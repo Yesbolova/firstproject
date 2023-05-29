@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Бір өлшемді массивке практикалық жұмыс</title>
+<meta charset="utf-8">
+<meta name="description" content="Вопросы по теме Арифметические операции в языке программирования C++">
+<meta name="viewport" content="width=device-width">
+<link href="https://metanit.com/style42.css?v=8" rel="stylesheet" type="text/css">
+<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="//metanitcom.disqus.com/embed.js"></script><link rel="preconnect" href="https://yastatic.net/"><link rel="preconnect" href="https://avatars.mds.yandex.net/"><link rel="preconnect" href="https://mc.yandex.ru/"><link rel="preconnect" href="https://ads.adfox.ru"><script async="" crossorigin="anonymous" src="https://yastatic.net/safeframe-bundles/0.83/host.js"></script><link rel="preload" href="https://yastatic.net/s3/home/fonts/ys/3/text-variable-full.woff2" type="font/woff2" as="font" crossorigin="anonymous"><style id="ysTextCssRule">@font-face {
+        font-family: "YS Text Variable";
+        src: url("https://yastatic.net/s3/home/fonts/ys/3/text-variable-full.woff2") format("woff2");
+        font-weight: 400 700;
+        font-display: optional;
+    }</style><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.cef06fba9afb581ee691b2d4ff616400.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.6719fe9dbe70a5a047052a905ea1cbc5.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.b29dff8af22e68239aefa0cfa712236c.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"><script async="" id="dsq_recs_scr" src="https://metanitcom.disqus.com/recommendations.js"></script><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/recommendations/styles/recommendations.10022a97346f1c6e3798931bbd8e4bb5.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/recommendations/common.bundle.ed70feedb9af01b8234c85d6eb19f2fd.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/recommendations/recommendations.bundle.bb3216316047d5c61d9dafa6240fbf39.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"><script async="" crossorigin="anonymous" src="https://mc.yandex.ru/metrika/watch.js"></script><style nonce="">#8d858a80be{width:1px;height:1px;position:relative;}</style><style nonce="">#id4568{width:1px;height:1px;top:0px;left:0px;position:absolute;}</style>
+</head>
+<body>
+<div class="item center menC">
+<h1 style="color: DarkBlue;">БІРӨЛШЕМДІ МАССИВТЕР. ПРАКТИКАЛЫҚ ЖҰМЫС</h1>
+	<li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=drive_link" class="cta outline">Практикалық тапсырмаларға сілтеме</a></li>
+	<div class="question">
+<div class="question-header"> <h3 style="color: DarkBlue;">1-практикалық тапсырма. Санды тізбекті зерттеу (математика)</h3></div>
+
+		<p><i>a<sub>1</sub>, a<sub>2</sub>,... a<sub>n-1</sub>, a<sub>n</sub> </i>cандар тізбегі берілген (n<10<sup>5</sup>)және(0< a<sub>j</sub><10<sup>3</sup>)</p>
+		<p>Осы тізбекке төмендегі зерттеулерді жүргіз:</p>
+		<p>а) тізбектегі жұп сандардың санын анықтау</p>
+		<p>ә) тізбектегі жай сандардың санын анықтау</p>
+<p>б) тізбектің арифметикалық ортасын және мәні арифметикалық ортадан кіші тізбек мүшелерін экранға шығар</p>
+<details>
+<summary> <b style="color: RoyalBlue;">Мысалы</b></summary>
+<div class="answer">
+	<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="1615549" _msthash="45">   <h3 style="color: RoyalBlue;"> <p>Мысалы</p> </h3>
+<th class="head"> <p _msttexthash="1237600" _msthash="46"><h3 style="color: RoyalBlue;"> <p></p> </th>
+	<th class="head"> <p _msttexthash="1237600" _msthash="46"><h3 style="color: RoyalBlue;"> <p></p> </th>
+	<th class="head"> <p _msttexthash="1237600" _msthash="46"><h3 style="color: RoyalBlue;"> <p>Нәтиже</p> </th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p _msttexthash="1761682" _msthash="47"><p>8</p><p>11 511 17 803 53 538 140 505</p> </p></td>
+<td><p _msttexthash="9831198" _msthash="48">
+	<p><i></i></p>
+	<p><i></i></p>
+	<p><i></i></p>
+	<p><i> </i></p>
+</p></td>
+	<td><p _msttexthash="9831198" _msthash="48">
+	<p><i></i></p>
+	<p><i></i></p>
+	<p><i></i></p>
+	<p><i> </i></p>
+</p></td>
+	<td><p _msttexthash="9831198" _msthash="48">
+	<p><i>Жұп мүшелер саны = 2 </i></p>
+	<p><i>Жай сандардың жалпы саны = 3</i></p>
+	<p><i>Арифметикалық ортасы = 332.25</i></p>
+	<p><i> Арифметикалық орта мәннен кіші сандар: 11 17 53 140</i></p>
+</p></td>
+</tr>
+</tbody>
+</div>
+</div>
+</body>
+</html>
