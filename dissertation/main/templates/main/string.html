@@ -7,25 +7,21 @@
 
     <title>Жолдық әдістер | Gamified</title>
 
-    <!-- BOOTSTRAP CSS -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous"
-    >
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- СЕНІҢ СТИЛІҢ (Bootstrap-тен кейін) -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <!-- Prism.js CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Prism.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
 </head>
-<body>
+<body class="light-premium">
+
+
 
 <header class="topbar">
     <div class="topbar-inner container">
@@ -54,7 +50,7 @@
     <section class="card progress-card">
         <div class="progress-header">
             <div>
-                <h1 class="page-title">Жолдық әдістер курсы</h1>
+                <h1 class="page-title">Жолдық әдістер</h1>
                 <p class="page-subtitle">Теория → Мысалдар → Ойындар. Барлық блокты бітірсең – 100%.</p>
             </div>
             <div class="level-badge">
@@ -71,8 +67,8 @@
         </div>
     </section>
 
-    <!-- Екі баған: контент + сайдбар -->
-    <div class="layout">
+
+
 
         <!-- Негізгі колонка -->
         <div class="main-column">
@@ -87,7 +83,7 @@
                         </p>
                     </div>
                     <button class="btn-pill btn-done" data-block="theory" data-xp="30">
-                        ✅ Дайын (Теория)
+                        ⬜ Орындалды (Теория)
                     </button>
                 </div>
 
@@ -95,138 +91,146 @@
                     💡 Python-да жолдарға арналған әдістер өте көп, біз бүгінгі сабақта ең жиі қолданылатындарын үйренеміз.
                 </div>
 
-                <h3 class="section-label">Жиі қолданылатын әдістер</h3>
+<h3 class="section-label">Жиі қолданылатын әдістер</h3>
 
-                <div class="methods-grid">
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">upper()</span>
-                            <span class="method-tag">Регистр</span>
-                        </div>
-                        <p class="method-desc">Барлық символды бас әріпке айналдырады.</p>
-                        <pre><code class="language-python">
-text = "Salem"
-print(text.upper())   # "SALEM"
-                        </code></pre>
-                    </article>
+<div class="methods-premium-grid">
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">lower()</span>
-                            <span class="method-tag">Регистр</span>
-                        </div>
-                        <p class="method-desc">Барлық символды кіші әріпке айналдырады.</p>
-                        <pre><code class="language-python">
-text = "PyThOn"
-print(text.lower())   # "python"
-                        </code></pre>
-                    </article>
+    <!-- upper() -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">upper()</span>
+            <span class="mp-tag">Регистр</span>
+        </div>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">islower() / isupper()</span>
-                            <span class="method-tag">Тексеру</span>
-                        </div>
-                        <p class="method-desc">Жол тек кіші/бас әріптерден тұра ма – соны тексереді.</p>
-                        <pre><code class="language-python">
-print("python".islower())  # True
-print("PY".isupper())      # True
-                        </code></pre>
-                    </article>
+        <pre class="mp-code">text = "Salem"
+print(text.upper())</pre>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">strip()</span>
-                            <span class="method-tag">Тазалау</span>
-                        </div>
-                        <p class="method-desc">Жолдың басы мен соңындағы бос орындарды алып тастайды.</p>
-                        <pre><code class="language-python">
-name = "  Aigerim  "
-print(name.strip())   # "Aigerim"
-                        </code></pre>
-                    </article>
+        <div class="mp-output">SALEM</div>
+    </div>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">split()</span>
-                            <span class="method-tag">Бөлу</span>
-                        </div>
-                        <p class="method-desc">Жолды бөліктерге бөледі, нәтижесі – тізім.</p>
-                        <pre><code class="language-python">
-s = "Мен Python үйренемін"
-words = s.split()     # бос орын бойынша бөледі
-print(words)
-                        </code></pre>
-                    </article>
+    <!-- lower() -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">lower()</span>
+            <span class="mp-tag">Регистр</span>
+        </div>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">" ".join(...)</span>
-                            <span class="method-tag">Біріктіру</span>
-                        </div>
-                        <p class="method-desc">Тізім элементтерін бір жолға біріктіреді.</p>
-                        <pre><code class="language-python">
-words = ["Мен", "Python", "үйренемін"]
-s = " ".join(words)
-print(s)
-                        </code></pre>
-                    </article>
+        <pre class="mp-code">text = "PyThOn"
+print(text.lower())</pre>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">replace(a, b)</span>
-                            <span class="method-tag">Ауыстыру</span>
-                        </div>
-                        <p class="method-desc"><code>a</code> ішкі жолын <code>b</code>-ға ауыстырады.</p>
-                        <pre><code class="language-python">
-text = "I like Python"
-print(text.replace("Python", "C++"))
-                        </code></pre>
-                    </article>
+        <div class="mp-output">python</div>
+    </div>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">find() / index()</span>
-                            <span class="method-tag">Іздеу</span>
-                        </div>
-                        <p class="method-desc">
-                            <code>find()</code> – табылмаса <code>-1</code>,
-                            <code>index()</code> – табылмаса қате (ValueError).
-                        </p>
-                        <pre><code class="language-python">
-s = "banana"
-print(s.find("na"))    # 2
-print(s.index("ba"))   # 0
-                        </code></pre>
-                    </article>
+    <!-- islower/isupper -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">islower() / isupper()</span>
+            <span class="mp-tag">Тексеру</span>
+        </div>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">count()</span>
-                            <span class="method-tag">Санау</span>
-                        </div>
-                        <p class="method-desc">Ішкі жол қанша рет кездесетінін санайды.</p>
-                        <pre><code class="language-python">
-s = "banana"
-print(s.count("a"))   # 3
-                        </code></pre>
-                    </article>
+        <pre class="mp-code">print("python".islower())
+print("PY".isupper())</pre>
 
-                    <article class="method-card">
-                        <div class="method-header">
-                            <span class="method-name">title() / capitalize()</span>
-                            <span class="method-tag">Стиль</span>
-                        </div>
-                        <p class="method-desc">Сөздердің / жолдың бас әріптерін реттейді.</p>
-                        <pre><code class="language-python">
-s = "python programming"
-print(s.title())       # "Python Programming"
-print(s.capitalize())  # "Python programming"
-                        </code></pre>
-                    </article>
-                </div>
-            </section>
+        <div class="mp-output">True<br>True</div>
+    </div>
 
+    <!-- strip -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">strip()</span>
+            <span class="mp-tag">Тазалау</span>
+        </div>
+
+        <pre class="mp-code">name = "  Aigerim  "
+print(name.strip())</pre>
+
+        <div class="mp-output">Aigerim</div>
+    </div>
+
+    <!-- split -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">split()</span>
+            <span class="mp-tag">Бөлу</span>
+        </div>
+
+        <pre class="mp-code">s = "Мен Python үйренемін"
+print(s.split())</pre>
+
+        <div class="mp-output">['Мен', 'Python', 'үйренемін']</div>
+    </div>
+
+    <!-- join -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">" ".join()</span>
+            <span class="mp-tag">Біріктіру</span>
+        </div>
+
+        <pre class="mp-code">words = ["Мен", "Python", "үйренемін"]
+print(" ".join(words))</pre>
+
+        <div class="mp-output">Мен Python үйренемін</div>
+    </div>
+
+    <!-- replace -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">replace()</span>
+            <span class="mp-tag">Ауыстыру</span>
+        </div>
+
+        <pre class="mp-code">text = "I like Python"
+print(text.replace("Python", "C++"))</pre>
+
+        <div class="mp-output">I like C++</div>
+    </div>
+
+    <!-- find/index -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">find() / index()</span>
+            <span class="mp-tag">Іздеу</span>
+        </div>
+
+        <pre class="mp-code">s = "banana"
+print(s.find("na"))
+print(s.index("ba"))</pre>
+
+        <div class="mp-output">2<br>0</div>
+    </div>
+
+    <!-- count -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">count()</span>
+            <span class="mp-tag">Санау</span>
+        </div>
+
+        <pre class="mp-code">s = "banana"
+print(s.count("a"))</pre>
+
+        <div class="mp-output">3</div>
+    </div>
+
+    <!-- title/capitalize -->
+    <div class="method-premium">
+        <div class="mp-head">
+            <span class="mp-name">title() / capitalize()</span>
+            <span class="mp-tag">Стиль</span>
+        </div>
+
+        <pre class="mp-code">s = "python programming"
+print(s.title())
+print(s.capitalize())</pre>
+
+        <div class="mp-output">Python Programming<br>Python programming</div>
+    </div>
+      </div>
+
+
+
+ <div class="main-column">
             <!-- 2. МЫСАЛДАР -->
             <section id="examples" class="card section">
                 <div class="section-header">
@@ -235,12 +239,12 @@ print(s.capitalize())  # "Python programming"
                         <p class="section-subtitle">Теорияны нақты тапсырмаларда қолдану.</p>
                     </div>
                     <button class="btn-pill btn-done" data-block="examples" data-xp="30">
-                        ✅ Дайын (Мысалдар)
+                         ⬜Орындалды (Мысалдар)
                     </button>
                 </div>
 
                 <article class="example-block">
-                    <div class="example-badge">EX 1</div>
+                    <div class="example-badge">1-мысал</div>
                     <div>
                         <h3>Пайдаланушының атын «тазалау»</h3>
                         <p>Артық бос орындарды алып тастап, бірінші әріпті бас әріпке айналдырамыз.</p>
@@ -253,7 +257,7 @@ print("Сәлем,", clean_name)
                 </article>
 
                 <article class="example-block">
-                    <div class="example-badge">EX 2</div>
+                    <div class="example-badge">2-мысал</div>
                     <div>
                         <h3>Сөйлемдегі сөздер санын табу</h3>
                         <pre><code class="language-python">
@@ -265,7 +269,7 @@ print("Сөздер саны:", len(words))
                 </article>
 
                 <article class="example-block">
-                    <div class="example-badge">EX 3</div>
+                    <div class="example-badge">3-мысал</div>
                     <div>
                         <h3>"python" сөзін регистрге тәуелсіз санау</h3>
                         <pre><code class="language-python">
@@ -278,11 +282,12 @@ print("'python' сөзі", count, "рет кездесті.")
                 </article>
 
                 <div class="callout soft">
-                    🔎 Мұғалімге: осы 3 мысалды бірге орындап,
-                    содан кейін ойындарға өтсең – оқушыларда «мен түсіндім» сезімі пайда болады.
+
                 </div>
             </section>
+      </div>
 
+ <div class="main-column">
             <!-- 3. ОЙЫНДАР -->
             <section id="games" class="section">
                 <div class="section-header">
@@ -291,23 +296,23 @@ print("'python' сөзі", count, "рет кездесті.")
                         <p class="section-subtitle">Easy → Medium → Hard. Қате табу, квиз, лаборатория.</p>
                     </div>
                     <button class="btn-pill btn-done" data-block="games" data-xp="40">
-                        ✅ Дайын (Ойындар)
+                         ⬜ Орындалды (Ойындар)
                     </button>
                 </div>
 
                 <!-- Ойын 1: Қате тап -->
                 <article class="card game-card">
                     <div class="game-header">
-                        <div class="game-icon game-easy">EASY</div>
+                        <div class="game-icon game-easy"></div>
                         <div>
                             <h3>Ойын 1 · «Қате тап»</h3>
-                            <p class="game-subtitle">Кодта қате бар. Easy / Medium / Hard деңгейлері.</p>
+                            <p class="game-subtitle">Кодта қате бар. Оңай, oрташа, күрделі деңгейлер.</p>
                         </div>
                     </div>
 
                     <!-- Easy -->
                     <details class="level-block" open>
-                        <summary>Easy деңгей</summary>
+                        <summary>Оңай деңгей</summary>
                         <div class="bug-task">
                             <p><strong>Міндет:</strong> Жолды бас әріпке айналдыру.</p>
                             <pre><code class="language-python">
@@ -332,7 +337,7 @@ print(result)
 
                     <!-- Medium -->
                     <details class="level-block">
-                        <summary>Medium деңгей</summary>
+                        <summary>Орташа деңгей</summary>
                         <div class="bug-task">
                             <p><strong>Міндет:</strong> Сөйлемнен сөздер тізімін алу.</p>
                             <pre><code class="language-python">
@@ -357,7 +362,7 @@ print(words)
 
                     <!-- Hard -->
                     <details class="level-block">
-                        <summary>Hard деңгей</summary>
+                        <summary>Күрделі деңгей</summary>
                         <div class="bug-task">
                             <p><strong>Міндет:</strong> Мәтінде «python» сөзін санау.</p>
                             <pre><code class="language-python">
@@ -385,7 +390,7 @@ print("python саны:", count)
                 <!-- Ойын 2: Quiz -->
                 <article class="card game-card">
                     <div class="game-header">
-                        <div class="game-icon game-medium">QUIZ</div>
+                        <div class="game-icon game-medium"></div>
                         <div>
                             <h3>Ойын 2 · Дұрыс әдісті таңда</h3>
                             <p class="game-subtitle">Дереу тексеру: қандай әдіс қай кезде қолданылады?</p>
@@ -402,7 +407,7 @@ print("python саны:", count)
                 <!-- Ойын 3: Лаборатория -->
                 <article class="card game-card">
                     <div class="game-header">
-                        <div class="game-icon game-hard">LAB</div>
+                        <div class="game-icon game-hard"></div>
                         <div>
                             <h3>Ойын 3 · Жолдық әдістер лабораториясы</h3>
                             <p class="game-subtitle">Жолды енгіз де, батырмаларды басып, нәтижесін бақыла.</p>
@@ -430,33 +435,8 @@ print("python саны:", count)
                 </article>
             </section>
         </div>
+    </div>
 
-        <!-- Сайдбар -->
-        <aside class="sidebar">
-            <section class="card sidebar-card">
-                <h3>Ресурстар</h3>
-                <ul class="link-list">
-                    <li><a href="https://www.onlinegdb.com/online_python_compiler" target="_blank">
-                        Онлайн Python компилятор
-                    </a></li>
-                    <li><a href="https://www.python.org/downloads/" target="_blank">
-                        Python жүктеу
-                    </a></li>
-                    <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" target="_blank">
-                        Практикалық тапсырмалар
-                    </a></li>
-                    <li><a href="/bagalau">
-                        Бағалау критерийі
-                    </a></li>
-                </ul>
-            </section>
-
-            <section class="card sidebar-card mood">
-                <h3>Көңіл-күй XP</h3>
-                <p>😊 Қате тапсаң – XP жоғалтпайсың. Бұл жай ғана деңгей өсіру жолы.</p>
-                <p>🔥 Бүкіл беттегі үш «Дайын» батырмасы жасыл болса – сен бүгінгі сабақты жауып тастадың.</p>
-            </section>
-        </aside>
     </div>
 </main>
 
@@ -507,7 +487,7 @@ print("python саны:", count)
             const xp = parseInt(btn.dataset.xp || '0', 10);
             currentXP = Math.min(totalXP, currentXP + xp);
             btn.classList.add('done');
-            btn.textContent = '✔ Бітті';
+            btn.textContent = '✓ аяқталды';
 
             updateUI();
         });
@@ -665,7 +645,40 @@ print("python саны:", count)
         });
     })();
 </script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
 
+<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+
+<script>
+async function loadPy() {
+    if (!window.pyodide) {
+        window.pyodide = await loadPyodide({
+            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.23.4/full/"
+        });
+    }
+    return window.pyodide;
+}
+
+async function runPython(code) {
+    const py = await loadPy();
+    return py.runPython(code);
+}
+
+document.addEventListener("click", async function(e) {
+    const btn = e.target.closest(".btn-run");
+    if (!btn) return;
+
+    const code = btn.dataset.code;      // <-- pre ішінен емес, data-code-тен аламыз
+    const outputBox = btn.nextElementSibling;
+
+    try {
+        const result = await runPython(code);
+        outputBox.textContent = result ?? " ";
+    } catch (err) {
+        outputBox.textContent = "Қате: " + err;
+    }
+});
+</script>
 
 </body>
 </html>
