@@ -1,235 +1,318 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% load static %}
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+    <title>IDE – Мен танысу | Gamified</title>
+
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+    <!-- Prism.js for Python highlighting -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
 
-    <!-- Favicons -->
-    <meta name="theme-color" content="#0C4B33">
+<style>
+.code-header {
+    background:#2c2c2e;
+    color:#d1d1d6;
+    padding:10px 14px;
+    border-radius:12px 12px 0 0;
+    font-size:14px;
+    font-weight:600;
+    font-family: "SF Pro Text", sans-serif;
+}
+
+.code-block {
+    background:#1e1e1e;
+    padding:18px 20px;
+    border-radius:0 0 12px 12px;
+    overflow-x:auto;
+    border:1px solid #3a3a3c;
+}
 
 
+.title { font-size:42px; font-weight:800; margin-bottom:10px; }
+.subtitle { font-size:18px; opacity:.7; margin-bottom:25px; }
+
+.glass-card {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(18px);
+    padding: 22px;
+    border-radius: 22px;
+    margin: 25px 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.code-header {
+    background:#2c2c2e; color:white;
+    padding:10px 14px; border-radius:12px 12px 0 0;
+}
+.code-block {
+    background:#1e1e1e; color:#f8f8f2;
+    padding:18px; border-radius:0 0 12px 12px;
+    font-family:"SF Mono",monospace;
+    overflow-x:auto;
+}
 
 
+/* ---- GLOBAL ---- */
+body {
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    margin: 0; padding: 0; line-height: 1.6;
+}
+.container { max-width:880px; margin:auto; padding:40px 20px 80px; }
 
+/* ---- TITLE ---- */
+.title { font-size:42px; font-weight:800; margin-bottom:6px; }
+.subtitle { font-size:19px; opacity:.8; margin-bottom:30px; }
 
-    <title>IDE (ай ди и) -мен танысу</title>
+/* ---- XP SYSTEM ---- */
+.level-box {
+    background: linear-gradient(135deg,#0071e3,#5ea0ff);
+    padding:22px; border-radius:20px; color:white;
+    margin-bottom:35px; box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+.level-box h3 { margin:0 0 8px 0; font-size:22px; font-weight:700; }
 
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
+.xp-bar {
+    width:100%; height:12px; background:rgba(255,255,255,.3);
+    border-radius:12px; overflow:hidden;
+}
+.xp-inner {
+    height:100%; width:0%; background:white;
+    transition:width .4s ease;
+}
 
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
+/* ---- POPUP ---- */
+.reward-popup {
+    position:fixed; top:-200px; left:50%; transform:translateX(-50%);
+    background:white; padding:24px 30px; border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center; z-index:2000; transition:top .6s ease;
+}
+.reward-popup.show { top:40px; }
 
-  <body id="generic" class="">
+/* ---- CARDS ---- */
+.image-card {
+    background:#fff; border-radius:18px; padding:14px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06); margin:20px 0;
+}
+.image-card img { width:100%; border-radius:14px; }
 
+/* ---- CODE ---- */
+.code-header { background:#2c2c2e; padding:10px; color:#d1d1d6; border-radius:12px 12px 0 0; font-size:14px; }
+.code-block {
+    background:#1e1e1e; padding:18px; color:#f8f8f2;
+    font-family:"SF Mono","Fira Code"; border-radius:0 0 12px 12px;
+}
 
+/* ---- QUIZ ---- */
+.quiz-box {
+    background:#fff; padding:22px; border-radius:18px;
+    box-shadow:0 8px 22px rgba(0,0,0,0.06); margin:25px 0;
+}
+.quiz-btn {
+    background:#34C759; color:white;
+    padding:10px 18px; border-radius:10px; border:none; cursor:pointer;
+}
 
+/* ---- STEPS ---- */
+.step {
+    background:#fff; padding:16px; border-radius:14px;
+    margin:12px 0; box-shadow:0 6px 18px rgba(0,0,0,0.05);
+}
 
-    <div class="copy-banner">
-      <div class="container ">
+/* ---- FINAL LEVEL ---- */
+.final-msg {
+    background:linear-gradient(135deg,#34C759,#2db94f);
+    padding:20px; color:white; border-radius:20px; margin-top:40px;
+    text-align:center; font-size:20px; font-weight:600;
+}
 
-  <h1>    Сабақтың тақырыбы:  IDE (ай ди и) -мен танысу</h1>
+</style>
+</head>
 
-      </div>
+<body>
+
+<!-- REWARD POPUP -->
+<div class="reward-popup" id="rewardPopup">
+    <h3 id="rewardTitle">Жетістік!</h3>
+    <p id="rewardText">+20 XP</p>
+    <button onclick="closeReward()" style="padding:10px 16px;background:#0071e3;color:white;border:none;border-radius:10px;cursor:pointer;">Жабу</button>
+</div>
+
+<div class="container">
+
+    <!-- TITLE -->
+    <h1 class="title">IDE – Мен танысу</h1>
+    <p class="subtitle">Бұл сабақ соңында сен 100 XP жинап, деңгейді толық аяқтайсың.</p>
+
+    <!-- XP BAR -->
+    <div class="level-box">
+        <h3>Сабақ прогресі</h3>
+        <div class="xp-bar"><div class="xp-inner" id="xpInner"></div></div>
+        <p id="xpText" style="margin-top:8px;">0 / 100 XP</p>
     </div>
-    <div id="billboard"></div>
 
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: IDE (ай ди и) интерфейсінің мүмкіндіктерін қолдану
- </h2>
-<h2>Python тілінің тарихы</h2>
-<p>Python тілін 1991 жылы голландиялық бағдарламашы Гвидо Ван Россум (Guido van Rossum) жасаған.  Тілдің Python деп аталуының себебі Гвидо Британдық "Monty Python' s Flying Circus" комедиялық сериалының жанкүйері болған.</p>
-<p> Python-ның бір ерекшелігі – оның синтаксисі оңай, бұл жоғары деңгейлі
-бағдарламалау тілін жаңадан бастап үйенушілерге де, IT бағытын өзгерткісі келетіндер
-үшін де өте ыңғайлы.</p>
-                    <img alt="" height="350" data-cke-saved-name="559730-monty-python-wallpaper-1920x1080-for-ios.jpg" name="559730-monty-python-wallpaper-1920x1080-for-ios.jpg" data-cke-saved-src="https://ucarecdn.com/b2f98cf7-201c-4c10-9251-9967e1f19ce0/" src="https://ucarecdn.com/b2f98cf7-201c-4c10-9251-9967e1f19ce0/" width="600" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fb2f98cf7-201c-4c10-9251-9967e1f19ce0%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221920%22%2C%22height%22%3A%221080%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
+    <!-- SECTION 1 ------------------------------------------- -->
+    <h2>1. Python тіліне кіріспе</h2>
+    <h1 class="title">Python тіліне кіріспе</h1>
+<p class="subtitle">Python — оқуға жеңіл, қуатты және әмбебап бағдарламалау тілі.</p>
 
-          <h2>Неге Python-ды таңдаймыз?</h2>
-          <p> Python - кез-келген тапсырмаға арналған көптеген модульдер мен кітапханалары бар
-қуатты скрипттер тілі. Python тілінде көптеген стартаптар әзірленуде. Оны YouTube,
-Instagram, Pinterest және т. б. сияқты алыптар қолданады.</p>
-           <p> Python – әмбебап тіл, сондықтан әртүрлі салалардағы мәселелерді шешуге ыңғайлы.
-Оны iOS және Android үшін мобильді қосымшаларды әзірлеу, жұмыс үстелі қосымшалары,
-ойындар, веб-қосымшалар жасау үшін қолдануға, машиналық оқыту, деректерді талдау,
-білім беру жобалары, ERP-жүйелерін құру (ресурстарды жоспарлау), бизнес қосымшалары
-әзірлеу және т. б. салаларда қолдануға болады.</p>
-              <p> Python - келесі салаларда көшбасшы болып тұрған тіл:</p>
-          <li>Веб-әзірлеу</li>
-           <li>Машиналық оқыту</li>
-           <li>Үлкен деректерді өңдеу</li>
+<div class="glass-card">
+    <h2>Python деген не?</h2>
+    <p>Python — адамның табиғи тіліне ұқсас синтаксисі бар жоғары деңгейлі тіл.
+       Web, Data Science, жасанды интеллект, робототехника сияқты көптеген салаларда қолданылады.</p>
+</div>
 
+<div class="glass-card">
+    <h2>Неге Python?</h2>
+    <ul>
+        <li>Синтаксисі жеңіл, оқуға түсінікті</li>
+        <li>Қате хабарламалары нақты және түсінікті</li>
+        <li>Көп саланы меңгеруге мүмкіндік береді</li>
+        <li>Бастаушыларға арналған ең үздік тіл</li>
+    </ul>
+</div>
 
-          <h2>Windows операциялық жүйесіне Python тілін орнату</h2>
+<div class="glass-card">
+    <h2>Python қайда қолданылады?</h2>
+    <ul>
+        <li><b>Web Development</b> — Django, Flask</li>
+        <li><b>Data Science</b> — NumPy, Pandas</li>
+        <li><b>Machine Learning</b> — TensorFlow, PyTorch</li>
+        <li><b>Automation</b> — скрипттер, боттар</li>
+        <li><b>Білім беру</b> — үйренуге өте жеңіл</li>
+    </ul>
+</div>
 
-<p>Python тілі еркін бағдарламалық жасақтама болып табылады, сондықтан оны Python тілінің ресми сайтынан жүктеп алуға, еркін таратуға және барлық заманауи операциялық жүйелерге орнатуға болады.</p>
-<h3>1 қадам</h3>
-          <p>   1. Браузер терезесін ашып <a href="#">python.org</a>  сайтына өтіңіз;</p>
-           <p>  2. Downloads cілтемесіне өтіңіз;</p>
-          <img alt="" height="400" data-cke-saved-name="1234567.png" name="1234567.png" data-cke-saved-src="https://ucarecdn.com/e96300e7-4709-4a3d-8b2d-5723054cdd70/" src="https://ucarecdn.com/e96300e7-4709-4a3d-8b2d-5723054cdd70/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fe96300e7-4709-4a3d-8b2d-5723054cdd70%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221546%22%2C%22height%22%3A%22664%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
+<div class="glass-card">
+    <h2>Алғашқы Python коды</h2>
+     <p>Тарихта кез келген бағдарламашы бірінші рет дәл осы кодты жазған:</p>
+ <div class="code-header">Python Code</div>
+<div class="code-block">
+<pre><code class="language-python">
+print("Hello, Python!")
+</code></pre>
+</div>
 
-          <h3>2-қадам. Орнатушыны іске қосыңыз</h3>
-          <p>   1. Add Python 3.x to PATH-ті белгілеңіз</p>
-           <p>  2. Install Now батырмасына шертіңіз;</p>
-          <p>   3.Бірнеше минуттан кейін компьютерде Python орнатылады</p>
-          <img alt="" height="507" data-cke-saved-name="12345678.png" name="12345678.png" data-cke-saved-src="https://ucarecdn.com/6f2b5b47-cc68-4cb1-93a3-05cc9031759d/" src="https://ucarecdn.com/6f2b5b47-cc68-4cb1-93a3-05cc9031759d/" width="807" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F6f2b5b47-cc68-4cb1-93a3-05cc9031759d%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22807%22%2C%22height%22%3A%22507%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
+    <p>Бұл код экранға мәтін шығарады. Python синтаксисінің қарапайымдылығын көрсетеді.</p>
+</div>
 
-<h3>Python 3.11.2 программалау тілінің жұмыс ортасы. Практикум</h3>
-<p>1. Python 3.11.2 программалау тілінің жұмыс ортасы ашыңыз.</p>
-           <p>2. Программада жаңа терезе ашу үшін IDLE ашып, мәзірден File ⇒ New File таңдаңыз.</p>
-          <img alt="" height="200" data-cke-saved-name="111.png" name="111.png" data-cke-saved-src="https://ucarecdn.com/c2be2a5b-829f-4628-b7b5-b5036a295790/" src="https://ucarecdn.com/c2be2a5b-829f-4628-b7b5-b5036a295790/" width="700" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fc2be2a5b-829f-4628-b7b5-b5036a295790%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221917%22%2C%22height%22%3A%22389%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p>3. Бос терезе тақырыбы «Untitled» сөзімен ашылады. Жаңа терезеде мына кодты енгізіңдер: print ('Мен Python тілін оқуды бастадым’) </p>
+<div class="glass-card">
+    <h2>Python қалай жұмыс істейді?</h2>
+    <p>Python — интерпретацияланатын тіл. Яғни код жол-жолымен оқылып, бірден орындалады.</p>
+</div>
 
-              <img alt="" height="123" data-cke-saved-name="222.png" name="222.png" data-cke-saved-src="https://ucarecdn.com/b7b350cb-9372-46cc-8141-dd53cdbc393c/" src="https://ucarecdn.com/b7b350cb-9372-46cc-8141-dd53cdbc393c/" width="471" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fb7b350cb-9372-46cc-8141-dd53cdbc393c%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22471%22%2C%22height%22%3A%22123%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
+<div class="glass-card">
+    <h2>Python үйренудің пайдасы</h2>
+    <ul>
+        <li>Ерте жұмыс табу мүмкіндігі</li>
+        <li>Freelance жобалар</li>
+        <li>Data Science және AI бағыттарына жол</li>
+        <li>Олимпиада, проект, стартаптарда үлкен артықшылық</li>
+    </ul>
+</div>
 
+    <button onclick="addXP(20,'Теория оқылды')" class="quiz-btn">Бұл бөлімді аяқтау (+20 XP)</button>
 
-<p>4. Мәзірден File ⇒ Save таңдаңыз немесе F5 пернесін басыңыз. Ашылған терезеде программа.py деп теріп, файлды жұмыс үстелі   немесе құжаттар бумасына сақтаңыздар. Python-да құрылған программа кеңейтілімі .ру.</p>
-<p>5. Run ⇒ Run Module командасын таңдаңдар. Сақталған программа нәти жесі суреттегідей көрінуі керек:<p/>
-          <img data-cke-saved-src="https://ucarecdn.com/8753c19f-a25c-41de-a322-f194baca532a/" src="https://ucarecdn.com/8753c19f-a25c-41de-a322-f194baca532a/" alt="" width="800" height="120" data-cke-saved-name="333.png" name="333.png" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F8753c19f-a25c-41de-a322-f194baca532a%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221917%22%2C%22height%22%3A%22173%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
+    <!-- SECTION 2 ------------------------------------------- -->
+    <h2>2. Python орнату</h2>
 
-          <h2> Басып шығару командасының sep и end аргументтері.</h2>
-          <p><b>sep</b> және <b>end</b> аргументтерін зерттеуді бағдарламалық кодты және алынған нәтижені
-талдау арқылы жүргізу ұсынылады. </p>
-          <p>Деректерді басып шығару үшін екі немесе одан да көп аргументті қолдануға болады. </p>
-          <p><i>Мысалы,</i>
-print("text1", "text2") # басып шығарудың екі аргументі бар. </p>
-          <p><i>Нәтиже:</i>
-text1 text2 </p>
-          <p><b>sep=''</b> аргументі басқа аргументтердің арасын ажырату белгісін көрсетеді. Үнсіз келісім
-бойынша бос орынмен ажыратылады. </p>
-          <p>><i>ысалы,</i>
-print("text1", "text2", "text3", sep="---") </p>
-          <p> <i>Нәтиже:</i>
-text1---text2---text3</p>
-          <p><b>end=''</b>аргументі нәтиженің соңында қандай таңба шығатынын көрсетеді: </p>
-          <p><i>Мысалы,</i> </p>
-          <p>print("text1", end=" ") </p>
-          <p>print("text2", end=" ")</p>
-          <p>print("text3")</p>
-          <p><i>Нәтиже:</i></p>
-          <p>text1 text2 text3 </p>
-          <p>Мұнда text1 және text2 сөздерін басып шығарғаннан кейін курсол сол қатарда қалады.
-<b>end='\n'</b> – жолды қандай символмен аяқтау керектігін көрсетеді. Егер <b>print()</b> функциясы
-<b>end='\n'</b> әдісімен аяқталса, жол келесі қатарға өтумен аяқталады. </p>
-
-      </div>
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
+    <div class="image-card">
+        <img src="https://ucarecdn.com/e96300e7-4709-4a3d-8b2d-5723054cdd70/">
     </div>
 
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
-  </ul>
+    <button onclick="addXP(20,'Орнатуды түсіндің')" class="quiz-btn">Бұл бөлімді аяқтау (+20 XP)</button>
+
+    <!-- SECTION 3 ------------------------------------------- -->
+    <h2>3. Алғашқы программа</h2>
+
+    <div class="code-header">Python Code</div>
+    <div class="code-block"><pre>
+print("Мен Python тілін оқуды бастадым")
+    </pre></div>
+
+    <button onclick="addXP(20,'Алғашқы код жазылды')" class="quiz-btn">Кодты жаздым (+20 XP)</button>
+
+    <!-- SECTION 4: Quiz ------------------------------------- -->
+    <h2>4. Mini Quiz</h2>
+
+    <div class="quiz-box">
+        <p><b>print("Hello") → ?</b></p>
+        <input id="answer" style="padding:10px;width:100%;border-radius:10px;">
+        <button class="quiz-btn" onclick="checkAnswer()">Тексеру</button>
+        <p id="quiz-result" style="font-weight:600;margin-top:10px;"></p>
+    </div>
+
+    <!-- SECTION 5 ------------------------------------------- -->
+    <h2>5. Сабақты аяқтау</h2>
+    <div class="step"><b>1)</b> Python орнаттың</div>
+    <div class="step"><b>2)</b> IDE аштың</div>
+    <div class="step"><b>3)</b> Код жаздың</div>
+    <div class="step"><b>4)</b> Quiz өттің</div>
+    <div class="step"><b>5)</b> Сабақты аяқтауға дайынсың</div>
+
+    <button onclick="addXP(20,'Сабақты толық аяқтадың')" class="quiz-btn">Сабақты аяқтау (+20 XP)</button>
+
+    <div id="finalLevel"></div>
+
 </div>
 
 
+<script>
+/* ---- XP LOGIC ---- */
+let xp = 0;
 
-    </div>
+function addXP(amount, message) {
+    if (xp >= 100) return;
 
+    xp += amount;
+    if (xp > 100) xp = 100;
 
+    document.getElementById("xpInner").style.width = xp + "%";
+    document.getElementById("xpText").innerText = xp + " / 100 XP";
 
+    showReward(message + " +" + amount + " XP");
 
-
-
-
-
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
-
-
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <p>«Л.Н.Гумилев атындағы Еуразия ұлттық университеті» КеАҚ</p><p>«7М01511 – Информатика» білім беру бағдарламасы</p>
-          <p>Астана 2023</p>
-            <ul>
-</div>
-
-
-
-
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
+    if (xp === 100) {
+        document.getElementById("finalLevel").innerHTML =
+            `<div class="final-msg">🎉 Құттықтаймын! Сен бұл сабақты 100 XP жинап толық аяқтадың!</div>`;
     }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
+}
 
+/* ---- QUIZ ---- */
+function checkAnswer() {
+    let ans = document.getElementById("answer").value.trim();
+    let result = document.getElementById("quiz-result");
 
+    if (ans === "Hello") {
+        result.style.color = "green";
+        result.innerHTML = "Дұрыс! (+20 XP)";
+        addXP(20, "Quiz дұрыс орындалды");
+    } else {
+        result.style.color = "red";
+        result.innerHTML = "Қате. Дұрыс жауап: Hello";
+    }
+}
+
+/* ---- POPUP ---- */
+function showReward(text) {
+    let popup = document.getElementById("rewardPopup");
+    document.getElementById("rewardText").innerText = text;
+
+    popup.classList.add("show");
+    setTimeout(() => popup.classList.remove("show"), 3000);
+}
+function closeReward() {
+    document.getElementById("rewardPopup").classList.remove("show");
+}
+
+</script>
 
 </body>
 </html>

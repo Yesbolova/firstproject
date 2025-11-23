@@ -565,6 +565,42 @@ body {
     background: #ffd4d4;      /* қызыл */
     border-color: #e53935;
 }
+.feature-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: 0.3s;
+    min-height: 260px;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.feature-card h4 {
+    color: #1e90ff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.feature-card ul {
+    padding-left: 18px;
+}
+
+.feature-card ul li {
+    margin-bottom: 8px;
+}
+
+.feature-card ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.feature-card ul li a:hover {
+    color: #1e90ff;
+}
 
 
 

@@ -1,4 +1,6 @@
+
 {% load static %}
+
 <!doctype html>
 <html lang="kk">
 <head>
@@ -17,7 +19,336 @@
 <!-- Prism.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
+
+    <style>
+/* ===========================
+   GLOBAL STYLE
+=========================== */
+body {
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 925px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+/* ===========================
+   TOP FIXED HEADER
+=========================== */
+.topbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    background: #34C759;
+    color: white;
+    padding: 12px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.brand-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    font-size: 14px;
+    opacity: .7;
+}
+
+.topnav a {
+    margin: 0 10px;
+    font-weight: 500;
+    color: #1d1d1f;
+    text-decoration: none;
+}
+
+.topnav a:hover {
+    color: #34C759;
+}
+
+.xp-panel {
+    background: #34C759;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Offset for fixed header */
+.page {
+    margin-top: 110px;
+}
+
+/* ===========================
+   PROGRESS CARD
+=========================== */
+.progress-card {
+    background: white;
+    padding: 28px;
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    margin-bottom: 35px;
+}
+
+.progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.page-subtitle {
+    margin-top: 6px;
+    opacity: .7;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, #34C759, #1fb157);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 18px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: #e6e6e6;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 18px 0;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #34C759;
+    transition: width .4s ease;
+}
+
+.progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    opacity: .8;
+}
+
+/* ===========================
+   SECTION CARD
+=========================== */
+.card.section {
+    background: white;
+    padding: 28px;
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    margin-bottom: 35px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Section button */
+.btn-pill {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    background: #e5e5e7;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-pill:hover {
+    background: #d5d5d7;
+}
+
+.btn-done.done {
+    background: #34C759;
+    color: white;
+}
+
+/* ===========================
+   PREMIUM METHOD GRID
+=========================== */
+.methods-premium-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 20px;
+}
+
+.method-premium {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+    transition: transform .2s ease;
+}
+
+.method-premium:hover {
+    transform: translateY(-4px);
+}
+
+.mp-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mp-name {
+    font-weight: 700;
+}
+
+.mp-tag {
+    background: #e6f7eb;
+    color: #34C759;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+/* ===========================
+   GAME CARDS
+=========================== */
+.game-card {
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+    margin-bottom: 35px;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+/* Difficulty icons */
+.game-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+}
+
+.game-easy { background: #d4f8d4; }
+.game-medium { background: #ffe8b3; }
+.game-hard { background: #ffd2d2; }
+
+/* ===========================
+   QUIZ STYLES
+=========================== */
+.quiz-option {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #f0f0f0;
+    margin-bottom: 10px;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.quiz-option:hover {
+    background: #e5e5e5;
+}
+
+.quiz-option.correct {
+    background: #d4f8d4;
+    border-left: 5px solid #34C759;
+}
+
+.quiz-option.wrong {
+    background: #ffd2d2;
+    border-left: 5px solid #ff4f4f;
+}
+
+.quiz-status {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* ===========================
+   LABORATORY
+=========================== */
+.text-input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.game-output {
+    margin-top: 18px;
+    padding: 14px;
+    background: #f6f6f6;
+    border-radius: 12px;
+    font-family: monospace;
+    min-height: 40px;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+.footer {
+    text-align: center;
+    padding: 40px 0;
+    color: #777;
+    margin-top: 40px;
+}
+   </style>
 </head>
 <body class="light-premium">
 
@@ -50,8 +381,8 @@
     <section class="card progress-card">
         <div class="progress-header">
             <div>
-                <h1 class="page-title">Жолдық әдістер</h1>
-                <p class="page-subtitle">Теория → Мысалдар → Ойындар. Барлық блокты бітірсең – 100%.</p>
+                <h1 class="brand-title">Жолдық әдістер</h1>
+                <p class="brand-subtitle">Теория → Мысалдар → Ойындар. Барлық блокты бітірсең – 100%.</p>
             </div>
             <div class="level-badge">
                 Деңгей <span id="level-value">1</span>
@@ -102,8 +433,10 @@
             <span class="mp-tag">Регистр</span>
         </div>
 
-        <pre class="mp-code">text = "Salem"
-print(text.upper())</pre>
+<pre><code class="language-python">
+text = "Salem"
+print(text.upper())
+</code></pre>
 
         <div class="mp-output">SALEM</div>
     </div>
@@ -115,8 +448,10 @@ print(text.upper())</pre>
             <span class="mp-tag">Регистр</span>
         </div>
 
-        <pre class="mp-code">text = "PyThOn"
-print(text.lower())</pre>
+<pre><code class="language-python">
+text = "PyThOn"
+print(text.lower())
+</code></pre>
 
         <div class="mp-output">python</div>
     </div>
@@ -128,8 +463,10 @@ print(text.lower())</pre>
             <span class="mp-tag">Тексеру</span>
         </div>
 
-        <pre class="mp-code">print("python".islower())
-print("PY".isupper())</pre>
+<pre><code class="language-python">
+print("python".islower())
+print("PY".isupper())
+</code></pre>
 
         <div class="mp-output">True<br>True</div>
     </div>
@@ -141,8 +478,10 @@ print("PY".isupper())</pre>
             <span class="mp-tag">Тазалау</span>
         </div>
 
-        <pre class="mp-code">name = "  Aigerim  "
-print(name.strip())</pre>
+<pre><code class="language-python">
+name = "  Aigerim  "
+print(name.strip())
+</code></pre>
 
         <div class="mp-output">Aigerim</div>
     </div>
@@ -154,8 +493,10 @@ print(name.strip())</pre>
             <span class="mp-tag">Бөлу</span>
         </div>
 
-        <pre class="mp-code">s = "Мен Python үйренемін"
-print(s.split())</pre>
+<pre><code class="language-python">
+s = "Мен Python үйренемін"
+print(s.split())
+</code></pre>
 
         <div class="mp-output">['Мен', 'Python', 'үйренемін']</div>
     </div>
@@ -167,8 +508,10 @@ print(s.split())</pre>
             <span class="mp-tag">Біріктіру</span>
         </div>
 
-        <pre class="mp-code">words = ["Мен", "Python", "үйренемін"]
-print(" ".join(words))</pre>
+<pre><code class="language-python">
+words = ["Мен", "Python", "үйренемін"]
+print(" ".join(words))
+</code></pre>
 
         <div class="mp-output">Мен Python үйренемін</div>
     </div>
@@ -180,54 +523,14 @@ print(" ".join(words))</pre>
             <span class="mp-tag">Ауыстыру</span>
         </div>
 
-        <pre class="mp-code">text = "I like Python"
-print(text.replace("Python", "C++"))</pre>
+<pre><code class="language-python">
+text = "I like Python"
+print(text.replace("Python", "C++"))
+</code></pre>
 
         <div class="mp-output">I like C++</div>
     </div>
-
-    <!-- find/index -->
-    <div class="method-premium">
-        <div class="mp-head">
-            <span class="mp-name">find() / index()</span>
-            <span class="mp-tag">Іздеу</span>
-        </div>
-
-        <pre class="mp-code">s = "banana"
-print(s.find("na"))
-print(s.index("ba"))</pre>
-
-        <div class="mp-output">2<br>0</div>
     </div>
-
-    <!-- count -->
-    <div class="method-premium">
-        <div class="mp-head">
-            <span class="mp-name">count()</span>
-            <span class="mp-tag">Санау</span>
-        </div>
-
-        <pre class="mp-code">s = "banana"
-print(s.count("a"))</pre>
-
-        <div class="mp-output">3</div>
-    </div>
-
-    <!-- title/capitalize -->
-    <div class="method-premium">
-        <div class="mp-head">
-            <span class="mp-name">title() / capitalize()</span>
-            <span class="mp-tag">Стиль</span>
-        </div>
-
-        <pre class="mp-code">s = "python programming"
-print(s.title())
-print(s.capitalize())</pre>
-
-        <div class="mp-output">Python Programming<br>Python programming</div>
-    </div>
-      </div>
-
 
 
  <div class="main-column">

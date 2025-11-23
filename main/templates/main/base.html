@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Python Оқу Платформасы{% endblock %}</title>
+
+    <!-- Apple INTER font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main Apple CSS -->
+    <link rel="stylesheet" href="{% static 'css/apple.css' %}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="nav-left">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/200px-Python_logo_and_wordmark.svg.png">
+            <span class="navbar-title">АЛГОРИТМДЕУ ЖӘНЕ ПРОГРАММАЛАУ</span>
+        </div>
+
+        <div class="nav-right">
+            <a class="btn-outline" href="/signup">Регистрация</a>
+            <a class="btn-primary" href="{% url 'login' %}">Кіру</a>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h6>6-сынып</h6>
+        <a href="/praktika">IDE – мен танысу</a>
+        <a href="/syntax">Тіл әліппесі. Синтаксис</a>
+        <a href="/datatype">Мәліметтер типтері</a>
+        <a href="/arithmeticoperation">Арифметикалық амалдар</a>
+        <a href="/inputandoutput">Енгізу және шығару</a>
+        <a href="/linearalgortm">Сызықтық алгоритмдер</a>
+
+        <h6>7-сынып</h6>
+        <a href="/workingwithfiles">Файлдармен жұмыс</a>
+        <a href="/programmingalgorithms01">Тармақталған алгоритмдер</a>
+        <a href="/programmingalgorithms02">Кірістірілген шарттар</a>
+        <a href="/programmingalgorithms03">Күрделі шарттар</a>
+        <a href="/programmingalgorithms04">Таңдау операторлары</a>
+
+        <h6>8-сынып</h6>
+        <a href="/operator01">While циклі</a>
+        <a href="/operator02">For циклі</a>
+        <a href="/operator03">Continue</a>
+        <a href="/operator04">Break</a>
+        <a href="/operator05">Else</a>
+        <a href="/trassirovka">Алгоритм трассировкасы</a>
+
+        <h6>9-сынып</h6>
+        <a href="/birolshemdimassiv">Бір өлшемді массив</a>
+        <a href="/orynauystyru">Элементтерді ауыстыру</a>
+        <a href="/ekiolshemdimassiv">Екі өлшемді массив</a>
+        <a href="/suryptau">Сұрыптау</a>
+        <a href="/zhoyujanekiristiru">Жою және кірістіру</a>
+        <a href="/pygame">Pygame</a>
+
+        <h6>10-сынып</h6>
+        <a href="/string">Жолдық әдістер</a>
+
+    </aside>
+
+
+
+    <!-- PAGE CONTENT -->
+    <main class="content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</div>
+
+
+
+<!-- FOOTER -->
+<footer>
+    © 2025 Python оқу платформасы. Барлық құқықтар қорғалған.
+</footer>
+
+</body>
+</html>
