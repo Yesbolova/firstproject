@@ -87,7 +87,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',    # ← style.css, images, js осы жерде
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'   # PythonAnywhere үшін міндетті
+
+STATIC_ROOT = '/home/Yesbolova/firstproject/staticfiles/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ---------- EMAIL ----------
