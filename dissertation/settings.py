@@ -84,9 +84,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',    # ← style.css, images, js осы жерде
+    '/home/Yesbolova/firstproject/staticfiles/',
 ]
-
 
 STATIC_ROOT = '/home/Yesbolova/firstproject/staticfiles/'
 MEDIA_ROOT = BASE_DIR / 'media'
