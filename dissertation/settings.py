@@ -81,14 +81,15 @@ USE_TZ = True
 
 # ---------- STATIC & MEDIA ----------
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 
+# Папка, куда Django будет копировать статики при collectstatic
+STATIC_ROOT = '/home/Yesbolova/firstproject/staticfiles/'
+
+# Папка, где лежат ТВОИ css, js, images
 STATICFILES_DIRS = [
     '/home/Yesbolova/firstproject/static/',
 ]
 
-STATIC_ROOT = '/home/Yesbolova/firstproject/staticfiles/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # ---------- EMAIL ----------
 EMAIL_USE_TLS = True
