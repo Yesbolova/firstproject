@@ -1,0 +1,438 @@
+/* --------------------------------------------------
+   GLOBAL
+-------------------------------------------------- */
+body {
+    background: #F8F9FB;
+    font-family: "Inter", "Poppins", sans-serif;
+    color: #1C1D1F;
+    padding-top: 90px;
+    margin: 0;
+}
+
+/* MAIN CONTAINER */
+/* Барлық беттегі басты контейнер */
+.page.container,
+.layout,
+.section,
+.card,
+.progress-card {
+    max-width: 1100px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Main column толық енімен жұмыс істесін */
+.main-column {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+/* Layout with sidebar */
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    width: 100%;
+}
+
+/* --------------------------------------------------
+   HEADER (Udemy style)
+-------------------------------------------------- */
+.topbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E7EB;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.topbar-inner {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    background: #2E6CE0;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+.brand-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.brand-subtitle {
+    font-size: 13px;
+    color: #6B7280;
+}
+
+.topnav a {
+    margin-left: 20px;
+    font-weight: 500;
+    color: #1C1D1F;
+    text-decoration: none;
+}
+
+.topnav a:hover {
+    color: #2E6CE0;
+}
+
+/* XP panel */
+.xp-panel {
+    background: #F0F4FF;
+    border: 1px solid #D4DFFF;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-weight: 600;
+    color: #2E6CE0;
+}
+
+/* --------------------------------------------------
+   CARDS
+-------------------------------------------------- */
+.card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* Section headers */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.section-subtitle {
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* --------------------------------------------------
+   PROGRESS BAR
+-------------------------------------------------- */
+.progress-card {
+    padding: 28px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #E5E7EB;
+    border-radius: 20px;
+}
+
+.progress-bar-fill {
+    background: #2ECC71;
+    height: 12px;
+    width: 0%;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.progress-meta {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #4B5563;
+}
+
+.level-badge {
+    background: #2E6CE0;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* --------------------------------------------------
+   BUTTONS
+-------------------------------------------------- */
+.btn-pill {
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    border: none;
+}
+
+.btn-primary {
+    background: #2E6CE0;
+    color: white;
+}
+
+.btn-outline {
+    border: 1px solid #2E6CE0;
+    color: #2E6CE0;
+    background: white;
+}
+
+.btn-outline:hover {
+    background: #2E6CE0;
+    color: white;
+}
+
+.btn-done {
+    background: #2ECC71;
+    color: white;
+}
+
+.btn-done.done {
+    background: #229954;
+}
+
+.sm {
+    padding: 6px 16px;
+    font-size: 14px;
+}
+
+/* --------------------------------------------------
+   METHODS GRID
+-------------------------------------------------- */
+.methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.method-card {
+    background: #FAFAFA;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 18px;
+    transition: 0.2s;
+}
+
+.method-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+}
+
+.method-name {
+    font-weight: 700;
+    color: #2E6CE0;
+}
+
+.method-tag {
+    background: #E8EFFF;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    color: #2E6CE0;
+}
+
+/* --------------------------------------------------
+   EXAMPLES
+-------------------------------------------------- */
+.example-block {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.example-badge {
+    background: #E8EFFF;
+    padding: 10px 14px;
+    border-radius: 10px;
+    height: fit-content;
+    color: #2E6CE0;
+    font-weight: 700;
+}
+
+/* --------------------------------------------------
+   GAME: BUG FIX
+-------------------------------------------------- */
+.level-block {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.level-block summary {
+    padding: 12px 14px;
+    cursor: pointer;
+    background: #F3F4F6;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.level-block[open] summary {
+    background: #E5E7EB;
+}
+
+.bug-task {
+    padding: 14px;
+}
+
+.answer {
+    background: #F8FAFC;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: none;
+}
+
+.answer.visible {
+    display: block;
+}
+
+/* --------------------------------------------------
+   QUIZ
+-------------------------------------------------- */
+.quiz-option {
+    background: #F3F4F6;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+}
+
+.quiz-option:hover {
+    background: #E9EBEF;
+}
+
+.quiz-option.correct {
+    background: #D1F2E4;
+    border-left: 6px solid #2ECC71;
+}
+
+.quiz-option.wrong {
+    background: #FADBD8;
+    border-left: 6px solid #E74C3C;
+}
+
+/* --------------------------------------------------
+   LAB
+-------------------------------------------------- */
+.text-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #D1D5DB;
+    margin-bottom: 12px;
+}
+
+.game-output {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    padding: 14px;
+    border-radius: 12px;
+    min-height: 60px;
+    margin-top: 12px;
+    font-weight: 500;
+}
+
+/* --------------------------------------------------
+   SIDEBAR
+-------------------------------------------------- */
+.sidebar-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.link-list a {
+    color: #2E6CE0;
+}
+
+.link-list a:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------
+   FOOTER
+-------------------------------------------------- */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    color: #6B7280;
+}
+
+/* --------------------------------------------------
+   RESPONSIVE
+-------------------------------------------------- */
+@media (max-width: 880px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}
+/* Барлық container-лердің ені бірдей болу үшін */
+.container {
+    max-width: 1100px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.layout {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+}
+.sidebar {
+    max-width: 320px !important;
+    width: 100%;
+}
+
+
+.method-card,
+.game-card,
+.example-block {
+    width: 100%;
+    max-width: 100%;
+}
+.methods-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.page.container,
+.layout,
+.main-column {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Карточкалар контейнерден шықпау үшін */
+.methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Карточканың ішінде ештеңе сыртқа шықпау үшін */
+.method-card {
+    overflow: hidden;
+}
+

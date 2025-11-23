@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" class="mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="ROBOTS" content="ALL">
+    <meta name="MSSmartTagsPreventParsing" content="true">
+    <meta name="Copyright" content="Django Software Foundation">
+
+    <title>Элементті жою және кірістіру</title>
+
+    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
+
+    <!-- Python синтаксисін әдемі көрсету (Prism.js) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+</head>
+
+<body id="generic">
+
+    <div class="copy-banner">
+      <div class="container ">
+          <h1>Элементті жою және кірістіру</h1>
+      </div>
+    </div>
+
+    <div class="container sidebar-right">
+      <div role="main">
+
+          <h2 style="color: MediumSeaGreen;">
+              Оқу мақсаты: бір өлшемді, екі өлшемді массивтерді пайдаланып Python программалау тілінде программаларды жасау
+          </h2>
+
+          <p>
+              Python-да бірөлшемді массивке элементтерді кірістіруді және өшіруді жүзеге асыру жолдарымен танысайық.
+              Бұл әрекеттер Python тілінде өте оңай орындалады.
+          </p>
+
+          <!-- ===================== -->
+          <!--   1-МЫСАЛ — ӨШІРУ     -->
+          <!-- ===================== -->
+
+          <h2>1-мысал (Элементтерді өшіру)</h2>
+
+          <p>
+              A[N] бірөлшемді массивінде нөлге тең жалғыз элемент бар.
+              Сол элементті өшіріп, массивтің ұзындығын қысқарту керек.
+          </p>
+
+          <pre><code class="language-python">
+# 1-мысал. Нөлге тең элементті өшіру
+
+# N (0 < N < 100) элемент саны
+N = int(input("Элементтер санын енгізіңіз: "))
+
+A = []
+for i in range(N):
+    x = int(input(f"{i + 1}-элементті енгізіңіз: "))
+    A.append(x)
+
+print("Бастапқы массив:", A)
+
+# Массивтегі 0 тұрған орынды табамыз
+zero_index = A.index(0)
+
+# Сол элементті өшіреміз
+A.pop(zero_index)
+
+print("Нөлді өшіргеннен кейінгі массив:", A)
+print("Жаңа ұзындығы:", len(A))
+          </code></pre>
+
+          <h3>Нәтиже мысалы</h3>
+
+          <pre><code class="language-python">
+A = [80, 11, 25, 14, 5, 43, 5, 0, 41, 75]
+print("Бастапқы:", A)
+
+zero_index = A.index(0)
+A.pop(zero_index)
+
+print("Нәтижесі:", A)
+# Нәтиже: [80, 11, 25, 14, 5, 43, 5, 41, 75]
+          </code></pre>
+
+
+          <!-- ===================== -->
+          <!--   2-МЫСАЛ — КІРІСТІРУ -->
+          <!-- ===================== -->
+
+          <h2>2-мысал (Элементтерді кірістіру)</h2>
+
+          <p>
+              B[N] массивінің K-шы орнына жаңа X элементін кірістіру керек.
+              Python-да бұл insert() әдісімен орындалады.
+          </p>
+
+          <pre><code class="language-python">
+# 2-мысал. Элементті кірістіру
+
+# N (0 < N < 100) элемент саны
+N = int(input("Элементтер санын енгізіңіз: "))
+
+B = []
+for i in range(N):
+    x = int(input(f"{i + 1}-элементті енгізіңіз: "))
+    B.append(x)
+
+print("Бастапқы массив:", B)
+
+K = int(input("К-шы орнын енгізіңіз (1-ден басталады): "))
+X = int(input("Жаңа элемент X мәнін енгізіңіз: "))
+
+# Python индексі 0-ден басталады → сондықтан K-1
+B.insert(K - 1, X)
+
+print("Жаңа массив:", B)
+print("Массив ұзындығы:", len(B))
+          </code></pre>
+
+          <h3>Нәтиже мысалы</h3>
+
+          <pre><code class="language-python">
+B = [80, 11, 25, 14, 5, 43, 5, 41, 75]
+print("Бастапқы:", B)
+
+K = 6
+X = 55
+
+B.insert(K - 1, X)
+
+print("Нәтижесі:", B)
+# Нәтиже: [80, 11, 25, 14, 5, 55, 43, 5, 41, 75]
+          </code></pre>
+
+      </div>
+    </div>
+
+    <!-- Оң жақ панель -->
+    <div role="complementary">
+      <div class="fundraising-sidebar">
+        <h2 style="color:Gold"><b>Программалау - ол түсіну</b></h2>
+        <img src="https://www.python.org/static/img/python-logo@2x.png" width="300" height="80">
+      </div>
+
+      <ul class="list-links">
+        <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
+        <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3 жүктеу</a></li>
+        <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+      </ul>
+    </div>
+
+</body>
+</html>
