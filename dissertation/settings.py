@@ -84,7 +84,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    '/home/Yesbolova/firstproject/staticfiles/',
+    '/home/Yesbolova/firstproject/static/',
 ]
 
 STATIC_ROOT = '/home/Yesbolova/firstproject/staticfiles/'
