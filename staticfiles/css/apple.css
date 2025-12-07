@@ -1,178 +1,413 @@
-/* Apple San Francisco */
+/* =========================================================
+   0. GLOBAL VARIABLES (Apple Premium Theme)
+========================================================= */
+:root {
+    --bg-main: #f5f5f7;
+    --text-main: #1d1d1f;
+    --text-soft: rgba(29,29,31,0.7);
+    --card-bg: #ffffff;
+    --radius-card: 22px;
+    --radius-small: 14px;
+    --shadow-card: 0 12px 32px rgba(0,0,0,0.06);
+
+    --green: #34C759;
+    --green-dark: #1fae45;
+
+    --font-large: 32px;
+    --font-medium: 20px;
+    --font-regular: 16px;
+}
+
+/* =========================================================
+   1. BASE STYLE
+========================================================= */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #f5f5f7;
     margin: 0;
-    display: flex;
-    animation: fadeIn 1s;
+    padding: 0;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
 }
 
-/* Fade animation */
-.fade-in {
-    animation: fade 0.6s ease-in-out;
+.container {
+    max-width: 935px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-@keyframes fade {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+img {
+    max-width: 100%;
+    border-radius: 16px;
 }
 
-/* Sidebar */
-.sidebar {
-    width: 240px;
-    padding: 30px 20px;
-    background: #ffffff;
-    border-right: 1px solid #e5e5e5;
-    height: 100vh;
+
+
+/* =========================================================
+   2. TOP BAR (Apple Glass)
+========================================================= */
+.topbar {
     position: fixed;
-    overflow-y: auto;
-}
-
-.sidebar-title {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #0a84ff;
-}
-
-.sidebar nav h4 {
-    margin-top: 25px;
-    font-size: 16px;
-    color: #333;
-}
-
-.sidebar nav a {
-    display: block;
-    padding: 6px 0;
-    color: #444;
-    text-decoration: none;
-    font-size: 15px;
-    transition: 0.2s;
-}
-
-.sidebar nav a:hover {
-    color: #0a84ff;
-    padding-left: 6px;
-}
-
-/* Header */
-.header {
-    position: fixed;
-    left: 240px;
-    right: 0;
     top: 0;
-    height: 60px;
-    background: white;
-    border-bottom: 1px solid #e5e5e5;
+    width: 100%;
+    z-index: 9999;
+
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: saturate(180%) blur(22px);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 0;
+}
+
+.brand {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
+    gap: 12px;
 }
 
-.platform-name {
-    font-weight: 600;
+.brand-icon {
+    background: var(--green);
+    color: white;
+    padding: 13px 15px;
+    border-radius: 18px;
+    font-weight: 700;
     font-size: 20px;
 }
 
-.dark-toggle {
-    font-size: 22px;
-    background: none;
+.brand-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    font-size: 13px;
+    opacity: .65;
+}
+
+.topnav a {
+    margin: 0 12px;
+    color: var(--text-main);
+    font-weight: 500;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.topnav a:hover {
+    color: var(--green);
+}
+
+.xp-panel {
+    background: var(--green);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.page {
+    margin-top: 110px;
+}
+
+
+
+/* =========================================================
+   3. PROGRESS CARD
+========================================================= */
+.progress-card {
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+
+    margin-bottom: 40px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    font-size: var(--font-large);
+    font-weight: 800;
+    margin: 0;
+}
+
+.page-subtitle {
+    opacity: .65;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    padding: 12px 22px;
+    font-weight: 700;
+    border-radius: 18px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: #e6e6e7;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--green);
+    transition: width .35s ease;
+}
+
+.progress-meta {
+    display: flex;
+    justify-content: space-between;
+    opacity: .75;
+}
+
+
+
+/* =========================================================
+   4. SECTION CARD
+========================================================= */
+.card.section {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 35px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-subtitle {
+    opacity: .65;
+}
+
+
+
+/* =========================================================
+   5. BUTTONS
+========================================================= */
+.btn-pill {
+    padding: 12px 20px;
+    border-radius: 40px;
+
+    background: #e7e7ea;
+    font-weight: 600;
     border: none;
     cursor: pointer;
+    transition: .2s;
 }
 
-.btn-login {
-    margin-left: 15px;
-    text-decoration: none;
-    padding: 6px 12px;
-    background: #0a84ff;
-    color: #fff;
-    border-radius: 8px;
+.btn-pill:hover {
+    background: #d9d9dc;
 }
 
-/* Content */
-.content {
-    margin-left: 240px;
-    margin-top: 70px;
-    padding: 30px 50px;
+.btn-done.done {
+    background: var(--green);
+    color: white;
 }
 
-/* Lesson Blocks */
-.lesson-header {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 20px;
+
+
+/* =========================================================
+   6. CODE BLOCKS
+========================================================= */
+pre {
+    background: #f0f1f3;
+    padding: 16px;
+    border-radius: 14px;
+    overflow-x: auto;
+    font-size: 14px;
 }
 
-.goal-box {
+
+
+/* =========================================================
+   7. METHODS GRID
+========================================================= */
+.methods-premium-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 22px;
+}
+
+.method-premium {
     background: white;
     padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.06);
-    margin-bottom: 25px;
+    border-radius: 18px;
+    box-shadow: var(--shadow-card);
+    transition: .2s ease;
 }
 
-.lesson-img {
-    max-width: 100%;
-    border-radius: 16px;
-    margin: 20px 0;
+.method-premium:hover {
+    transform: translateY(-4px);
 }
 
-/* Code Block */
-.code-block {
-    background: #1e1e1e;
-    color: #dcdcdc;
-    padding: 15px 20px;
+.mp-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.mp-tag {
+    background: #e6f7eb;
+    color: var(--green);
+    padding: 4px 12px;
     border-radius: 12px;
-    font-family: "Fira Code", monospace;
-    margin: 20px 0;
+    font-size: 12px;
 }
 
-/* Gamification */
-.xp-box {
-    background: #fff;
-    padding: 15px;
+.mp-output {
+    background: #f6fff7;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: monospace;
+}
+
+
+
+/* =========================================================
+   8. GAME CARDS
+========================================================= */
+.game-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 35px;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+
+/* Difficulty Icons */
+.game-icon {
+    width: 42px;
+    height: 42px;
     border-radius: 14px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.05);
-    margin: 20px 0;
 }
 
-.xp {
-    font-weight: 700;
-    color: #0a84ff;
+.game-easy   { background: #d4f8d4; }
+.game-medium { background: #ffe4b3; }
+.game-hard   { background: #ffd1d1; }
+
+
+
+/* =========================================================
+   9. QUIZ
+========================================================= */
+.quiz-option {
+    width: 100%;
+    padding: 14px 18px;
+
+    background: #f2f2f2;
+    border-radius: 14px;
+    margin-bottom: 10px;
+
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.xp-progress {
-    margin-top: 10px;
-    height: 8px;
-    background: #e5e5e5;
-    border-radius: 20px;
+.quiz-option:hover {
+    background: #e8e8e8;
 }
 
-.xp-progress div {
-    background: #0a84ff;
-    height: 100%;
-    border-radius: 20px;
+.quiz-option.correct {
+    background: #d8f8d8;
+    border-left: 5px solid var(--green);
 }
 
-/* Dark Mode */
-body.dark {
-    background: #1b1b1d;
-    color: #f2f2f7;
+.quiz-option.wrong {
+    background: #ffd7d7;
+    border-left: 5px solid #ff4f4f;
 }
 
-body.dark .sidebar {
-    background: #2c2c2e;
-    border-color: #3a3a3c;
+
+
+/* =========================================================
+   10. LABORATORY
+========================================================= */
+.text-input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 16px;
 }
 
-body.dark .header {
-    background: #2c2c2e;
-    border-color: #3a3a3c;
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-body.dark .goal-box,
-body.dark .xp-box {
-    background: #2c2c2e;
+.game-output {
+    background: #fafafa;
+    padding: 14px;
+    border-radius: 14px;
+    font-family: monospace;
+}
+
+
+
+/* =========================================================
+   11. FOOTER
+========================================================= */
+.footer {
+    margin-top: 40px;
+    padding: 40px 0;
+    text-align: center;
+    color: #777;
+}
+
+
+
+/* =========================================================
+   12. MOBILE ADAPTATION
+========================================================= */
+@media (max-width: 768px) {
+
+    .topnav {
+        display: none;
+    }
+
+    .brand-title {
+        font-size: 16px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .methods-premium-grid {
+        grid-template-columns: 1fr;
+    }
 }

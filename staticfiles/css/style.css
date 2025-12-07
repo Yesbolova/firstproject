@@ -411,3 +411,28 @@ pre {
         grid-template-columns: 1fr;
     }
 }
+/* ---- LIGHT MODE PRISM CODE STYLE (Apple-like) ---- */
+pre[class*="language-"] {
+    background: #f8f8f8; /* ашық жұмсақ фон */
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    border: 1px solid #e5e7eb;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+code[class*="language-"] {
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    color: #1f2937; /* негізгі текст */
+}
+
+/* Python-ға түс беру */
+.token.comment { color: #6b7280; font-style: italic; }
+.token.keyword { color: #d03801; font-weight: 600; }     /* for, while, def... */
+.token.string { color: #0f766e; }                        /* "мәтін" */
+.token.number { color: #0369a1; }                        /* 1,2,3 */
+.token.function { color: #7c3aed; font-weight: 600; }    /* print, input */
+.token.operator { color: #374151; }
+.token.punctuation { color: #4b5563; }

@@ -782,6 +782,193 @@
 .quiz-option:hover{
   background:#f3f4f6;
 }
+/* === АДАПТАЦИЯ ПЛАТФОРМЫ ПОД ПЛАНШЕТЫ И ТЕЛЕФОНЫ === */
+
+/* Ширина до 1024px: перестраиваем layout, смягчаем отступы */
+@media (max-width: 1024px) {
+
+  /* layout становится колонкой: сайдбар сверху, контент снизу */
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 18px;
+  }
+
+  .content {
+    padding: 20px 24px;
+    min-height: auto;
+  }
+
+  /* hero-блок и стеклянная карточка вписываются в ширину контента */
+  .hero-block {
+    margin: 12px 0 24px;
+  }
+
+  .glass-card {
+    width: 100%;
+    padding: 24px 20px;
+  }
+
+  /* блок с курсами подстраивается */
+  .course-section {
+    max-width: 100%;
+    margin: 20px 0 28px;
+  }
+}
+
+/* Ширина до 768px: настройка навбара, шрифтов, сеток */
+@media (max-width: 768px) {
+
+  /* NAVBAR */
+  .nav-container {
+    width: 100%;
+    padding: 10px 14px;
+  }
+
+  .nav-title {
+    font-size: 17px;
+  }
+
+  .nav-right a {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  /* Сайдбар: чуть компактнее */
+  .sidebar {
+    padding: 12px 14px;
+  }
+
+  .accordion {
+    font-size: 15px;
+    padding: 10px 8px;
+  }
+
+  .panel a {
+    font-size: 14px;
+    padding: 6px 6px;
+  }
+
+  /* Контент */
+  .content {
+    padding: 18px 16px 22px;
+  }
+
+  /* HERO-текст поменьше, чтобы не ломался */
+  .glass-card h2 {
+    font-size: 24px;
+  }
+
+  .glass-card p {
+    font-size: 15px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Курсы: удобная сетка */
+  .course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .course-card {
+    padding: 12px 14px;
+  }
+
+  /* Компилятор */
+  .compiler-wrapper {
+    padding: 16px 14px 18px;
+  }
+
+  .compiler-header h1,
+  .compiler-header h2 {
+    font-size: 22px;
+  }
+
+  .compiler-header p {
+    font-size: 13px;
+  }
+
+  .compiler-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .compiler-buttons button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Ширина до 480px: совсем маленькие телефоны */
+@media (max-width: 480px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .nav-title {
+    font-size: 15px;
+  }
+
+  /* Sidebar: ещё компактнее */
+  .sidebar {
+    padding: 10px 10px;
+  }
+
+  .accordion {
+    font-size: 14px;
+  }
+
+  .panel a {
+    font-size: 13px;
+  }
+
+  /* Контент */
+  .content {
+    padding: 14px 10px 18px;
+  }
+
+  /* Курсы */
+  .course-card h3 {
+    font-size: 16px;
+  }
+
+  .grade-subtitle {
+    font-size: 13px;
+  }
+
+  .course-card ul {
+    font-size: 12px;
+  }
+
+  /* Компилятор: высота поменьше, чтобы не был "монстром" */
+  .code-editor .CodeMirror {
+    height: 220px;
+    font-size: 13px;
+  }
+
+  #pyConsole {
+    min-height: 180px;
+    font-size: 12px;
+  }
+}
+
 
   </style>
 </head>

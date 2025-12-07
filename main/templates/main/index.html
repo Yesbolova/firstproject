@@ -27,6 +27,267 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
 
   <style>
+ /* === Премиум-стиль для hero и карточек сыныптар === */
+
+/* HERO */
+.hero-block {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 30px;
+}
+
+.glass-card {
+  width: 100%;
+  max-width: 920px;
+  padding: 32px 28px;
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+
+  /* очень мягкий градиент + лёгкая рамка */
+  background:
+    radial-gradient(circle at top left, rgba(0, 113, 227, 0.06), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(52, 199, 89, 0.06), transparent 60%),
+    rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 60%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.glass-card h2 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.glass-card p {
+  margin: 0 0 18px;
+  font-size: 15px;
+  color: var(--text-light);
+}
+
+/* Кнопки hero — лёгкий премиум-градиент */
+.hero-buttons {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-btn {
+  padding: 11px 24px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.hero-btn.primary {
+  background: linear-gradient(135deg, #0071e3, #34c759);
+  color: #ffffff;
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35);
+}
+
+.hero-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 48px rgba(0, 113, 227, 0.42);
+}
+
+.hero-btn.secondary {
+  background:
+    linear-gradient(135deg, rgba(248, 250, 252, 0.96), rgba(241, 245, 249, 0.96));
+  color: #111827;
+  border-color: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);
+}
+
+.hero-btn.secondary:hover {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 1));
+  transform: translateY(-1px);
+}
+
+/* Блок СЫНЫПТАР */
+.course-section {
+  max-width: 1040px;
+  margin: 24px auto 32px;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.course-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.course-link {
+  font-size: 14px;
+  color: var(--blue);
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.course-link:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+/* Сетка карточек */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+/* Карточка сынып — «әрең байқалатын» градиент */
+.course-card {
+  position: relative;
+  background:
+    radial-gradient(circle at top left, rgba(0, 113, 227, 0.04), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(52, 199, 89, 0.04), transparent 60%),
+    #ffffff;
+  border-radius: var(--radius);
+  padding: 16px 18px 18px;
+  border: 1px solid rgba(148, 163, 184, 0.30);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+/* Нәзік акцент сызық сверху */
+.course-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    rgba(0, 113, 227, 0.50),
+    rgba(52, 199, 89, 0.50));
+  opacity: 0.7;
+}
+
+/* Лёгкий «glow» в углу */
+.course-card::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: -40px;
+  bottom: -40px;
+  background: radial-gradient(circle, rgba(15, 23, 42, 0.06), transparent 65%);
+  pointer-events: none;
+}
+
+.course-card h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.grade-subtitle {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.course-card ul {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.course-card-footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.course-card-footer a {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--blue);
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.course-card-footer a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Адаптация под планшет/телефон */
+@media (max-width: 900px) {
+  .glass-card {
+    padding: 26px 20px;
+  }
+
+  .course-section {
+    max-width: 100%;
+    margin: 20px 0 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .glass-card h2 {
+    font-size: 24px;
+  }
+
+  .course-card {
+    padding: 14px 14px 16px;
+  }
+}
+
+
+/* Адаптация под узкие экраны */
+@media (max-width: 900px) {
+  .course-section {
+    max-width: 100%;
+    margin: 20px 0 26px;
+  }
+
+  .course-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .course-link {
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .course-card {
+    padding: 12px 14px 14px;
+  }
+
+  .course-title {
+    font-size: 18px;
+  }
+}
+
   <style>
   .content {
     max-width: 900px;
@@ -317,6 +578,193 @@
     }
 
     .footer{text-align:center;margin:30px 0;color:#999;font-size:14px;}
+    /* === АДАПТАЦИЯ ПЛАТФОРМЫ ПОД ПЛАНШЕТЫ И ТЕЛЕФОНЫ === */
+
+/* Ширина до 1024px: перестраиваем layout, смягчаем отступы */
+@media (max-width: 1024px) {
+
+  /* layout становится колонкой: сайдбар сверху, контент снизу */
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 18px;
+  }
+
+  .content {
+    padding: 20px 24px;
+    min-height: auto;
+  }
+
+  /* hero-блок и стеклянная карточка вписываются в ширину контента */
+  .hero-block {
+    margin: 12px 0 24px;
+  }
+
+  .glass-card {
+    width: 100%;
+    padding: 24px 20px;
+  }
+
+  /* блок с курсами подстраивается */
+  .course-section {
+    max-width: 100%;
+    margin: 20px 0 28px;
+  }
+}
+
+/* Ширина до 768px: настройка навбара, шрифтов, сеток */
+@media (max-width: 768px) {
+
+  /* NAVBAR */
+  .nav-container {
+    width: 100%;
+    padding: 10px 14px;
+  }
+
+  .nav-title {
+    font-size: 17px;
+  }
+
+  .nav-right a {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  /* Сайдбар: чуть компактнее */
+  .sidebar {
+    padding: 12px 14px;
+  }
+
+  .accordion {
+    font-size: 15px;
+    padding: 10px 8px;
+  }
+
+  .panel a {
+    font-size: 14px;
+    padding: 6px 6px;
+  }
+
+  /* Контент */
+  .content {
+    padding: 18px 16px 22px;
+  }
+
+  /* HERO-текст поменьше, чтобы не ломался */
+  .glass-card h2 {
+    font-size: 24px;
+  }
+
+  .glass-card p {
+    font-size: 15px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Курсы: удобная сетка */
+  .course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .course-card {
+    padding: 12px 14px;
+  }
+
+  /* Компилятор */
+  .compiler-wrapper {
+    padding: 16px 14px 18px;
+  }
+
+  .compiler-header h1,
+  .compiler-header h2 {
+    font-size: 22px;
+  }
+
+  .compiler-header p {
+    font-size: 13px;
+  }
+
+  .compiler-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .compiler-buttons button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Ширина до 480px: совсем маленькие телефоны */
+@media (max-width: 480px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .nav-title {
+    font-size: 15px;
+  }
+
+  /* Sidebar: ещё компактнее */
+  .sidebar {
+    padding: 10px 10px;
+  }
+
+  .accordion {
+    font-size: 14px;
+  }
+
+  .panel a {
+    font-size: 13px;
+  }
+
+  /* Контент */
+  .content {
+    padding: 14px 10px 18px;
+  }
+
+  /* Курсы */
+  .course-card h3 {
+    font-size: 16px;
+  }
+
+  .grade-subtitle {
+    font-size: 13px;
+  }
+
+  .course-card ul {
+    font-size: 12px;
+  }
+
+  /* Компилятор: высота поменьше, чтобы не был "монстром" */
+  .code-editor .CodeMirror {
+    height: 220px;
+    font-size: 13px;
+  }
+
+  #pyConsole {
+    min-height: 180px;
+    font-size: 12px;
+  }
+}
+
   </style>
 </head>
 
@@ -405,16 +853,124 @@
 
  {% block content %}
 <main class="content">
+  <!-- ЛЕНДИНГ-БЛОК -->
+  <section class="hero-block">
+    <div class="glass-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+           alt="Python Logo" class="python-3d">
+
+      <h2>Программалау және Python тілін үйренуге арналған онлайн-платформа</h2>
+      <p>
+        6–10 сынып оқушыларына арналған теория, практикалық тапсырмалар, mini-quiz
+        және олимпиадалық деңгейге дейінгі есептер – бәрі бір жерде.
+      </p>
+
+      <div class="hero-buttons">
+        <!-- первая кнопка: перейти к первому уроку 6-сынып -->
+        <a href="/praktika" class="hero-btn primary">
+          6-сыныптан бастау
+        </a>
+        <!-- вторая кнопка: прокрутить к компилятору -->
+        <a href="operator06" class="hero-btn secondary">
+         Python бойынша жаттығулар
+        </a>
+         <a href="maksat" class="hero-btn secondary">
+      Оқу мақсаттары
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+    <!-- КУРСТАР · СЫНЫПТАР БОЙЫНША -->
+  <section class="course-section">
+    <div class="course-header">
+      <h2 class="course-title">Сыныптар</h2>
+      <a href="/praktika" class="course-link">
+        6–10 сыныптарға шолу
+      </a>
+    </div>
+
+    <div class="course-grid">
+
+      <!-- 6-сынып -->
+      <article class="course-card">
+        <h3>6-сынып</h3>
+        <p class="grade-subtitle">Python негіздері және IDE-мен танысу</p>
+        <ul>
+          <li>Python ортасын баптау</li>
+          <li>Алғашқы программа жазу</li>
+          <li>Синтаксис және деректер типтері</li>
+        </ul>
+        <div class="course-card-footer">
+          <a href="/praktika">Тақырыптарды ашу  →</a>
+        </div>
+      </article>
+
+      <!-- 7-сынып -->
+      <article class="course-card">
+        <h3>7-сынып</h3>
+        <p class="grade-subtitle">Шарттар, файлдар және алгоритмдер</p>
+        <ul>
+          <li>Файлдармен жұмыс</li>
+          <li>Тармақталған алгоритмдер</li>
+          <li>Күрделі және кірістірілген шарттар</li>
+        </ul>
+        <div class="course-card-footer">
+          <a href="/workingwithfiles">Тақырыптарды ашу  →</a>
+        </div>
+      </article>
+
+      <!-- 8-сынып -->
+      <article class="course-card">
+        <h3>8-сынып</h3>
+        <p class="grade-subtitle">Циклдер және трассировка</p>
+        <ul>
+          <li>While және For циклдері</li>
+          <li>Continue, Break, Else</li>
+          <li>Алгоритм трассировкасы</li>
+        </ul>
+        <div class="course-card-footer">
+          <a href="/operator01">Тақырыптарды ашу  →</a>
+        </div>
+      </article>
+
+      <!-- 9-сынып -->
+      <article class="course-card">
+        <h3>9-сынып</h3>
+        <p class="grade-subtitle">Массивтер, сұрыптау және Pygame</p>
+        <ul>
+          <li>Бір өлшемді және екі өлшемді массивтер</li>
+          <li>Элементтерді ауыстыру, жою және кірістіру</li>
+          <li>Сұрыптау және Pygame-ге кіріспе</li>
+        </ul>
+        <div class="course-card-footer">
+          <a href="/birolshemdimassiv">Тақырыптарды ашу  →</a>
+        </div>
+      </article>
+
+      <!-- 10-сынып -->
+      <article class="course-card">
+        <h3>10-сынып</h3>
+        <p class="grade-subtitle">Жолдық әдістер және күрделі құрылымдар</p>
+        <ul>
+          <li>Жолдарды өңдеу (string methods)</li>
+          <li>Функциялар және модульдер</li>
+          <li>Жобалық тапсырмалар</li>
+        </ul>
+        <div class="course-card-footer">
+          <a href="/string">Тақырыптарды ашу →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
 
 
   <section class="compiler-wrapper">
-    <div class="compiler-header">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
-             alt="Python Logo" class="python-3d">
-        <h2>Python үйренудің жаңа деңгейі</h2>
-        <p>Интерактивті оқу платформасы.</p>
 
-    </div>
 
     <!-- Код (жоғарыда) -->
     <section class="compiler-section">
