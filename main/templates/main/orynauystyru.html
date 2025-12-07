@@ -1,190 +1,492 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Элементтерді ауыстыру (Бір өлшемді массив){% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <link rel="alternate" type="application/rss+xml" title="PythonRu » Лента" href="https://pythonru.com/feed">
-    <link rel="icon" type="image/png" href="https://pythonru.com/wp-content/uploads/2019/04/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://pythonru.com/wp-content/uploads/2018/11/bm-76x76.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://pythonru.com/wp-content/uploads/2018/11/bm-120x120.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://pythonru.com/wp-content/uploads/2018/11/bm-152x152.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://pythonru.com/wp-content/uploads/2018/11/bm-114x114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://pythonru.com/wp-content/uploads/2018/11/bm-144x144.png">
-    <script type="text/javascript" src="https://pythonru.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
-    <link rel="amphtml" href="https://pythonru.com/osnovy/fajly-v-python-vvod-vyvod?ysclid=lfm9qe8keh52925195&amp;amp">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Элементтерді ауыстыру</h1>
+<p class="subtitle">
+  Бұл сабақта бір өлшемді массивтегі элементтердің орындарын ауыстыру,
+  уақытша айнымалыны пайдалану және Python тілінде массивпен (тізіммен) жұмыс
+  істеуді қайталаймыз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
-
-
-    <title>Элементтердің орнын ауыстыру</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1> Элементтердің орнын ауыстыру</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: бір өлшемді массивтер пайдаланып Python программалау тілінде программаларды жасау </h2>
-
-<h2>Бір массивтің элементін екіншісіне ауыстыру</h2>
-<p></p>
-          <p>Массивтермен жұмыс істеу барысында массивтің элементтерін екінші массив элементтеріне толық жүктеуге болады (1-мысал). Сонымен б3рге массивтердегі элементтерді де белгілі қасиетіне байланысты екінші массивке жүктеуге болады.
-          Олармен төменде берілген мысалдар арқылы танысамыз</p
-
-
- <h2>1-мысал</h2><img alt="" height="309" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/f669a06a-4ae0-4fa2-87f7-644c4e80dc7a/" src="https://ucarecdn.com/f669a06a-4ae0-4fa2-87f7-644c4e80dc7a/" width="832" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Ff669a06a-4ae0-4fa2-87f7-644c4e80dc7a%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22832%22%2C%22height%22%3A%22309%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-  <h2>2-мысал</h2>
-
-          <p>2-мысал: D[] бірөлшемді массив берілген (0 < N < 100). Осы массивтегң Z-тен үлкен элементтердң Z-пен ауыстыр (Z<1000). Ауыстырулар санын және жаңа массивті экранға шығар.<p/>
-          <img alt="" height="309" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/f669a06a-4ae0-4fa2-87f7-644c4e80dc7a/" src="https://ucarecdn.com/f669a06a-4ae0-4fa2-87f7-644c4e80dc7a/" width="832" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Ff669a06a-4ae0-4fa2-87f7-644c4e80dc7a%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22832%22%2C%22height%22%3A%22309%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          </div>
-      </div>
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:10px;">
+    <li>Бір өлшемді массивтегі элементтерді индекстер бойынша түсіну;</li>
+    <li>Екі элементтің орнын ауыстыру алгоритмін жазу;</li>
+    <li>Уақытша айнымалы (<code>temp</code>) қолдану идеясын меңгеру;</li>
+    <li>Python тілінде тізім элементтерін ауыстырудың қысқа жазылуын қолдану;</li>
+    <li>Практикалық есептер арқылы дағдыны бекіту.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:14px;">Бір өлшемді массив және индекстер</h3>
+  <p>
+    Python тілінде бір өлшемді массивті көбіне <b>тізім (list)</b> арқылы көрсетеміз:
+  </p>
 
+  <pre><code class="language-python">a = [5, 9, 2, 7, 3]</code></pre>
+
+  <p>
+    Мұнда <code>a</code> — тізім, ал әр элементтің <b>индексі</b> болады:
+  </p>
+
+  <ul>
+    <li><code>a[0] = 5</code></li>
+    <li><code>a[1] = 9</code></li>
+    <li><code>a[2] = 2</code> және т.с.с.</li>
+  </ul>
+
+  <p>
+    Python-да индекстер <b>0-ден басталады</b>. Сондықтан бірінші элемент — <code>a[0]</code>, ал соңғысы —
+    <code>a[len(a) - 1]</code>.
+  </p>
+
+  <h3>Екі элементтің орнын қалай ауыстырамыз?</h3>
+  <p>Классикалық тәсіл — уақытша айнымалы пайдалану:</p>
+
+  <pre><code class="language-python">a = [5, 9, 2, 7, 3]
+
+# 1 және 3-индекстегі элементтердің орнын ауыстыру (9 және 7)
+temp = a[1]
+a[1] = a[3]
+a[3] = temp
+
+print(a)</code></pre>
+
+  <p><b>Бағдарлама нәтижесі:</b></p>
+  <pre><code class="language-python">[5, 7, 2, 9, 3]</code></pre>
+
+  <p>
+    Яғни, <code>a[1]</code> мен <code>a[3]</code> мәндері бір-бірімен орын ауыстырды.
+  </p>
+
+  <h3>Python-дағы қысқа жазылу</h3>
+  <p>
+    Python тілінде екі айнымалының орнын уақытша айнымалысыз-ақ
+    бір жолда ауыстыруға болады:
+  </p>
+
+  <pre><code class="language-python">a[i], a[j] = a[j], a[i]</code></pre>
+
+  <p>Мысал:</p>
+
+  <pre><code class="language-python">a = [5, 9, 2, 7, 3]
+
+i = 1
+j = 3
+a[i], a[j] = a[j], a[i]
+
+print(a)</code></pre>
+
+  <p><b>Нәтиже:</b></p>
+  <pre><code class="language-python">[5, 7, 2, 9, 3]</code></pre>
+
+  <h3>Бастан-аяқ алгоритм (алғашқы және соңғы элемент)</h3>
+  <p>
+    Массивтің бірінші және соңғы элементтерінің орнын ауыстыру үшін
+    мынадай алгоритм қолданамыз:
+  </p>
+
+  <ol>
+    <li>Тізімді енгізу (немесе дайын тізім беру);</li>
+    <li>Бірінші элемент индексі — <code>0</code>, соңғы элемент индексі — <code>len(a) - 1</code>;</li>
+    <li>Екі элементтің орнын ауыстыру;</li>
+    <li>Жаңартылған тізімді шығару.</li>
+  </ol>
+
+  <pre><code class="language-python">a = [10, 20, 30, 40, 50]
+
+first = 0
+last = len(a) - 1
+
+a[first], a[last] = a[last], a[first]
+
+print(a)</code></pre>
+
+  <p><b>Бағдарлама нәтижесі:</b></p>
+  <pre><code class="language-python">[50, 20, 30, 40, 10]</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <!-- Мысал 1 -->
+  <h3 style="margin-top:14px;">1-мысал · Бірінші және соңғы элементті ауыстыру</h3>
+  <pre><code class="language-python">a = [4, 8, 15, 16, 23, 42]
+
+first = 0
+last = len(a) - 1
+
+a[first], a[last] = a[last], a[first]
+
+print("Жаңартылған тізім:", a)</code></pre>
+
+  <p><b>Консолдағы нәтиже:</b></p>
+  <pre><code class="language-python">Жаңартылған тізім: [42, 8, 15, 16, 23, 4]</code></pre>
+
+  <!-- Мысал 2 -->
+  <h3 style="margin-top:18px;">2-мысал · Екі көрсетілген индексті ауыстыру</h3>
+  <p>Пайдаланушыдан индекстерді енгіздіреміз:</p>
+  <pre><code class="language-python">a = [5, 9, 2, 7, 3, 1]
+
+print("Бастапқы тізім:", a)
+
+i = int(input("Бірінші индексті енгіз: "))
+j = int(input("Екінші индексті енгіз: "))
+
+a[i], a[j] = a[j], a[i]
+
+print("Жаңартылған тізім:", a)</code></pre>
+
+  <p><b>Мысал жұмыс (input/output):</b></p>
+  <pre><code class="language-python">Бастапқы тізім: [5, 9, 2, 7, 3, 1]
+Бірінші индексті енгіз: 1
+Екінші индексті енгіз: 4
+Жаңартылған тізім: [5, 3, 2, 7, 9, 1]</code></pre>
+
+  <!-- Мысал 3 -->
+  <h3 style="margin-top:18px;">3-мысал · Тізімнің ортасын айна секілді ауыстыру</h3>
+  <p>Бірінші элемент соңғысымен, екінші элемент соңғыдан біріншісімен, т.с.с.</p>
+
+  <pre><code class="language-python">a = [1, 2, 3, 4, 5, 6]
+
+left = 0
+right = len(a) - 1
+
+while left &lt; right:
+    a[left], a[right] = a[right], a[left]
+    left += 1
+    right -= 1
+
+print("Айналған тізім:", a)</code></pre>
+
+  <p><b>Нәтиже:</b></p>
+  <pre><code class="language-python">Айналған тізім: [6, 5, 4, 3, 2, 1]</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Екі элементтің орнын ауыстыр</h3>
+  <p>
+    Тізім берілсін: <code>a = [10, 20, 30, 40, 50]</code>.
+    Пайдаланушыдан екі индекс енгізіп, сол индекстердегі элементтердің орнын
+    ауыстыратын программа жаз.
+  </p>
+
+  <div class="task-card">
+    <div class="task-io">
+      <p class="task-io-title">Мысал кіріс және шығыс:</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс</th>
+            <th>Орындалған әрекет</th>
+            <th>Шығыс</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>i = 1, j = 3</code></td>
+            <td><code>[10, 20, 30, 40, 50] → a[1] ↔ a[3]</code></td>
+            <td><code>[10, 40, 30, 20, 50]</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px;">Тапсырма 2 · Максимумды бірінші орынға әкел</h3>
+  <p>
+    Берілген тізімдегі ең үлкен элементті тауып, оны бірінші элементпен
+    орын ауыстыр:
+  </p>
+  <pre><code class="language-python">a = [3, 11, 7, 5, 9]</code></pre>
+
+  <div class="task-card">
+    <div class="task-io">
+      <p class="task-io-title">Қадамдық ойлау:</p>
+      <ul style="margin-top:4px;">
+        <li>Максимум мәнін және оның индексін тап;</li>
+        <li>Бірінші элементпен (<code>a[0]</code>) орнын ауыстыр;</li>
+        <li>Нәтижені тізім түрінде шығар.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px;">Тапсырма 3 · Көрші элементтердің орнын ауыстыр</h3>
+  <p>
+    Тізімдегі <b>(0,1), (2,3), (4,5)</b> т.с.с. жұп индекстерді өзара ауыстыр:
+  </p>
+  <pre><code class="language-python">a = [1, 2, 3, 4, 5, 6]</code></pre>
+
+  <div class="task-card">
+    <div class="task-io">
+      <p class="task-io-title">Күтілетін логика:</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Бастапқы тізім</th>
+            <th>Ауыстырулар</th>
+            <th>Жаңартылған тізім</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>[1, 2, 3, 4, 5, 6]</code></td>
+            <td><code>a[0]↔a[1], a[2]↔a[3], a[4]↔a[5]</code></td>
+            <td><code>[2, 1, 4, 3, 6, 5]</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (10 сұрақ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="25">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тест сұрақтарына жауап бер. Соңында <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Элементтердің орнын ауыстыру не үшін қажет?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Массивтің өлшемін өзгерту үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Элементтерді қажетті ретке келтіру үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Жаңа массив құру үшін
+      </label>
     </div>
 
-
-
+    <!-- 2 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Қай код екі айнымалының орнын дұрыс ауыстырады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>a = b; b = a</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>a, b == b, a</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>a, b = b, a</code>
+      </label>
     </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 3 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Тізімнің соңғы элементінің индексі қалай табылады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>len(a) - 1</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>len(a)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>a[-2]</code>
+      </label>
+    </div>
 
+    <!-- 4 -->
+    <div class="quiz-item" data-correct="d">
+      <p><b>4) Төмендегі код не істейді?</b></p>
+      <pre><code class="language-python">a[0], a[-1] = a[-1], a[0]</code></pre>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) Барлық элементтерді өшіреді
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) Соңғы элементті өшіреді
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) Тек бірінші элементті өзгертеді
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="d">
+        в) Бірінші және соңғы элементтердің орнын ауыстырады
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+    <!-- 5 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>5) Уақытша айнымалы не үшін қолданылады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) Индексті сақтау үшін ғана
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) Екі мәнді уақытша сақтап, орнын ауыстыру үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Цикл санын сақтау үшін
+      </label>
+    </div>
 
+    <!-- 6 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>6) Қай жазылу Python үшін дұрыс?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) <code>a[i] &lt;→ a[j]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) <code>swap(a[i], a[j])</code> (Python-да стандартты емес)
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) <code>a[i], a[j] = a[j], a[i]</code>
+      </label>
+    </div>
 
-</div>
+    <!-- 7 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>7) Төмендегі кодтан кейін не шығады?</b></p>
+      <pre><code class="language-python">a = [1, 2, 3, 4]
+a[0], a[1] = a[1], a[0]
+print(a)</code></pre>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="a">
+        а) <code>[2, 1, 3, 4]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="b">
+        ә) <code>[1, 2, 3, 4]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="c">
+        б) <code>[4, 3, 2, 1]</code>
+      </label>
+    </div>
 
+    <!-- 8 -->
+    <div class="quiz-item" data-correct="d">
+      <p><b>8) Индекс диапазоны қай вариантта дұрыс Берілген тізім: a = [5, 6, 7]</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="a">
+        а) <code>0, 1, 2, 3</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="b">
+        ә) <code>1, 2, 3</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="c">
+        б) <code>-1, 0, 1</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="d">
+        в) <code>0, 1, 2</code>
+      </label>
+    </div>
 
+    <!-- 9 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>9) Элементтердің орнын ауыстыру қандай алгоритм типіне жатады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="a">
+        а) Тармақталу алгоритмі
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="b">
+        ә) Сызықтық алгоритм (бірнеше рет орындалатын операциялар тізбегі)
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="c">
+        б) Циклдік алгоритм
+      </label>
+    </div>
 
+    <!-- 10 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>10) Қай жағдайда қате (IndexError) пайда болуы мүмкін?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="a">
+        а) <code>a[0], a[1] = a[1], a[0]</code> және тізімде кем дегенде 2 элемент бар
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="b">
+        ә) <code>a[0], a[-1] = a[-1], a[0]</code> және тізім бос емес
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="c">
+        б) <code>a[0], a[10] = a[10], a[0]</code> және тізім ұзындығы 3
+      </label>
+    </div>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+  </div>
+
+  <button id="checkQuiz" type="button" class="quiz-check-btn">
+    Тексеру
+  </button>
+  <div id="quizResult" class="quiz-result"></div>
+</section>
+
+{% endblock %}

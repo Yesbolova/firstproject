@@ -1,243 +1,498 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}For циклі{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
-
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
-
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
-
-
-    <title>For (фор) циклі</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1> For (фор) циклі</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: For (фор) цикл операторын пайдалану</h2>
-<h2> Python-да for циклі дегеніміз не? </h2>
-<div>
-      <p>Цикл <strong>for</strong>, сондай-ақ, параметрмен цикл деп аталады,, Питон тілінде мүмкіндіктерге бай. Циклде <strong>for</strong> айнымалы және көптеген мәндер көрсетіледі, ауыспалы жүгіретін болады. Көптеген мәндер тізіммен, кортежмен, жолмен немесе ауқыммен белгіленуі мүмкін.</p>
-
-<p>Міне, кортеж көптеген мәндер ретінде пайдаланылатын циклді пайдаланудың қарапайым мысалы:</p>
-<img alt="" height="90" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/a62d0648-2989-467f-a586-e5fa728eb413/" src="https://ucarecdn.com/a62d0648-2989-467f-a586-e5fa728eb413/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fa62d0648-2989-467f-a586-e5fa728eb413%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221172%22%2C%22height%22%3A%22128%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p>Бұл мысал айнымалы <strong>color</strong> мәндерді дәйекті қабылдайды ‘red’, ‘orange’ және т. б. Цикл денесінде түс атауы, яғни айнымалы мәні бар хабарлама шығады <strong>color</strong>, сондай – ақ циклдің Итерация нөмірі-бірінші 1-ге тең Сан, содан кейін біреуі артады (Нұсқаулық <span class="page_code_style" id="14dCaTNytp">
-  </span></p><p>i += 1</p>
- әрбір циклмен).<p></p>
-<p>Мәндер тізімінде әр түрлі өрнектер болуы мүмкін, мысалы:</p>
-
-<img alt="" height="66" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/145f40f3-0739-40e2-8369-b84b15c809e2/" src="https://ucarecdn.com/145f40f3-0739-40e2-8369-b84b15c809e2/" width="638" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F145f40f3-0739-40e2-8369-b84b15c809e2%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22638%22%2C%22height%22%3A%2266%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-
-<p>Циклдің алғашқы үш итерациясы кезінде айнымалы i түрін қабылдайды<strong>int</strong>, келесі үш типті<strong>str</strong>.</p>
-<h4>Функция range</h4>
-<p>Әдетте циклдар <strong>for</strong> белгілі бір әрекет реттілігін қайталау үшін, немесе кейбір бастапқы мәннен кейбір соңғы мәнге дейін циклдегі айнымалы мәндерді өзгерту үшін қолданылады.</p>
-<p>Циклді қайталау үшін бірнеше рет n циклды пайдалануға болады<strong>fo</strong>R функциясымен бірге <strong>range</strong>:</p>
-
-<pre><code class="language-css">
- for i in range(n):
-     Цикл денесі
-  </code></pre>
-
-<p>N ретінде сандық константа, айнымалы немесе еркін арифметикалық өрнек (мысалы, 2 ** 10) қолданылуы мүмкін. Егер N мәні нөлге тең немесе теріс болса, цикл денесі бір рет орындалмайды.</p>
-<p>Егер циклды осылай орнатсаңыз:</p>
-
-
-<pre><code class="language-css">
- for i in range(a, b):
-     Цикл денесі
-  </code></pre>
-
-
-<p>I индекстік айнымалысы a – дан b — 1-ге дейінгі мәндерді, яғни екі параметрмен шақырылған range функциясының бірінші параметрін индекстік айнымалының бастапқы мәнін, ал екінші параметр-индекстік айнымалыны қабылдамайтын мәнді көрсетеді. Егер a≥b болса, онда цикл ешқашан орындалмайды. Мысалы, 1-ден n-ге дейінгі сандар мәндерін жоспарлау үшін келесі бағдарламаны пайдалануға болады:</p>
-
-
-<img alt="" height="93" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/bae4015e-1c2a-4080-ab87-e21a9b413d10/" src="https://ucarecdn.com/bae4015e-1c2a-4080-ab87-e21a9b413d10/" width="738" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fbae4015e-1c2a-4080-ab87-e21a9b413d10%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22738%22%2C%22height%22%3A%2293%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-
-<p>Бұл мысалда I айнымалысы 1, 2, ..., n мәндерін қабылдайды және sum айнымалы мәні көрсетілген мәндерге біртіндеп артады.</p>
-<p>Ақырында, индекстік айнымалы азайтылатын циклды ұйымдастыру үшін функцияны пайдалану керек<span class="page_code_style" id="k9A1fRnStu">
-  </span></p><p>range</p>
- үш параметрмен. Бірінші параметр индекстік айнымалының бастапқы мәнін көрсетеді, екінші параметр — индекстік айнымалыны өзгертетін мән (оны қоса емес!), ал үшінші параметр-индекстік айнымалының өзгеру шамасын. Мысалы, 1-ден 99-ға дейінгі барлық тақ сандар бойынша циклды функцияның көмегімен жасауға болады<span class="page_code_style" id="DtjRef2DLh">
-  <p>range(1, 100, 2)</p>
-</span>,100-ден 1-ге дейін барлық сандар бойынша цикл жасауға болады <span class="page_code_style" id="DzcjQebpqt">
-  <p>range(100, 0, -1)</p>
-</span><p></p>
-<p>Формальды, цикл
-
- for i in range(a, b, d)
-
-  <br>
-
+<h1>For циклі</h1>
+<p class="subtitle">
+  Бұл сабақта <b>for циклі</b> қалай жазылатынын, <code>range()</code> функциясымен бірге
+  қалай қолданылатынын, тізім элементтерін, жолдағы символдарды және сандарды
+  қайталап өңдеуді үйренеміз.
 </p>
- d кезінде &gt; 0 индекстік айнымалының мәнін i = a, i = a + d, i = a + 2 * d және сол үшін i&lt; b. Егер d &lt;0, онда айнымалы циклдің барлық мәндерін қабылдайды &gt; b.<p></p>
-</div>
 
-      </div>
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында сен for циклін түрлі жағдайларда пайдалана аласың және
+  <b>10 сұрақтық Mini-Quiz</b> арқылы біліміңді тексересің.
+</p>
 
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:12px;">
+    <li><code>for</code> циклі мен <code>while</code> циклінің айырмашылығын түсіну;</li>
+    <li><code>range()</code> функциясының жұмысын меңгеру;</li>
+    <li>Сандар аралығын, тізімді, жолды for арқылы қайталап шығу;</li>
+    <li>Қарапайым есептерді for циклімен шешу;</li>
+    <li>Mini-quiz арқылы білімді бекіту.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:16px;">For циклі деген не?</h3>
+  <p>
+    <b>For циклі</b> – белгілі бір <b>элементтер жиынын</b> (мысалы, сандар аралығы,
+    тізім, жолдағы символдар) ретімен өтіп, әр элемент үшін бірдей әрекет орындауға арналған цикл.
+  </p>
 
+  <p>Жалпы жазылуы:</p>
+  <pre><code class="language-python">for айнымалы in реттік_жиын:
+    # әр элемент үшін қайталанатын командалар
+    команда1
+    команда2
+    ...</code></pre>
+
+  <ul>
+    <li><b>айнымалы</b> – әр қадамда жаңа мән алып отырады;</li>
+    <li><b>реттік_жиын</b> – <code>range()</code>, тізім, жол және т.б.;</li>
+    <li>цикл барлық элементтер біткенше қайталанады.</li>
+  </ul>
+
+  <h3 style="margin-top:18px;">Range() функциясы</h3>
+  <p><code>range()</code> – сандар тізбегін құратын функция.</p>
+  <pre><code class="language-python">range(stop)          # 0-ден stop-1 дейін
+range(start, stop)   # start-тан stop-1 дейін
+range(start, stop, step)  # step қадамымен</code></pre>
+
+  <h4>Мысал: 0-ден 4-ке дейін</h4>
+  <pre><code class="language-python">for i in range(5):
+    print(i)</code></pre>
+
+  <pre><code class="language-text">Шығыс:
+0
+1
+2
+3
+4</code></pre>
+
+  <h4>Мысал: 1-ден 5-ке дейін</h4>
+  <pre><code class="language-python">for i in range(1, 6):
+    print(i)</code></pre>
+
+  <pre><code class="language-text">Шығыс:
+1
+2
+3
+4
+5</code></pre>
+
+  <h4>Мысал: 2-ден 10-ға дейін 2 қадаммен</h4>
+  <pre><code class="language-python">for i in range(2, 11, 2):
+    print(i)</code></pre>
+
+  <pre><code class="language-text">Шығыс:
+2
+4
+6
+8
+10</code></pre>
+
+  <h3 style="margin-top:18px;">Тізім және жол бойынша цикл</h3>
+
+  <p>Тізім элементтері бойынша өту:</p>
+  <pre><code class="language-python">languages = ["Python", "Java", "C++"]
+
+for lang in languages:
+    print(lang)</code></pre>
+
+  <pre><code class="language-text">Шығыс:
+Python
+Java
+C++</code></pre>
+
+  <p>Жол символдары бойынша өту:</p>
+  <pre><code class="language-python">text = "Salem"
+
+for ch in text:
+    print(ch)</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">1-мысал · 1-ден n-ге дейінгі қосынды</h3>
+  <pre><code class="language-python">n = int(input("n санын енгіз: "))
+
+s = 0
+for i in range(1, n + 1):
+    s = s + i
+
+print("Қосынды:", s)</code></pre>
+
+  <pre><code class="language-text">Кіріс: n = 5
+Шығыс: Қосынды: 15</code></pre>
+
+  <h3 style="margin-top:18px;">2-мысал · Квадраттарды шығару</h3>
+  <p>1-ден n-ге дейінгі сандардың квадраттарын шығару:</p>
+  <pre><code class="language-python">n = int(input("n санын енгіз: "))
+
+for i in range(1, n + 1):
+    print(i, "квадраты =", i**2)</code></pre>
+
+  <h3 style="margin-top:18px;">3-мысал · Тек жұп сандарды шығару</h3>
+  <pre><code class="language-python">n = int(input("n санын енгіз: "))
+
+for i in range(2, n + 1, 2):
+    print(i)</code></pre>
+
+  <h3 style="margin-top:18px;">4-мысал · Мәтінді бірнеше рет шығару</h3>
+  <pre><code class="language-python">for i in range(3):
+    print("Python керемет!")</code></pre>
+
+  <pre><code class="language-text">Шығыс:
+Python керемет!
+Python керемет!
+Python керемет!</code></pre>
+
+  <h3 style="margin-top:18px;">5-мысал · Тізімдегі элементтер санын санау</h3>
+  <pre><code class="language-python">numbers = [3, 7, 2, 9, 4]
+
+count = 0
+for num in numbers:
+    if num &gt; 5:
+        count = count + 1
+
+print("5-тен үлкен элементтер саны:", count)</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Көбейту кестесінің қатары</h3>
+  <p>
+    Пайдаланушы енгізген сан үшін 1-ден 10-ға дейінгі көбейту кестесін
+    for циклі арқылы шығар.
+  </p>
+
+  <table class="io-table">
+    <thead>
+      <tr>
+        <th>Кіріс</th>
+        <th>Шығыс (қысқаша)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>5</code></td>
+        <td><code>5 * 1 = 5 ... 5 * 10 = 50</code></td>
+      </tr>
+      <tr>
+        <td><code>7</code></td>
+        <td><code>7 * 1 = 7 ... 7 * 10 = 70</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:18px;">Тапсырма 2 · Жолдағы дауысты әріптер санын табу</h3>
+  <p>
+    Пайдаланушы енгізген жолдағы қазақ/латын дауысты әріптердің санын
+    табатын программа жаз (<code>a, e, i, o, u, ә, ө, ү</code>, т.б.).
+  </p>
+
+  <table class="io-table">
+    <thead>
+      <tr>
+        <th>Кіріс (жол)</th>
+        <th>Шығыс</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>"Salem"</code></td>
+        <td><code>2</code> (a, e)</td>
+      </tr>
+      <tr>
+        <td><code>"Python"</code></td>
+        <td><code>1</code> (o)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:18px;">Тапсырма 3 · Тізім элементтерінің орташа мәні</h3>
+  <p>
+    Сандар тізімін беріп (немесе input арқылы алып), олардың орташа арифметикалық
+    мәнін есептейтін программа жаз.
+  </p>
+
+  <pre><code class="language-text">Мысалы:
+Кіріс: [4, 6, 10]
+Шығыс: Орташа мәні: 6.67 (шекаралы түрде дөңгелектеуге болады)</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (10 СҰРАҚ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="25">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі 10 тест сұрағына жауап бер де,
+    <b>«Тексеру»</b> батырмасын басып, нәтижеңді көр.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) For циклі не үшін қолданылады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Тек бір рет формула есептеу үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Белгілі бір жиындағы элементтерді ретімен өңдеу үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Тек сурет салу үшін
+      </label>
     </div>
 
-
-
-
-
-
-
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Қай жазылу дұрыс?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>for i in 10:</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>for range in i:</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>for i in range(10):</code>
+      </label>
     </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Төмендегі код не шығарады?</b></p>
 
+      <pre><code class="language-python">for i in range(3):
+    print("Hi")</code></pre>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а)
+        <pre><code class="language-text">Hi
+Hi
+Hi</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>HiHiHi</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>3</code>
+      </label>
+    </div>
 
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) range(2, 7) функциясы қандай сандар береді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) 2, 3, 4, 5, 6, 7
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) 2, 3, 4, 5, 6
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) 3, 4, 5, 6, 7
+      </label>
+    </div>
 
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Төмендегі код неше рет орындалады?</b></p>
 
+      <pre><code class="language-python">for i in range(1, 6):
+    print(i)</code></pre>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) 4 рет
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) 6 рет
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) 5 рет
+      </label>
+    </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>6) Тізім элементтерін шығаратын дұрыс код қайсы?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а)
+        <pre><code class="language-python">nums = [1, 2, 3]
+for x in nums:
+    print(x)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә)
+        <pre><code class="language-python">nums = [1, 2, 3]
+for 3 in nums:
+    print(nums)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б)
+        <pre><code class="language-python">nums = [1, 2, 3]
+for i in range(nums):
+    print(i)</code></pre>
+      </label>
+    </div>
 
+    <!-- 7-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>7) Қай код тек жұп сандарды шығарады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="a">
+        а)
+        <pre><code class="language-python">for i in range(1, 11):
+    print(i)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="b">
+        ә)
+        <pre><code class="language-python">for i in range(2, 11, 2):
+    print(i)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="c">
+        б)
+        <pre><code class="language-python">for i in range(1, 11, 2):
+    print(i)</code></pre>
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+    <!-- 8-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>8) Жолдағы әр символды шығару үшін қайсысы дұрыс?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="a">
+        а)
+        <pre><code class="language-python">for ch in "Python":
+    print("Python")</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="b">
+        ә)
+        <pre><code class="language-python">for "Python" in ch:
+    print(ch)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="c">
+        б)
+        <pre><code class="language-python">for ch in "Python":
+    print(ch)</code></pre>
+      </label>
+    </div>
 
+    <!-- 9-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>9) For циклін while цикліне қарағанда қашан пайдалану тиімді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="a">
+        а) Элементтер саны алдын ала белгілі болғанда (мысалы, 1-ден 10-ға дейін)
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="b">
+        ә) Мүлдем цикл керек болмағанда
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="c">
+        б) Тек қана шарт бойынша тоқтатқымыз келгенде
+      </label>
+    </div>
 
-</div>
+    <!-- 10-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>10) Қай код 2-ден 8-ге дейінгі жұп сандардың қосындысын табады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="a">
+        а)
+        <pre><code class="language-python">s = 0
+for i in range(2, 9):
+    s = s + i
+print(s)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="b">
+        ә)
+        <pre><code class="language-python">s = 0
+for i in range(2, 9, 2):
+    s = s + i
+print(s)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="c">
+        б)
+        <pre><code class="language-python">s = 0
+for i in range(1, 5):
+    s = s + i
+print(s)</code></pre>
+      </label>
+    </div>
 
+  </div>
 
+  <button id="checkQuiz" class="quiz-check-btn">
+    Тексеру
+  </button>
+  <p id="quizResult" class="quiz-result-text"></p>
+</section>
 
-
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+{% endblock %}

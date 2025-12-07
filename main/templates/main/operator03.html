@@ -1,193 +1,382 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Continue операторы{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Continue операторы</h1>
+<p class="subtitle">
+  Бұл сабақта біз <code>continue</code> операторының не үшін қолданылатынын,
+  ол циклдың жұмысын қалай өзгертетінін, <code>break</code> операторынан
+  айырмашылығын және практикалық мысалдарын қарастырамыз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
-
-
-    <title>Continue (континю) циклін басқару</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1> Continue (континю) циклін басқару</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: цикл басқару нұсқаулығын қолдану (continue ( континю), break (брик), else (элс))</h2>
-
-<h2> Continue (континю) циклін басқару</h2>
-<div>
-<li><strong>Continue</strong> —  <code>continue</code>  кілттік сөзі ағымдағы  итерацияны тоқтады және басқаруды циклдің басына береді, одан кейін шарт қайта тексеріледі. Егер ол ақиқат болса, келесі итерация орындалады.</li>
-<img alt="" height="150" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/cb9c4c23-b1f0-4291-9937-c1c88c9f53fb/" src="https://ucarecdn.com/cb9c4c23-b1f0-4291-9937-c1c88c9f53fb/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fcb9c4c23-b1f0-4291-9937-c1c88c9f53fb%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221158%22%2C%22height%22%3A%22183%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-</div>
-
-      </div>
-
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:10px;">
+    <li><code>continue</code> операторының мағынасын түсіну;</li>
+    <li><code>for</code> және <code>while</code> циклдарында <code>continue</code> қолдануды үйрену;</li>
+    <li><code>break</code>, <code>continue</code>, <code>pass</code> операторларын салыстыру;</li>
+    <li>Практикалық есептер арқылы шартты өткізіп кетуді қолдану;</li>
+    <li>Mini-quiz арқылы білімді тексеру.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:14px;">Continue операторы деген не?</h3>
+  <p>
+    <code>continue</code> операторы — цикл ішінде белгілі бір жағдай орындалса,
+    <b>ағымдағы итерацияның қалған бөлігін өткізіп жіберіп</b>,
+    бірден келесі итерацияға өтуді қамтамасыз ететін оператор.
+  </p>
 
+  <p>Яғни:</p>
+  <ul>
+    <li>цикл <b>тоқтамайды</b>;</li>
+    <li>тек сол сәттегі итерацияның қалған командалары орындалмайды;</li>
+    <li>келесі қайталануға өтіп кетеді.</li>
+  </ul>
+
+  <h3><code>break</code>, <code>continue</code>, <code>pass</code> айырмашылығы</h3>
+  <ul>
+    <li><code>break</code> — циклды <b>толық тоқтатады</b>;</li>
+    <li><code>continue</code> — тек <b>ағымдағы итерацияны өткізіп кетеді</b>, цикл жалғасады;</li>
+    <li><code>pass</code> — «ештеңе істеме» деген бос оператор, кодтың орнын «толтыру» үшін.</li>
+  </ul>
+
+  <h3>Continue операторы бар <code>for</code> циклі</h3>
+  <p>1-ден 10-ға дейінгі сандарды шығарып, тек жұп сандарды ғана көрсетейік:</p>
+
+  <pre><code class="language-python">for i in range(1, 11):
+    if i % 2 != 0:
+        continue      # тақ сандарды өткізіп жібереміз
+    print(i)</code></pre>
+
+  <p><b>Нәтиже:</b></p>
+  <pre><code class="language-python">2
+4
+6
+8
+10</code></pre>
+
+  <p>
+    Мұнда <code>i</code> тақ болғанда, <code>continue</code> орындалады да,
+    сол итерациядағы <code>print(i)</code> командасы орындалмайды.
+  </p>
+
+  <h3>Continue операторы бар <code>while</code> циклі</h3>
+  <p>1-ден 5-ке дейінгі сандарды шығарайық, бірақ 3 санын өткізіп жібереміз:</p>
+
+  <pre><code class="language-python">i = 1
+
+while i &lt;= 5:
+    if i == 3:
+        i += 1       # міндетті түрде i-ді үлкейтеміз
+        continue     # 3-ті өткізіп кетеміз
+
+    print(i)
+    i += 1</code></pre>
+
+  <p><b>Нәтиже:</b></p>
+  <pre><code class="language-python">1
+2
+4
+5</code></pre>
+
+  <p style="margin-top:8px;">
+    Назар аудар: <code>while</code> циклында <code>continue</code> алдында
+    <code>i += 1</code> жазбасақ, <b>шексіз цикл</b> туындайды (өйткені <code>i</code> мәні өзгермейді).
+  </p>
+
+  <h3>Жол ішіндегі кейбір таңбаларды өткізіп кету</h3>
+  <p>Берілген мәтіндегі бос орындарды өткізіп, тек символдарды шығарайық:</p>
+
+  <pre><code class="language-python">text = "Hello Python"
+
+for ch in text:
+    if ch == " ":
+        continue      # бос орындарды өткіземіз
+    print(ch)</code></pre>
+
+  <p><b>Нәтиже:</b> әр әріп жеке жолға жазылады, бірақ бос орындар жоқ.</p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">1-мысал · Теріс сандарды өткізіп кету</h3>
+  <p>Тізімдегі сандардың тек оң мәндерін ғана шығарайық:</p>
+
+  <pre><code class="language-python">numbers = [3, -5, 7, 0, -2, 10]
+
+for n in numbers:
+    if n &lt;= 0:
+        continue      # теріс және 0 сандарын өткізіп жібереміз
+    print(n)</code></pre>
+
+  <p><b>Нәтиже:</b></p>
+  <pre><code class="language-python">3
+7
+10</code></pre>
+
+  <h3 style="margin-top:18px;">2-мысал · Тек дауысты әріптерді шығару</h3>
+  <p>Мәтіндегі тек дауысты әріптерді шығарайық:</p>
+
+  <pre><code class="language-python">text = "informatika"
+vowels = "aeiou"
+
+for ch in text:
+    if ch not in vowels:
+        continue      # дауыссыздарды өткізіп жібереміз
+    print(ch)</code></pre>
+
+  <p><b>Нәтиже:</b></p>
+  <pre><code class="language-python">i
+o
+a
+i
+a</code></pre>
+
+  <h3 style="margin-top:18px;">3-мысал · 1–20 аралығындағы 3-ке бөлінбейтін сандар</h3>
+  <p>1 ден 20-ға дейінгі сандардан 3-ке бөлінетіндерін өткізіп жіберейік:</p>
+
+  <pre><code class="language-python">for i in range(1, 21):
+    if i % 3 == 0:
+        continue
+    print(i)</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Жұп сандарды өткізіп жібер</h3>
+  <p>
+    1-ден 20-ға дейінгі сандардың ішінен <b>тек тақ</b> сандарды шығаратын
+    программа жаз. Жұп сандарды <code>continue</code> арқылы өткізіп жібер.
+  </p>
+
+  <div class="task-card">
+    <p class="task-io-title">Күтілетін нәтиже (фрагмент):</p>
+    <pre><code class="language-python">1
+3
+5
+...
+19</code></pre>
+  </div>
+
+  <h3 style="margin-top:18px;">Тапсырма 2 · Теріс мәндерді елемеу</h3>
+  <p>
+    Пайдаланушыдан бірнеше сан енгізілген тізім ал. Цикл ішінде
+    <b>теріс</b> сандарды <code>continue</code> арқылы өткізіп,
+    тек нөлден үлкен сандардың қосындысын шығар.
+  </p>
+
+  <div class="task-card">
+    <p class="task-io-title">Мысал:</p>
+    <pre><code class="language-python">Кіріс: [5, -2, 3, -1, 4]
+Шығыс: 12</code></pre>
+  </div>
+
+  <h3 style="margin-top:18px;">Тапсырма 3 · Құпия сөзді тексеру</h3>
+  <p>
+    Пайдаланушыдан бірнеше рет сөз енгізетін программа жаз.
+    Егер енгізілген жол бос болса (<code>""</code>), оны <code>continue</code> арқылы
+    өткізіп жібер. Тек бос емес жолдарды ғана «қабылданды» деп шығарып отыр.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тест сұрақтарына жауап бер. Соңында <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Continue операторы не істейді?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Циклды толығымен тоқтатады
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Ағымдағы итерацияның қалған бөлігін өткізіп, келесі итерацияға өтеді
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Ештеңе істемейді, жай «бос орын» ретінде қалады
+      </label>
     </div>
 
+    <!-- 2 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Қай оператор циклды толық тоқтатады?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>continue</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>pass</code>
+      </label>
 
-
-
-
-
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>break</code>
+      </label>
     </div>
 
+    <!-- 3 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Төмендегі код не істейді?</b></p>
 
+      <pre><code class="language-python">for i in range(5):
+    if i == 2:
+        continue
+    print(i)</code></pre>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>0 1 3 4</code> шығарады
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>0 1 2 3 4</code> шығарады
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) Тек <code>2</code> санын шығарады
+      </label>
+    </div>
 
+    <!-- 4 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) Қай жағдайда <code>continue</code> қолдану ыңғайлы?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) Циклды бірден аяқтау керек болса
+      </label>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) Кейбір жағдайларда тек бір-екі команданы өткізіп, циклды жалғастырғымыз келсе
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) Цикл денесін толтыруға ерінгенде
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+    <!-- 5 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) While циклында continue қолданғанда нені естен шығармау керек?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) Міндетті түрде <code>break</code> жазу керек
+      </label>
 
-</div>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) Циклдың шартын әр итерацияда қайта жазу керек
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Айнымалы мәні (мысалы, <code>i</code>) өзгеріп отыруы керек, әйтпесе шексіз цикл болуы мүмкін
+      </label>
+    </div>
 
+  </div>
 
+  <button id="checkQuiz" class="quiz-check-btn" type="button">
+    Тексеру
+  </button>
+  <div id="quizResult" class="quiz-result"></div>
+</section>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+<!-- ========================================================= -->
+<!-- 6. ҚОРЫТЫНДЫ / ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Үй тапсырмасы</h2>
+    <button class="btn-done" data-block="homework" data-xp="10">
+      ⬜ Орындалды (Үй жұмысы)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Чек-лист</h3>
+  <ul>
+    <li><code>continue</code> операторын түсіндіре аламын;</li>
+    <li><code>break</code>, <code>continue</code> және <code>pass</code> айырмашылығын айта аламын;</li>
+    <li><code>for</code> және <code>while</code> циклдарында <code>continue</code> қолданып программа жаза аламын;</li>
+    <li>Mini-quiz сұрақтарына жауап бердім.</li>
+  </ul>
+
+  <h3>Үй тапсырмасы</h3>
+  <ul>
+    <li>Тізімдегі сандардың ішінен тек жұп сандардың қосындысын есептейтін
+        программа жаз (тақ сандарды <code>continue</code> арқылы өткізіп жібер);</li>
+    <li>Мәтіндегі тек қазақ дауысты әріптерін (<code>a, ә, e, i, о, ө, ұ, ү, ы, і</code>) шығаратын
+        программа жаз;</li>
+    <li>Бағдарламаларыңды файлға сақтап, келесі сабақта көрсет.</li>
+  </ul>
+</section>
+
+{% endblock %}

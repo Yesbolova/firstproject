@@ -1,59 +1,68 @@
-/* --------------------------------------------------
-   GLOBAL
--------------------------------------------------- */
+/* =========================================================
+   0. GLOBAL VARIABLES (Apple Premium Theme)
+========================================================= */
+:root {
+    --bg-main: #f5f5f7;
+    --text-main: #1d1d1f;
+    --text-soft: rgba(29,29,31,0.7);
+    --card-bg: #ffffff;
+    --radius-card: 22px;
+    --radius-small: 14px;
+    --shadow-card: 0 12px 32px rgba(0,0,0,0.06);
+
+    --green: #34C759;
+    --green-dark: #1fae45;
+
+    --font-large: 32px;
+    --font-medium: 20px;
+    --font-regular: 16px;
+}
+
+/* =========================================================
+   1. BASE STYLE
+========================================================= */
 body {
-    background: #F8F9FB;
-    font-family: "Inter", "Poppins", sans-serif;
-    color: #1C1D1F;
-    padding-top: 90px;
     margin: 0;
+    padding: 0;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
 }
 
-/* MAIN CONTAINER */
-/* Барлық беттегі басты контейнер */
-.page.container,
-.layout,
-.section,
-.card,
-.progress-card {
-    max-width: 1100px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-/* Main column толық енімен жұмыс істесін */
-.main-column {
-    max-width: 100% !important;
-    width: 100% !important;
-    margin: 0 auto !important;
+.container {
+    max-width: 935px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-/* Layout with sidebar */
-.layout {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 24px;
-    width: 100%;
+img {
+    max-width: 100%;
+    border-radius: 16px;
 }
 
-/* --------------------------------------------------
-   HEADER (Udemy style)
--------------------------------------------------- */
+
+
+/* =========================================================
+   2. TOP BAR (Apple Glass)
+========================================================= */
 .topbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #FFFFFF;
-    border-bottom: 1px solid #E5E7EB;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    z-index: 9999;
+
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: saturate(180%) blur(22px);
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .topbar-inner {
-    height: 70px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 0;
 }
 
 .brand {
@@ -63,376 +72,342 @@ body {
 }
 
 .brand-icon {
-    background: #2E6CE0;
+    background: var(--green);
     color: white;
+    padding: 13px 15px;
+    border-radius: 18px;
     font-weight: 700;
-    font-size: 18px;
-    border-radius: 8px;
-    padding: 6px 10px;
+    font-size: 20px;
 }
 
 .brand-title {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .brand-subtitle {
     font-size: 13px;
-    color: #6B7280;
+    opacity: .65;
 }
 
 .topnav a {
-    margin-left: 20px;
+    margin: 0 12px;
+    color: var(--text-main);
     font-weight: 500;
-    color: #1C1D1F;
     text-decoration: none;
+    transition: .2s;
 }
 
 .topnav a:hover {
-    color: #2E6CE0;
+    color: var(--green);
 }
 
-/* XP panel */
 .xp-panel {
-    background: #F0F4FF;
-    border: 1px solid #D4DFFF;
-    padding: 6px 14px;
-    border-radius: 16px;
-    font-weight: 600;
-    color: #2E6CE0;
-}
-
-/* --------------------------------------------------
-   CARDS
--------------------------------------------------- */
-.card {
-    background: #FFFFFF;
+    background: var(--green);
+    color: white;
+    padding: 8px 16px;
     border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-}
-
-/* Section headers */
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-}
-
-.section-subtitle {
-    color: #6B7280;
     font-size: 14px;
 }
 
-.page-title {
-    font-size: 28px;
-    font-weight: 700;
+.page {
+    margin-top: 110px;
 }
 
-/* --------------------------------------------------
-   PROGRESS BAR
--------------------------------------------------- */
+
+
+/* =========================================================
+   3. PROGRESS CARD
+========================================================= */
 .progress-card {
-    padding: 28px;
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+
+    margin-bottom: 40px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    font-size: var(--font-large);
+    font-weight: 800;
+    margin: 0;
+}
+
+.page-subtitle {
+    opacity: .65;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    padding: 12px 22px;
+    font-weight: 700;
+    border-radius: 18px;
 }
 
 .progress-bar {
     width: 100%;
-    height: 12px;
-    background: #E5E7EB;
-    border-radius: 20px;
+    height: 14px;
+    background: #e6e6e7;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
 }
 
 .progress-bar-fill {
-    background: #2ECC71;
-    height: 12px;
     width: 0%;
-    border-radius: 20px;
-    transition: 0.3s;
+    height: 100%;
+    background: var(--green);
+    transition: width .35s ease;
 }
 
 .progress-meta {
-    margin-top: 6px;
-    font-size: 14px;
-    color: #4B5563;
+    display: flex;
+    justify-content: space-between;
+    opacity: .75;
 }
 
-.level-badge {
-    background: #2E6CE0;
-    color: #ffffff;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: 700;
+
+
+/* =========================================================
+   4. SECTION CARD
+========================================================= */
+.card.section {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 35px;
 }
 
-/* --------------------------------------------------
-   BUTTONS
--------------------------------------------------- */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-subtitle {
+    opacity: .65;
+}
+
+
+
+/* =========================================================
+   5. BUTTONS
+========================================================= */
 .btn-pill {
-    padding: 8px 20px;
-    border-radius: 30px;
+    padding: 12px 20px;
+    border-radius: 40px;
+
+    background: #e7e7ea;
     font-weight: 600;
     border: none;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.btn-primary {
-    background: #2E6CE0;
-    color: white;
-}
-
-.btn-outline {
-    border: 1px solid #2E6CE0;
-    color: #2E6CE0;
-    background: white;
-}
-
-.btn-outline:hover {
-    background: #2E6CE0;
-    color: white;
-}
-
-.btn-done {
-    background: #2ECC71;
-    color: white;
+.btn-pill:hover {
+    background: #d9d9dc;
 }
 
 .btn-done.done {
-    background: #229954;
+    background: var(--green);
+    color: white;
 }
 
-.sm {
-    padding: 6px 16px;
+
+
+/* =========================================================
+   6. CODE BLOCKS
+========================================================= */
+pre {
+    background: #f0f1f3;
+    padding: 16px;
+    border-radius: 14px;
+    overflow-x: auto;
     font-size: 14px;
 }
 
-/* --------------------------------------------------
-   METHODS GRID
--------------------------------------------------- */
-.methods-grid {
+
+
+/* =========================================================
+   7. METHODS GRID
+========================================================= */
+.methods-premium-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 22px;
+}
+
+.method-premium {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: var(--shadow-card);
+    transition: .2s ease;
+}
+
+.method-premium:hover {
+    transform: translateY(-4px);
+}
+
+.mp-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.mp-tag {
+    background: #e6f7eb;
+    color: var(--green);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.mp-output {
+    background: #f6fff7;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: monospace;
+}
+
+
+
+/* =========================================================
+   8. GAME CARDS
+========================================================= */
+.game-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 35px;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
     gap: 18px;
 }
 
-.method-card {
-    background: #FAFAFA;
-    border: 1px solid #E5E7EB;
-    border-radius: 12px;
-    padding: 18px;
-    transition: 0.2s;
+
+
+/* Difficulty Icons */
+.game-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
 }
 
-.method-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
-}
+.game-easy   { background: #d4f8d4; }
+.game-medium { background: #ffe4b3; }
+.game-hard   { background: #ffd1d1; }
 
-.method-name {
-    font-weight: 700;
-    color: #2E6CE0;
-}
 
-.method-tag {
-    background: #E8EFFF;
-    padding: 3px 10px;
-    border-radius: 10px;
-    font-size: 11px;
-    color: #2E6CE0;
-}
 
-/* --------------------------------------------------
-   EXAMPLES
--------------------------------------------------- */
-.example-block {
-    display: flex;
-    gap: 14px;
-    margin-bottom: 16px;
-}
-
-.example-badge {
-    background: #E8EFFF;
-    padding: 10px 14px;
-    border-radius: 10px;
-    height: fit-content;
-    color: #2E6CE0;
-    font-weight: 700;
-}
-
-/* --------------------------------------------------
-   GAME: BUG FIX
--------------------------------------------------- */
-.level-block {
-    border: 1px solid #E5E7EB;
-    border-radius: 10px;
-    background: #FFFFFF;
-    margin-bottom: 10px;
-    padding: 0;
-}
-
-.level-block summary {
-    padding: 12px 14px;
-    cursor: pointer;
-    background: #F3F4F6;
-    border-radius: 10px;
-    font-weight: 600;
-}
-
-.level-block[open] summary {
-    background: #E5E7EB;
-}
-
-.bug-task {
-    padding: 14px;
-}
-
-.answer {
-    background: #F8FAFC;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
-    display: none;
-}
-
-.answer.visible {
-    display: block;
-}
-
-/* --------------------------------------------------
-   QUIZ
--------------------------------------------------- */
+/* =========================================================
+   9. QUIZ
+========================================================= */
 .quiz-option {
-    background: #F3F4F6;
-    padding: 12px 14px;
-    border-radius: 10px;
+    width: 100%;
+    padding: 14px 18px;
+
+    background: #f2f2f2;
+    border-radius: 14px;
     margin-bottom: 10px;
-    cursor: pointer;
+
     border: none;
-    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
 }
 
 .quiz-option:hover {
-    background: #E9EBEF;
+    background: #e8e8e8;
 }
 
 .quiz-option.correct {
-    background: #D1F2E4;
-    border-left: 6px solid #2ECC71;
+    background: #d8f8d8;
+    border-left: 5px solid var(--green);
 }
 
 .quiz-option.wrong {
-    background: #FADBD8;
-    border-left: 6px solid #E74C3C;
+    background: #ffd7d7;
+    border-left: 5px solid #ff4f4f;
 }
 
-/* --------------------------------------------------
-   LAB
--------------------------------------------------- */
+
+
+/* =========================================================
+   10. LABORATORY
+========================================================= */
 .text-input {
     width: 100%;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid #D1D5DB;
-    margin-bottom: 12px;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 16px;
+}
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .game-output {
-    background: #F9FAFB;
-    border: 1px solid #E5E7EB;
+    background: #fafafa;
     padding: 14px;
-    border-radius: 12px;
-    min-height: 60px;
-    margin-top: 12px;
-    font-weight: 500;
+    border-radius: 14px;
+    font-family: monospace;
 }
 
-/* --------------------------------------------------
-   SIDEBAR
--------------------------------------------------- */
-.sidebar-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
 
-.link-list a {
-    color: #2E6CE0;
-}
 
-.link-list a:hover {
-    text-decoration: underline;
-}
-
-/* --------------------------------------------------
-   FOOTER
--------------------------------------------------- */
+/* =========================================================
+   11. FOOTER
+========================================================= */
 .footer {
+    margin-top: 40px;
+    padding: 40px 0;
     text-align: center;
-    padding: 20px 0;
-    margin-top: 30px;
-    color: #6B7280;
+    color: #777;
 }
 
-/* --------------------------------------------------
-   RESPONSIVE
--------------------------------------------------- */
-@media (max-width: 880px) {
-    .layout {
+
+
+/* =========================================================
+   12. MOBILE ADAPTATION
+========================================================= */
+@media (max-width: 768px) {
+
+    .topnav {
+        display: none;
+    }
+
+    .brand-title {
+        font-size: 16px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .methods-premium-grid {
         grid-template-columns: 1fr;
     }
 }
-/* Барлық container-лердің ені бірдей болу үшін */
-.container {
-    max-width: 1100px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-.layout {
-    max-width: 1100px;
-    width: 100%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 24px;
-}
-.sidebar {
-    max-width: 320px !important;
-    width: 100%;
-}
-
-
-.method-card,
-.game-card,
-.example-block {
-    width: 100%;
-    max-width: 100%;
-}
-.methods-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-.page.container,
-.layout,
-.main-column {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Карточкалар контейнерден шықпау үшін */
-.methods-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-/* Карточканың ішінде ештеңе сыртқа шықпау үшін */
-.method-card {
-    overflow: hidden;
-}
-

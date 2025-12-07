@@ -2,94 +2,1153 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Python Оқу Платформасы{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Python Оқу Платформасы{% endblock %}</title>
 
-    <!-- Apple INTER font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Main Apple CSS -->
-    <link rel="stylesheet" href="{% static 'css/apple.css' %}">
+  <!-- Prism default light theme -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/inline-highlight/prism-inline-highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/inline-highlight/prism-inline-highlight.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material.min.css">
+
+{# Skulpt + CodeMirror JS #}
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+
+
+
+
+  <style>
+  /* Контент орамы */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px 40px;
+}
+
+/* Негізгі карточка */
+.compiler-wrapper {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  padding: 24px 22px 26px;
+}
+
+.compiler-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.compiler-header h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+}
+
+.compiler-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Бөлімдер – бірінің астында бірі */
+.compiler-section {
+  margin-top: 14px;
+}
+
+.compiler-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+
+/* CodeMirror (код редактор) */
+#pyCode {
+  /* CodeMirror textarea өзі жасырылып кетеді,
+     бірақ өлшем беру үшін қалдырамыз */
+  min-height: 220px;
+}
+
+.code-editor .CodeMirror {
+  height: 260px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #0f172a;
+  font-size: 14px;
+}
+
+/* CodeMirror тақырыбы/түстері */
+.cm-s-material.CodeMirror {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.cm-s-material .CodeMirror-gutters {
+  background: #020617;
+  border-right: 1px solid #1f2937;
+}
+
+.cm-s-material .CodeMirror-linenumber {
+  color: #6b7280;
+}
+
+/* Консоль – input + output */
+#pyConsole {
+  width: 100%;
+  min-height: 220px;
+  font-family: "JetBrains Mono","Consolas","Courier New",monospace;
+  font-size: 13px;
+  border-radius: 16px;
+  border: none;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  background: #020617;
+  color: #e5e7eb;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* Батырмалар */
+.compiler-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.compiler-buttons button {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.compiler-buttons button:first-child {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.35);
+}
+
+.compiler-buttons button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 20px 14px 32px;
+  }
+
+  .compiler-wrapper {
+    padding: 18px 14px 20px;
+  }
+
+  .compiler-header h1 {
+    font-size: 24px;
+  }
+}
+
+  .compiler-card {
+  margin-top: 24px;
+  border-radius: 18px;
+  padding: 20px 20px 22px;
+}
+
+.compiler-header h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.compiler-header p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.compiler-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+  gap: 16px;
+}
+
+.compiler-editor label {
+  font-size: 13px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4px;
+}
+
+#pyCode {
+  width: 100%;
+  min-height: 220px;
+  font-family: "JetBrains Mono","Consolas",monospace;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.compiler-buttons {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.compiler-buttons button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.compiler-buttons button:first-child {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.compiler-output-title {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+#pyOutput {
+  background: #0b1120;
+  color: #e5e7eb;
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-height: 160px;
+  font-family: "JetBrains Mono","Consolas",monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .compiler-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+  .task-card{
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.85);
+  box-shadow:0 8px 22px rgba(15,23,42,0.04);
+  border:1px solid rgba(226,232,240,0.8);
+}
+
+.task-io{
+  margin-top:10px;
+}
+
+.task-io-title{
+  margin:0 0 6px;
+  font-size:14px;
+  font-weight:600;
+  color:#6b7280;
+}
+
+.io-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+  background:rgba(248,250,252,0.9);
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.io-table thead{
+  background:linear-gradient(90deg,#e5f0ff,#f5f3ff);
+}
+
+.io-table th,
+.io-table td{
+  padding:8px 10px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+}
+
+.io-table tr:last-child td{
+  border-bottom:none;
+}
+
+.io-table th{
+  font-weight:600;
+  color:#4b5563;
+}
+
+.io-table tbody tr:nth-child(even){
+  background:rgba(255,255,255,0.9);
+}
+
+  /* Ultra-soft pastel gradients — ultra premium */
+:root {
+  --g1: linear-gradient(135deg, #f9fbff 0%, #ffffff 100%); /* faint blue whisper */
+  --g2: linear-gradient(135deg, #f7fffa 0%, #ffffff 100%); /* mint breeze */
+  --g3: linear-gradient(135deg, #fbf9ff 0%, #ffffff 100%); /* lavender veil */
+  --g4: linear-gradient(135deg, #fffdf7 0%, #ffffff 100%); /* cream dust */
+  --g5: linear-gradient(135deg, #fff9fb 0%, #ffffff 100%); /* rose feather */
+  --g6: linear-gradient(135deg, #f8fdff 0%, #ffffff 100%); /* icy cloud */
+  --g7: linear-gradient(135deg, #f7fff9 0%, #ffffff 100%); /* green pearl */
+  --g8: linear-gradient(135deg, #fffaf5 0%, #ffffff 100%); /* peach cotton */
+}
+
+/* Premium block structure */
+.apple-section {
+  padding: 26px 28px;
+  border-radius: 22px;
+  margin: 22px 0;
+  background: white;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.03);
+  transition: 0.35s ease;
+}
+
+/* Block gradients (super subtle) */
+.apple-section:nth-of-type(1) { background: var(--g1); }
+.apple-section:nth-of-type(2) { background: var(--g2); }
+.apple-section:nth-of-type(3) { background: var(--g3); }
+.apple-section:nth-of-type(4) { background: var(--g4); }
+.apple-section:nth-of-type(5) { background: var(--g5); }
+.apple-section:nth-of-type(6) { background: var(--g6); }
+.apple-section:nth-of-type(7) { background: var(--g7); }
+.apple-section:nth-of-type(8) { background: var(--g8); }
+
+/* Hover — even softer lift */
+.apple-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.04);
+}
+
+  .quiz-wrapper {
+  margin-top: 12px;
+}
+
+.quiz-item {
+  background:#fff;
+  padding:14px 18px;
+  border-radius:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom:16px;
+}
+
+.quiz-option {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:4px 0;
+  cursor:pointer;
+}
+
+.quiz-option input {
+  transform:scale(1.1);
+}
+
+.quiz-check-btn {
+  margin-top:8px;
+  padding:8px 16px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
+  background:#f3f4f6;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.quiz-check-btn:hover {
+  background:#e5e7eb;
+}
+
+.quiz-result {
+  margin-top:8px;
+  font-weight:600;
+}
+
+/* түстер */
+.quiz-item.correct {
+  border-left:4px solid #16a34a;
+  background:#ecfdf3;
+}
+
+.quiz-item.wrong {
+  border-left:4px solid #dc2626;
+  background:#fef2f2;
+}
+
+  .syntax-symbol {
+    font-weight: 600;
+    color: #0b5bd3; /* көк */
+}
+
+.syntax-operator {
+    font-weight: 700;
+    color: #d03801; /* қызыл */
+}
+
+.syntax-string {
+    color: #0f766e; /* жасыл */
+}
+
+.syntax-escape {
+    color: #7c3aed; /* күлгін */
+    font-weight: 600;
+}
+
+    :root{
+      --bg:#ffffff;
+      --sidebar-bg:#f6f6f6;
+      --text:#1d1d1f;
+      --text-light:#6b7280;
+      --green:#34C759;
+      --green-soft: rgba(52,199,89,0.16);
+      --blue:#0071e3;
+      --border:#e5e5e5;
+      --radius:18px;
+      --shadow:0 8px 28px rgba(0,0,0,0.06);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      font-family:"Inter",sans-serif;
+      color:var(--text);
+    }
+
+    /* NAVBAR */
+    .navbar{
+      background:#ffffffd8;
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:50;
+    }
+    .nav-container{
+      width:94%; margin:0 auto; padding:10px 0;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px;
+    }
+    .nav-title{font-size:20px;font-weight:600}
+
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .nav-right a{
+      padding:8px 14px; border-radius:10px;
+      border:1px solid var(--blue); color:var(--blue);
+      text-decoration:none;
+      font-size:14px; font-weight:500;
+      white-space:nowrap;
+    }
+
+    /* Burger for mobile */
+    .nav-menu-toggle{
+      display:none;
+      border:none;
+      background:transparent;
+      padding:4px 8px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+    .nav-menu-toggle span{
+      display:block;
+      width:20px;
+      height:2px;
+      background:#111;
+      border-radius:999px;
+      margin:4px 0;
+      transition:.2s;
+    }
+
+    /* LAYOUT */
+    .layout{display:flex;gap:0;position:relative;}
+
+    /* SIDEBAR */
+    .sidebar{
+      width:270px; background:var(--sidebar-bg);
+      padding:18px; height:calc(100vh - 62px);
+      position:sticky; top:62px; overflow-y:auto;
+      border-right:1px solid var(--border);
+      z-index:40;
+    }
+
+    .accordion{
+      background:transparent; cursor:pointer; width:100%;
+      padding:12px 10px; text-align:left;
+      border:none; outline:none; font-size:16px;
+      color:var(--text); font-weight:600;
+      border-radius:10px; transition:.2s;
+      margin-top:6px;
+    }
+    .accordion:hover{background:#e9e9e9}
+    .accordion.active{
+      background:#eafff1; color:#0b6b2b;
+    }
+
+    .panel{display:none; padding:6px 0 6px 10px;}
+    .panel.show{display:block}
+
+    .panel a{
+      display:block; padding:8px 8px;
+      text-decoration:none; color:#333;
+      border-radius:8px; font-size:15px;
+      margin:2px 0; transition:.2s;
+    }
+    .panel a:hover{
+      background:var(--green-soft); color:#0b6b2b; font-weight:500;
+    }
+    .panel a.active{
+      background:var(--green-soft);
+      color:#0b6b2b; font-weight:700;
+      border-left:4px solid var(--green);
+    }
+
+    /* CONTENT */
+    .content{
+      flex-grow:1; padding:26px 48px;
+      min-height:calc(100vh - 62px);
+    }
+
+    /* HERO only for main */
+    .hero-block{width:100%;display:flex;justify-content:center;margin:10px 0 40px;}
+    .glass-card{
+      width:80%; max-width:960px;
+      padding:36px; border-radius:28px;
+      background:rgba(255,255,255,0.72); backdrop-filter:blur(18px);
+      box-shadow:var(--shadow); text-align:center;
+    }
+    .python-3d{
+      width:100px; margin-bottom:18px;
+      filter:drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+    }
+    .glass-card h2{font-size:34px;font-weight:600;margin:0 0 8px}
+    .glass-card p{font-size:17px;color:var(--text-light);margin:0}
+    .hero-buttons{margin-top:22px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+    .hero-btn{
+      padding:11px 24px; border-radius:14px;
+      text-decoration:none; font-size:15px; font-weight:600; transition:.2s;
+    }
+    .hero-btn.primary{background:var(--blue);color:white}
+    .hero-btn.primary:hover{background:#005bbf}
+    .hero-btn.secondary{background:#e5e5e7;color:#111}
+    .hero-btn.secondary:hover{background:#d0d0d4}
+
+    /* GAMIFICATION */
+    .progress-card{
+      background:#fff; border-radius:22px;
+      padding:18px 20px; box-shadow:var(--shadow);
+      margin:0 0 22px;
+    }
+    .progress-head{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:10px;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .progress-title{font-size:18px;font-weight:700}
+    .xp-pill{
+      background:#eef6ff; color:#0b5bd3;
+      padding:6px 12px; border-radius:999px;
+      font-weight:700; font-size:14px; border:1px solid #d6e6ff;
+    }
+    .bar{
+      width:100%; height:10px; background:#e5e7eb;
+      border-radius:999px; overflow:hidden;
+    }
+    .bar-fill{
+      height:100%; width:0%; background:var(--green); transition:.3s;
+    }
+    .progress-meta{margin-top:8px;font-size:14px;color:#4b5563;}
+
+    /* DONE BUTTONS */
+    .btn-done{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:12px;
+      border:1px solid #e5e7eb; background:#fafafa;
+      cursor:pointer; font-weight:700; font-size:14px;
+      transition:.2s; user-select:none;
+    }
+    .btn-done.done{
+      background:#eafff1; border-color:#bde9c7; color:#0b6b2b;
+    }
+
+    .footer{text-align:center;margin:30px 0;color:#999;font-size:14px;}
+
+    /* CODE BLOCKS – ақ фон және подсветка */
+    pre[class*="language-"]{
+      background:#f8f9fa;
+      border-radius:14px;
+      padding:18px 20px;
+      border:1px solid #e5e7eb;
+      box-shadow:0 4px 16px rgba(0,0,0,0.06);
+      overflow-x:auto;
+      margin:20px 0;
+    }
+    code[class*="language-"]{
+      font-family:SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:14px;
+    }
+    /* Prism токендерін сәл айқындап қойдық */
+    .token.comment{color:#6b7280;font-style:italic;}
+    .token.keyword{color:#d03801;font-weight:600;}
+    .token.string{color:#0f766e;}
+    .token.number{color:#0369a1;}
+    .token.function{color:#7c3aed;font-weight:600;}
+
+    /* ---- MOBILE ADAPTATION ---- */
+    @media (max-width: 960px){
+      .nav-container{
+        width:96%;
+      }
+
+      .nav-right{
+        display:none;
+      }
+
+      .nav-menu-toggle{
+        display:inline-flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+      }
+
+      .layout{
+        flex-direction:column;
+      }
+
+      .sidebar{
+        position:fixed;
+        top:56px;
+        left:0;
+        height:calc(100vh - 56px);
+        transform:translateX(-100%);
+        transition:transform .25s ease;
+        width:260px;
+        box-shadow:0 18px 40px rgba(0,0,0,0.35);
+      }
+      .sidebar.open{
+        transform:translateX(0);
+      }
+
+      .content{
+        padding:20px 16px;
+      }
+
+      .glass-card{
+        width:100%;
+        padding:24px 18px;
+      }
+      .glass-card h2{
+        font-size:26px;
+      }
+      .glass-card p{
+        font-size:15px;
+      }
+    }
+
+    @media (max-width: 600px){
+      .progress-card{
+        padding:14px 14px;
+      }
+      .progress-title{
+        font-size:16px;
+      }
+      .xp-pill{
+        font-size:13px;
+        padding:4px 10px;
+      }
+    }
+
+    /* Backdrop for mobile sidebar */
+    .backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,0.45);
+      z-index:35;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .2s ease, visibility .2s ease;
+    }
+    .backdrop.show{
+      opacity:1;
+      visibility:visible;
+    }
+    /* ---- CONTENT TYPOGRAPHY ---- */
+.content{
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* Негізгі текст балаларға ыңғайлырақ болу үшін */
+.content p,
+.content li{
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Сабақтың қысқаша сипаттамасы */
+.subtitle{
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--text-light);
+  max-width: 720px;
+}
+
+/* ---- APPLE-SECTION КАРТОЧКАЛАРЫ ---- */
+.apple-section{
+  background:#ffffff;
+  border-radius: 20px;
+  padding: 18px 22px;
+  margin: 18px 0;
+  box-shadow: 0 10px 28px rgba(15,23,42,0.04);
+  border: 1px solid #e5e7eb;
+}
+
+/* Бір сабақ блоктан екіншісіне ауысуды жұмсарту */
+.apple-section h2{
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.apple-section h3{
+  font-size: 17px;
+  margin-top: 14px;
+  margin-bottom: 4px;
+}
+
+.apple-section h4{
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  color:#374151;
+}
+
+/* Тізімдердің арасы ашық, оқуға жеңіл болсын */
+.apple-section ul,
+.apple-section ol{
+  padding-left: 20px;
+  margin-top: 6px;
+}
+
+.apple-section li{
+  margin-bottom: 4px;
+}
+
+/* ---- MINI-QUIZ-ге кішкене акцент ---- */
+#quiz .apple-section,
+.apple-section#quiz{
+  border-left: 4px solid var(--blue);
+}
+
+.quiz-wrapper,
+#quiz ol{
+  margin-top: 8px;
+}
+
+/* Радио-тест қолданатын болсаң, опцияларды жұмсақ карта сияқты қыламыз */
+.quiz-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 8px;
+  border-radius:10px;
+  transition:background .15s;
+}
+
+.quiz-option:hover{
+  background:#f3f4f6;
+}
+
+  </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
-    <div class="navbar-container">
-        <div class="nav-left">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/200px-Python_logo_and_wordmark.svg.png">
-            <span class="navbar-title">АЛГОРИТМДЕУ ЖӘНЕ ПРОГРАММАЛАУ</span>
-        </div>
+  <div class="nav-container">
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Мәзірді ашу">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-        <div class="nav-right">
-            <a class="btn-outline" href="/signup">Регистрация</a>
-            <a class="btn-primary" href="{% url 'login' %}">Кіру</a>
-        </div>
+    <span class="nav-title">Python тілінде программалау</span>
+
+    <div class="nav-right">
+      <a href="/signup">Регистрация</a>
+      <a href="{% url 'login' %}">Кіру</a>
     </div>
+  </div>
 </nav>
 
+<div class="backdrop" id="backdrop"></div>
 
-
-<!-- MAIN LAYOUT -->
 <div class="layout">
+{% with p=request.path %}
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
 
-        <h6>6-сынып</h6>
-        <a href="/praktika">IDE – мен танысу</a>
-        <a href="/syntax">Тіл әліппесі. Синтаксис</a>
-        <a href="/datatype">Мәліметтер типтері</a>
-        <a href="/arithmeticoperation">Арифметикалық амалдар</a>
-        <a href="/inputandoutput">Енгізу және шығару</a>
-        <a href="/linearalgortm">Сызықтық алгоритмдер</a>
+    <!-- 6-сынып -->
+    <button class="accordion {% if '/praktika' in p or '/syntax' in p or '/datatype' in p or '/arithmeticoperation' in p or '/inputandoutput' in p or '/linearalgortm' in p %}active{% endif %}">
+      6-сынып
+    </button>
+    <div class="panel {% if '/praktika' in p or '/syntax' in p or '/datatype' in p or '/arithmeticoperation' in p or '/inputandoutput' in p or '/linearalgortm' in p %}show{% endif %}">
+      <a href="/praktika" class="{% if p == '/praktika' or p == '/praktika/' %}active{% endif %}">IDE – мен танысу</a>
+      <a href="/syntax" class="{% if p == '/syntax' or p == '/syntax/' %}active{% endif %}">Тіл әліппесі</a>
+      <a href="/datatype" class="{% if p == '/datatype' or p == '/datatype/' %}active{% endif %}">Мәліметтер типтері</a>
+      <a href="/arithmeticoperation" class="{% if p == '/arithmeticoperation' or p == '/arithmeticoperation/' %}active{% endif %}">Арифметикалық амалдар</a>
+      <a href="/inputandoutput" class="{% if p == '/inputandoutput' or p == '/inputandoutput/' %}active{% endif %}">Енгізу және шығару</a>
+      <a href="/linearalgortm" class="{% if p == '/linearalgortm' or p == '/linearalgortm/' %}active{% endif %}">Сызықтық алгоритмдер</a>
+    </div>
 
-        <h6>7-сынып</h6>
-        <a href="/workingwithfiles">Файлдармен жұмыс</a>
-        <a href="/programmingalgorithms01">Тармақталған алгоритмдер</a>
-        <a href="/programmingalgorithms02">Кірістірілген шарттар</a>
-        <a href="/programmingalgorithms03">Күрделі шарттар</a>
-        <a href="/programmingalgorithms04">Таңдау операторлары</a>
+    <!-- 7-сынып -->
+    <button class="accordion {% if '/workingwithfiles' in p or '/programmingalgorithms' in p %}active{% endif %}">
+      7-сынып
+    </button>
+    <div class="panel {% if '/workingwithfiles' in p or '/programmingalgorithms' in p %}show{% endif %}">
+      <a href="/workingwithfiles" class="{% if p == '/workingwithfiles' or p == '/workingwithfiles/' %}active{% endif %}">Файлдармен жұмыс</a>
+      <a href="/programmingalgorithms01" class="{% if p == '/programmingalgorithms01' or p == '/programmingalgorithms01/' %}active{% endif %}">Тармақталған алгоритмдер</a>
+      <a href="/programmingalgorithms02" class="{% if p == '/programmingalgorithms02' or p == '/programmingalgorithms02/' %}active{% endif %}">Кірістірілген шарттар</a>
+      <a href="/programmingalgorithms03" class="{% if p == '/programmingalgorithms03' or p == '/programmingalgorithms03/' %}active{% endif %}">Күрделі шарттар</a>
+      <a href="/programmingalgorithms04" class="{% if p == '/programmingalgorithms04' or p == '/programmingalgorithms04/' %}active{% endif %}">Таңдау операторлары</a>
+    </div>
 
-        <h6>8-сынып</h6>
-        <a href="/operator01">While циклі</a>
-        <a href="/operator02">For циклі</a>
-        <a href="/operator03">Continue</a>
-        <a href="/operator04">Break</a>
-        <a href="/operator05">Else</a>
-        <a href="/trassirovka">Алгоритм трассировкасы</a>
+    <!-- 8-сынып -->
+    <button class="accordion {% if '/operator' in p or '/trassirovka' in p %}active{% endif %}">
+      8-сынып
+    </button>
+    <div class="panel {% if '/operator' in p or '/trassirovka' in p %}show{% endif %}">
+      <a href="/operator01" class="{% if p == '/operator01' or p == '/operator01/' %}active{% endif %}">While циклі</a>
+      <a href="/operator02" class="{% if p == '/operator02' or p == '/operator02/' %}active{% endif %}">For циклі</a>
+      <a href="/operator03" class="{% if p == '/operator03' or p == '/operator03/' %}active{% endif %}">Continue</a>
+      <a href="/operator04" class="{% if p == '/operator04' or p == '/operator04/' %}active{% endif %}">Break</a>
+      <a href="/operator05" class="{% if p == '/operator05' or p == '/operator05/' %}active{% endif %}">Else</a>
+      <a href="/trassirovka" class="{% if p == '/trassirovka' or p == '/trassirovka/' %}active{% endif %}">Алгоритм трассировкасы</a>
+    </div>
 
-        <h6>9-сынып</h6>
-        <a href="/birolshemdimassiv">Бір өлшемді массив</a>
-        <a href="/orynauystyru">Элементтерді ауыстыру</a>
-        <a href="/ekiolshemdimassiv">Екі өлшемді массив</a>
-        <a href="/suryptau">Сұрыптау</a>
-        <a href="/zhoyujanekiristiru">Жою және кірістіру</a>
-        <a href="/pygame">Pygame</a>
+    <!-- 9-сынып -->
+    <button class="accordion {% if '/birolshemdimassiv' in p or '/orynauystyru' in p or '/ekiolshemdimassiv' in p or '/suryptau' in p or '/zhoyujanekiristiru' in p or '/pygame' in p %}active{% endif %}">
+      9-сынып
+    </button>
+    <div class="panel {% if '/birolshemdimassiv' in p or '/orynauystyru' in p or '/ekiolshemdimassiv' in p or '/suryptau' in p or '/zhoyujanekiristiru' in p or '/pygame' in p %}show{% endif %}">
+      <a href="/birolshemdimassiv" class="{% if p == '/birolshemdimassiv' or p == '/birolshemdimassiv/' %}active{% endif %}">Бір өлшемді массив</a>
+      <a href="/orynauystyru" class="{% if p == '/orynauystyru' or p == '/orynauystyru/' %}active{% endif %}">Элементтерді ауыстыру</a>
+      <a href="/ekiolshemdimassiv" class="{% if p == '/ekiolshemdimassiv' or p == '/ekiolshemdimassiv/' %}active{% endif %}">Екі өлшемді массив</a>
+      <a href="/suryptau" class="{% if p == '/suryptau' or p == '/suryptau/' %}active{% endif %}">Сұрыптау</a>
+      <a href="/zhoyujanekiristiru" class="{% if p == '/zhoyujanekiristiru' or p == '/zhoyujanekiristiru/' %}active{% endif %}">Жою және кірістіру</a>
+      <a href="/pygame" class="{% if p == '/pygame' or p == '/pygame/' %}active{% endif %}">Pygame</a>
+    </div>
 
-        <h6>10-сынып</h6>
-        <a href="/string">Жолдық әдістер</a>
+    <!-- 10-сынып -->
+    <button class="accordion {% if '/string' in p %}active{% endif %}">
+      10-сынып
+    </button>
+    <div class="panel {% if '/string' in p %}show{% endif %}">
+      <a href="/string" class="{% if p == '/string' or p == '/string/' %}active{% endif %}">Жолдық әдістер</a>
+    </div>
 
-    </aside>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- GAMIFICATION PROGRESS -->
+    <section class="progress-card" id="progressCard">
+      <div class="progress-head">
+        <div class="progress-title">Сабақ прогресі</div>
+        <div class="xp-pill">XP: <span id="xpValue">0</span></div>
+      </div>
+      <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+      <div class="progress-meta">
+        Орындалды: <span id="doneCount">0</span>/<span id="totalCount">0</span> блок
+      </div>
+    </section>
+
+    <!-- HERO only on main "/" -->
+    {% if p == "/" %}
+    <div class="hero-block">
+      <div class="glass-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+             alt="Python Logo" class="python-3d">
+        <h2>Python үйренудің жаңа деңгейі</h2>
+        <p>Modern Apple Light стиліндегі интерактивті оқу платформасы.</p>
+        <div class="hero-buttons">
+          <a href="/signup" class="hero-btn primary">Бастау</a>
+          <a href="/string" class="hero-btn secondary">Онлайн компилятор</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  {% block content %}
+  <section class="empty-state">
+    <h1>Сабақты таңда</h1>
+    <p class="subtitle">
+      Сол жақ мәзірден тақырыпты таңдасаң, материал осы жерде ашылады.
+    </p>
+  </section>
+
+  <!-- ВСТРОЕННЫЙ PYTHON КОМПИЛЯТОР -->
+  <section class="glass-card compiler-card">
+    <div class="compiler-header">
+      <h2>Онлайн Python компилятор</h2>
+      <p>Кодты осы жерге жазып, бірден нәтижесін көр.</p>
+    </div>
+
+    <div class="compiler-grid">
+      <div class="compiler-editor">
+        <label for="pyCode">Код:</label>
+        <textarea id="pyCode" spellcheck="false">
+print("Сәлем, Python!")
+for i in range(3):
+    print("Цикл:", i)
+        </textarea>
+        <div class="compiler-buttons">
+          <button type="button" onclick="runPythonCode()">Run ▶</button>
+          <button type="button" onclick="clearPythonOutput()">Output-ты тазалау</button>
+        </div>
+      </div>
+
+      <div class="compiler-output">
+        <div class="compiler-output-title">Нәтиже:</div>
+        <pre id="pyOutput"></pre>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
 
 
+  </main>
 
-    <!-- PAGE CONTENT -->
-    <main class="content">
-        {% block content %}
-        {% endblock %}
-    </main>
-
+{% endwith %}
 </div>
 
-
-
-<!-- FOOTER -->
-<footer>
-    © 2025 Python оқу платформасы. Барлық құқықтар қорғалған.
+<footer class="footer">
+  © 2025 Python оқу платформасы. Apple Light Edition.
 </footer>
 
+<!-- Prism core + Python component -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+<script>
+/* 0) MOBILE SIDEBAR TOGGLE */
+(function(){
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.querySelector(".sidebar");
+  const backdrop = document.getElementById("backdrop");
+
+  if(menuToggle && sidebar && backdrop){
+    const closeSidebar = () => {
+      sidebar.classList.remove("open");
+      backdrop.classList.remove("show");
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = sidebar.classList.toggle("open");
+      backdrop.classList.toggle("show", isOpen);
+    });
+
+    backdrop.addEventListener("click", closeSidebar);
+
+    window.addEventListener("resize", () => {
+      if(window.innerWidth > 960){
+        closeSidebar();
+      }
+    });
+  }
+})();
+
+/* 1) ACCORDION */
+document.querySelectorAll(".accordion").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const panel = btn.nextElementSibling;
+    btn.classList.toggle("active");
+    panel.classList.toggle("show");
+  });
+});
+
+/* 2) GAMIFICATION XP */
+(function(){
+  const pathKey = "xp:" + window.location.pathname;
+  const doneKey = "done:" + window.location.pathname;
+
+  let xp = parseInt(localStorage.getItem(pathKey) || "0");
+  let doneMap = JSON.parse(localStorage.getItem(doneKey) || "{}");
+
+  const buttons = document.querySelectorAll(".btn-done");
+  const xpValue = document.getElementById("xpValue");
+  const barFill = document.getElementById("barFill");
+  const doneCountEl = document.getElementById("doneCount");
+  const totalCountEl = document.getElementById("totalCount");
+
+  if (totalCountEl) {
+    totalCountEl.textContent = buttons.length;
+  }
+
+  function render(){
+    if (xpValue) xpValue.textContent = xp;
+
+    let doneCount = 0;
+    buttons.forEach(btn => {
+      const block = btn.dataset.block;
+      const isDone = !!doneMap[block];
+      btn.classList.toggle("done", isDone);
+      // Егер "(Мақсат)" сияқты мәтін сақталсын десең:
+      const label = btn.getAttribute("data-label") || "";
+      btn.innerHTML = isDone ? `✅ Орындалды ${label}` : `⬜ Орындалды ${label}`;
+      if(isDone) doneCount++;
+    });
+
+    if (doneCountEl) doneCountEl.textContent = doneCount;
+
+    const total = buttons.length;
+    const pct = total ? Math.round((doneCount / total) * 100) : 0;
+    if (barFill) barFill.style.width = pct + "%";
+  }
+
+  buttons.forEach(btn => {
+    // label сақтау үшін бастапқы мәтінді data-атрибутқа жазамыз
+    if (!btn.getAttribute("data-label")) {
+      const text = btn.textContent.replace("⬜ Орындалды","").replace("✅ Орындалды","").trim();
+      btn.setAttribute("data-label", text ? `(${text})` : "");
+    }
+
+    btn.addEventListener("click", () => {
+      const block = btn.dataset.block;
+      const addXp = parseInt(btn.dataset.xp || "0");
+      if(!block) return;
+
+      if(doneMap[block]) return;  // қайта XP қоспау үшін
+
+      doneMap[block] = true;
+      xp += addXp;
+
+      localStorage.setItem(pathKey, xp);
+      localStorage.setItem(doneKey, JSON.stringify(doneMap));
+      render();
+    });
+  });
+
+  render();
+})();
+
+/* 3) Prism: кодты бояу */
+document.addEventListener("DOMContentLoaded", function(){
+  if (window.Prism && typeof Prism.highlightAll === "function") {
+    Prism.highlightAll();
+  }
+});
+
+/* 4) MINI QUIZ CHECK */
+document.addEventListener("DOMContentLoaded", function () {
+  const quizBtn = document.getElementById("checkQuiz");
+  if (!quizBtn) return;  // кей беттерде квиз жоқ
+
+  const quizItems = document.querySelectorAll(".quiz-item");
+  const resultEl = document.getElementById("quizResult");
+
+  quizBtn.addEventListener("click", () => {
+    let correctCount = 0;
+    const total = quizItems.length;
+
+    quizItems.forEach((item) => {
+      const correct = item.dataset.correct;            // a / b / c / d
+      const checked = item.querySelector('input[type="radio"]:checked');
+
+      item.classList.remove("correct", "wrong");
+
+      if (checked && checked.value === correct) {
+        correctCount++;
+        item.classList.add("correct");
+      } else {
+        item.classList.add("wrong");
+      }
+    });
+
+    if (resultEl) {
+      resultEl.textContent = `Дұрыс жауаптар: ${correctCount} / ${total}`;
+    }
+  });
+});
+
+/* 5) SKULPT PYTHON КОМПИЛЯТОРЫ (егер бетте бар болса) */
+function builtinRead(x) {
+  if (typeof Sk === "undefined" || !Sk.builtinFiles || !Sk.builtinFiles["files"][x]) {
+    throw "File not found: '" + x + "'";
+  }
+  return Sk.builtinFiles["files"][x];
+}
+
+function outf(text) {
+  const out = document.getElementById("pyOutput");
+  if (out) {
+    out.textContent += text;
+  }
+}
+
+function clearPythonOutput() {
+  const out = document.getElementById("pyOutput");
+  if (out) {
+    out.textContent = "";
+  }
+}
+
+function runPythonCode() {
+  const codeEl = document.getElementById("pyCode");
+  if (!codeEl) return;
+
+  clearPythonOutput();
+  const prog = codeEl.value;
+
+  Sk.configure({
+    output: outf,
+    read: builtinRead,
+    execLimit: 3000
+  });
+
+  const promise = Sk.misceval.asyncToPromise(function () {
+    return Sk.importMainWithBody("<stdin>", false, prog, true);
+  });
+
+  promise.then(
+    function () { /* OK */ },
+    function (err) {
+      const out = document.getElementById("pyOutput");
+      if (out) {
+        out.textContent += "\n[Қате] " + err.toString();
+      }
+    }
+  );
+}
+</script>
+
+{% block extra_js %}{% endblock %}
 </body>
 </html>

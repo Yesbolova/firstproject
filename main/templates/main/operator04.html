@@ -1,195 +1,372 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Break операторы{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Break операторы</h1>
+<p class="subtitle">
+  Бұл сабақта біз <code>break</code> операторының не істейтінін, циклды
+  қалай тоқтататынын, <code>continue</code> және <code>else</code>-пен
+  байланысын, сондай-ақ практикалық мысалдар мен тест тапсырмаларын қарастырамыз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
-
-
-    <title>Break (брик) циклін басқару</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1> Break (брик) циклін басқару</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: цикл басқару нұсқаулығын қолдану (continue ( континю), break (брик), else (элс))</h2>
-
-<h2> Break операторы</h2>
-<div>
-      <p> Break операторы Python тілінде циклден шығу үшін қолданылады. Демек, кодтың орындалуы барысында программа break операторын кездестірсе, онда ол циклдің орындалуын бірден аяқтайды және циклден шығып кетеді. Программаны басқару цикл денесінен кейін тұрған операторға өтеді. Егер break операторы ішкі циклде (циклдің ішіндегі цикл) орналасса, онда ішкі циклдің орындалуы аяқталады.</p>
-<li><strong>Break</strong> — <code>break</code> кілттік сөзі циклдің орындалуын бірден аяқтайды және басқаруды цикл соңына береді<pre class="  language-py">
-    <img data-cke-saved-src="https://ucarecdn.com/289007e7-2a0a-4fb9-adb0-87d07b9e9c9e/" src="https://ucarecdn.com/289007e7-2a0a-4fb9-adb0-87d07b9e9c9e/" name="image.png" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F289007e7-2a0a-4fb9-adb0-87d07b9e9c9e%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A543%2C%22height%22%3A195%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%2C%22name%22%3A%22image.png%22%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element" alt="" width="543" height="195">
-</pre></li>
-
-</div>
-
-      </div>
-
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:10px;">
+    <li><code>break</code> операторының жұмысын түсіну;</li>
+    <li><code>for</code> және <code>while</code> циклдарында <code>break</code> қолдануды үйрену;</li>
+    <li><code>break</code> пен <code>continue</code> айырмашылығын түсіндіре алу;</li>
+    <li>Циклдан ерте шығу қажет болатын практикалық есептерді шешу;</li>
+    <li>Mini-quiz арқылы өз біліміңді тексеру.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:14px;">Break операторы деген не?</h3>
+  <p>
+    <code>break</code> операторы цикл ішінде белгілі бір шарт орындалғанда
+    <b>цикл жұмысын толық тоқтату</b> үшін қолданылады. Яғни:
+  </p>
+  <ul>
+    <li>ағымдағы итерация да, қалған итерациялар да жалғаспайды;</li>
+    <li>бағдарлама циклдан кейінгі бірінші командаларға өтеді.</li>
+  </ul>
 
+  <h3><code>break</code> vs <code>continue</code></h3>
+  <ul>
+    <li><code>break</code> — циклды біржола аяқтайды;</li>
+    <li><code>continue</code> — тек ағымдағы итерацияны өткізіп, келесі итерацияға өтеді;</li>
+    <li><code>pass</code> — ештеңе істемейді (бос оператор).</li>
+  </ul>
+
+  <h3>Break операторы бар <code>for</code> циклі</h3>
+  <p>0-ден бастап сандарды шығарып, 5-ке жеткенде циклды тоқтатайық:</p>
+
+  <pre><code class="language-python">for i in range(10):
+    if i == 5:
+        break     # 5-ке жеткенде цикл аяқталады
+    print(i)</code></pre>
+
+  <p><b>Нәтиже:</b></p>
+  <pre><code class="language-python">0
+1
+2
+3
+4</code></pre>
+
+  <p>
+    Көріп тұрғанымыздай, <code>5</code> мәні шықпайды, себебі <code>i == 5</code>
+    болған сәтте <code>break</code> циклды біржола тоқтатты.
+  </p>
+
+  <h3>Break операторы бар <code>while</code> циклі</h3>
+  <p>Пайдаланушыдан сандар енгізіп, 0 енгізгенде циклды тоқтатайық:</p>
+
+  <pre><code class="language-python">total = 0
+
+while True:  # шексіз цикл
+    x = int(input("Сан енгіз (тоқтату үшін 0): "))
+    if x == 0:
+        break          # 0 болса, цикл аяқталады
+    total += x
+
+print("Қосынды:", total)</code></pre>
+
+  <p>
+    Мұнда <code>while True</code> — шексіз цикл, ал <code>break</code> оны
+    пайдаланушы 0 енгізгенде тоқтатады.
+  </p>
+
+  <h3><code>for ... else</code> және <code>break</code></h3>
+  <p>
+    Python-да циклдан кейін <code>else</code> блогын жазуға болады.
+    <code>break</code> орындалмаса, <code>else</code> бөлімі іске қосылады;
+    ал егер <code>break</code> арқылы цикл ерте тоқтаса, <code>else</code> орындалмайды.
+  </p>
+
+  <pre><code class="language-python">for i in range(1, 6):
+    if i == 3:
+        print("3 табылды!")
+        break
+    print("Тексеру:", i)
+else:
+    print("3 табылмады")</code></pre>
+
+  <p>
+    Бұл мысалда <code>3</code> табылғандықтан, <code>break</code> орындалады,
+    цикл тоқтайды және <code>else</code> мүлде орындалмайды.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">1-мысал · Құпия санды табу</h3>
+  <p>Компьютер бір құпия сан «ойлап» тұр, ал біз оны табуымыз керек:</p>
+
+  <pre><code class="language-python">secret = 7
+
+while True:
+    guess = int(input("Болжам енгіз: "))
+    if guess == secret:
+        print("Дұрыс таптың!")
+        break
+    print("Қайтадан байқап көр!")</code></pre>
+
+  <h3 style="margin-top:18px;">2-мысал · Тізімнен белгілі элементті іздеу</h3>
+  <p>Тізімде қандай да бір сан бар ма, соны тексерейік:</p>
+
+  <pre><code class="language-python">numbers = [3, 8, 1, 10, 5]
+target = 10
+
+found = False
+
+for n in numbers:
+    if n == target:
+        found = True
+        break
+
+if found:
+    print("Мән тізімде бар!")
+else:
+    print("Мән табылмады.")</code></pre>
+
+  <h3 style="margin-top:18px;">3-мысал · Теріс сан кездескенше қосу</h3>
+  <p>Тізімдегі сандарды қосамыз, бірақ бірінші теріс санға дейін ғана:</p>
+
+  <pre><code class="language-python">nums = [5, 4, 3, -1, 10, 2]
+total = 0
+
+for x in nums:
+    if x &lt; 0:
+        break      # теріс сан шыққан бойда тоқтаймыз
+    total += x
+
+print("Қосынды:", total)</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Теріс санға дейінгі қосынды</h3>
+  <p>
+    Пайдаланушыдан сандарды бір-бірлеп енгізетін программа жаз.
+    Егер теріс сан енгізсе, цикл <code>break</code> арқылы тоқтайды,
+    ал теріс санға дейін енгізілген сандардың қосындысы шығарылады.
+  </p>
+
+  <div class="task-card">
+    <p class="task-io-title">Мысал:</p>
+    <pre><code class="language-python">Кіріс: 5, 3, 2, -1
+Шығыс: 10</code></pre>
+  </div>
+
+  <h3 style="margin-top:18px;">Тапсырма 2 · Құпия сөз</h3>
+  <p>
+    Құпия сөз алдын ала <code>"python"</code> деп берілсін. Пайдаланушыдан
+    бірнеше рет пароль сұрайтын программа жаз. Егер пароль дұрыс болса,
+    <code>"Қош келдің!"</code> деп жазып, циклды <code>break</code> арқылы тоқтат.
+    Егер 3 рет қате енгізсе, <code>"Кіру бұғатталды"</code> деп шығарып, циклды тоқтат.
+  </p>
+
+  <h3 style="margin-top:18px;">Тапсырма 3 · 1–100 аралығында іздеу</h3>
+  <p>
+    1-ден 100-ге дейінгі сандардан <b>25-ке бірінші бөлінетін</b> санды тауып,
+    оны экранға шығар да, циклды <code>break</code> арқылы тоқтат.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тест сұрақтарына жауап бер. Соңында <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Break операторының негізгі қызметі?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Ағымдағы итерацияны өткізіп жіберу
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Циклды толық тоқтату
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Ештеңе істемеу
+      </label>
     </div>
 
+    <!-- 2 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Қай жерде break қолдану орынды?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) Әр итерация сайын айнымалыны арттыру
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) Барлық сандарды міндетті түрде шығару
+      </label>
 
-
-
-
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) Қажетті элемент табылған кезде циклды бірден тоқтату
+      </label>
     </div>
 
+    <!-- 3 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Төмендегі кодтың нәтижесі қандай?</b></p>
 
+      <pre><code class="language-python">for i in range(1, 6):
+    if i == 3:
+        break
+    print(i)</code></pre>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>1 2</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>1 2 3</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>3 4 5</code>
+      </label>
+    </div>
 
+    <!-- 4 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) While циклында break көбінесе қай кезде қолданылады?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) Цикл ешқашан аяқталмасын дегенде
+      </label>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) Шарт <code>True</code> болып тұрғанымен, белгілі бір жағдайда циклды ерте тоқтатқымыз келсе
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) Айнымалыны экранға шығармау үшін
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+    <!-- 5 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) For ... else конструкциясында break орындалса не болады?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) Else әрқашан орындалады
+      </label>
 
-</div>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) Else тек range біткенде ғана орындалады, break әсер етпейді
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Break орындалғандықтан, else бөлігі орындалмайды
+      </label>
+    </div>
 
+  </div>
 
+  <button id="checkQuiz" class="quiz-check-btn" type="button">
+    Тексеру
+  </button>
+  <div id="quizResult" class="quiz-result"></div>
+</section>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+<!-- ========================================================= -->
+<!-- 6. ҚОРЫТЫНДЫ / ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Үй тапсырмасы</h2>
+    <button class="btn-done" data-block="homework" data-xp="10">
+      ⬜ Орындалды (Үй жұмысы)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Чек-лист</h3>
+  <ul>
+    <li><code>break</code> операторын анық түсіндіре аламын;</li>
+    <li><code>break</code> пен <code>continue</code> айырмашылығын білемін;</li>
+    <li>Циклдан ерте шығу керек есептерді шеше аламын;</li>
+    <li>Mini-quiz сұрақтарына жауап бердім.</li>
+  </ul>
+
+  <h3>Үй тапсырмасы</h3>
+  <ul>
+    <li>Пайдаланушыдан сандар енгізіп, бірінші 0 мәні шыққанға дейін қосындысын табатын бағдарлама жаз;</li>
+    <li>Логин мен парольді 3 ретке дейін сұрап, дұрыс енгізгенде «Қош келдің!» деп, қате болса «Кіру сәтсіз аяқталды» деп шығаратын программа жаз (циклды <code>break</code> арқылы тоқтат);</li>
+    <li>Бағдарламаларыңды файлға сақтап, келесі сабақта көрсет.</li>
+  </ul>
+</section>
+
+{% endblock %}

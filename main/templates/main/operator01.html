@@ -1,221 +1,488 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}While циклі{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>While циклі</h1>
+<p class="subtitle">
+  Бұл сабақта <b>while циклі</b> қалай жұмыс істейтінін, қай кезде қолдану тиімді екенін,
+  санау, қосынды табу және қарапайым есептерді қайталап орындау үшін while-ды пайдалануды үйренеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында сен while циклін түсініп, бірнеше практикалық есеп шығарып,
+  <b>10 сұрақтық Mini-Quiz</b> арқылы біліміңді тексере аласың.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-    <title>While (уайл) циклі</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>While (уайл) циклі</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: While (уайл) цикл операторын пайдалану</h2>
-<h2> Python-да while циклі дегеніміз не? </h2>
-<p>Цикл  <strong>while</strong> ("әзірше")  Python-да  шарт ақиқат болғанша  белгілі бір нұсқаулықты бірнеше рет орындау үшін қолданылады.</p>
-<div>
-<p>Шарт цикл денесіне жазылады және цикл денесін орындағанға дейін тексеріледі. Әдетте цикл <strong>while</strong> қадамдардың нақты санын алдын ала анықтау мүмкін болмаған кезде пайдаланылады.</p>
-<p>While циклінің синтаксисі қарапайым жағдайда көрінеді:</p>
-
-
-<pre><code class="language-css">
- while шарт:
-   Нұсқаулық блогы <br>
-  </code></pre>
-
-
-
-
-
-
-<p>While циклін орындау кезінде алдымен шарт тексеріледі. Егер ол жалған болса, циклді орындау тоқтатылады және басқару while циклының денесінен кейін келесі нұсқауға беріледі. Егер шарт шынайы болса, онда Нұсқаулық орындалады, содан кейін шарт қайтадан тексеріледі және нұсқаулық орындалады. Осылайша шарт шынайы болғанша жалғасады. Шарт жалған болғаннан кейін цикл жұмысы аяқталады және басқару циклден кейін келесі нұсқауларды береді.</p>
-<p>Мысалы, Бағдарламаның келесі бөлігі 1-ден 10-ға дейінгі барлық бүтін сандардың квадратын экранға шығарады<strong>:</strong></p>
-    <img alt="" height="125" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/33cb03e3-62f3-4cbb-9aea-879c773f917b/" src="https://ucarecdn.com/33cb03e3-62f3-4cbb-9aea-879c773f917b/" width="686" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F33cb03e3-62f3-4cbb-9aea-879c773f917b%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22686%22%2C%22height%22%3A%22125%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p>Бұл мысалда цикл ішіндегі I айнымалы 1-ден 10-ға дейін өзгереді. Әрбір жаңа циклмен өзгеретін Мұндай айнымалы санауыш деп аталады. Бұл фрагментті орындағаннан кейін I айнымалы мәні 11-ге тең болады, себебі i==11 шарты i&lt;=10 алғаш рет орындалмайды.</p>
-<p>Бұл цикл көрінеді&nbsp;<strong><span class="page_code_style" id="i2PN5n9aYK">
-  while
-</span></strong>&nbsp;циклді ауыстыра алады&nbsp;<strong><span class="page_code_style" id="ILtWspcgpo">
-  for … in range(…)
-</span></strong></p>
-<p>Циклді пайдаланудың тағы бір мысалы <strong>while</strong> n натурал сандар санын анықтау үшін:</p>
-    <img alt="" height="160" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/ac73800f-f9a9-442b-b079-13aa66ae7501/" src="https://ucarecdn.com/ac73800f-f9a9-442b-b079-13aa66ae7501/" width="668" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fac73800f-f9a9-442b-b079-13aa66ae7501%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22668%22%2C%22height%22%3A%22160%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p>Бұл циклда біз бір саннан бастап, 10-ға бүтін бөлікке тең
-  (n //= 10)
-, бұл ретте айнымалы деп санаймыз length
-, бұл қанша рет жасалды.</p>
-<span>Дегенмен, Питон тілінде бұл мәселені шешудің басқа жолы бар:&nbsp;</span><span><span class="page_code_style" id="nCJYOJA931">
-  length = len(str(i))
-</span></span><p></p>
-<p>While циклінің for циклінен айырмашылығы: <em><strong>while</strong> біз алдын ала белгілі бір әрекетті қанша рет қайталау керек екенін білмейміз кезде пайдаланылады.</em></p>
-
-
-<script src="/prism.js"></script>
-</div>
-      </div>
-
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:12px;">
+    <li><code>while</code> циклі не үшін керектігін түсіну;</li>
+    <li>Қарапайым санау циклін жасау (1-ден n-ге дейін, кері санау);</li>
+    <li>Қайталанатын әрекеттер арқылы қосынды/көбейтінді табу;</li>
+    <li>Шарт жалған болғанда циклдің қалай тоқтайтынын түсіну;</li>
+    <li>Mini-quiz арқылы while тақырыбын бекіту.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:16px;">While циклі деген не?</h3>
+  <p>
+    Кейде бір әрекетті бірнеше рет қайталау керек болады: мысалы, 1-ден 10-ға дейін сандарды шығару,
+    кіріс деректерді бірнеше рет сұрау, қосындыны есептеу т.б.
+  </p>
+  <p>
+    Осындай қайталанатын әрекеттерді орындау үшін <b>циклдер</b> қолданылады.
+    Python тілінде циклдердің бірі — <b><code>while</code> циклі</b>.
+  </p>
 
+  <p><code>while</code> циклі жалпы түрде былай жазылады:</p>
+
+  <pre><code class="language-python">while шарт:
+    # шарт ақиқат (True) болғанша қайталанатын командалар
+    команда1
+    команда2
+    ...</code></pre>
+
+  <ul>
+    <li><b>шарт</b> – логикалық өрнек (True/False);</li>
+    <li>шарт <b>ақиқат</b> (True) болса – цикл ішіндегі блок орындала береді;</li>
+    <li>шарт <b>жалған</b> (False) болғанда – цикл тоқтайды.</li>
+  </ul>
+
+  <h3 style="margin-top:18px;">1-ден 5-ке дейін сандарды шығару</h3>
+
+  <pre><code class="language-python">i = 1
+
+while i &lt;= 5:
+    print(i)
+    i = i + 1</code></pre>
+
+  <pre><code class="language-text">Кіріс: (жоқ)
+Шығыс:
+1
+2
+3
+4
+5</code></pre>
+
+  <p>
+    Мұнда <code>i</code> әр қайталаудан кейін 1-ге артып отырады. <code>i &lt;= 5</code>
+    шарты жалған болған кезде (i = 6) цикл тоқтайды.
+  </p>
+
+  <h3 style="margin-top:18px;">Кері санау мысалы</h3>
+
+  <pre><code class="language-python">i = 5
+
+while i &gt;= 1:
+    print(i)
+    i = i - 1
+
+print("Старт!")</code></pre>
+
+  <pre><code class="language-text">Шығыс:
+5
+4
+3
+2
+1
+Старт!</code></pre>
+
+  <h3 style="margin-top:18px;">Қайталанатын қосынды</h3>
+  <p>1-ден n-ге дейінгі сандардың қосындысын табу:</p>
+
+  <pre><code class="language-python">n = int(input("n санын енгіз: "))
+
+s = 0      # қосынды
+i = 1      # есептегіш
+
+while i &lt;= n:
+    s = s + i
+    i = i + 1
+
+print("Қосынды:", s)</code></pre>
+
+  <pre><code class="language-text">Кіріс: n = 5
+Шығыс: Қосынды: 15</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">1-мысал · Тек жұп сандарды шығару</h3>
+  <p>1-ден n-ге дейінгі <b>жұп сандарды</b> шығаратын программа:</p>
+
+  <pre><code class="language-python">n = int(input("n санын енгіз: "))
+
+i = 1
+while i &lt;= n:
+    if i % 2 == 0:
+        print(i)
+    i = i + 1</code></pre>
+
+  <pre><code class="language-text">Кіріс: n = 7
+Шығыс:
+2
+4
+6</code></pre>
+
+  <h3 style="margin-top:18px;">2-мысал · Цифрлар қосындысы</h3>
+  <p>Берілген санның цифрларының қосындысын табу:</p>
+
+  <pre><code class="language-python">n = int(input("Санды енгіз: "))
+
+s = 0
+while n &gt; 0:
+    digit = n % 10     # соңғы цифр
+    s = s + digit      # қосамыз
+    n = n // 10        # соңғы цифрды алып тастаймыз
+
+print("Цифрлар қосындысы:", s)</code></pre>
+
+  <h3 style="margin-top:18px;">3-мысал · Пайдаланушы 0 енгізгенше</h3>
+  <p>Пайдаланушы <code>0</code> енгізгенше сандарды қосатын программа:</p>
+
+  <pre><code class="language-python">s = 0
+
+x = int(input("Сан енгіз (тоқтау үшін 0): "))
+
+while x != 0:
+    s = s + x
+    x = int(input("Тағы сан енгіз (тоқтау үшін 0): "))
+
+print("Қосынды:", s)</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · 1-ден n-ге дейінгі тақ сандар</h3>
+  <p>
+    Пайдаланушы енгізген <code>n</code> санына дейінгі барлық <b>тақ сандарды</b>
+    while циклі арқылы экранға шығартын программа жаз.
+  </p>
+
+  <table class="io-table">
+    <thead>
+      <tr>
+        <th>Кіріс (n)</th>
+        <th>Күтілетін шығу</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>7</code></td>
+        <td><code>1 3 5 7</code></td>
+      </tr>
+      <tr>
+        <td><code>10</code></td>
+        <td><code>1 3 5 7 9</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:18px;">Тапсырма 2 · Көбейту кестесінің бір қатары</h3>
+  <p>
+    Пайдаланушы енгізген сан үшін оның 1-ден 10-ға дейінгі көбейту кестесін шығаратын
+    while циклін құр. Мысалы, 5 саны үшін:
+  </p>
+
+  <pre><code class="language-text">Кіріс: 5
+Шығыс:
+5 * 1 = 5
+5 * 2 = 10
+...
+5 * 10 = 50</code></pre>
+
+  <h3 style="margin-top:18px;">Тапсырма 3 · Қарапайым «сан ойлау» ойыны</h3>
+  <p>
+    1–10 аралығында бір құпия сан ойлап, оқушыдан оны табуды сұрайтын программа жаз.
+    Пайдаланушы дұрыс тапқанға дейін <code>while</code> циклі жалғассын.
+  </p>
+  <p style="font-size:14px;color:#6b7280;">
+    Кеңес: <code>import random</code>, <code>secret = random.randint(1, 10)</code> пайдалануға болады.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (10 СҰРАҚ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="25">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі 10 тест сұрағына жауап бер де,
+    <b>«Тексеру»</b> батырмасын басып, нәтижеңді көр.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) While циклі не істейді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Команданы тек бір рет орындайды
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Шарт ақиқат болғанша командаларды қайталайды
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Тек қана экранға мәтін шығарады
+      </label>
     </div>
 
-
-
-
-
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) While циклінің негізгі бөліктері қандай?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) Айнымалы, тізім, функция
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) Тек шарт және print
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) Бастапқы мән, шарт, өзгерту (инкремент/декремент)
+      </label>
     </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Төмендегі код не шығарады?</b></p>
 
+      <pre><code class="language-python">i = 1
+while i &lt;= 3:
+    print(i)
+    i = i + 1</code></pre>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а)
+        <code>1 2 3</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә)
+        <code>1 2</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б)
+        <code>1 2 3 4</code>
+      </label>
+    </div>
 
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) Қай кодта шексіз цикл пайда болуы мүмкін?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а)
+        <pre><code class="language-python">i = 1
+while i &lt;= 5:
+    print(i)
+    i = i + 1</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә)
+        <pre><code class="language-python">i = 1
+while i &lt;= 5:
+    print(i)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б)
+        <pre><code class="language-python">i = 10
+while i &gt; 0:
+    print(i)
+    i = i - 2</code></pre>
+      </label>
+    </div>
 
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Шарт қай кезде тексеріледі?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) Цикл денесі орындалып біткеннен кейін бір рет
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) Бағдарлама басталған кезде ғана
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Әр қайталану алдында
+      </label>
+    </div>
 
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>6) While циклінде есептегіш айнымалы не үшін керек?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) Циклдің қашан тоқтайтынын басқару үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) Тек экранға шығару үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) Функция атауын сақтау үшін
+      </label>
+    </div>
 
+    <!-- 7-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>7) Циклден шығу үшін қандай жағдай болуы керек?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="a">
+        а) print саны көбейген кезде
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="b">
+        ә) While-дағы шарт жалған (False) болғанда
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="c">
+        б) Айнымалылар жойылғанда
+      </label>
+    </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 8-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>8) Қай фрагмент 10-нан 1-ге дейінгі сандарды шығарады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="a">
+        а)
+        <pre><code class="language-python">i = 1
+while i &lt;= 10:
+    print(i)
+    i += 1</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="b">
+        ә)
+        <pre><code class="language-python">i = 10
+while i &lt;= 1:
+    print(i)
+    i -= 1</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="c">
+        б)
+        <pre><code class="language-python">i = 10
+while i &gt;= 1:
+    print(i)
+    i -= 1</code></pre>
+      </label>
+    </div>
 
+    <!-- 9-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>9) Қай код 1–n аралығындағы сандардың қосындысын while арқылы табады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="a">
+        а)
+        <pre><code class="language-python">n = int(input())
+s = 0
+i = 1
+while i &lt;= n:
+    s = s + i
+    i = i + 1
+print(s)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="b">
+        ә)
+        <pre><code class="language-python">n = int(input())
+s = 0
+for i in range(1, n+1):
+    s = s + i
+print(s)</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="c">
+        б)
+        <pre><code class="language-python">n = int(input())
+print(n)</code></pre>
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+    <!-- 10-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>10) While циклін қолданудың қай мысалы дұрыс сипатталған?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="a">
+        а) Бір рет қана есептелетін формуланы шығару
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="b">
+        ә) Қайталанып тұрған әрекетті көп рет орындау
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="c">
+        б) Тек сурет салу үшін қолдану
+      </label>
+    </div>
 
+  </div>
 
-</div>
+  <button id="checkQuiz" class="quiz-check-btn">
+    Тексеру
+  </button>
+  <p id="quizResult" class="quiz-result-text"></p>
+</section>
 
-
-
-
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+{% endblock %}

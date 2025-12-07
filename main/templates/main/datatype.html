@@ -1,256 +1,462 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Мәліметтер типтері{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Мәліметтер типтері</h1>
+<p class="subtitle">
+  Бұл сабақта Python тіліндегі негізгі мәліметтер типтерін, олармен қандай
+  амалдар орындауға болатынын және <code class="language-python">type()</code>
+  функциясын қолдануды үйренеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақты толық орындасаң, шамамен <b>100 XP</b> жинайсың.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-    <title>Мәліметтер типтері</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>    Мәліметтер типі</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-            <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: деректер түрлерін жіктеу
- </h2>
-<h2> Мәліметтер типтері</h2>
-<p> Мәліметтер типтері – қабылдай алатын
-мәндерінің және олармен
-орындауға болатын амалдардың жиынын анықтау,
-яғни тип дегеніміз – шамалардың қабылдайтын мәндері не берілетін сипаттама.
-Python тіліндегі мәліметтер типінің бір неше
-түрі бар. Солардың ішіндегі
-негізгі кіріктірілген тип түрлері:</p>
-          <img alt="" height="420" data-cke-saved-name="Banking with FinTech.jpg" name="Banking with FinTech.jpg" data-cke-saved-src="https://ucarecdn.com/696e362a-fe25-4380-b73a-6c59e5a03491/" src="https://ucarecdn.com/696e362a-fe25-4380-b73a-6c59e5a03491/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F696e362a-fe25-4380-b73a-6c59e5a03491%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221920%22%2C%22height%22%3A%221080%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-          <h2> Type () функциясы </h2>
-<p>Айнымалы немесе мән қандай классқа жататынын білу үшін type() функциясын қолданамыз.
-    <h2>Python-дағы сандық деректер типі</h2>
-<p>Python-да сандық деректер типтерінің мынадай түрлері бар:</p>
-          <li>int (бүтін сан);</li>
-          <li>float (нақты сан [жылжымалы нүктелі: –0.2, 0.0, 3.14159265
-және т.б.]);</li>
-   <p> Сандық деректер типіне келтірілген мысалды қарастырайық:</p>
-          <img alt="" height="139" data-cke-saved-name="san1.png" name="san1.png" data-cke-saved-src="https://ucarecdn.com/ef19f207-7f96-4af4-9cb9-e202520495ac/" src="https://ucarecdn.com/ef19f207-7f96-4af4-9cb9-e202520495ac/" width="567" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fef19f207-7f96-4af4-9cb9-e202520495ac%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22567%22%2C%22height%22%3A%22139%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p>Тексеру</p>
-          <img alt="" height="56" data-cke-saved-name="san2.png" name="san2.png" data-cke-saved-src="https://ucarecdn.com/bba4cecb-4574-47ec-9bae-b67300391c44/" src="https://ucarecdn.com/bba4cecb-4574-47ec-9bae-b67300391c44/" width="439" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fbba4cecb-4574-47ec-9bae-b67300391c44%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22439%22%2C%22height%22%3A%2256%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-         <p>Жоғарыда келтірілген мысалда біз екі айнымалы san1, san2 және сәйкесінше 5, 2.0 мәндерін құрдық.
-           Біз, сондай-ақ, белгілі бір айнымалының қай классқа жататынын білу үшін type() функциясын қолдандық.</p>
-          <h2>Python-дағы жолдық деректер типі (string) </h2>
-<p> Жол - бұл бір немесе екі тырнақшамен ұсынылған таңбалар жиынтығы.<p/>
-          <img alt="" height="137" data-cke-saved-name="zhol2.png" name="zhol2.png" data-cke-saved-src="https://ucarecdn.com/271552ad-2444-43b0-a871-dc751b6cce42/" src="https://ucarecdn.com/271552ad-2444-43b0-a871-dc751b6cce42/" width="513" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F271552ad-2444-43b0-a871-dc751b6cce42%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22513%22%2C%22height%22%3A%22137%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p>Тексеру</p>
-          <img alt="" height="77" data-cke-saved-name="zhol1.png" name="zhol1.png" data-cke-saved-src="https://ucarecdn.com/2eab8187-644a-47db-b742-2e02d7e1cf5e/" src="https://ucarecdn.com/2eab8187-644a-47db-b742-2e02d7e1cf5e/" width="338" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F2eab8187-644a-47db-b742-2e02d7e1cf5e%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22338%22%2C%22height%22%3A%2277%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p> Тырнақша ішіндегі сөздердің бірінші жолынан бастап соңғы
-жолына дейін немесе әр символын [] [:] таңбаларын пайдаланып
-қиып алып, қосымша жолдар жасауға болады. Жолдар үшін қосу (+) операторы екі жолды қосады, жұлдызша (*) жолдарды қайталайды.  Cоңғы таңба үшін –1-ден кері
-индекстеуді, яғни тырнақша ішіндегі символдарды кері жазуды
-қолдана аламыз. Мысалы:</p>
-          <img alt="" height="200" data-cke-saved-name="zhol4.png" name="zhol4.png" data-cke-saved-src="https://ucarecdn.com/f042b79f-9269-4f42-b924-7036a2ebcc5e/" src="https://ucarecdn.com/f042b79f-9269-4f42-b924-7036a2ebcc5e/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Ff042b79f-9269-4f42-b924-7036a2ebcc5e%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221080%22%2C%22height%22%3A%22249%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-         <p>Тексеру</p>
-          <img alt="" height="250" name="zhol6.png" src="https://ucarecdn.com/f6873ba7-9d52-46b4-bddf-4315e95fc1f2/" width="591">
- <h2>Python-ғы тізім (list) </h2>
-<p>Python-ғы тізімдер – құрамдас мәліметтердің ең әмбебап
-түрі. Тізім тік жақша арасында үтір мен бөлінген элементтерден
-тұрады ([]). Бір ерекшелігі – бір тізімдегі элементтерде әртүрлі
-мәліметтер типтері болуы мүмкін. Нөлден соңына дейін қию
-операторын ([] және [:]) және индекстерді қолдана отырып,
-тізімде сақталған элементтерге жолдардағы сияқты қол жеткізе
-аламыз. Дәл жолдағы сияқты қосу (+) операторы екі жолды
-бірге қосады, жұлдызша (*) жолдарды қайталайды. <p/>
-
-          <h2>Python-ғы  кортеж (tuple)</h2>
-<p>
-Кортеж – тізімдерге ұқcас мәліметтер типінің бір түрі. Кортеж
-кәдімгі жақша ішінде үтірлермен бөлінген мәндер қатарынан тұрады. Тізімдер мен кортеждердің араcындағы басты айырмашылық – кортеж элементтерін өзгерту мүмкін еместігі. Кортеждерді
-тек оқуға арналған тізім ретінде қолдана аламыз. Тізім мәлімет
-типінің элементтерін өзгерту қажет болмаса, жадтағы бос орынды
-үнемдеу үшін бірден осы кортежді пайдаланып кетуге болады.
-Кортежге тік жақша емес, жай жақша тән.  <p/>
-          <h2>Python-ғы  сөздіктер  (dictionarу)</h2>
-<p>
-Python-дағы сөздіктер – кілт пен ашылатын сұрыпталмаған
-элементтер жиынтығы. Сөздіктің әр кілті белгілі бір мәнге сәйкес келеді.
-Кілт кез-келген өзгермейтін деректер болуы мүмкін (сан, жол, кортеж), ал мәні кез-келген мәліметтер типі болуы мүмкін. Кілт және оның мәні {} осындай жақша ішіне жазылады. <p/>
-          <h2>Python-ғы логикалық тип (boolean) </h2>
-<p>
-Python-да қарапайым логикалық операторлар бар. Олар:</p>
-    <p>=,  !=,  <,  >,  <=,  >=</p>
-<p>Сонымен қатар күрделі логикалық өрнектерді құруға
-болатын операторлар:</p>
-    <p>and, or, not (және, немесе, емес)</p>
-<p>not операторынан басқа барлық логикалық операторлар
-екілік болып табылады. Бұл not операторынан басқа операторлардың сол және оң жағында өрнектер болуы керек дегенді
-білдіреді.
-Логикалық операторларды қолдану арқылы бұл өрнектер
-бір-бірі мен салыстырылады.
-Логикалық операциялардың нәтижелері логикалық мәліметтер типіне ие.<p/>
-
-
-
-      </div>
-
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:10px;">
+    <li>Мәліметтер типі деген ұғымды түсіну;</li>
+    <li>Python-дағы негізгі кіріктірілген мәліметтер типтерін ажырата білу;</li>
+    <li><code class="language-python">type()</code> функциясын қолданып,
+        айнымалы типін анықтай алу;</li>
+    <li>Сандық, жолдық, тізім, кортеж, сөздік және логикалық типтермен
+        қарапайым амалдар орындау;</li>
+    <li>Mini-Quiz арқылы білімін тексеру.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="35">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <!-- 2.1 Жалпы түсінік -->
+  <h3 style="margin-top:14px;">Мәліметтер типі деген не?</h3>
+  <p>
+    Мәліметтер типі – айнымалы қандай мәндерді қабылдай алатынын және
+    оларға қандай амалдар қолдануға болатынын сипаттайды. Яғни,
+    <b>тип</b> – шаманың «табиғаты» туралы ақпарат.
+  </p>
+  <p>
+    Python тілінде көптеген мәліметтер типтері бар, бірақ мектеп
+    деңгейінде біз негізінен мына кіріктірілген типтермен жұмыс жасаймыз:
+  </p>
 
+  <ul>
+    <li><code class="language-python">int</code> – бүтін сандар;</li>
+    <li><code class="language-python">float</code> – нақты сандар
+        (жылжымалы нүктелі);</li>
+    <li><code class="language-python">str</code> – жолдық деректер
+        (мәтін);</li>
+    <li><code class="language-python">list</code> – тізім;</li>
+    <li><code class="language-python">tuple</code> – кортеж;</li>
+    <li><code class="language-python">dict</code> – сөздік (кілт–мән жұптары);</li>
+    <li><code class="language-python">bool</code> – логикалық мәндер
+        (<code class="language-python">True</code>, <code class="language-python">False</code>).</li>
+  </ul>
+
+  <!-- 2.2 type() функциясы -->
+  <h3 style="margin-top:18px;">type() функциясы</h3>
+  <p>
+    Айнымалы немесе тұрақтының қай типке жататынын білу үшін
+    <code class="language-python">type()</code> функциясын қолданамыз.
+  </p>
+
+  <pre><code class="language-python">san = 5
+print(type(san))   # &lt;class 'int'&gt;
+
+name = "Aigerim"
+print(type(name))  # &lt;class 'str'&gt;</code></pre>
+
+  <p>
+    Кез келген мәнді <code class="language-python">type()</code> ішіне беруге
+    болады: сан, жол, тізім, т.б.
+  </p>
+
+  <!-- 2.3 Сандық типтер -->
+  <h3 style="margin-top:18px;">Python-дағы сандық деректер типі</h3>
+  <p>Python-да сандық деректердің негізгі екі типі бар:</p>
+  <ul>
+    <li><code class="language-python">int</code> – бүтін сандар
+        (<code class="language-python">-3</code>, <code>0</code>,
+        <code>17</code>);</li>
+    <li><code class="language-python">float</code> – нақты сандар,
+        яғни үтірден кейінгі бөлігі бар сандар
+        (<code class="language-python">-0.2</code>,
+        <code>3.1415</code>, <code>2.0</code> т.б.).</li>
+  </ul>
+
+  <p>Мысал:</p>
+  <pre><code class="language-python">san1 = 5        # int
+san2 = 2.0      # float
+
+print(san1, type(san1))
+print(san2, type(san2))
+
+# Арифметикалық амалдар
+print(san1 + san2)
+print(san1 * san2)</code></pre>
+
+  <!-- 2.4 Жолдық тип -->
+  <h3 style="margin-top:18px;">Python-дағы жолдық деректер типі (string)</h3>
+  <p>
+    <b>Жол</b> – бұл бір немесе екі тырнақша ішінде жазылған таңбалар
+    жиынтығы.
+  </p>
+
+  <pre><code class="language-python">text1 = "Python"
+text2 = 'Hello, world'
+
+print(text1)
+print(text2)</code></pre>
+
+  <p>
+    Жол элементтеріне индекс арқылы қол жеткіземіз (0-ден бастап),
+    тілімдермен бөліп аламыз және операциялар қолдана аламыз:
+  </p>
+
+  <pre><code class="language-python">text = "Python"
+
+print(text[0])     # 'P'   – бірінші символ
+print(text[-1])    # 'n'   – соңғы символ
+print(text[1:4])   # 'yth' – 1-ден 3-ке дейінгі символдар
+
+print(text + " тілi")   # жолдарды қосу
+print(text * 3)         # қайталау
+print(text[::-1])       # кері жазу</code></pre>
+
+  <!-- 2.5 Тізім -->
+  <h3 style="margin-top:18px;">Python-дағы тізім (list)</h3>
+  <p>
+    <code class="language-python">list</code> – құрамдас мәліметтердің ең
+    әмбебап түрі. Тізім элементтері тік жақша ішінде
+    үтірмен бөлініп жазылады: <code class="language-python">[ ]</code>.
+  </p>
+
+  <pre><code class="language-python">numbers = [1, 2, 3, 4]
+mix = [1, "Python", 3.14, True]
+
+print(numbers[0])      # 1
+print(mix[1])          # "Python"
+
+numbers[0] = 10        # тізім элементін өзгертуге болады
+print(numbers)</code></pre>
+
+  <!-- 2.6 Кортеж -->
+  <h3 style="margin-top:18px;">Python-дағы кортеж (tuple)</h3>
+  <p>
+    <code class="language-python">tuple</code> – тізімге ұқсайды, бірақ
+    <b>элементтері өзгермейді</b>. Кәдімгі жақша қолданылады:
+    <code class="language-python">( )</code>.
+  </p>
+
+  <pre><code class="language-python">coords = (10, 20)
+print(coords[0])   # 10
+
+# coords[0] = 30   # ҚАТЕ! Кортеж элементін өзгертуге болмайды</code></pre>
+
+  <p>
+    Егер тізімдегі мәндер өзгермеуі керек болса (мысалы, апта күндері),
+    онда кортеж қолдану ыңғайлы және жадты тиімді пайдаланады.
+  </p>
+
+  <!-- 2.7 Сөздік -->
+  <h3 style="margin-top:18px;">Python-дағы сөздік (dict)</h3>
+  <p>
+    <code class="language-python">dict</code> – кілт–мән (key–value) жұптарынан
+    тұратын құрылым. Кілт арқылы мәнді оқуға болады.
+  </p>
+
+  <pre><code class="language-python">student = {"name": "Aigerim", "age": 15, "grade": 9}
+
+print(student["name"])     # "Aigerim"
+
+student["grade"] = 10      # мәнді өзгерту
+print(student)</code></pre>
+
+  <p>
+    Сөздіктер <code class="language-python">{ }</code> фигуралық жақшасының ішінде
+    кілт пен мәнді <code class="language-python">:</code> арқылы бөліп жазады.
+  </p>
+
+  <!-- 2.8 Логикалық тип -->
+  <h3 style="margin-top:18px;">Python-дағы логикалық тип (boolean)</h3>
+  <p>
+    Логикалық тип екі ғана мән қабылдайды:
+    <code class="language-python">True</code> немесе
+    <code class="language-python">False</code>.
+  </p>
+
+  <p>Негізгі салыстыру операторлары:</p>
+  <p>
+    <code class="language-python">==</code>,
+    <code class="language-python">!=</code>,
+    <code class="language-python">&lt;</code>,
+    <code class="language-python">&gt;</code>,
+    <code class="language-python">&lt;=</code>,
+    <code class="language-python">&gt;=</code>
+  </p>
+
+  <p>Логикалық операторлар:</p>
+  <p>
+    <code class="language-python">and</code>,
+    <code class="language-python">or</code>,
+    <code class="language-python">not</code>
+  </p>
+
+  <pre><code class="language-python">a = 5
+b = 3
+
+print(a > b)              # True
+print(a == b)             # False
+print(a > 0 and b > 0)    # True
+print(not (a > b))        # False</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="25">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Типті анықтау</h3>
+  <p>Төмендегі айнымалылардың типін дәптерге жаз және Python-да тексер:</p>
+
+  <pre><code class="language-python">a = 17
+b = 3.5
+c = "Python"
+d = [1, 2, 3]
+e = (4, 5, 6)
+f = {"language": "Python", "level": "beginner"}
+g = True</code></pre>
+
+  <p>Әр айнымалыға <code class="language-python">type()</code> қолдан:</p>
+  <pre><code class="language-python">print(type(a))
+print(type(b))
+# ... т.с.с.</code></pre>
+
+  <h3>Тапсырма 2 · Өз мысалың</h3>
+  <ul>
+    <li>Сандық типтерге (int, float) кем дегенде 2 мысал ойлап тап;</li>
+    <li>Жолдық типке 2 түрлі жол жаз;</li>
+    <li>Тізімге өзіңнің 3 сүйікті пәніңді енгіз;</li>
+    <li>Кортежге сыныптағы парта санын, қатар санын жаз;</li>
+    <li>Сөздікке өзің туралы шағын ақпарат енгіз
+        (<code class="language-python">name</code>, <code>age</code>, <code>grade</code>);</li>
+    <li>2–3 логикалық өрнек құрып, нәтижесін шығар.</li>
+  </ul>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. MINI-QUIZ (ТЕСТ ТҮРІНДЕ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="20">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тестті белгілеу арқылы орында. Егер base.html файлыңда
+    интерактивті quiz скрипті қосылған болса, жауаптарың автоматты
+    тексеріледі.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Мәліметтер типі деген не?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Айнымалының атауы
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Айнымалы қандай мәндерді қабылдайтынын
+        және қандай амалдар қолданылатынын сипаттау
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Бағдарламаның орындалу уақыты
+      </label>
     </div>
 
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Қайсысы сандық деректер типі <u>емес</u>?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code class="language-python">int</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code class="language-python">float</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code class="language-python">str</code>
+      </label>
+    </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>3) Айнымалы типін анықтайтын функция қайсысы?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code class="language-python">print()</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code class="language-python">type()</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code class="language-python">input()</code>
+      </label>
+    </div>
 
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="d">
+      <p><b>4) Қай жазба тізімді (list) көрсетеді?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) <code class="language-python">"Python"</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) <code class="language-python">(1, 2, 3)</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) <code class="language-python">{"a": 1, "b": 2}</code>
+      </label>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="d">
+        в) <code class="language-python">[10, 20, 30]</code>
+      </label>
+    </div>
 
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>5) Қай типтің элементін өзгертуге болмайды?</b></p>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) <code class="language-python">tuple</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) <code class="language-python">list</code>
+      </label>
 
-</div>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) <code class="language-python">dict</code>
+      </label>
+    </div>
 
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>6) Қай өрнектің нәтижесі логикалық тип болады?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) <code class="language-python">5 + 3</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) <code class="language-python">"Python" + "3"</code>
+      </label>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) <code class="language-python">5 &gt; 3</code>
+      </label>
+    </div>
+
+    <button type="button" id="checkQuiz" class="quiz-check-btn">
+      Жауаптарды тексеру
+    </button>
+    <p id="quizResult" class="quiz-result"></p>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. ҚОРЫТЫНДЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Сабақты қорытындылау</h2>
+    <button class="btn-done" data-block="homework" data-xp="10">
+      ⬜ Орындалды (Қорытынды)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Не үйрендің?</h3>
+  <ul>
+    <li>Мәліметтер типі не екенін және не үшін қажет екенін;</li>
+    <li>Python-дағы негізгі типтерді:
+        <code class="language-python">int</code>,
+        <code class="language-python">float</code>,
+        <code class="language-python">str</code>,
+        <code class="language-python">list</code>,
+        <code class="language-python">tuple</code>,
+        <code class="language-python">dict</code>,
+        <code class="language-python">bool</code>;</li>
+    <li><code class="language-python">type()</code> функциясын қолдануды;</li>
+    <li>Әр типпен қарапайым амалдар орындауды.</li>
+  </ul>
+
+  <h3>Үйге тапсырма</h3>
+  <ul>
+    <li>Әр мәліметтер типіне кем дегенде бір мысал ойлап тап
+        және Python-да орындап көр;</li>
+    <li>Mini-Quiz сұрақтарына қайта жауап беріп,
+        неге сол нұсқаны таңдағаныңа түсініктеме жаз;</li>
+    <li>Онлайн компиляторда (OnlineGDB, Replit) немесе
+        орнатылған IDE-де кішкентай тәжірибелер жасап көр.</li>
+  </ul>
+</section>
+
+{% endblock %}

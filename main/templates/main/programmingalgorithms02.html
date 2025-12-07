@@ -1,313 +1,496 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Кірістірілген шарттар{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Кірістірілген шарттар (nested if)</h1>
+<p class="subtitle">
+  Бұл сабақта шарт ішінде тағы бір шарт жазуды, яғни <b>кірістірілген if</b> конструкциясын
+  қарастырамыз. Осындай құрылым күрделірек логиканы жазуға көмектеседі.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақты толық орындасаң, осы тақырып бойынша <b>логикалық ойлау</b> дағдың жақсы қалыптасады.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
-
-
-    <title>Кірістірілген шарттарды программалау</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>Кірістірілген шарттарды программалау</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-                    <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: Python (пайтон) программалау тіліндегі кірістірілген шарттарды қолдану</h2>
-
-<h2>Кірістірілген шарт</h2>
-          <font _mstmutation="1" _msttexthash="10493730" _msthash="249">Python-да <code>if...else</code> операторының үш түрі бар</font>
-          <ol>
-	<li><code>if</code> құрылымы</li>
-	<li><code>if...else</code> құрылымы</li>
-	<li><code>if...elif...else</code> құрылымы</li>
-</ol>
-
-<h2 id="if">1. Python тіліндегі if операторы</h2>
-
-<p>Python тіліндегі <code>if</code>  операторының синтаксисі келесідей:</p>
-<pre style="max-height: 600px;"><code class="python hljs"><span class="hljs-keyword">if</span> шарт:
-    <span class="hljs-comment"># if операторының негізгі бөлігі</span></code></pre>
-
-<p> <code>if</code>  операторы  <code>шартқа</code> тәуелді.</p>
-
-<ol>
-	<li>Егер <code>шарт</code>  <code>Ақиқат</code> болса,онда  <code>if</code> денесінің ішіндегі код оқылады.</li>
-	<li>Егер  <code>шарт</code> <code>Жалған</code> болса, онда  <code>if</code> денесінің ішіндегі код өткізіліп жіберіледі.</li>
-</ol>
-
-<hr>
-<h3 id="example-if"> 1-Мысал: Python тіліндегі if операторы</h3>
-          <img alt="" height="174" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/eade16c8-0011-429f-bcf9-75b618d89a2c/" src="https://ucarecdn.com/eade16c8-0011-429f-bcf9-75b618d89a2c/" width="468" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Feade16c8-0011-429f-bcf9-75b618d89a2c%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22468%22%2C%22height%22%3A%22174%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p><strong>Output</strong></p>
-
-<pre><samp><img alt="" height="69" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/a8af8327-c13a-45be-ab96-5965e376885f/" src="https://ucarecdn.com/a8af8327-c13a-45be-ab96-5965e376885f/" width="368" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fa8af8327-c13a-45be-ab96-5965e376885f%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22368%22%2C%22height%22%3A%2269%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element"></samp></pre>
-
-<p>Жоғарыдағы мысалда біз san деп аталатын айнымалы құрдық. Тестілеу шарттарына назар аударыңыз,
-
-San > 0, бұл жерде сан 0-ден үлкен болғандықтан, Шартқа True мәні беріледі.</p>
-
-<hr>
-<h2 id="if-else">2. Python тіліндегі if...else операторы</h2>
-
-<p> <code>if</code> операторында қосымша  <code>else</code>  ұсынылуы мүмкін.</p>
-
-<p> <code>if...else</code> операторының  синтаксисі келесідей: </p>
-
-<pre style="max-height: 600px;"><code class="python hljs"><span class="hljs-keyword">if</span> шарт:
-    <span class="hljs-comment"># шарт ақиқат болғандағы код блогы</span>
-
-<span class="hljs-keyword">else</span>:
-    <span class="hljs-comment"># шарт жалған болғандағы код блогы</span></code></pre>
-
-<p>The <code>if...else</code> statement evaluates the given <code>condition</code>:</p>
-
-<p><strong>Егер шарт</strong> <code><strong>Ақиқат</strong></code><strong> мәнін қабылдаса,</strong></p>
-
-<ul>
-	<li><code>if</code>  ішіндегі код орындалады.</li>
-	<li> <code>else</code> ішіндегі код өткізіліп жіберіледі.</li>
-</ul>
-
-<p><strong>Егер шарт</strong> <code><strong>Жалған</strong></code><strong> мәнін қабылдаса,</strong></p>
-
-<ul>
-	<li><code>else</code> ішіндегі код орындалады,</li>
-	<li><code>if</code> ішіндегі код өткізіліп жіберіледі.</li>
-</ul>
-<hr>
-<h3 id="example-else">2-мысал. Python тіліндегі if...else операторы</h3>
-          <img alt="" height="336" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/ccef5d6c-32c6-42e3-9e3f-236968910dcb/" src="https://ucarecdn.com/ccef5d6c-32c6-42e3-9e3f-236968910dcb/" width="758" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fccef5d6c-32c6-42e3-9e3f-236968910dcb%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22758%22%2C%22height%22%3A%22336%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p><strong>Output</strong></p>
-
-<pre><samp><img alt="" height="88" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/83638c9d-d44d-4f53-b7ae-c09d382a9e23/" src="https://ucarecdn.com/83638c9d-d44d-4f53-b7ae-c09d382a9e23/" width="515" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F83638c9d-d44d-4f53-b7ae-c09d382a9e23%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22515%22%2C%22height%22%3A%2288%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element"></samp></pre>
-
-<p>Жоғарыдағы мысалда біз san деп аталатын айнымалы құрдық. Тестілеу шарттарына назар аударыңыз: San > 0</p>
-<p>San айнымалысының мәні 10 болғандықтан, шарт Ақиқат ретінде бағаланады. Демек, код if денесінде орындалады.</p>
-
-<p>Егер айнымалының мәнін теріс бүтін санға өзгертсек. Айталық, san = -5. Енді бағдарламаны іске қоссақ, нәтиже  келесідей болады:
-    Сан теріс.
-Бұл оператор әрқашан орындалады.
-Мұнда шартқа Жалған мәні беріледі. Демек, код else денесінде орындалады.</p>
-
-<h2 id="elif">3. Python  тіліндегі if...elif...else операторлары</h2>
-
-<p> <code>if...else</code> операторы  екі балама нұсқаның біреуі арқылы код блогын орындау үшін қолданылады.</p>
-
-<p>Алайда, егер екіден көп балама арасында таңдау жасау керек болса, онда біз  <code>if...elif...else</code> операторын қолданамыз</p>
-
-<p><code>if...elif...else</code> операторының синтаксисі келесідей:</p>
-
-<pre style="max-height: 600px;"><code class="python hljs"><span class="hljs-keyword">if</span> 1-шарт:
-    <span class="hljs-comment"># 1-код блогы</span>
-
-<span class="hljs-keyword">elif</span> 2-шарт:
-    <span class="hljs-comment"># 2-код блогы</span>
-
-<span class="hljs-keyword">else</span>:
-    <span class="hljs-comment"># 3-код блогы</span></code></pre>
-
-<p>Бұл жерде,</p>
-
-<ol>
-	<li>Егер<strong>1-шарт</strong> <code>Ақиқат</code> мәнін қабылдаса, <strong>1-код блогы</strong> орындалады.</li>
-	<li> Егер <strong>1-шарт</strong> <code>Жалған</code> мәнін қабылдаса, онда <strong>2-шарт</strong> есептеледі.
-		<ol>
-			<li>Егер <strong>2-шарт </strong> <code>Ақиқат</code> болса, <strong>2-код блогы</strong> орындалады.</li>
-			<li>Егер <strong>2-шарт</strong> <code>Жалған</code> болса, <strong>3-код блогы</strong> орындалады.</li>
-		</ol>
-	</li>
-</ol>
-<hr>
-<h3 id="example-elif"> 3-мысал: Python тіліндегі if...elif...else операторы</h3>
-<img alt="" height="300" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/f7dc040f-bb20-46c5-85aa-613df1fa0bbf/" src="https://ucarecdn.com/f7dc040f-bb20-46c5-85aa-613df1fa0bbf/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Ff7dc040f-bb20-46c5-85aa-613df1fa0bbf%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221009%22%2C%22height%22%3A%22400%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p><strong>Output</strong></p>
-
-<pre><samp><img alt="" height="66" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/d1b24df5-ad9a-44c1-b488-e982be937bfd/" src="https://ucarecdn.com/d1b24df5-ad9a-44c1-b488-e982be937bfd/" width="616" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fd1b24df5-ad9a-44c1-b488-e982be937bfd%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22616%22%2C%22height%22%3A%2266%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element"></samp></pre>
-
-<p>Жоғарыда келтірілген мысалда біз <var>san</var>  деп аталатын және  <strong>0</strong> мәніне ие айнымалы құрдық. Мұнда бізде екі шартты өрнек бар:
-
-Мұнда шарттың екеуі де <code>Жалған</code> деп бағаланады. Демек, <code>else</code> денесінің ішінде оператор орындалады.</p>
-<hr>
-<h2 id="nested">Python тіліндегі кірістірілген if операторлары</h2>
-
-<p>Біз сондай-ақ, <code>if</code> операторының ішінде <code>if</code> операторын пайдалана аламыз. Бұл  <strong> кірістірілген if</strong> операторы ретінде белгілі.</p>
-
-<p> <strong>Кірістірілген if</strong> операторының синтаксисі:</p>
-
-<pre style="max-height: 600px;"><code class="python hljs"><span class="hljs-comment"># сыртқы оператор if</span>
-<span class="hljs-keyword">if</span> 1-шарт:
-    <span class="hljs-comment"># оператор(лар)</span>
-
-    <span class="hljs-comment"># ішкі оператор if</span>
-    <span class="hljs-keyword">if</span> 2-шарт:
-        <span class="hljs-comment"># оператор(лар)</span></code></pre>
-
-<div class="note-tip">
-	<p><strong>Ескертулер</strong>:</p>
-
-	<ul>
-		<li> <code>else</code> және <code>elif</code> операторларын  ішкі <code>if</code> операторына қоса аламыз.</li>
-		<li> ішкі  <code>if</code> операторын сыртқы <code>else</code> немесе <code>elif</code> операторларының ішіне енгізуге болады.</li>
-		<li> <code>if</code> операторларының бірнеше деңгейін енгізе аламыз.</li>
-	</ul>
-</div>
-
-<hr>
-<h3 id="example-elif">4-мысал: Python тіліндегі кірістірілген if операторы</h3>
-<img alt="" height="408" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/abf66c3e-5f51-4f8f-9245-2a7dd64f24ef/" src="https://ucarecdn.com/abf66c3e-5f51-4f8f-9245-2a7dd64f24ef/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fabf66c3e-5f51-4f8f-9245-2a7dd64f24ef%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221130%22%2C%22height%22%3A%22508%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p>Жоғарыда келтірілген мысалда берілген санның оң, теріс немесе 0 екенін тексеру үшін кірістірілген if операторын қолдандық.</p>
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
   </div>
 
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:12px;">
+    <li><code>if</code> блогының құрылымын қайталау;</li>
+    <li><b>Кірістірілген шарт</b> ұғымын түсіну;</li>
+    <li>Кірістірілген шартпен программа құру (баға қою, температура, үшбұрыш түрі т.б.);</li>
+    <li>Mini-quiz арқылы білімді тексеру.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:16px;">Жай шартты операторды еске түсіру</h3>
+  <p>Қарапайым <code>if–elif–else</code> конструкциясы былай жазылады:</p>
+
+  <pre><code class="language-python">x = int(input("Сан енгіз: "))
+
+if x &gt; 0:
+    print("Оң сан")
+elif x &lt; 0:
+    print("Теріс сан")
+else:
+    print("Нөл")</code></pre>
+
+  <p>
+    Мұнда әрбір <code>if</code>, <code>elif</code>, <code>else</code> блогының ішінде
+    тек бір деңгейдегі командалар орындалады.
+  </p>
+
+  <h3 style="margin-top:18px;">Кірістірілген шарт деген не?</h3>
+  <p>
+    <b>Кірістірілген шарт (nested if)</b> — бір <code>if</code> блогының ішіне басқа
+    <code>if</code> немесе <code>if–elif–else</code> жазу.
+    Яғни «шарттың ішінде тағы бір шарт» болады.
+  </p>
+
+  <p>Жалпы түрі:</p>
+  <pre><code class="language-python">if шарт1:
+    # 1-деңгей
+    if шарт2:
+        # 2-деңгей
+        ...
+    else:
+        ...
+else:
+    ...</code></pre>
+
+  <p>
+    Мұндай құрылым мынадай ситуацияларда пайдалы:
+  </p>
+  <ul>
+    <li>алдымен үлкен категорияны анықтау (мысалы, «емтихан тапсырды ма?»);</li>
+    <li>содан кейін ішкі категорияға бөлу (баға қою, қосымша хабарлама т.б.).</li>
+  </ul>
+
+  <h3 style="margin-top:18px;">· Емтихан нәтижесі</h3>
+  <p>
+    Оқушының алған ұпайына байланысты алдымен «өту/өтпеуін», содан кейін
+    әртүрлі баға деңгейін шығарайық:
+  </p>
+
+  <pre><code class="language-python">score = int(input("Ұпайыңды енгіз (0–100): "))
+
+if score &gt;= 50:
+    print("Емтиханнан өттің!")
+
+    if score &gt;= 90:
+        print("Баға: 5 (өте жақсы)")
+    elif score &gt;= 75:
+        print("Баға: 4 (жақсы)")
+    else:
+        print("Баға: 3 (қанағаттанарлық)")
+else:
+    print("Өкінішті, емтиханнан өтпедің.")</code></pre>
+
+  <p>
+    Мұнда сыртқы <code>if score &gt;= 50</code> шартынан кейін ғана ішкі
+    <code>if–elif–else</code> жұмыс істейді.
+  </p>
+
+  <h3 style="margin-top:18px;"> · Температура және киім</h3>
+  <p>Сыртқы шарт – «жаңбыр бар ма?», ішкі шарт – «температура қандай?»:</p>
+
+  <pre><code class="language-python">rain = input("Жаңбыр жауып тұр ма? (иә/жоқ): ")
+t = int(input("Температура: "))
+
+if rain == "иә":
+    print("Қолшатыр ал!")
+
+    if t &lt; 5:
+        print("Қалың күртеше ки.")
+    else:
+        print("Жеңіл күртеше жеткілікті.")
+else:
+    print("Жаңбыр жоқ.")
+
+    if t &gt;= 25:
+        print("Өте жылы, жеңіл киін.")
+    else:
+        print("Қалыпты ауа райы.")</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <!-- 1-мысал -->
+  <div class="task-card">
+    <h3 style="margin-top:14px;">1-мысал · Үшбұрыш түрін анықтау</h3>
+    <p>
+      Алдымен үшбұрыш <b>құрыла ма</b>, содан кейін оның түрін (теңқабырғалы,
+      теңбүйірлі, әрқабырғалы) анықтаймыз.
+    </p>
+
+    <pre><code class="language-python">a = int(input("a қабырғасы: "))
+b = int(input("b қабырғасы: "))
+c = int(input("c қабырғасы: "))
+
+# Алдымен үшбұрыш құрыла ма?
+if a + b &gt; c and a + c &gt; b and b + c &gt; a:
+    print("Үшбұрыш құрылады.")
+
+    # Ішкі шарттар: үшбұрыш түрі
+    if a == b == c:
+        print("Теңқабырғалы үшбұрыш.")
+    elif a == b or a == c or b == c:
+        print("Теңбүйірлі үшбұрыш.")
+    else:
+        print("Әрқабырғалы үшбұрыш.")
+else:
+    print("Үшбұрыш құрылмайды.")</code></pre>
+  </div>
+
+  <!-- 2-мысал -->
+  <div class="task-card">
+    <h3 style="margin-top:18px;">2-мысал · Логин және роль</h3>
+    <p>
+      Пайдаланушының логині дұрыс болса, содан кейін оның ролін тексереміз.
+    </p>
+
+    <pre><code class="language-python">username = input("Логин: ")
+role = input("Рөлің (admin/user): ")
+
+if username == "student01":
+    print("Логин дұрыс.")
+
+    if role == "admin":
+        print("Қош келдің, админ!")
+    else:
+        print("Қарапайым қолданушы ретінде кірдің.")
+else:
+    print("Логин қате.")</code></pre>
+  </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <div class="task-card">
+    <h3 style="margin-top:14px;">Тапсырма 1 · Баға және пікір</h3>
+    <p>
+      Пайдаланушыдан 0–100 аралығында ұпай енгізуді сұра.
+      Егер ұпай &gt;= 50 болса – «емтиханнан өттің» деп жаз,
+      содан кейін кірістірілген шартпен қосымша пікір шығар:
+    </p>
+    <ul>
+      <li>90–100 – «өте жақсы жұмыс»;</li>
+      <li>75–89 – «жақсы нәтиже»;</li>
+      <li>50–74 – «өту балын алдың, бірақ тағы қайталау керек».</li>
+    </ul>
+
+    <table class="io-table">
+      <thead>
+        <tr>
+          <th>Кіріс (ұпай)</th>
+          <th>Шарт</th>
+          <th>Шығыс (хабарлама)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>95</code></td>
+          <td><code>score &gt;= 90</code></td>
+          <td><code>"Емтиханнан өттің! Өте жақсы жұмыс!"</code></td>
+        </tr>
+        <tr>
+          <td><code>80</code></td>
+          <td><code>75 &lt;= score &lt; 90</code></td>
+          <td><code>"Емтиханнан өттің! Жақсы нәтиже."</code></td>
+        </tr>
+        <tr>
+          <td><code>60</code></td>
+          <td><code>50 &lt;= score &lt; 75</code></td>
+          <td><code>"Емтиханнан өттің! Тағы қайталау керек."</code></td>
+        </tr>
+        <tr>
+          <td><code>40</code></td>
+          <td><code>score &lt; 50</code></td>
+          <td><code>"Өтпедің."</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-card">
+    <h3 style="margin-top:18px;">Тапсырма 2 · Жыл мезгілі және ауа райы</h3>
+    <p>
+      Пайдаланушыдан жыл мезгілі (<code>"қыс"</code>, <code>"көктем"</code>, <code>"жаз"</code>, <code>"күз"</code>)
+      және температура мәнін сұрайтын программа жаз.
+    </p>
+    <p>Сыртқы шарт – мезгіл, ішкі шарт – температура диапазоны.</p>
+
+    <table class="io-table">
+      <thead>
+        <tr>
+          <th>Кіріс</th>
+          <th>Шарт</th>
+          <th>Шығыс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>мезгіл = "қыс", t = -10</code></td>
+          <td><code>мезгіл == "қыс", t &lt; 0</code></td>
+          <td><code>"Аязды қыс."</code></td>
+        </tr>
+        <tr>
+          <td><code>мезгіл = "жаз", t = 30</code></td>
+          <td><code>мезгіл == "жаз", t &gt;= 25</code></td>
+          <td><code>"Ыстық жаз."</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="task-card">
+    <h3 style="margin-top:18px;">Тапсырма 3 · Логин, пароль және доступ</h3>
+    <p>
+      Пайдаланушыдан логин және пароль сұрайтын программа жаз.
+      Егер екеуі де дұрыс болса, ішкі шартпен оның ролін (admin/user) тексер.
+    </p>
+
+    <table class="io-table">
+      <thead>
+        <tr>
+          <th>Кіріс</th>
+          <th>Шарттар</th>
+          <th>Шығыс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>login = "user", pass = "1234", role = "user"</code></td>
+          <td><code>login=="user" және pass=="1234"</code></td>
+          <td><code>"Кіру сәтті. Қарапайым қолданушы."</code></td>
+        </tr>
+        <tr>
+          <td><code>login = "admin", pass = "admin", role = "admin"</code></td>
+          <td><code>login=="admin" және pass=="admin"</code></td>
+          <td><code>"Кіру сәтті. Админ панеліне доступ."</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="25">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі 6 сұраққа жауап бер. Содан кейін <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Кірістірілген шарт деген не?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Бір программаның ішінде екі түрлі функция жазу
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Бір <code>if</code> блогының ішінде тағы бір <code>if</code> (немесе <code>if–elif–else</code>) жазу
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Бір қатарда бірнеше шартты қатар жазу
+      </label>
     </div>
 
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Төмендегі кодта ішкі шарт қай жерде орналасқан?</b></p>
 
+      <pre><code class="language-python">if x &gt;= 0:
+    print("оң немесе нөл")
 
+    if x % 2 == 0:
+        print("жұп")
+    else:
+        print("тақ")</code></pre>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) Сыртқы <code>if x &gt;= 0</code> жолында
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>print("оң немесе нөл")</code> қатарында
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>if x % 2 == 0:</code> және оған байланысты блокта
+      </label>
+    </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Кірістірілген шартты қолданудың басты себебі?</b></p>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) Күрделі логиканы бір үлкен сыртқы шарттан кейін ұсақ бөліктерге бөлу
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) Программаны баяу жұмыс істету үшін
+      </label>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) Кодты оқуға қиындату үшін
+      </label>
+    </div>
 
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) Қай код үлгісі кірістірілген шартты дұрыс көрсетеді?</b></p>
 
-</div>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а)
+        <pre><code class="language-python">if a &gt; 0:
+elif b &gt; 0:
+    print("ok")</code></pre>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә)
+        <pre><code class="language-python">if a &gt; 0:
+    if b &gt; 0:
+        print("a және b оң")</code></pre>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б)
+        <pre><code class="language-python">if a &gt; 0:
+print("оң")</code></pre>
+      </label>
+    </div>
 
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Кірістірілген шарттарда ең маңыздысы не?</b></p>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) Айнымалы аттарын мүмкіндігінше қысқа жазу
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) Бір жолға барлығын сыйдыру
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Шегіністерді (indentation) дұрыс қою, блоктарды шатастырмау
+      </label>
+    </div>
+
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>6) Кірістірілген шарт қай кезде орындалады?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) Тек сыртқы <code>if</code> шарты <code>True</code> болғанда
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) Әрдайым, сыртқы шартқа қарамастан
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) Тек программа басында
+      </label>
+    </div>
+
+    <button type="button" id="checkQuiz" class="quiz-check-btn">
+      Тексеру
+    </button>
+    <p id="quizResult" class="quiz-result"></p>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. ҚОРЫТЫНДЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="summary">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Сабақты қорытындылау</h2>
+    <button class="btn-done" data-block="summary" data-xp="10">
+      ⬜ Орындалды (Қорытынды)
+    </button>
+  </div>
+
+  <ul style="margin-top:10px;">
+    <li>Кірістірілген шарттың не екенін түсіндім;</li>
+    <li>Сыртқы және ішкі <code>if</code> блоктарын шатастырмай жаза аламын;</li>
+    <li>Ұпай, баға, ауа райы, логин сияқты өмірлік мысалдармен жұмыс істедім;</li>
+    <li>Mini-quiz сұрақтарына жауап бердім.</li>
+  </ul>
+</section>
+
+{% endblock %}

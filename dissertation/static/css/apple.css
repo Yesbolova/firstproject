@@ -1,114 +1,413 @@
-/* -----------------------------------------------------------
-   APPLE DEVELOPER STYLE — CLEAN, MINIMAL, PREMIUM
-   ----------------------------------------------------------- */
+/* =========================================================
+   0. GLOBAL VARIABLES (Apple Premium Theme)
+========================================================= */
+:root {
+    --bg-main: #f5f5f7;
+    --text-main: #1d1d1f;
+    --text-soft: rgba(29,29,31,0.7);
+    --card-bg: #ffffff;
+    --radius-card: 22px;
+    --radius-small: 14px;
+    --shadow-card: 0 12px 32px rgba(0,0,0,0.06);
 
-/* GLOBAL --------------------------------------------------- */
+    --green: #34C759;
+    --green-dark: #1fae45;
+
+    --font-large: 32px;
+    --font-medium: 20px;
+    --font-regular: 16px;
+}
+
+/* =========================================================
+   1. BASE STYLE
+========================================================= */
 body {
-    background-color: #f5f5f7;
-    color: #1d1d1f;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, sans-serif;
     margin: 0;
     padding: 0;
-    transition: background-color .25s ease, color .25s ease;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
 }
 
-/* Dark Mode ------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #1c1c1e;
-        color: #f5f5f7;
-    }
+.container {
+    max-width: 935px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-/* SECTION TITLE ------------------------------------------- */
-.section-title {
-    font-size: 32px;
-    font-weight: 800;
-    margin: 50px 0 30px;
-    text-align: center;
-    letter-spacing: -0.3px;
+img {
+    max-width: 100%;
+    border-radius: 16px;
 }
 
-/* GRID ----------------------------------------------------- */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 28px;
-    padding-bottom: 60px;
+
+
+/* =========================================================
+   2. TOP BAR (Apple Glass)
+========================================================= */
+.topbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: saturate(180%) blur(22px);
+    border-bottom: 1px solid #e0e0e0;
 }
 
-/* CARD ----------------------------------------------------- */
-.card-class {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 28px;
-    min-height: 300px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+.topbar-inner {
     display: flex;
-    flex-direction: column;
-    transition:
-        transform .28s cubic-bezier(.25,.46,.45,.94),
-        box-shadow .28s cubic-bezier(.25,.46,.45,.94),
-        background-color .25s ease;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 0;
 }
 
-@media (prefers-color-scheme: dark) {
-    .card-class {
-        background: #2c2c2e;
-        box-shadow: 0 8px 22px rgba(0,0,0,0.45);
-    }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.card-class:hover {
-    transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-}
-
-/* ICON ----------------------------------------------------- */
-.class-icon {
-    width: 46px;
-    height: 46px;
-    margin-bottom: 18px;
-    color: #0071e3;
-}
-
-@media (prefers-color-scheme: dark) {
-    .class-icon {
-        color: #4da3ff;
-    }
-}
-
-/* TITLE ---------------------------------------------------- */
-.class-title {
-    font-size: 20px;
+.brand-icon {
+    background: var(--green);
+    color: white;
+    padding: 13px 15px;
+    border-radius: 18px;
     font-weight: 700;
+    font-size: 20px;
+}
+
+.brand-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    font-size: 13px;
+    opacity: .65;
+}
+
+.topnav a {
+    margin: 0 12px;
+    color: var(--text-main);
+    font-weight: 500;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.topnav a:hover {
+    color: var(--green);
+}
+
+.xp-panel {
+    background: var(--green);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.page {
+    margin-top: 110px;
+}
+
+
+
+/* =========================================================
+   3. PROGRESS CARD
+========================================================= */
+.progress-card {
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+
+    margin-bottom: 40px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    font-size: var(--font-large);
+    font-weight: 800;
+    margin: 0;
+}
+
+.page-subtitle {
+    opacity: .65;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    padding: 12px 22px;
+    font-weight: 700;
+    border-radius: 18px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: #e6e6e7;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--green);
+    transition: width .35s ease;
+}
+
+.progress-meta {
+    display: flex;
+    justify-content: space-between;
+    opacity: .75;
+}
+
+
+
+/* =========================================================
+   4. SECTION CARD
+========================================================= */
+.card.section {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 35px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-subtitle {
+    opacity: .65;
+}
+
+
+
+/* =========================================================
+   5. BUTTONS
+========================================================= */
+.btn-pill {
+    padding: 12px 20px;
+    border-radius: 40px;
+
+    background: #e7e7ea;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-pill:hover {
+    background: #d9d9dc;
+}
+
+.btn-done.done {
+    background: var(--green);
+    color: white;
+}
+
+
+
+/* =========================================================
+   6. CODE BLOCKS
+========================================================= */
+pre {
+    background: #f0f1f3;
+    padding: 16px;
+    border-radius: 14px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+
+
+/* =========================================================
+   7. METHODS GRID
+========================================================= */
+.methods-premium-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 22px;
+}
+
+.method-premium {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: var(--shadow-card);
+    transition: .2s ease;
+}
+
+.method-premium:hover {
+    transform: translateY(-4px);
+}
+
+.mp-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.mp-tag {
+    background: #e6f7eb;
+    color: var(--green);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.mp-output {
+    background: #f6fff7;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: monospace;
+}
+
+
+
+/* =========================================================
+   8. GAME CARDS
+========================================================= */
+.game-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 35px;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+
+/* Difficulty Icons */
+.game-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+}
+
+.game-easy   { background: #d4f8d4; }
+.game-medium { background: #ffe4b3; }
+.game-hard   { background: #ffd1d1; }
+
+
+
+/* =========================================================
+   9. QUIZ
+========================================================= */
+.quiz-option {
+    width: 100%;
+    padding: 14px 18px;
+
+    background: #f2f2f2;
+    border-radius: 14px;
+    margin-bottom: 10px;
+
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.quiz-option:hover {
+    background: #e8e8e8;
+}
+
+.quiz-option.correct {
+    background: #d8f8d8;
+    border-left: 5px solid var(--green);
+}
+
+.quiz-option.wrong {
+    background: #ffd7d7;
+    border-left: 5px solid #ff4f4f;
+}
+
+
+
+/* =========================================================
+   10. LABORATORY
+========================================================= */
+.text-input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid #dcdcdc;
     margin-bottom: 16px;
 }
 
-/* LIST ----------------------------------------------------- */
-.topic-list {
-    padding-left: 18px;
-    margin: 0;
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.topic-list li {
-    margin-bottom: 8px;
+.game-output {
+    background: #fafafa;
+    padding: 14px;
+    border-radius: 14px;
+    font-family: monospace;
 }
 
-/* LINK ----------------------------------------------------- */
-.topic-list li a {
-    text-decoration: none;
-    font-size: 16px;
-    color: #1d1d1f;
-    transition: opacity .2s ease;
+
+
+/* =========================================================
+   11. FOOTER
+========================================================= */
+.footer {
+    margin-top: 40px;
+    padding: 40px 0;
+    text-align: center;
+    color: #777;
 }
 
-.topic-list li a:hover {
-    opacity: 0.6;
-}
 
-@media (prefers-color-scheme: dark) {
-    .topic-list li a {
-        color: #f5f5f7;
+
+/* =========================================================
+   12. MOBILE ADAPTATION
+========================================================= */
+@media (max-width: 768px) {
+
+    .topnav {
+        display: none;
+    }
+
+    .brand-title {
+        font-size: 16px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .methods-premium-grid {
+        grid-template-columns: 1fr;
     }
 }

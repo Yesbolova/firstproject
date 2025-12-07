@@ -1,648 +1,399 @@
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Тіл синтаксисі — Gamified | Full Apple Mixed</title>
+{% extends "main/base.html" %}
 
-    <!-- SF Pro -->
-    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+{% block title %}Тіл синтаксисі{% endblock %}
 
-<style>
-.quiz-box {
-    background:#fff;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    margin:20px 0;
-}
-.quiz-q {
-    font-weight:600;
-    margin:10px 0;
-}
-.option {
-    margin:6px 0;
-}
-.result {
-    font-weight:700;
-    margin-top:15px;
-}
-.green-btn {
-    background:#34C759;
-    color:#fff;
-    border:none;
-    padding:10px 18px;
-    border-radius:12px;
-    cursor:pointer;
-    margin-top:10px;
-}
-</style>
+{% block content %}
 
-
-<style>
-/* GLOBAL ------------------------------------------------------- */
-body {
-    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    margin: 0; padding: 0; line-height: 1.6;
-}
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding-top: 160px;
-}
-
-}
-
-
-/* TITLE ------------------------------------------------------- */
-.title {
-    font-size: 42px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-.subtitle {
-    font-size: 18px;
-    opacity: .8;
-    margin-bottom: 30px;
-}
-
-/* XP BOX ------------------------------------------------------- */
-.level-box {
-    background: linear-gradient(135deg, #34C759, #00d46a);
-    padding: 22px;
-    border-radius: 22px;
-    color: white;
-    margin-bottom: 35px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.12);
-}
-.level-box h3 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.xp-bar {
-    width: 100%;
-    background: rgba(255,255,255,.35);
-    height: 12px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 12px;
-}
-.xp-inner {
-    height: 100%;
-    width: 0%;
-    background: white;
-    transition: width .4s ease;
-}
-#xpText {
-    margin-top: 8px;
-}
-
-/* GREEN PREMIUM BUTTONS --------------------------------------- */
-.green-btn {
-    background: #34C759;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 12px;
-    transition: .25s;
-}
-.green-btn:hover {
-    background: #2db14f;
-}
-
-/* POP-UP ------------------------------------------------------- */
-.reward-popup {
-    position: fixed;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 24px 28px;
-    border-radius: 22px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
-    transition: top .6s ease;
-    z-index: 2000;
-}
-.reward-popup.show {
-    top: 40px;
-}
-
-/* CARDS -------------------------------------------------------- */
-.glass-card {
-    background: rgba(255,255,255, .6);
-    backdrop-filter: blur(18px);
-    padding: 20px;
-    border-radius: 20px;
-    margin: 25px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,.06);
-}
-
-.image-card img {
-    width: 100%;
-    border-radius: 16px;
-}
-
-/* TABLE -------------------------------------------------------- */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    margin: 18px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,.06);
-}
-.table th {
-    background: #34C759;
-    color: white;
-    padding: 14px;
-    font-size: 18px;
-}
-.table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-/* QUIZ -------------------------------------------------------- */
-.quiz-box {
-    background: white;
-    padding: 22px;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.06);
-    margin-top: 30px;
-}
-
-/* FINAL -------------------------------------------------------- */
-.final-msg {
-    background: linear-gradient(135deg, #34C759, #2db94f);
-    padding: 20px;
-    border-radius: 20px;
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    margin-top: 40px;
-}
-
-</style>
-<style>
-.pretty-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 30px 0;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    font-size: 17px;
-}
-.pretty-table th {
-    background: #34C759;
-    color: white;
-    padding: 14px;
-    text-align: center;
-}
-.pretty-table td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid #efefef;
-    vertical-align: middle;
-}
-.pretty-code {
-    background: #f5f5f7;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    text-align: left;
-}
-.output-box {
-    background: #e8fff0;
-    padding: 10px;
-    border-radius: 10px;
-    font-family: monospace;
-    font-size: 14px;
-}
-</style>
-    <style>
-    .level-box {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 900px;
-
-    z-index: 9999;
-    height: 80px;
-}
-
-}
-    </style>
-</head>
-
-<body>
-
-<!-- POPUP -->
-<div class="reward-popup" id="rewardPopup">
-    <h3 id="rewardTitle">Жетістік!</h3>
-    <p id="rewardText">+20 XP</p>
-    <button onclick="closeReward()" class="green-btn" style="margin-top:10px;">Жабу</button>
-</div>
-
-<div class="container">
-
-    <!-- TITLE -->
-    <h1 class="title">Тіл синтаксисі</h1>
-    <p class="subtitle">Бұл сабақ соңында сен 10 балл жинап, деңгейді толық аяқтайсың.</p>
-
-    <!-- XP BOX -->
-    <div class="level-box">
-        <div id="finalLevel"></div>
-
-        <h3>Сабақ прогресі</h3>
-        <div class="xp-bar"><div class="xp-inner" id="xpInner"></div></div>
-        <p id="xpText">0 / 10 балл</p>
-    </div>
-
-    <!-- SECTION 1 -->
-    <h2>1. Оқу мақсаты</h2>
-    <p>Python тіліндегі сызықтық алгоритмдерді жазуды үйрену.</p>
-
-    <!-- SECTION 2 -->
-    <h2>2. Экрандалған таңбалар</h2>
-
-    <p>
-    <b>Экрандалған таңбалар (escape sequences)</b> — бұл Python мәтінінің ішінде
-    тікелей жазуға болмайтын немесе арнайы мағынасы бар символдарды көрсету үшін
-    қолданылатын <b>арнайы басқарушы комбинациялар</b>.
+<h1>Тіл синтаксисі</h1>
+<p class="subtitle">
+  Бұл сабақта Python тілінің әліпбиін, экрандалған таңбаларды (escape sequences)
+  және синтаксис ережелерін қарастырамыз. Сабақ соңында сен осы тақырып бойынша
+  барлық негізгі ұғымдарды меңгеріп шығасың.
 </p>
 
-<p>
-    Олар әрқашан <b>кері слэштен ( \ )</b> басталады және Python-ға
+<p style="margin-top:8px;color:#4b5563;">
+  Бұл сабақ соңында сен <b>100 XP</b> жинай аласың.
+</p>
+
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
+
+  <ul style="margin-top:12px;">
+    <li>Python тілінің әліпбиін (әріп, сан, арнайы таңбалар) дұрыс қолдануды үйрену;</li>
+    <li>Экрандалған таңбалардың (escape sequences) мағынасын түсіну және қолдану;</li>
+    <li>Python синтаксисінің негізгі ережелерін меңгеру;</li>
+    <li>Шегініс (indentation) неге маңызды екенін білу;</li>
+    <li>Mini-quiz арқылы өз біліміңді тексеру.</li>
+  </ul>
+</section>
+
+<!-- ========================================================= -->
+<!-- 2. ЭКРАНДАЛҒАН ТАҢБАЛАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="escapes">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Экрандалған таңбалар</h2>
+    <button class="btn-done" data-block="escapes" data-xp="25">
+      ⬜ Орындалды (Экранизация)
+    </button>
+  </div>
+
+  <p style="margin-top:12px;">
+    <b>Экрандалған таңбалар (escape sequences)</b> — Python мәтінінің ішінде
+    тікелей жазуға болмайтын немесе арнайы мағынасы бар символдарды көруге
+    мүмкіндік беретін басқарушы комбинациялар.
+  </p>
+
+  <p>
+    Олар әрқашан кері слэштен <code>\</code> басталады және Python-ға:
     «бұл жай символ емес, арнайы әрекет» екенін білдіреді.
-</p>
+  </p>
 
-   <table class="pretty-table">
-    <tr>
-        <th>Таңба</th>
-        <th>Қызметі</th>
-        <th>Мысал</th>
-        <th>Нәтиже</th>
-    </tr>
+  <h3 style="margin-top:16px;">Негізгі экрандалған таңбалар</h3>
 
-    <tr>
-        <td>\\</td>
-        <td>Кері слэш («\»)</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print("C:\\folder")
-</code></pre>
-        </td>
-        <td><div class="output-box">C:\folder</div></td>
-    </tr>
+  <div style="overflow-x:auto;">
+    <table style="border-collapse:collapse;width:100%;margin-top:8px;font-size:15px;">
+      <thead>
+        <tr style="background:#f3f4f6;">
+          <th style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:left;">Таңба</th>
+          <th style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:left;">Қызметі</th>
+          <th style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:left;">Мысал</th>
+          <th style="padding:8px 10px;border-bottom:1px solid #e5e7eb;text-align:left;">Нәтиже</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\\</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Кері слэшті шығару</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print("C:\\folder")</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>C:\folder</code></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\'</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Апостроф (') шығару</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print('It\'s OK')</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>It's OK</code></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\"</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Қос тырнақша (") шығару</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print("He said: \"Hello\"")</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">He said: "Hello"</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\n</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Жаңа жолға көшу</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print("Hello\nWorld")</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Hello<br>World</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\t</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Табуляция (кідіріс)</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print("Name:\tAigerim")</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Name:&nbsp;&nbsp;&nbsp;&nbsp;Aigerim</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\uXXXX</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Юникод (16-бит)</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print("\u2764")</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">❤</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\UXXXXXXXX</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">Юникод (32-бит)</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print("\U0001F600")</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">😀</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;"><code>\xXX</code></td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">16-лық мән (hex)</td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">
+            <pre><code class="language-python">print("\x41")</code></pre>
+          </td>
+          <td style="padding:8px 10px;border-bottom:1px solid #e5e7eb;">A</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <tr>
-        <td>\'</td>
-        <td>Апостроф</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print('It\'s OK')
-</code></pre>
-        </td>
-        <td><div class="output-box">It's OK</div></td>
-    </tr>
+  <p style="margin-top:10px;">
+    Экрандалған таңбалар — бұл Python-дағы мәтінмен жұмыс істеудің қуатты құралы.
+    Әсіресе файл жолдары, арнайы символдар немесе бірнеше жолды мәтін
+    жазғанда өте қажет.
+  </p>
+</section>
 
-    <tr>
-        <td>\"</td>
-        <td>Тырнақша</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print("He said: \"Hello\"")
-</code></pre>
-        </td>
-        <td><div class="output-box">He said: "Hello"</div></td>
-    </tr>
+<!-- ========================================================= -->
+<!-- 3. ТІЛДІҢ ӘЛІПБИІ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="alphabet">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Тілдің әліпбиі</h2>
+    <button class="btn-done" data-block="alphabet" data-xp="20">
+      ⬜ Орындалды (Әліпби)
+    </button>
+  </div>
 
-    <tr>
-        <td>\n</td>
-        <td>Жаңа жол</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print("Hello\nWorld")
-</code></pre>
-        </td>
-        <td>
-<div class="output-box">
-Hello<br>World
-</div>
-        </td>
-    </tr>
-
-    <tr>
-        <td>\t</td>
-        <td>Табуляция</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print("Name:\tAigerim")
-</code></pre>
-        </td>
-        <td>
-<div class="output-box">
-Name:    Aigerim
-</div>
-        </td>
-    </tr>
-
-    <tr>
-        <td>\uXXXX</td>
-        <td>Юникод 16-бит</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print("\u2764")
-</code></pre>
-        </td>
-        <td><div class="output-box">❤</div></td>
-    </tr>
-
-    <tr>
-        <td>\UXXXXXXXX</td>
-        <td>Юникод 32-бит</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print("\U0001F600")
-</code></pre>
-        </td>
-        <td><div class="output-box">😀</div></td>
-    </tr>
-
-    <tr>
-        <td>\xXX</td>
-        <td>16-лық мән</td>
-        <td>
-<pre class="pretty-code"><code class="language-python">
-print("\x41")
-</code></pre>
-        </td>
-        <td><div class="output-box">A</div></td>
-    </tr>
-
-</table>
-    <button class="green-btn" onclick="addXP(2, 'Кесте меңгерілді')">Бұл бөлімді аяқтау (+2 балл)</button>
-
-    <!-- SECTION 3 -->
-    <!-- Тілдің әліпбиі -->
-<h2>3. Тілдің әліпбиі</h2>
-
-<p>
-    Программалау тілінің әліпбиі — код жазу кезінде қолданылатын барлық символдардың жиынтығы.
-    Python бағдарламасын құрайтын әрбір әріп, сан, тыныс белгісі немесе арнайы таңба — осы әліпбидің бөлігі.
-</p>
-
-<style>
-.symbol { font-weight:600; padding:2px 4px; border-radius:6px; }
-.blue   { color:#0071e3; background:#e6f1ff; }
-.green  { color:#34C759; background:#e9fbe9; }
-.purple { color:#af52de; background:#f4e9ff; }
-</style>
+  <p style="margin-top:12px;">
+    Программалау тілінің <b>әліпбиі</b> — код жазу кезінде қолданылатын барлық
+    символдардың жиынтығы. Python бағдарламасын құрайтын әрбір әріп, сан,
+    тыныс белгісі немесе арнайы таңба — осы әліпбидің бөлігі.
+  </p>
 
 <ul>
-    <li>Латын әріптері (A–Z, a–z)</li>
-    <li>Сандар (0–9)</li>
+  <li>Латын әріптері: <code class="language-python">A-Z</code>, <code class="language-python">a-z</code></li>
 
-    <li>
-        Арифметикалық таңбалар:
-        <span class="symbol blue">+</span>,
-        <span class="symbol blue">-</span>,
-        <span class="symbol blue">*</span>,
-        <span class="symbol blue">/</span>,
-        <span class="symbol blue">%</span>,
-        <span class="symbol blue">=</span>
-    </li>
+  <li>Сандар: <code class="language-python">0-9</code></li>
 
-    <li>
-        Салыстыру таңбалары:
-        <span class="symbol green">&lt;</span>,
-        <span class="symbol green">&gt;</span>,
-        <span class="symbol green">==</span>,
-        <span class="symbol green">!=</span>
-    </li>
+  <li>Арифметикалық таңбалар:
+    <code class="language-python">+</code>,
+    <code class="language-python">-</code>,
+    <code class="language-python">*</code>,
+    <code class="language-python">/</code>,
+    <code class="language-python">%</code>,
+    <code class="language-python">=</code>
+  </li>
 
-    <li>
-        Тырнақшалар:
-        <span class="symbol green">" "</span>,
-        <span class="symbol green">' '</span>
-    </li>
+  <li>Салыстыру таңбалары:
+    <code class="language-python">&lt;</code>,
+    <code class="language-python">&gt;</code>,
+    <code class="language-python">==</code>,
+    <code class="language-python">!=</code>
+  </li>
 
-    <li>
-        Жақшалар:
-        <span class="symbol green">( )</span>,
-        <span class="symbol green">[ ]</span>,
-        <span class="symbol green">{ }</span>
-    </li>
+  <li>Тырнақшалар:
+    <code class="language-python">"</code>,
+    <code class="language-python">'</code>
+  </li>
 
-    <li>
-        Экрандалған таңбалар:
-        <span class="symbol purple">\n</span>,
-        <span class="symbol purple">\t</span>,
-        <span class="symbol purple">\\</span>
-    </li>
+  <li>Жақшалар:
+    <code class="language-python">( )</code>,
+    <code class="language-python">[ ]</code>,
+    <code class="language-python">{ }</code>
+  </li>
 
-    <li>
-        Қызметтік таңбалар:
-        <span class="symbol blue">:</span>,
-        <span class="symbol blue">#</span>,
-        <span class="symbol blue">_</span>
-    </li>
+  <li>Экрандалған таңбалар:
+    <code class="language-python">\n</code>,
+    <code class="language-python">\t</code>,
+    <code class="language-python">\\</code>
+  </li>
+
+  <li>Қызметтік таңбалар:
+    <code class="language-python">:</code>,
+    <code class="language-python">#</code>,
+    <code class="language-python">_</code>
+  </li>
 </ul>
 
-<p>
+  <p>
     Python әліпбиін меңгеру — дұрыс синтаксис құрудың алғашқы қадамы.
-    Бұл «тілдің әріптері» секілді: код осы символдар арқылы құралады.
-</p>
+    Бұл — «тілдің әріптері»: код осы символдар арқылы құралады.
+  </p>
+</section>
 
-<button class="green-btn" onclick="addXP(2,'Тілдің әліпбиі бөлімін аяқтадың')">
-    Бұл бөлімді аяқтау (+2 балл)
-</button>
+<!-- ========================================================= -->
+<!-- 4. ТІЛДІҢ СИНТАКСИСІ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="syntax">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Тілдің синтаксисі</h2>
+    <button class="btn-done" data-block="syntax" data-xp="20">
+      ⬜ Орындалды (Синтаксис)
+    </button>
+  </div>
 
-<!-- Тілдің синтаксисі -->
-<h2 style="margin-top:40px;">4. Тілдің синтаксисі</h2>
-
-<p>
-    Тіл синтаксисі — Python кодын жазу барысында сақталатын ережелер жүйесі.
+  <p style="margin-top:12px;">
+    <b>Тіл синтаксисі</b> — Python кодын жазу барысында сақталатын ережелер жүйесі.
     Python синтаксисі қарапайым, нақты және оқуға өте жеңіл.
+  </p>
+
+  <h3>Python синтаксисінің басты ерекшеліктері</h3>
+  <ol>
+    <li><b>Қатаң құрылым.</b> Python <b>шегініс</b> (tab/space) арқылы код блоктарын анықтайды.</li>
+    <li><b>Артық белгілер жоқ.</b> Көп тілдердегі сияқты <code>;</code> немесе <code>{}</code> міндетті емес.</li>
+    <li><b>Оқуға жеңіл.</b> Код логикасын кез келген адам тез түсіне алады.</li>
+  </ol>
+
+  <h3>Мысал: айнымалыны экранға шығару</h3>
+  <pre><code class="language-python">name = "Aigerim"
+print(name)</code></pre>
+
+  <p>
+    Бұл кодтың өзі Python синтаксисінің үлкен артықшылығын көрсетеді:
+    қысқа, таза, түсінікті.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI QUIZ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Mini Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="25">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:12px;">
+  Төмендегі сұрақтарға жауап бер (дұрыс нұсқаны таңда да, «Тексеру» батырмасын бас).
 </p>
 
-<p><b>Python синтаксисінің басты ерекшеліктері:</b></p>
+<div class="quiz-wrapper">
 
-<ul>
-    <li><b>1) Қатаң құрылым:</b> Python шегініс (tab/space) арқылы код блоктарын анықтайды.</li>
-    <li><b>2) Артық белгілер жоқ:</b> Басқа тілдердегі сияқты «;» немесе «{}» міндетті емес.</li>
-    <li><b>3) Оқуға жеңіл:</b> Код логикасын кез келген адам тез түсіне алады.</li>
-</ul>
+  <!-- 1-сұрақ -->
+  <div class="quiz-item" data-correct="b">
+    <p><b>1) Python әліпбиіне не кіреді?</b></p>
 
-<p>
-    Мысалы, төмендегі код айнымалыны экранға шығарады:
-</p>
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="a">
+      а) Тек әріптер ғана
+    </label>
 
-<div class="code-header">Python Code</div>
-<div class="code-block">
-<pre><code class="language-python">
-name = "Aigerim"
-print(name)
-</code></pre>
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="b">
+      ә) Әріп, сан және арнайы таңбалар
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="c">
+      б) Тек сандар
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="d">
+      в) Тек арнайы белгілер
+    </label>
+  </div>
+
+  <!-- 2-сұрақ -->
+  <div class="quiz-item" data-correct="b">
+    <p><b>2) Жаңа жолды ашатын экрандалған таңба?</b></p>
+
+    <label class="quiz-option">
+      <input type="radio" name="q2" value="a">
+      а) <code class="language-python">\t</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q2" value="b">
+      ә) <code class="language-python">\n</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q2" value="c">
+      б) <code class="language-python">\\</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q2" value="d">
+      в) <code class="language-python">\"</code>
+    </label>
+  </div>
+
+  <!-- 3-сұрақ -->
+  <div class="quiz-item" data-correct="d">
+    <p><b>3) Python синтаксисіндегі ең маңызды нәрсе?</b></p>
+
+    <label class="quiz-option">
+      <input type="radio" name="q3" value="a">
+      а) Нүкте үтір <code class="language-python">;</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q3" value="b">
+      ә) Қосымша тырнақша
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q3" value="c">
+      б) Көп жақшалар
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q3" value="d">
+      в) Шегініс (indentation)
+    </label>
+  </div>
+
+  <!-- 4-сұрақ -->
+  <div class="quiz-item" data-correct="a">
+    <p><b>4) Тырнақшаны шығару үшін қандай escape таңба қолданылады?</b></p>
+
+    <label class="quiz-option">
+      <input type="radio" name="q4" value="a">
+      а) <code class="language-python">\"</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q4" value="b">
+      ә) <code class="language-python">\'</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q4" value="c">
+      б) <code class="language-python">\\</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q4" value="d">
+      в) <code class="language-python">\x</code>
+    </label>
+  </div>
+
+  <!-- 5-сұрақ -->
+  <div class="quiz-item" data-correct="a">
+    <p><b>5) Арифметикалық таңба қайсысы?</b></p>
+
+    <label class="quiz-option">
+      <input type="radio" name="q5" value="a">
+      а) <code class="language-python">+</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q5" value="b">
+      ә) <code class="language-python">:</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q5" value="c">
+      б) <code class="language-python">"</code>
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q5" value="d">
+      в) <code class="language-python">#</code>
+    </label>
+  </div>
+
+  <button type="button" id="checkQuiz" class="quiz-check-btn">
+    Жауаптарды тексеру
+  </button>
+  <p id="quizResult" class="quiz-result"></p>
 </div>
 
-<p>
-    Бұл кодтың өзі — Python синтаксисінің ең үлкен артықшылығы: қысқа, таза, түсінікті.
-</p>
+</section>
 
-<button class="green-btn" onclick="addXP(1,'Синтаксис бөлімін аяқтадың')">
-    Бұл бөлімді аяқтау (+1 балл)
-</button>
-
-    <!-- SECTION 5 -->
-  <h2>5. Mini Quiz</h2>
-
-<div class="quiz-box">
-
-    <!-- Question 1 -->
-    <div class="quiz-q">1) Python әліпбиіне не кіреді?</div>
-    <div class="option"><input type="radio" name="q1" value="0"> Тек әріптер ғана</div>
-    <div class="option"><input type="radio" name="q1" value="1"> Әріп, сан және арнайы таңбалар</div>
-    <div class="option"><input type="radio" name="q1" value="0"> Тек сандар</div>
-    <div class="option"><input type="radio" name="q1" value="0"> Тек арнайы белгілер</div>
-
-    <!-- Question 2 -->
-    <div class="quiz-q">2) Жаңа жолды ашатын экрандалған таңба?</div>
-    <div class="option"><input type="radio" name="q2" value="0"> \t</div>
-    <div class="option"><input type="radio" name="q2" value="1"> \n</div>
-    <div class="option"><input type="radio" name="q2" value="0"> \\</div>
-    <div class="option"><input type="radio" name="q2" value="0"> \"</div>
-
-    <!-- Question 3 -->
-    <div class="quiz-q">3) Python синтаксисіндегі ең маңызды нәрсе?</div>
-    <div class="option"><input type="radio" name="q3" value="1"> Шегініс (indentation)</div>
-    <div class="option"><input type="radio" name="q3" value="0"> Нүкте үтір (;)</div>
-    <div class="option"><input type="radio" name="q3" value="0"> Қосымша тырнақша</div>
-    <div class="option"><input type="radio" name="q3" value="0"> Көп жақшалар</div>
-
-    <!-- Question 4 -->
-    <div class="quiz-q">4) Тырнақшаны шығару үшін қандай escape таңба?</div>
-    <div class="option"><input type="radio" name="q4" value="1"> \"</div>
-    <div class="option"><input type="radio" name="q4" value="0"> \'</div>
-    <div class="option"><input type="radio" name="q4" value="0"> \\</div>
-    <div class="option"><input type="radio" name="q4" value="0"> \x</div>
-
-    <!-- Question 5 -->
-    <div class="quiz-q">5) Арифметикалық таңба?</div>
-    <div class="option"><input type="radio" name="q5" value="1"> +</div>
-    <div class="option"><input type="radio" name="q5" value="0"> :</div>
-    <div class="option"><input type="radio" name="q5" value="0"> "</div>
-    <div class="option"><input type="radio" name="q5" value="0"> #</div>
-
-    <button class="green-btn" onclick="checkMulti()">Тексеру</button>
-
-    <div id="multiResult" class="result"></div>
-    <div id="completeQuiz"></div>
-</div>
-
-</div>
-
-<script>
-let xp = 0;
-
-/* XP SYSTEM */
-function addXP(amount, message) {
-    if (xp >= 10) return;
-
-    xp += amount;
-    if (xp > 10) xp = 10;
-
-    // Прогресс жолағын жаңарту (10 балл → 100%)
-    document.getElementById("xpInner").style.width = (xp * 10) + "%";
-
-    // БАЛЛДЫ көрсету
-    document.getElementById("xpText").innerText = xp + " / 10 балл";
-
-    // Жетістік попап
-    showReward(message + " +" + amount + " балл");
-
-    // Егер 10 балл жиналса
-    if (xp === 10) {
-        document.getElementById("finalLevel").innerHTML =
-            `<div class="final-msg">🎉 Құттықтаймын! Сен бұл сабақты 10 балл жинап толық аяқтадың!</div>`;
-    }
-}
-
-/* QUIZ */
-function checkAnswer() {
-    let ans = document.getElementById("answer").value.trim();
-    let res = document.getElementById("quizResult");
-
-    if (ans === "Hello") {
-        res.style.color = "green";
-        res.innerHTML = "Дұрыс! (+10 балл)";
-        addXP(10, "Quiz дұрыс орындалды");
-    } else {
-        res.style.color = "red";
-        res.innerHTML = "Қате. Дұрыс жауап: Hello";
-    }
-}
-
-/* POPUP */
-function showReward(text) {
-    let popup = document.getElementById("rewardPopup");
-    document.getElementById("rewardText").innerText = text;
-    popup.classList.add("show");
-    setTimeout(() => popup.classList.remove("show"), 3000);
-}
-function closeReward() {
-    document.getElementById("rewardPopup").classList.remove("show");
-}
-
-</script>
-<script>
-function checkMulti() {
-    let score = 0;
-    for (let i = 1; i <= 5; i++) {
-        let q = document.querySelector(`input[name="q${i}"]:checked`);
-        if (q && q.value === "1") score++;
-    }
-
-    let output = document.getElementById("multiResult");
-    let completeBox = document.getElementById("completeQuiz");
-
-    if (score === 5) {
-        output.style.color = "green";
-        output.innerHTML = "Керемет! Барлығы дұрыс! (+5 балл)";
-
-        // XP қосу
-        addXP(5, "Mini Quiz толық дұрыс орындалды");
-
-        // Бөлім аяқталды деген хабарлама
-        completeBox.innerHTML = `
-            <div class="final-msg" style="margin-top:20px;">
-                🎉 Бұл бөлімді толық аяқтадың!
-            </div>
-        `;
-    } else {
-        output.style.color = "red";
-        output.innerHTML = score + "/5 дұрыс. Тағы бір рет қайталап көр.";
-
-        completeBox.innerHTML = "";
-    }
-}
-</script>
-
-
-</body>
-</html>
+{% endblock %}

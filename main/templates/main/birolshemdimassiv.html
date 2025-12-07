@@ -1,279 +1,505 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Бір өлшемді массив{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <link rel="alternate" type="application/rss+xml" title="PythonRu » Лента" href="https://pythonru.com/feed">
-    <link rel="icon" type="image/png" href="https://pythonru.com/wp-content/uploads/2019/04/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://pythonru.com/wp-content/uploads/2018/11/bm-76x76.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://pythonru.com/wp-content/uploads/2018/11/bm-120x120.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://pythonru.com/wp-content/uploads/2018/11/bm-152x152.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://pythonru.com/wp-content/uploads/2018/11/bm-114x114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://pythonru.com/wp-content/uploads/2018/11/bm-144x144.png">
-    <script type="text/javascript" src="https://pythonru.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
-    <link rel="amphtml" href="https://pythonru.com/osnovy/fajly-v-python-vvod-vyvod?ysclid=lfm9qe8keh52925195&amp;amp">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
-
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
-
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
-
-
-    <title>Бір өлшемді массив</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1> Бір өлшемді массив</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-                    <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: бір өлшемді массивтер пайдаланып Python программалау тілінде программаларды жасау </h2>
-
-<h2> Массив</h2>
-<p>Массив - (француз тілінен аударғанда massif - қуатты, тұтас дегенді білдіреді) біртекті заттар немесе нысандардың тұтас алғандағы жиынтығын білдіретін ұғым. Мысалы, тұрмыста тұрғын ұй массивтері (тұрғын аудандар), орман массивтері (орман алқаптары) деген сияқты ұғымдамен бірге қолданылады.</p>
-          <p>Массив біртипті деректердің бірізділігі, оның элементтері әртүрлі индекстермен ерекшеленетін ортақ атаумен біріктірілген.</p>
-          <p>Математикада да, программалауда да массив (жиын) ретінде сандар тізбегі қарастырылады. Мысалы, 2,4,6... - жұп сандар тізбегі. Математика мен программалауда массив <i>a<sub>1</sub>, a<sub>2</sub>,... a<sub>n-1</sub>, a<sub>n</sub></i> cияқты формуламен өрнектеледі. Программалауда мұндай тізбекті бірөлшемді массив деп қарастырады. Бірдей типті деректерді өңдеуде массивтің рөлі өте жоғары. Деректердің бұл түрі сандық тізбектерді белгілеу үшін  пайдаланады десек, онда барлық сандар тобы бірдей атпен (көбінесе бір әріппен) белгіленеді. Массивке қатысушылап массив элементтері, элементтердің массивтегі орны элемент индексі деп аталады. Компьютерде өте үлкен мөлшердегі біртипті деректерді өңдеуде массивтер кеңінен қолданылады. Мысалы, қаладағы телефон абоненттерінің нөмірлері, емтиханға қатысқан оқушылардың алған бағасы т.б.
+<h1>Бір өлшемді массив</h1>
+<p class="subtitle">
+  Бұл сабақта біз бір өлшемді массив (Python тілінде – <b>list</b> тізімі)
+  деген не екенін, оның түрлері мен ерекшеліктерін, элементтерді енгізу,
+  қосу, іздеу тәсілдерін және практикалық есептерді қарастырамыз.
 </p>
 
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында сен массивпен жұмыс істей алсаң, <b>XP</b> ұпайларың да
+  автоматты түрде жиналады.
+</p>
 
- <h2>Массивтің түрлері</h2>
-           <li>бірөлшемді массив;</li>
-          <li>екіөлшемді массив;</li>
-          <li>көпөлшемді массив.</li>
-          <h2>Массивтің типтері</h2>
-           <li>сандық;</li>
-          <li>мәтіндік;</li>
-          <li>символдық.</li>
-           <h2>Массивтің ерекшеліктері</h2>
-           <li>элементтердің барлығы біртипті;</li>
-          <li>элементтер бір атаумен аталады;</li>
-          <li>элементтер жадта қатар орналасады.</li>
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-
-          <h2>Бір өлшемді массив</h2>
-          <img alt="" height="303" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/d442258b-7fc1-492e-994e-9d716df3860e/" src="https://ucarecdn.com/d442258b-7fc1-492e-994e-9d716df3860e/" width="643" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fd442258b-7fc1-492e-994e-9d716df3860e%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22643%22%2C%22height%22%3A%22303%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<h2>Массивтермен жұмыс</h2>
-          <h3>Бос тізімдер жасау</h3>
-          <p>Бос тізімдерді құру мысалдары:<p/>
-          <p>empty1=[]<p/>
-          <p>empty2=list () <p/>
-          <p>print ('Бос тізім:', empty1,empty2) #Бос тізім [] []<p/>
-          <h3>Бос емес тізімдерді жасау</h3>
-          <p>Массивті құру кезінде элементтерді тізімге қоюға болады.<p/>
-          <p>Мысалы, arr= [2, 3, 5, 7, 11]<p/>
-          <p>Python тізім элементтерін нөмірлеу екі бағытта жүргізіледі:<p/>
-          <table class="table-bordered">
-<tr>
-<td><kbd>Оң
-индекстер</kbd></td>
-    <td><kbd>[0]</kbd></td>
-    <td><kbd>[1]</kbd></td>
-    <td><kbd>[2]</kbd></td>
-    <td><kbd>[3]</kbd></td>
-    <td><kbd>[4]</kbd></td>
-
-</tr>
-<tr>
-<td><kbd>arr</kbd></td>
-    <td><kbd>2</kbd></td>
-    <td><kbd>3</kbd></td>
-    <td><kbd>5</kbd></td>
-    <td><kbd>7</kbd></td>
-    <td><kbd>11</kbd></td>
-</tr>
-<tr>
-<tr>
-<td><kbd>Теріс индекстер</kbd></td>
-    <td><kbd>[-5]</kbd></td>
-    <td><kbd>[-4]</kbd></td>
-    <td><kbd>[-3]</kbd></td>
-    <td><kbd>[-2]</kbd></td>
-    <td><kbd>[-1]</kbd></td>
-</tr>
-
-</tr>
-
-</tbody></table>
-          <h2>Тізімге элемент қосу</h2>
-          <p> <b>append</b> тізім әдісі тізімнің соңына элемент қосу үшін қолданылады. Бұл әдіс арқылы
-тізімге кез келген элементтер санын қосуға болады. Элемент қосқан сайын тізімдегі
-элементтер саны өзгереді, бұл – динамикалық құрылым.</p>
-          <img alt="" height="98" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/aded3220-e1cd-438c-9dd1-5d2db565551d/" src="https://ucarecdn.com/aded3220-e1cd-438c-9dd1-5d2db565551d/" width="379" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Faded3220-e1cd-438c-9dd1-5d2db565551d%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22379%22%2C%22height%22%3A%2298%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p>Нәтижесі:</p>
-          <img alt="" height="35" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/c777e578-f1e8-4865-8843-d055ca572152/" src="https://ucarecdn.com/c777e578-f1e8-4865-8843-d055ca572152/" width="291" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fc777e578-f1e8-4865-8843-d055ca572152%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22291%22%2C%22height%22%3A%2235%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-           <h2>Тізім элементтерін іріктеп алу</h2>
-                              <p> Python тілінде тізім элементтерін екі жолмен сұрыптауға болады.</p>
-          <p> Бірінші әдіс "элементтер бойынша теру»:</p>
-          <img alt="" height="92" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/4e7d7c2c-a608-4c9b-ae85-3043dece7b67/" src="https://ucarecdn.com/4e7d7c2c-a608-4c9b-ae85-3043dece7b67/" width="411" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F4e7d7c2c-a608-4c9b-ae85-3043dece7b67%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22411%22%2C%22height%22%3A%2292%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p> Екінші әдіс "элементтердің индексі бойынша теру»:</p>
-<img alt="" height="90" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/0ad22471-c0b3-4117-806b-48da683a383d/" src="https://ucarecdn.com/0ad22471-c0b3-4117-806b-48da683a383d/" width="422" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F0ad22471-c0b3-4117-806b-48da683a383d%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22422%22%2C%22height%22%3A%2290%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-           <h2>Массив элементтерін енгізу.</h2>
-                    <p>Массивтің әр элементін (элементтің мәнін) жеке енгізуге болады, ол үшін append()
-әдісі қолданылады.<p/>
-            <p>Бір жолға бос орынмен бөліп жазылған массив элементтерінің жиынтығын енгізу
-үшін split() жолдық әдісін қолданыңыз, бұл әдіс элементтер тізімін жасайды.<p/>
- <p><b>split()</b> әдісі жолдық типтегі элементтерді анықтайтынын ұмытпаңыз, сондықтан
-элементтерді/элементтердің мәнін сан ретінде өңдеу үшін түрлендіру функцияларын
-қолданыңыз, мысалы,<p/>
-<img alt="" height="150" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/6f16e3b1-e7ce-404d-9d87-e9e553ac7026/" src="https://ucarecdn.com/6f16e3b1-e7ce-404d-9d87-e9e553ac7026/" width="769" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F6f16e3b1-e7ce-404d-9d87-e9e553ac7026%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22769%22%2C%22height%22%3A%22150%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p>Тізім элементтерін бүтін сандармен толтыруға мүмкіндік беретін тізімдік өрнекті
-пайдалануға болады:<p/>
-          <img alt="" height="50" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/6714cabc-91c2-4510-ae72-a3fa41b7b6c3/" src="https://ucarecdn.com/6714cabc-91c2-4510-ae72-a3fa41b7b6c3/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F6714cabc-91c2-4510-ae72-a3fa41b7b6c3%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221018%22%2C%22height%22%3A%2263%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p> Бұл жағдайда біз sum функциясын қолданамыз, өйткені тізімнің барлық элементтері
-бүтін сандар.<p/>
-          <h2>Қасиеті бойынша элементті іздеу</h2>
-          <p> Массивтерді өңдеуде бірі-белгілі бір критерийлер бойынша элементтерді іздеу
-тапсырмалары жиі кездеседі.<p/>
-          <p> Мысалы, массивтегі дөңгелек сандардың (нөлмен аяқталатын немесе 10-ға қалдықсыз
-бөлінетін сандар) санын анықтау.<p/>
-          <img alt="" height="179" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/3f23fea3-fcd7-4881-8b49-6e7bd64e5e5c/" src="https://ucarecdn.com/3f23fea3-fcd7-4881-8b49-6e7bd64e5e5c/" width="672" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F3f23fea3-fcd7-4881-8b49-6e7bd64e5e5c%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22672%22%2C%22height%22%3A%22179%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <h2>Практикалық жұмыс</h2>
-          <p>Қосынды. Ұзындығы N-ге тең A [N] массиві берілген (N<100). Осы массивтегі оң элементтердің қосындысын тап.<p/>
-          <img alt="" height="250" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/2ac5a954-e571-4eac-b1d5-34a9c91ee150/" src="https://ucarecdn.com/2ac5a954-e571-4eac-b1d5-34a9c91ee150/" width="700" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F2ac5a954-e571-4eac-b1d5-34a9c91ee150%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22897%22%2C%22height%22%3A%22328%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p>Программа нәтижесі:</p>
-          <img alt="" height="150" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/ef1452fc-2163-40ec-986c-fbb2395f6f29/" src="https://ucarecdn.com/ef1452fc-2163-40ec-986c-fbb2395f6f29/" width="700" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fef1452fc-2163-40ec-986c-fbb2395f6f29%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22875%22%2C%22height%22%3A%22199%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-          </div>
-      </div>
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-       <li><a href="/task" class="cta outline">Қосымша материал</a></li>
-      <li><a href="/task09" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:12px;">
+    <li>Массив ұғымын түсіну және өмірлік мысалдар келтіру;</li>
+    <li>Бір өлшемді массивтің (тізімнің) түрлері мен ерекшеліктерін білу;</li>
+    <li>Python тілінде массив (list) құру, элемент қосу, алу, енгізу тәсілдерін үйрену;</li>
+    <li>Массив элементтері бойынша іздеу, қосынды табу сияқты есептерді шығару;</li>
+    <li>Mini-quiz арқылы білімді тексеру.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ: МАССИВ ЖӘНЕ БІР ӨЛШЕМДІ МАССИВ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Массив деген не?</h3>
+  <p>
+    Массив – біртипті (бірдей типтегі) деректердің бірізділігі, олардың
+    элементтері әртүрлі индекстермен ерекшеленіп, ортақ атаумен біріктіріледі.
+  </p>
+  <p>
+    Тұрмыста «тұрғын үй массиві», «орман массиві» сияқты ұғымдар бар.
+    Бағдарламалауда массив ретінде сандар тізбегі қарастырылады:
+    <code>a₁, a₂, …, aₙ</code>.
+  </p>
+
+  <h4>Массивтің түрлері</h4>
+  <ul>
+    <li>Бір өлшемді массив;</li>
+    <li>Екі өлшемді массив;</li>
+    <li>Көп өлшемді массив.</li>
+  </ul>
+
+  <h4>Массивтің типтері</h4>
+  <ul>
+    <li>Сандық;</li>
+    <li>Мәтіндік;</li>
+    <li>Символдық.</li>
+  </ul>
+
+  <h4>Массивтің ерекшеліктері</h4>
+  <ul>
+    <li>Элементтердің барлығы біртипті;</li>
+    <li>Элементтер бір атаумен аталады (мысалы, <code>a</code>, <code>arr</code>);</li>
+    <li>Элементтер жадта қатар орналасады.</li>
+  </ul>
+
+  <h3 style="margin-top:18px;">Python-дағы бір өлшемді массив – тізім (list)</h3>
+  <p>
+    Python тілінде бір өлшемді массив көбіне <b>list</b> тізімі арқылы жүзеге асады.
+    Тізім элементтері шаршы жақшада жазылады:
+  </p>
+
+  <pre><code class="language-python">numbers = [2, 4, 6, 8, 10]      # сандық массив
+words   = ["alma", "banan"]     # мәтіндік массив
+mixed   = [10, "python", 3.14]  # аралас типтер (Python рұқсат етеді)</code></pre>
+
+  <h4>Индекстеу (оң және теріс индекстер)</h4>
+  <p>Python тізім элементтерін оң және теріс индекстер арқылы аламыз:</p>
+
+  <pre><code class="language-python">arr = [2, 3, 5, 7, 11]
+
+# Оң индекстер
+# Индекс:   0   1   2   3    4
+# Элемент:  2   3   5   7    11
+
+print(arr[0])   # 2
+print(arr[2])   # 5
+print(arr[4])   # 11
+
+# Теріс индекстер
+# Индекс:  -5  -4  -3  -2   -1
+# Элемент:  2   3   5   7   11
+
+print(arr[-1])  # 11 (соңғы элемент)
+print(arr[-2])  # 7</code></pre>
+
+  <h4>Бос тізім құру</h4>
+  <pre><code class="language-python">empty1 = []
+empty2 = list()
+
+print("Бос тізімдер:", empty1, empty2)</code></pre>
+
+  <pre><code class="language-none">Консольдағы нәтиже:
+Бос тізімдер: [] []</code></pre>
+
+  <h4>Тізімге элемент қосу (append)</h4>
+  <p><code>append()</code> әдісі тізім соңына жаңа элемент қосады:</p>
+
+  <pre><code class="language-python">arr = [1, 2, 3]
+arr.append(4)
+arr.append(5)
+
+print("Тізім:", arr)</code></pre>
+
+  <pre><code class="language-none">Консольдағы нәтиже:
+Тізім: [1, 2, 3, 4, 5]</code></pre>
+
+  <h4>Срездер (кесінділер)</h4>
+  <p>Тізімнің белгілі бір бөлігін алуға болады:</p>
+
+  <pre><code class="language-python">arr = [10, 20, 30, 40, 50]
+
+print(arr[1:4])   # [20, 30, 40]
+print(arr[:3])    # [10, 20, 30]
+print(arr[2:])    # [30, 40, 50]</code></pre>
+
+  <h4>Массив элементтерін енгізу</h4>
+  <p>Элементтерді бір жолға жазып, кейін тізімге айналдыру:</p>
+
+  <pre><code class="language-python">line = input("Сандарды бос орын арқылы енгіз: ")
+parts = line.split()                 # ['1', '5', '10', '-3']
+nums  = list(map(int, parts))       # [1, 5, 10, -3]
+
+print("Тізім:", nums)</code></pre>
+
+  <pre><code class="language-none">Мысалы, енгізу:
+1 5 10 -3
+
+Консольдағы нәтиже:
+Тізім: [1, 5, 10, -3]</code></pre>
+
+  <h4>Қызықты ақпарат</h4>
+  <ul>
+    <li>Python-дағы тізімдер – <b>динамикалық</b>, яғни өлшемі программаның орындалу кезінде өзгереді.</li>
+    <li>Кейбір тілдерде (C, Java) массив өлшемі алдын ала беріледі, ал Python-да тізімге <code>append()</code> арқылы қалағаныңша элемент қоса аласың.</li>
+    <li>Тізімдер – олимпиадалық есептерде ең жиі қолданылатын құрылымдардың бірі.</li>
+  </ul>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР ЖӘНЕ ЕСЕПТЕУ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Мысал 1 · Тізім элементтерінің қосындысы</h3>
+  <p>Массивтегі барлық оң элементтердің қосындысын табайық:</p>
+
+  <pre><code class="language-python">nums = [3, -2, 10, 0, 7, -5]
+
+total = 0
+for x in nums:
+    if x > 0:
+        total += x
+
+print("Оң элементтердің қосындысы:", total)</code></pre>
+
+  <pre><code class="language-none">Консольдағы нәтиже:
+Оң элементтердің қосындысы: 20</code></pre>
+
+  <h3 style="margin-top:18px;">Мысал 2 · Дөңгелек сандар саны</h3>
+  <p>
+    Массивтегі <b>дөңгелек сандар</b> – нөлмен аяқталатын немесе 10-ға қалдықсыз
+    бөлінетін сандар. Олардың санын табайық:
+  </p>
+
+  <pre><code class="language-python">nums = [10, 23, 40, 55, 100, 7, 30]
+
+count_round = 0
+for x in nums:
+    if x % 10 == 0:
+        count_round += 1
+
+print("Дөңгелек сандар саны:", count_round)</code></pre>
+
+  <pre><code class="language-none">Консольдағы нәтиже:
+Дөңгелек сандар саны: 4</code></pre>
+
+  <h3 style="margin-top:18px;">Мысал 3 · Массивті енгізу және орташа мән</h3>
+  <p>Пайдаланушы енгізген сандардың орташа арифметикалық мәнін табамыз:</p>
+
+  <pre><code class="language-python">line = input("Сандарды енгіз (бос орын арқылы): ")
+nums = list(map(int, line.split()))
+
+s = sum(nums)
+avg = s / len(nums)
+
+print("Элементтер саны:", len(nums))
+print("Қосынды:", s)
+print("Орташа мән:", avg)</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <div class="task-card">
+    <h3 style="margin-top:6px;">Тапсырма 1 · Оң элементтердің қосындысы</h3>
+    <p>
+      Ұзындығы <code>N</code>-ге тең <code>A[N]</code> массиві берілген
+      (<code>N &lt; 100</code>). Осы массивтегі <b>оң</b> элементтердің қосындысын тап.
+    </p>
+
+    <div class="task-io">
+      <p class="task-io-title">Мысал (кіріс/шығыс):</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс (input)</th>
+            <th>Шығыс (output)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>5<br>1 -3 4 0 10</code></td>
+            <td><code>15</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <h3 style="margin-top:6px;">Тапсырма 2 · Жұп сандар саны</h3>
+    <p>
+      Берілген массивтегі <b>жұп</b> элементтердің санын есептейтін программа жаз.
+    </p>
+
+    <div class="task-io">
+      <p class="task-io-title">Мысал:</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс</th>
+            <th>Шығыс</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>6<br>2 7 8 9 10 13</code></td>
+            <td><code>3</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <h3 style="margin-top:6px;">Тапсырма 3 · Максимал элемент</h3>
+    <p>
+      Массивтегі ең үлкен элементті және оның индексін табатын программа құр.
+    </p>
+    <div class="task-io">
+      <p class="task-io-title">Мысал:</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс</th>
+            <th>Шығыс</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>5<br>3 11 5 9 7</code></td>
+            <td><code>Максимум: 11, индексі: 1</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (10 СҰРАҚ + ТЕКСЕРУ БАТЫРМАСЫ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тест сұрақтарына жауап бер. Соңында <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Бір өлшемді массив деген не?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Кесте түріндегі деректер, жолдар мен бағандардан тұрады
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Бір қатарға тізілген біртипті деректер тізбегі
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Екі өлшемді координаталар жиыны
+      </label>
     </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Python-да бос тізім қалай жасалады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>{}</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>[]</code>
+      </label>
+    </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) <code>arr = [10, 20, 30, 40]</code> болса, <code>arr[0]</code> мәні?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>10</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>20</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>40</code>
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2> <p>«Л.Н.Гумилев атындағы Еуразия ұлттық университеті» КеАҚ</p><p>«7М01511 – Информатика» білім беру бағдарламасы</p>
-          <p>Астана 2023</p></h2>
-          <ul>
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) <code>arr[-1]</code> нені білдіреді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) Бірінші элемент
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) Соңғы элемент
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) Екінші элемент
+      </label>
+    </div>
 
-</div>
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Қай әдіс тізімнің соңына элемент қосады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) <code>insert()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) <code>remove()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) <code>append()</code>
+      </label>
+    </div>
 
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>6) <code>line.split()</code> не істейді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) Жолды бос орын бойынша бөліп, тізім жасайды
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) Жолды бүтін санға айналдырады
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) Жолды жояды
+      </label>
+    </div>
 
+    <!-- 7-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>7) Тізім элементтерінің қосындысын табу үшін қандай функция қолайлы?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="a">
+        а) <code>len()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="b">
+        ә) <code>sum()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="c">
+        б) <code>max()</code>
+      </label>
+    </div>
 
+    <!-- 8-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>8) <code>nums = [3, -1, 5, 0]</code>. Қанша оң элемент бар?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="a">
+        а) 1
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="b">
+        ә) 2
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="c">
+        б) 2 (3 және 5)
+      </label>
+    </div>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-          <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
+    <!-- 9-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>9) Тізімнің ұзындығын қай функция қайтарады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="a">
+        а) <code>len()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="b">
+        ә) <code>list()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="c">
+        б) <code>range()</code>
+      </label>
+    </div>
 
-  </body>
-</html>
+    <!-- 10-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>10) Қай жазу дұрыс массивті білдіреді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="a">
+        а) <code>(1, 2, 3)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="b">
+        ә) <code>[1, 2, 3]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="c">
+        б) <code>{"1", "2", "3"}</code>
+      </label>
+    </div>
+
+  </div>
+
+  <button id="checkQuiz" class="quiz-check-btn" type="button">
+    Тексеру
+  </button>
+  <div id="quizResult" class="quiz-result"></div>
+</section>
+
+{% endblock %}

@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-*%@!qz@06-1bs$e7kq8wjaq@fr=e0=^n8e8e_az0)8^)_)$hpb
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['yesbolova.pythonanywhere.com'
+ALLOWED_HOSTS = ['127.0.0.1'
 ]
 
 INSTALLED_APPS = [
@@ -36,6 +36,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",  # <-- важно для APPEND_SLASH
+
 ]
 
 ROOT_URLCONF = 'dissertation.urls'
@@ -82,13 +86,15 @@ USE_TZ = True
 # ---------- STATIC & MEDIA ----------
 STATIC_URL = '/static/'
 
-# Папка, куда Django будет копировать статики при collectstatic
-STATIC_ROOT = '/home/Yesbolova/firstproject/staticfiles/'
-
-# Папка, где лежат ТВОИ css, js, images
+# Сенің қолданушы статикаң (css/js/img)
 STATICFILES_DIRS = [
-    '/home/Yesbolova/firstproject/static/',
+    BASE_DIR / 'dissertation/static',   # МІНДЕТТІ ТҮРДЕ осылай
 ]
+
+# collectstatic көшіретін жер
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
 
 
 # ---------- EMAIL ----------

@@ -1,203 +1,459 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Күрделі шарттарды программалау{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Күрделі шарттарды программалау</h1>
+<p class="subtitle">
+  Бұл сабақта Python тілінде <b>күрделі шарттарды</b> жазуды,
+  <code>and</code>, <code>or</code>, <code>not</code> логикалық амалдарын қолдануды
+  және логикалық өрнектердің орындалу ретін түсінеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында сен қарапайым шарттарды біріктіріп, күрделі логикалық өрнектер жаза аласың
+  және <b>Mini-Quiz</b> арқылы біліміңді тексересің.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-    <title>Күрделі шарттарды программалау</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>Күрделі шарттарды программалау</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-            <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: Python (пайтон) программалау тіліндегі күрделі шарттарды қолдану</h2>
-<h2> Күрделі шарттар </h2>
-<p>Қарапайым шарттар бір салыстыру амалынан тұрады, мысалы, үлкен, кіші, үлкен немесе тең, кіші немесе тең, тең және т.б. Алайда кейбір жағдайларда қарпапайым шарттарды күрделі шарттарға біріктіру қажеттілігі туындайды.  Мысалы, күн суық және қар жауып тұр. Бұл жерде екі қарапайым шарт (күн суық, қар жауып тұр) ЖӘНЕ сөзімен байланысып тұр.</p>
-
-          <h2> Күрделі шарттар </h2>
-          <p>Логикалық амалдар көмегімен біріктірілген екі немесе бірнеше қарапайым қатынастар (шарттар)</p>
-
-    <h2>Программалау тілінде күрделі шарттарды жазуда қолданылатын логикалық амалдар</h2>
-<p>Python-да сандық деректер типтерінің мынадай түрлері бар:</p>
-          <li>ЖӘНЕ - логикалық көбейту, Python тілінде and деп жазылады;</li>
-          <li>НЕМЕСЕ - логикалық қосу, Python тілінде оr деп жазылады;</li>
-          <li>ЕМЕС - логикалық терістеу, Python тілінде not деп жазылады;</li>
- <h2>ЖӘНЕ логикалық амалы - екі шарттың да бір мезетте орындалуын талап етеді.</h2>
-<p> 1-шарт and 2-шарт екі қарапайым шартта ақиқат болған кезде ғана ақиқат мәнді қабылдайды, егер 1 шарт жалған болса, онда 2-шарт тексерілмейді. <p/>
-
-          <h2>НЕМЕСЕ логикалық амалы - екі шарттың кем дегенде біреуінің орындалуын талап етеді.</h2>
-<p>1-шарт or 2-шарт - екі қарапайым шарт та жалған болған кезде ғана жалған мәнді қабылдайды, егер 1-шарт ақиқат болса, онда 2-шарт тексерілмейді.<p/>
-          <h2>ЕМЕС логикалық амалы пікірді теріске шығарады: ақиқат мәнді жалған мәнге, жалған мәнді ақиқат мәнге өзгертеді.</h2>
-<p> not 1-шарт - егер 1-шарт ақиқат болса, онда жалған мән қабылдайды және керісінше. Мысалы, келесі екі шарт өзара тең: A < B және not (A>=B)<p/>
-           <h2>Логикалық амалдар мен қатынастардың орындалу реті</h2>
-          <li>жақша ішіндегі амалдар</li>
-          <li>ЕМЕС амалы</li>
-          <li>логикалық қатынастар >, <, >=, <=, ==, != </li>
-          <li>ЖӘНЕ амалы</li>
-          <li>НЕМЕСЕ амалы </li>
-<p>Әрекеттердің орындалу ретін өзгерту үшін дөңгелек жақшалар қолданылады.<p/>
-          <h2>Логикалық айнымалылар</h2>
-          <p>Көптеген программалау тілдерінде логикалық мәндерді (ақиқат немесе жалған) сақтайтын айынмалыларды қолдану мүмкіндігі қарастырылған. Python программалау тілінде мұндай айнымалылар True (ақиқат) мәнін немесе False (жалған) мәнін қабылдайды.<p/>
-
-
-
-
-      </div>
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:12px;">
+    <li>Қарапайым және күрделі шарт ұғымын ажырату;</li>
+    <li><code>and</code>, <code>or</code>, <code>not</code> логикалық амалдарын түсіну;</li>
+    <li>Логикалық өрнектердің орындалу ретін білу;</li>
+    <li>Python тілінде күрделі шарттармен жұмыс істейтін бағдарламалар жазу;</li>
+    <li>Mini-quiz арқылы тақырыпты бекіту.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
+
+  <h3 style="margin-top:16px;">Қарапайым және күрделі шарттар</h3>
+  <p>
+    <b>Қарапайым шарт</b> — бір ғана салыстырудан тұратын өрнек:
+    <code>a &gt; b</code>, <code>x == 0</code>, <code>age &gt;= 18</code> және т.б.
+  </p>
+  <p>
+    Кейде бір ғана шарт жеткіліксіз болады. Мысалы:
+    <i>«Күн суық және қар жауып тұр»</i>. Бұл жерде екі бөлек шарт бар:
+  </p>
+  <ul>
+    <li><code>күн суық</code></li>
+    <li><code>қар жауып тұр</code></li>
+  </ul>
+  <p>Олар «ЖӘНЕ» сөзімен біріктірілген. Осындай бірнеше шарт бірігіп жазылған өрнек — <b>күрделі шарт</b>.</p>
+
+  <h3 style="margin-top:18px;">Күрделі шарт деген не?</h3>
+  <p>
+    <b>Күрделі шарт</b> — логикалық амалдар көмегімен біріктірілген екі немесе бірнеше
+    қарапайым қатынастар (шарттар):
+  </p>
+  <pre><code class="language-python">(x &gt; 0) and (x &lt; 10)
+age &gt;= 18 or has_parent
+not (x == 0)</code></pre>
+
+  <h3 style="margin-top:18px;">Python-тағы логикалық амалдар</h3>
+  <ul>
+    <li><b>ЖӘНЕ</b> — логикалық көбейту, Python-да <code>and</code> деп жазылады;</li>
+    <li><b>НЕМЕСЕ</b> — логикалық қосу, Python-да <code>or</code> деп жазылады;</li>
+    <li><b>ЕМЕС</b> — логикалық терістеу, Python-да <code>not</code> деп жазылады.</li>
+  </ul>
+
+  <h4 style="margin-top:14px;">1) AND (ЖӘНЕ)</h4>
+  <p>
+    <code>A and B</code> өрнегі тек екі шарт та <b>ақиқат</b> болғанда ғана <code>True</code> болады.
+    Егер бірінші шарт <code>False</code> болса, екінші шарт мүлдем тексерілмеуі де мүмкін.
+  </p>
+  <pre><code class="language-python">age = 15
+has_ticket = True
+
+can_enter = (age &gt;= 14) and has_ticket
+print(can_enter)  # True</code></pre>
+
+  <h4 style="margin-top:14px;">2) OR (НЕМЕСЕ)</h4>
+  <p>
+    <code>A or B</code> өрнегі — кем дегенде бір шарт ақиқат болса, <code>True</code>.
+    Тек екі шарт та жалған болғанда ғана <code>False</code>.
+  </p>
+  <pre><code class="language-python">is_student = True
+has_discount_card = False
+
+can_get_discount = is_student or has_discount_card
+print(can_get_discount)  # True</code></pre>
+
+  <h4 style="margin-top:14px;">3) NOT (ЕМЕС)</h4>
+  <p>
+    <code>not</code> — пікірді теріске шығарады: <code>True → False</code>, <code>False → True</code>.
+  </p>
+  <pre><code class="language-python">is_raining = False
+go_for_a_walk = not is_raining
+print(go_for_a_walk)  # True</code></pre>
+  <p>
+    Мысал: <code>A &lt; B</code> және <code>not (A &gt;= B)</code> — мағынасы бірдей шарттар.
+  </p>
+
+  <h3 style="margin-top:18px;">Логикалық амалдар мен қатынастардың орындалу реті</h3>
+  <p>Python-та күрделі өрнектерді есептегенде мына рет сақталады:</p>
+  <ol>
+    <li>Жақша ішіндегі амалдар;</li>
+    <li><code>not</code> амалы;</li>
+    <li>Салыстыру амалдары: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>;</li>
+    <li><code>and</code> амалы;</li>
+    <li><code>or</code> амалы.</li>
+  </ol>
+  <p>Әрекеттердің ретін өзгерту үшін дөңгелек жақшаларды қолданамыз.</p>
+
+  <h3 style="margin-top:18px;">Логикалық айнымалылар</h3>
+  <p>
+    Логикалық айнымалы тек екі мәннің бірін қабылдайды:
+    <code>True</code> (ақиқат) немесе <code>False</code> (жалған).
+  </p>
+  <pre><code class="language-python">x = 5
+y = 10
+
+is_less = x &lt; y
+is_equal = x == y
+
+print(is_less)   # True
+print(is_equal)  # False</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">1-мысал · Сан 1 мен 10 аралығында ма?</h3>
+  <pre><code class="language-python">x = int(input("Санды енгіз: "))
+
+if x &gt;= 1 and x &lt;= 10:
+    print("Сан 1 мен 10 аралығында.")
+else:
+    print("Диапазоннан тыс.")</code></pre>
+
+  <pre><code class="language-text">Кіріс: 7
+Шығыс: Сан 1 мен 10 аралығында.</code></pre>
+
+  <h3 style="margin-top:18px;">2-мысал · Емтиханнан өттің бе?</h3>
+  <p>Егер баға 50-ден жоғары <b>немесе</b> қосымша жұмыс тапсырылса, студент өтеді.</p>
+  <pre><code class="language-python">score = int(input("Бағаңды енгіз: "))
+extra_work = input("Қосымша жұмыс тапсырдың ба? (иә/жоқ): ")
+
+has_extra = extra_work.lower() == "иә"
+
+if score &gt;= 50 or has_extra:
+    print("Сен емтиханнан өттің!")
+else:
+    print("Әлі дайындалу керек.")</code></pre>
+
+  <h3 style="margin-top:18px;">3-мысал · Тыйым салынған аймақ</h3>
+  <p>Жас бойынша шектеу: 18 жастан кіші болса, кіргізілмейді.</p>
+  <pre><code class="language-python">age = int(input("Жасың: "))
+
+if not (age &gt;= 18):
+    print("Кіруге рұқсат жоқ (жасың 18-ге толмаған).")
+else:
+    print("Кіруге рұқсат.")</code></pre>
+
+  <h3 style="margin-top:18px;">4-мысал · Қауіпсіз пароль ме?</h3>
+  <p>Қарапайым логика: пароль қысқа <b>немесе</b> бос болса — жарамсыз.</p>
+  <pre><code class="language-python">password = input("Пароль енгіз: ")
+
+if password == "" or len(password) &lt; 6:
+    print("Пароль тым қысқа немесе бос.")
+else:
+    print("Пароль қабылданды.")</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Сан диапазонда ма?</h3>
+  <p>
+    Пайдаланушыдан бір бүтін сан енгізіп, оның
+    <b>1 мен 100 аралығында</b> екенін және <b>5-ке бөлінбейтінін</b> тексеретін программа жаз.
+  </p>
+
+  <table class="io-table">
+    <thead>
+      <tr>
+        <th>Кіріс (x)</th>
+        <th>Шарт</th>
+        <th>Шығыс</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>20</code></td>
+        <td><code>1 ≤ x ≤ 100 and x % 5 != 0</code></td>
+        <td><code>False</code> (5-ке бөлінеді)</td>
+      </tr>
+      <tr>
+        <td><code>37</code></td>
+        <td><code>1 ≤ x ≤ 100 and x % 5 != 0</code></td>
+        <td><code>True</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:18px;">Тапсырма 2 · Күн райына кеңес</h3>
+  <p>
+    Пайдаланушыдан ауа температурасы мен жауын-шашын туралы ақпарат ал:
+    <code>t</code> — температура, <code>rain</code> — «иә/жоқ».
+    Келесі логика бойынша хабарлама шығаратын программа жаз:
+  </p>
+  <ul>
+    <li>Егер <code>t &lt; 0</code> <b>және</b> <code>rain == "иә"</code> → <code>"Қар аралас жаңбыр, жылы киін!"</code>;</li>
+    <li>Егер <code>t &gt;= 20</code> <b>немесе</b> жаңбыр емес → <code>"Жылы ауа райы."</code>;</li>
+    <li>Қалған жағдайда → <code>"Ауа райы өзгермелі."</code>.</li>
+  </ul>
+
+  <h3 style="margin-top:18px;">Тапсырма 3 · Қарапайым авторизация</h3>
+  <p>
+    Логин мен пароль бойынша кіргізетін программа жаз:
+  </p>
+  <ul>
+    <li>Логин <code>"student"</code>, пароль ұзындығы кемінде 6 символ;</li>
+    <li>Егер логин дұрыс <b>және</b> пароль ұзындығы жеткілікті болса → <code>"Қош келдің, студент!"</code>;</li>
+    <li>Әйтпесе → <code>"Логин немесе пароль қате."</code>.</li>
+  </ul>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (10 СҰРАҚ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="25">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі 10 тест сұрағына жауап бер де,
+    <b>«Тексеру»</b> батырмасын басып, нәтижеңді көр.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Күрделі шарт дегеніміз не?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Тек бір салыстырудан тұратын шарт
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Логикалық амалдармен біріктірілген бірнеше шарт
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Тек цикл ішінде қолданылатын шарт
+      </label>
     </div>
 
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Қай өрнек <code>and</code> амалына мысал?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>x or y</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>not x</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>(x &gt; 0) and (x &lt; 10)</code>
+      </label>
+    </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Қай логикалық амал кем дегенде бір шарттың ақиқат болуын талап етеді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>or</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>and</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>not</code>
+      </label>
+    </div>
 
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) Қай өрнек <code>not</code> амалын дұрыс қолданады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) <code>x not y</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) <code>not (x &gt; 0)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) <code>x != not y</code>
+      </label>
+    </div>
 
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Логикалық амалдардың орындалу реті қай жауапта дұрыс берілген?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) <code>or</code>, <code>and</code>, салыстыру, <code>not</code>, жақша
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) салыстыру, <code>not</code>, <code>and</code>, <code>or</code>, жақша
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) жақша, <code>not</code>, салыстыру (&gt;, &lt;, == ...), <code>and</code>, <code>or</code>
+      </label>
+    </div>
 
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>6) Python-да логикалық айнымалы қандай мәндерді қабылдай алады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) <code>True</code> және <code>False</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) <code>1</code> және <code>0</code> ғана
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) Кез келген мәтін
+      </label>
+    </div>
 
+    <!-- 7-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>7) Қай өрнек «сан 1 мен 100 арасында» деген шартты дұрыс көрсетеді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="a">
+        а) <code>x &gt; 1 or x &lt; 100</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="b">
+        ә) <code>x &gt;= 1 and x &lt;= 100</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="c">
+        б) <code>x &lt; 1 and x &gt; 100</code>
+      </label>
+    </div>
 
+    <!-- 8-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>8) Қай программа фрагментінде күрделі шарт қолданылады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="a">
+        а)
+        <pre><code class="language-python">if x &gt; 0:
+    print("оң")</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="b">
+        ә)
+        <pre><code class="language-python">if x == 0:
+    print("нөл")</code></pre>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="c">
+        б)
+        <pre><code class="language-python">if x &gt; 0 and x &lt; 10:
+    print("аралықта")</code></pre>
+      </label>
+    </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 9-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>9) Келесі кодта қандай логикалық амал қолданылған?</b></p>
+      <pre><code class="language-python">if not is_raining:
+    print("Серуендеуге болады")</code></pre>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="a">
+        а) <code>not</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="b">
+        ә) <code>and</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="c">
+        б) <code>or</code>
+      </label>
+    </div>
 
+    <!-- 10-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>10) Қай өрнек <code>A &lt; B</code>-ге логикалық тұрғыда тең?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="a">
+        а) <code>not (A &lt; B)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="b">
+        ә) <code>not (A &gt;= B)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="c">
+        б) <code>A &gt;= B and A &lt; B</code>
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+  </div>
 
+  <button id="checkQuiz" class="quiz-check-btn">
+    Тексеру
+  </button>
+  <p id="quizResult" class="quiz-result-text"></p>
+</section>
 
-</div>
-
-
-
-
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+{% endblock %}

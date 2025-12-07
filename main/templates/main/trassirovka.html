@@ -1,188 +1,490 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Алгоритм трассировкасы{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <link rel="alternate" type="application/rss+xml" title="PythonRu » Лента" href="https://pythonru.com/feed">
-    <link rel="icon" type="image/png" href="https://pythonru.com/wp-content/uploads/2019/04/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://pythonru.com/wp-content/uploads/2018/11/bm-76x76.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://pythonru.com/wp-content/uploads/2018/11/bm-120x120.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://pythonru.com/wp-content/uploads/2018/11/bm-152x152.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://pythonru.com/wp-content/uploads/2018/11/bm-114x114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://pythonru.com/wp-content/uploads/2018/11/bm-144x144.png">
-    <script type="text/javascript" src="https://pythonru.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
-    <link rel="amphtml" href="https://pythonru.com/osnovy/fajly-v-python-vvod-vyvod?ysclid=lfm9qe8keh52925195&amp;amp">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Алгоритм трассировкасы</h1>
+<p class="subtitle">
+  Бұл сабақта қате түрлерін, трассировкалау ұғымын, алгоритмді қадамдап
+  орындау тәсілін және трассировка кестесін рәсімдеуді үйренеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында трассировка кестесін өз бетіңше толтырып, қарапайым
+  программалардағы қателерді таба алуың керек.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-    <title>Алгоритм трассировкасы</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>Алгоритм трассировкасы</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: алгоритмнің трассировкасын жүзеге асыру</h2>
-
-
-<p>Кез-келген программалау тілінде жазылған программаны дер кезінде реттеп, <b>түзетуге </b> (отладка)болады. Программалау тілінде қателерді түзететін өз құралдары бар. Программалаушылар өз тілінде программада жіберілген қателерді  <b>багтар</b> (ағыл. bug-қате), программа кодын түзетуді <b>дебагтар</b> (ағыл. debugger - түзетуші) деп атайды. Python тілінде қатені жөндеп, программаны түзететін, реттейтін өз құралдары бар.</p>
-         <p> Программалаушылар программа жазуда үш түрлі қате жіберуі мүмкін. Олар:</p>
-          <li>Синтаксистік;</li>
-          <li>Программаның орындалу уақытына байланысты;</li>
-          <li>Алгоримдік қателер</li>
-
- <h2>Трассировкалау</h2>
-          <p><b>Трассировкалау</b> алгоритмі кездесетін қатемен жұмыс істеу ретін білдіреді. Программаны біртіндеп, қадамдап орындау процесі <b>трассировка</b> деп аталады.<p/>
-
-          <h2>Мысалы</h2>
-          <img alt="" height="130" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/9648fbff-4f83-4eed-bdd5-5e85a44a00a1/" src="https://ucarecdn.com/9648fbff-4f83-4eed-bdd5-5e85a44a00a1/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F9648fbff-4f83-4eed-bdd5-5e85a44a00a1%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22938%22%2C%22height%22%3A%22159%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
- <h2>Программаны трассировкалау</h2>
-          <img alt="" height="172" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/a2662ae0-2b3f-413a-8faf-8760747c06a3/" src="https://ucarecdn.com/a2662ae0-2b3f-413a-8faf-8760747c06a3/" width="836" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fa2662ae0-2b3f-413a-8faf-8760747c06a3%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22836%22%2C%22height%22%3A%22172%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <a href="https://www.101computing.net/code-breaking-using-trace-tables/" class="cta outline">Трассировка кестесін құру үшін онлайн тапсырмалар</a>
-
-
-          </div>
-      </div>
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:12px;">
+    <li>Программадағы қате түрлерін (синтаксистік, орындалу, алгоритмдік) ажырату;</li>
+    <li>Алгоритм трассировкасы деген ұғымды түсіну;</li>
+    <li>Қарапайым программаға трассировка кестесін құру;</li>
+    <li>Қателерді табу үшін қадамдап орындау тәсілін қолдану;</li>
+    <li>Mini-quiz арқылы тақырып бойынша білімді тексеру.</li>
   </ul>
-</div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ: ҚАТЕЛЕР ТҮРЛЕРІ ЖӘНЕ ТРАССИРОВКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Программадағы қателер</h3>
+  <p>
+    Кез келген программаны жазғанда қателер жіберілуі мүмкін. Программалаушылар
+    қателерді <b>bug</b>, ал қателерді табу және түзету процесін
+    <b>debugging</b> деп атайды.
+  </p>
+
+  <p>Қателердің негізгі үш түрі бар:</p>
+  <ul>
+    <li>
+      <b>Синтаксистік қате</b> — Python тілінің ережесін бұзу
+      (жабылмаған жақша, тырнақша, дұрыс емес кілт сөз, т.б.).
+    </li>
+    <li>
+      <b>Орындалу уақыты қателері</b> — программа синтаксис бойынша дұрыс,
+      бірақ орындау кезінде қате туындайды (нөлге бөлу, жоқ файлды ашу, т.б.).
+    </li>
+    <li>
+      <b>Алгоритмдік қате</b> — программа қате логикамен жазылғандықтан,
+      нәтиже дұрыс шықпайды (формула қате, шарт дұрыс қойылмаған, т.б.).
+    </li>
+  </ul>
+
+  <h3>Алгоритм трассировкасы деген не?</h3>
+  <p>
+    <b>Трассировкалау</b> — программаны қадамдап орындап, әр қадамда
+    айнымалылар мәнін, орындалған командаларды бақылау процесі.
+  </p>
+  <p>
+    Басқаша айтқанда, біз <b>қолмен орындау</b> жасаймыз: кіріс мәнін таңдап,
+    цикл мен шарттар қалай жұмыс істейтінін қадам-қадаммен жазып шығамыз.
+  </p>
+
+  <h4>Трассировка не үшін қажет?</h4>
+  <ul>
+    <li>Программа логикасын терең түсіну үшін;</li>
+    <li>Алгоритмдік қателерді табу үшін;</li>
+    <li>Цикл, шарт, айнымалылардың өзгеруін көзбен көру үшін;</li>
+    <li>Олимпиадалық есептер шешкенде «қолмен тексеру» үшін.</li>
+  </ul>
+
+  <h4>Қарапайым мысал</h4>
+  <p>Мына программаны қарастырайық:</p>
+
+  <pre><code class="language-python">x = 0
+for i in range(1, 4):
+    x = x + i
+    print("i =", i, "x =", x)</code></pre>
+
+  <p>
+    Бұл жерде <code>i</code> – цикл айнымалысы, <code>x</code> – жинақталған
+    қосынды. Трассировка кестесінде әр қадамда <code>i</code> және
+    <code>x</code> мәндерін белгілейміз.
+  </p>
+
+  <table class="io-table" style="margin-top:10px;">
+    <thead>
+      <tr>
+        <th>Қадам</th>
+        <th>i</th>
+        <th>Ескі x</th>
+        <th>Жаңа x = x + i</th>
+        <th>Экранға шығатын мән</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Бастапқы</td>
+        <td>–</td>
+        <td>0</td>
+        <td>–</td>
+        <td>Ештеңе жоқ</td>
+      </tr>
+      <tr>
+        <td>1-итерация</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td><code>i = 1 x = 1</code></td>
+      </tr>
+      <tr>
+        <td>2-итерация</td>
+        <td>2</td>
+        <td>1</td>
+        <td>3</td>
+        <td><code>i = 2 x = 3</code></td>
+      </tr>
+      <tr>
+        <td>3-итерация</td>
+        <td>3</td>
+        <td>3</td>
+        <td>6</td>
+        <td><code>i = 3 x = 6</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:8px;">
+    Осылайша цикл аяқталғаннан кейін <code>x</code> мәні <b>6</b>-ға тең болады.
+  </p>
+
+  <h4>Қызықты факт</h4>
+  <p>
+    «Bug» сөзі (қате) программалауда кездейсоқ шықпаған: бір есептеу
+    машинасында нақты жәндік (көбелек) тұрып қалып, ақау берген. Сол кезден
+    бастап программалардағы қателерді де «bug» деп атап кетті.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР: ТРАССИРОВКА КЕСТЕСІ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="25">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <!-- Мысал 1 -->
+  <h3 style="margin-top:14px;">1-мысал · Екі еселенген мән</h3>
+  <p>Мына программаны трассировка кестесі арқылы орында:</p>
+
+  <pre><code class="language-python">x = 2
+y = 0
+for i in range(3):
+    y = y + x
+    x = x * 2
+print("y =", y)
+print("x =", x)</code></pre>
+
+  <table class="io-table" style="margin-top:10px;">
+    <thead>
+      <tr>
+        <th>Қадам</th>
+        <th>i</th>
+        <th>Ескі x</th>
+        <th>Ескі y</th>
+        <th>Жаңа y = y + x</th>
+        <th>Жаңа x = x * 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Бастапқы</td>
+        <td>–</td>
+        <td>2</td>
+        <td>0</td>
+        <td>–</td>
+        <td>–</td>
+      </tr>
+      <tr>
+        <td>1-итерация</td>
+        <td>0</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>2-итерация</td>
+        <td>1</td>
+        <td>4</td>
+        <td>2</td>
+        <td>6</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>3-итерация</td>
+        <td>2</td>
+        <td>8</td>
+        <td>6</td>
+        <td>14</td>
+        <td>16</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:6px;">
+    Соңында экранға <code>y = 14</code> және <code>x = 16</code> шығады.
+  </p>
+
+  <!-- Мысал 2 -->
+  <h3 style="margin-top:20px;">2-мысал · Максималды мәнді табу</h3>
+  <p>Төмендегі программа үш сан ішінен ең үлкенін тауып береді:</p>
+
+  <pre><code class="language-python">max_value = -10**9
+numbers = [4, 9, 2]
+
+for x in numbers:
+    if x &gt; max_value:
+        max_value = x
+
+print("Максимум:", max_value)</code></pre>
+
+  <table class="io-table" style="margin-top:10px;">
+    <thead>
+      <tr>
+        <th>Қадам</th>
+        <th>x</th>
+        <th>Ескі max_value</th>
+        <th>Шарт <code>x &gt; max_value</code></th>
+        <th>Жаңа max_value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Бастапқы</td>
+        <td>–</td>
+        <td>-10⁹</td>
+        <td>–</td>
+        <td>-10⁹</td>
+      </tr>
+      <tr>
+        <td>1-элемент</td>
+        <td>4</td>
+        <td>-10⁹</td>
+        <td>ИӘ</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>2-элемент</td>
+        <td>9</td>
+        <td>4</td>
+        <td>ИӘ</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>3-элемент</td>
+        <td>2</td>
+        <td>9</td>
+        <td>ЖОҚ</td>
+        <td>9</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:6px;">
+    Трассировкадан көрініп тұрғандай, соңында <code>max_value = 9</code>.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Циклді трассировкалау</h3>
+  <p>Мына программаны дәптерде трассировка кестесі арқылы орында:</p>
+
+  <pre><code class="language-python">s = 0
+for i in range(1, 6):
+    s = s + i
+print(s)</code></pre>
+
+  <p>Кестеңде кем дегенде мына бағандар болсын:</p>
+  <ul>
+    <li>Қадам (итерация нөмірі);</li>
+    <li><code>i</code> мәні;</li>
+    <li>Ескі <code>s</code>;</li>
+    <li>Жаңа <code>s = s + i</code>;</li>
+    <li>Экранға шығатын нәтиже (бар болса).</li>
+  </ul>
+
+  <h3 style="margin-top:16px;">Тапсырма 2 · Шартпен трассировка</h3>
+  <p>Келесі программаны трассировкалап, қай сандар экранға шығатынын анықта:</p>
+
+  <pre><code class="language-python">for x in range(1, 8):
+    if x % 2 == 0:
+        print(x, "жұп")
+    else:
+        print(x, "тақ")</code></pre>
+
+  <p>Кестеде <code>x</code>, <code>x % 2 == 0</code> шартын және экранға шыққан
+    мәтінді белгіле.</p>
+
+  <h3 style="margin-top:16px;">Тапсырма 3 · Өз программана трассировка жаз</h3>
+  <p>
+    1–2 программа ойлап тап (цикл және шарт қолданатын болсын) және әр
+    программаның трассировка кестесін дәптерге түсір.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:8px;">
+    Төмендегі тест сұрақтарына жауап бер де, «Тексеру» батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Алгоритм трассировкасы деген не?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Программаны өте жылдам орындау әдісі
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Программаны қадамдап орындап, айнымалыларды бақылау процесі
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Тек синтаксистік қателерді түзету тәсілі
+      </label>
     </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Қайсысы алгоритмдік қате?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) Тырнақшаны жабуды ұмытып кету
+      </label>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>ZeroDivisionError</code> (нөлге бөлу)
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) Формулада <code>a + b</code> орнына қате жазып <code>a - b</code> қолдану
+      </label>
+    </div>
 
-</div>
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Трассировка кестесінде не жазылады?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) Қадам нөмірі, айнымалылар мәні, шарттар және экранға шыққан мәтін
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) Тек программа мәтіні ғана
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) Компьютердің техникалық сипаттамалары
+      </label>
+    </div>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) Қай жұп — «қате түрі · мысал» дұрыс берілген?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) Синтаксистік қате · формула логикасы қате
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) Орындалу уақыты қатесі · нөлге бөлу
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) Алгоритмдік қате · тырнақша жабылмаған
+      </label>
+    </div>
+
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Трассировкалау қай кезде ерекше пайдалы?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) Тек программа өте қысқа болғанда
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) Тек графикалық интерфейс жазғанда
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Циклдер мен шарттар көп болғанда, логикасы күрделенген кезде
+      </label>
+    </div>
+  </div>
+
+  <button id="checkQuiz" class="quiz-check-btn" type="button" style="margin-top:4px;">
+    Тексеру
+  </button>
+  <div id="quizResult" class="quiz-result"></div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. ҚОРЫТЫНДЫ / ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Сабақты аяқтау</h2>
+    <button class="btn-done" data-block="homework" data-xp="15">
+      ⬜ Орындалды (Үй жұмысы)
+    </button>
+  </div>
+
+  <h3 style="margin-top:12px;">Сабақты қорытындылау</h3>
+  <ul>
+    <li>Қате түрлерін ажырата аламын;</li>
+    <li>Трассировка кестесін құра аламын;</li>
+    <li>Цикл мен шартты қадамдап түсіндіре аламын;</li>
+    <li>Mini-quiz сұрақтарына жауап бере алдым.</li>
+  </ul>
+
+  <h3>Үй тапсырмасы</h3>
+  <ul>
+    <li>Кем дегенде екі программа ойлап тап (цикл және шартпен);</li>
+    <li>Әр программаға толық трассировка кестесін жаса;</li>
+    <li>Қандай жерде қате кетуі мүмкін екенін ойлан, мүмкін болатын қателерді жаз.</li>
+  </ul>
+</section>
+
+{% endblock %}

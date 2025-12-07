@@ -1,187 +1,535 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Тармақталған алгоритмдер{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Тармақталған алгоритмдер</h1>
+<p class="subtitle">
+  Бұл сабақта <b>if, elif, else</b> тармақталу операторларын, салыстыру белгілерін,
+  логикалық тексерулерді және оларды Python тілінде жазу тәсілдерін үйренеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында сен тармақталған алгоритм құрып, әртүрлі шарттар бойынша
+  шешім қабылдай алатын боласың.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
-
-
-    <title>Тармақталған алгоритмдерді программалау</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>Тармақталған алгоритмдерді программалау</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: Python (пайтон) программалау тілінде тармақталған алгоритмдерді жазу</h2>
-<h2> Тармақталған алгоритмдерді программалау </h2>
-<p>Тармақталған алгоритм (Разветвляющийся алгоритм; bifurcating algorithm) — 1) толық емес формасы — бұл алгоритм берілген шартқа тәуелді болғандықтан кейбір әрекеттерді орындамауы мүмкін; 2) толық формасы — мұндай алгоритм берілген шартқа байланысты әрекетгердің біріншісін немесе басқасын орындайды.</p>
-                    <img alt="" height="400" data-cke-saved-name="if elif else.jpg" name="if elif else.jpg" data-cke-saved-src="https://ucarecdn.com/28a54d83-91df-4515-940f-d896970fd22a/-/crop/814x987/0,0/-/preview/" src="https://ucarecdn.com/28a54d83-91df-4515-940f-d896970fd22a/-/crop/814x987/0,0/-/preview/" width="400" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F28a54d83-91df-4515-940f-d896970fd22a%2F-%2Fcrop%2F814x987%2F0%2C0%2F-%2Fpreview%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22814%22%2C%22height%22%3A%22987%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-          <div style="font-size:"16px;" data-customstyle="yes"> <strong></strong> <strong>Шартты инструкция</strong>  <span data-redactor-tag="span" style="color: rgb(14, 125, 120);"> if-elif-else </span><strong>(тармақталу операторы) </strong>-Python-дағы негізгі таңдау құралы. Қарапайым тілмен айтқанда, ол шартты тексеру кезінде айнымалылардың мәніне байланысты қандай әрекетті орындау керектігін таңдайды. Бұл нұсқаулықты қолданудың бірнеше нұсқалары бар. <br><br> <strong>1. Шартты  конструкция</strong> <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if </span></strong><br>  <strong></strong> Python-да <span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if </span> командасы басқа бағдарламалау тілдеріндегідей схема бойынша жұмыс істейді. Онда логикалық шарт бар, егер бұл шарт ақиқат болса (<strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">True</span></strong> мәніне тең), онда <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if</span></strong> командасының ішінде жазылған код бөлігі орындалады. Егер логикалық шарт жалған болса (<strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">False</span></strong> мәніне тең),онда  <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if</span></strong>  командасының ішінде жазылған код бөлігі өткізіліп жіберіледі, кодты орындау <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if</span></strong> блогынан кейінгі  келесі код жолына ауысады.<br></div>
-<img alt="" height="130" data-cke-saved-name="222ss.png" name="222ss.png" data-cke-saved-src="https://ucarecdn.com/7a603886-8384-4947-a645-6dfdb65ec421/" src="https://ucarecdn.com/7a603886-8384-4947-a645-6dfdb65ec421/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F7a603886-8384-4947-a645-6dfdb65ec421%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22930%22%2C%22height%22%3A%22143%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<div style="font-size:"16px;" data-customstyle="yes"> <strong>2.<span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if...else</span> конструкциясы</strong><br><strong> if</strong> конструкциясына <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">else</span></strong> командасы қосылуы мүмкін. Ол  егер <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if</span></strong>  командасындағы шарт жалған болса,  орындалатын код бөлігінен тұрады . <br><br>  <span style="color: rgb(14, 125, 120);"><strong>else</strong> </span> командасы  опционалды болып табылады, әрбір <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">if</span> </strong>- конструкциясында  тек ғана бір <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">else</span></strong> командасы болады. <br><br> Мысалы: <br></div>
-    <img alt="" height="130" data-cke-saved-name="ӘӘӘӘ.png" name="ӘӘӘӘ.png" data-cke-saved-src="https://ucarecdn.com/6b04deb6-757b-4074-a3a0-46126810bd3b/" src="https://ucarecdn.com/6b04deb6-757b-4074-a3a0-46126810bd3b/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F6b04deb6-757b-4074-a3a0-46126810bd3b%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221112%22%2C%22height%22%3A%22143%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-    <div style="font-size:"16px;" data-customstyle="yes"><strong>3.<span data-redactor-tag="span" style="color: rgb(14, 125, 120);">elif</span></strong> командасы <br><strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">elif</span></strong> командасы <strong>бірнеше</strong> өрнектердің ақиқаттылығын тексеруге мүмкіндік береді және  тексеру нәтижесіне байланысты кодтың қажетті бөлігін орындайды. <br><br>  else командасы сияқты,  <span style="color: rgb(14, 125, 120);"><strong>elif</strong></span>  командасыда  <strong>опционалды</strong> болып табылады, бірақ,  <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">else</span></strong> командасынан артықшылығы, бір if-конструкциясында  <strong>саны шектеусіз </strong> <strong><span data-redactor-tag="span" style="color: rgb(14, 125, 120);">elif</span></strong> командалары болуы мүмкін. <br><br> Мысалы: <br></div>
-  <img alt="" height="141" data-cke-saved-name="qqqq.png" name="qqqq.png" data-cke-saved-src="https://ucarecdn.com/adf2e3f2-e0a6-4cfe-85d4-faf401fee791/" src="https://ucarecdn.com/adf2e3f2-e0a6-4cfe-85d4-faf401fee791/" width="422" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fadf2e3f2-e0a6-4cfe-85d4-faf401fee791%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22422%22%2C%22height%22%3A%22141%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-      </div>
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
-  </ul>
-</div>
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
   </div>
 
+  <ul style="margin-top:12px;">
+    <li><b>Тармақталған алгоритм</b> ұғымын түсіну;</li>
+    <li><b>if, elif, else</b> операторларының синтаксисін білу;</li>
+    <li>Салыстыру (<code>&gt;</code>, <code>&lt;</code>, <code>==</code>, <code>&gt;=</code>, т.б.) және логикалық (<code>and</code>, <code>or</code>, <code>not</code>) операторларды қолдану;</li>
+    <li>Шартқа байланысты әртүрлі нәтиже беретін программалар құрастыру;</li>
+    <li>Mini-quiz арқылы білімді тексеру.</li>
+  </ul>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:16px;">Тармақталған алгоритм деген не?</h3>
+  <p>
+    <b>Тармақталған алгоритм</b> — белгілі бір <b>шартқа</b> байланысты
+    әртүрлі әрекеттер орындалатын алгоритм. Егер шарт <b>true (ақиқат)</b>
+    болса – бір тармақ, ал <b>false (жалған)</b> болса – басқа тармақ орындалады.
+  </p>
 
+  <h3>Python-дағы негізгі салыстыру операторлары</h3>
+  <ul>
+    <li><code>&gt;</code> – үлкен;</li>
+    <li><code>&lt;</code> – кіші;</li>
+    <li><code>&gt;=</code> – үлкен немесе тең;</li>
+    <li><code>&lt;=</code> – кіші немесе тең;</li>
+    <li><code>==</code> – тең (екі мәнді салыстыру);</li>
+    <li><code>!=</code> – тең емес.</li>
+  </ul>
 
+  <h3>Негізгі синтаксис: if</h3>
+  <pre><code class="language-python">if шарт:
+    # шарт ақиқат болса орындалатын блок
+    команда_1
+    команда_2</code></pre>
+
+  <h3>if ... else синтаксисі</h3>
+  <pre><code class="language-python">if шарт:
+    # шарт true болса
+    команда_1
+else:
+    # шарт false болса
+    команда_2</code></pre>
+
+  <h3>Көп тармақты құрылым: if ... elif ... else</h3>
+  <pre><code class="language-python">if шарт_1:
+    # 1-шарт орындалса
+    блок_1
+elif шарт_2:
+    # 2-шарт орындалса
+    блок_2
+else:
+    # ешбір шарт орындалмаса
+    блок_3</code></pre>
+
+  <p style="margin-top:10px;">
+    <b>Маңызды:</b> Python-да шегініс (<b>indentation</b>) өте маңызды.
+    <code>if</code> ішіндегі барлық командалар бірдей шегініспен жазылуы тиіс.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="25">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <!-- 1-мысал -->
+  <h3 style="margin-top:14px;">1-мысал · Санның таңбасын анықтау</h3>
+  <p>Пайдаланушы енгізген санның оң, теріс немесе нөл екенін анықтаймыз.</p>
+
+  <pre><code class="language-python">x = float(input("Сан енгіз: "))
+
+if x &gt; 0:
+    print("Сан оң")
+elif x &lt; 0:
+    print("Сан теріс")
+else:
+    print("Сан нөлге тең")</code></pre>
+
+  <p><b>Бағдарлама нәтижесінің үлгісі:</b></p>
+  <pre><code class="language-python">Сан енгіз: -3
+Сан теріс</code></pre>
+
+  <!-- 2-мысал -->
+  <h3 style="margin-top:22px;">2-мысал · Жас бойынша шешім қабылдау</h3>
+  <p>Егер жас 18-ден үлкен немесе тең болса – "ересек", әйтпесе – "әлі кішкентай".</p>
+
+  <pre><code class="language-python">age = int(input("Жасыңды енгіз: "))
+
+if age &gt;= 18:
+    print("Сен ересексің")
+else:
+    print("Сен әлі кішкентайсың")</code></pre>
+
+  <p><b>Бағдарлама нәтижесінің үлгісі:</b></p>
+  <pre><code class="language-python">Жасыңды енгіз: 16
+Сен әлі кішкентайсың</code></pre>
+
+  <!-- 3-мысал -->
+  <h3 style="margin-top:22px;">3-мысал · Екі санның үлкенін табу</h3>
+  <p>Пайдаланушы енгізген екі санның үлкенін экранға шығарамыз.</p>
+
+  <pre><code class="language-python">a = float(input("a санын енгіз: "))
+b = float(input("b санын енгіз: "))
+
+if a &gt; b:
+    print("Үлкен сан:", a)
+elif b &gt; a:
+    print("Үлкен сан:", b)
+else:
+    print("Екі сан тең")</code></pre>
+
+  <p><b>Бағдарлама нәтижесінің үлгісі:</b></p>
+  <pre><code class="language-python">a санын енгіз: 5
+b санын енгіз: 9
+Үлкен сан: 9</code></pre>
+
+  <!-- 4-мысал -->
+  <h3 style="margin-top:22px;">4-мысал · Баға қою (бағалау)</h3>
+  <p>Оқушының баллына байланысты баға қоямыз.</p>
+
+  <pre><code class="language-python">score = int(input("Баллды енгіз (0-100): "))
+
+if score &gt;= 90:
+    print("Баға: 5")
+elif score &gt;= 75:
+    print("Баға: 4")
+elif score &gt;= 50:
+    print("Баға: 3")
+else:
+    print("Баға: 2")</code></pre>
+
+  <p><b>Бағдарлама нәтижесінің үлгісі:</b></p>
+  <pre><code class="language-python">Баллды енгіз (0-100): 82
+Баға: 4</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <!-- Тапсырма 1 -->
+  <div class="task-card">
+    <h3 style="margin-top:14px;">Тапсырма 1 · Жұп немесе тақ?</h3>
+    <p>
+      Пайдаланушы енгізген бүтін санның <b>жұп</b> немесе <b>тақ</b> екенін анықтайтын
+      программа жаз.
+    </p>
+
+    <div class="task-io">
+      <p class="task-io-title">Кіріс–шығыс деректерінің үлгісі:</p>
+
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс (input)</th>
+            <th>Шарт</th>
+            <th>Шығыс (output)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>7</code></td>
+            <td><code>7 % 2 != 0</code></td>
+            <td><code>"Тақ сан"</code></td>
+          </tr>
+          <tr>
+            <td><code>12</code></td>
+            <td><code>12 % 2 == 0</code></td>
+            <td><code>"Жұп сан"</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Тапсырма 2 -->
+  <div class="task-card">
+    <h3 style="margin-top:18px;">Тапсырма 2 · Температура бойынша кеңес</h3>
+    <p>
+      Температура мәні бойынша хабарлама шығаратын программа құрастыр:
+    </p>
+    <ul>
+      <li>Егер <code>t &lt; 0</code> болса – <code>"Суық, жылы киін!"</code>;</li>
+      <li>Егер <code>0 ≤ t &lt; 20</code> болса – <code>"Салқын, жеңіл күртеше кисең болады."</code>;</li>
+      <li>Егер <code>t ≥ 20</code> болса – <code>"Жылы ауа райы, жеңіл киін."</code>.</li>
+    </ul>
+
+    <div class="task-io">
+      <p class="task-io-title">Мысалдар кестесі:</p>
+
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс (t)</th>
+            <th>Шарт</th>
+            <th>Шығыс (хабарлама)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>-5</code></td>
+            <td><code>t &lt; 0</code></td>
+            <td><code>"Суық, жылы киін!"</code></td>
+          </tr>
+          <tr>
+            <td><code>12</code></td>
+            <td><code>0 &lt;= t &lt; 20</code></td>
+            <td><code>"Салқын, жеңіл күртеше кисең болады."</code></td>
+          </tr>
+          <tr>
+            <td><code>25</code></td>
+            <td><code>t &gt;= 20</code></td>
+            <td><code>"Жылы ауа райы, жеңіл киін."</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Тапсырма 3 -->
+  <div class="task-card">
+    <h3 style="margin-top:18px;">Тапсырма 3 · Қарапайым калькулятор (екі амал)</h3>
+    <p>
+      Пайдаланушыдан екі сан және амал таңбасын (<code>+</code>, <code>-</code>)
+      сұрайтын бағдарлама жаз. Амал таңбасына байланысты қосу немесе азайту
+      операциясын орында.
+    </p>
+
+    <div class="task-io">
+      <p class="task-io-title">Калькулятор жұмысының үлгілері:</p>
+
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс</th>
+            <th>Орындалатын амал</th>
+            <th>Шығыс (нәтиже)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>a = 7, b = 3, op = "+"</code></td>
+            <td><code>7 + 3</code></td>
+            <td><code>10</code></td>
+          </tr>
+          <tr>
+            <td><code>a = 7, b = 3, op = "-"</code></td>
+            <td><code>7 - 3</code></td>
+            <td><code>4</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (ОНЛАЙН ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz (тармақталған алгоритм)</h2>
+    <button class="btn-done" data-block="quiz" data-xp="20">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі 6 сұраққа жауап бер. Соңында <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Тармақталған алгоритм деген не?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Барлық қадамдары тек қайталанудан тұратын алгоритм
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Шартқа байланысты әртүрлі тармақтармен орындалатын алгоритм
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Тек бір ғана командадан тұратын алгоритм
+      </label>
     </div>
 
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Python-дағы тармақталу операторы қалай жазылады?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>if шарт then</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>if (шарт) { ... }</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>if шарт:</code>
+      </label>
+    </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Қай салыстыру операторы "тең" дегенді білдіреді?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>==</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>=</code>
+      </label>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>!=</code>
+      </label>
+    </div>
 
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) Қандай программа сызықтық емес, тармақталған алгоритм?</b></p>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а)
+        <pre><code class="language-python">x = int(input())
+y = int(input())
+s = x + y
+print(s)</code></pre>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә)
+        <pre><code class="language-python">x = int(input())
+if x &gt; 0:
+    print("оң")</code></pre>
+      </label>
 
-</div>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б)
+        <pre><code class="language-python">i = 1
+while i &lt;= 3:
+    print(i)
+    i += 1</code></pre>
+      </label>
+    </div>
 
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>5) Төмендегі код үшін x = 10 болса не шығады?</b></p>
 
+      <pre><code class="language-python">x = 10
+if x &gt;= 10:
+    print("A")
+else:
+    print("B")</code></pre>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) <code>A</code>
+      </label>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) <code>B</code>
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Ештеңе шықпайды
+      </label>
+    </div>
+
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>6) Қай жазылым дұрыс?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а)
+        <pre><code class="language-python">if x &gt; 0
+print("оң")</code></pre>
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә)
+        <pre><code class="language-python">if x &gt; 0:
+print("оң")</code></pre>
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б)
+        <pre><code class="language-python">if x &gt; 0:
+    print("оң")</code></pre>
+      </label>
+    </div>
+
+  </div>
+
+  <button type="button" id="checkQuiz" class="quiz-check-btn">
+      Жауаптарды тексеру
+    </button>
+    <p id="quizResult" class="quiz-result"></p>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. ҚОРЫТЫНДЫ / ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Сабақты аяқтау және үй тапсырмасы</h2>
+    <button class="btn-done" data-block="homework" data-xp="20">
+      ⬜ Орындалды (Үй жұмысы)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Сабақты аяқтаудың чек-листі</h3>
+  <ul>
+    <li><b>if, elif, else</b> синтаксисін түсінемін;</li>
+    <li>Салыстыру және логикалық операторларды қолдана аламын;</li>
+    <li>Тармақталған алгоритм құрып, Python тілінде жаза аламын;</li>
+    <li>Mini-quiz сұрақтарына жауап бердім.</li>
+  </ul>
+
+  <h3>Үй тапсырмасы</h3>
+  <ul style="margin-top:8px;">
+    <li>Жоғарыдағы практика тапсырмаларын толық аяқта;</li>
+    <li><b>Өз өміріңнен</b> бір жағдай ойлап тап (мысалы, "үй тапсырмасын орындадым/орындамадым",
+        "баға", "күнделікті режим") және соны тармақталған алгоритм түрінде жаз;</li>
+    <li>Программаны сақтап, келесі сабақта көрсет.</li>
+  </ul>
+</section>
+
+<!-- QUIZ SCRIPT -->
+<script>
+(function(){
+  const btn = document.getElementById("checkQuiz");
+  const resultEl = document.getElementById("quizResult");
+  if(!btn || !resultEl) return;
+
+  btn.addEventListener("click", function(){
+    const items = document.querySelectorAll(".quiz-item");
+    let correct = 0;
+    let total = items.length;
+
+    items.forEach((item) => {
+      const right = item.getAttribute("data-correct");
+      const name = item.querySelector("input[type='radio']").name;
+      const checked = item.querySelector("input[type='radio']:checked");
+
+      item.style.borderLeft = "4px solid transparent";
+
+      if(checked && checked.value === right){
+        correct++;
+        item.style.borderLeft = "4px solid #16a34a";
+      } else if (checked) {
+        item.style.borderLeft = "4px solid #dc2626";
+      }
+    });
+
+    resultEl.textContent = `Дұрыс жауаптар: ${correct} / ${total}`;
+  });
+})();
+</script>
+
+{% endblock %}

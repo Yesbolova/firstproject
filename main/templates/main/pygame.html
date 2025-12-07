@@ -1,258 +1,559 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}PyGame кітапханасы{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <link rel="alternate" type="application/rss+xml" title="PythonRu » Лента" href="https://pythonru.com/feed">
-    <link rel="icon" type="image/png" href="https://pythonru.com/wp-content/uploads/2019/04/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://pythonru.com/wp-content/uploads/2018/11/bm-76x76.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://pythonru.com/wp-content/uploads/2018/11/bm-120x120.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://pythonru.com/wp-content/uploads/2018/11/bm-152x152.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://pythonru.com/wp-content/uploads/2018/11/bm-114x114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://pythonru.com/wp-content/uploads/2018/11/bm-144x144.png">
-    <script type="text/javascript" src="https://pythonru.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
-    <link rel="amphtml" href="https://pythonru.com/osnovy/fajly-v-python-vvod-vyvod?ysclid=lfm9qe8keh52925195&amp;amp">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>PyGame кітапханасы</h1>
+<p class="subtitle">
+  Бұл сабақта Python-да ойын жасауға арналған <b>PyGame</b> кітапханасымен
+  танысамыз: терезе ашу, цикл құру, дұрыс жабу және қарапайым фигуралар
+  салуды үйренеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақтың барлық блоктарын орындасаң, шамамен <b>100 XP</b> жинайсың.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-    <title>PyGame кітапханасы</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>PyGame кітапханасы</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-                    <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: ойын терезесін жасау үшін PyGame кітапханасының дайын модульдерін пайдалану; </h2>
-
-<h2> PYGAME модулі. 2D ойын әзірлеу</h2>
-<p>Ойын әзірлеу көптеген процестерді қамтитын және әртүрлі технологияларды
-қолдануды қажет ететін күрделі процесс.</p>
-          <p>Кез-келген ойын Объектілер + Графика + Физика+ ... деп айтуға болады.
-Барлық осы әртүрлілікті бағдарламалауға ыңғайлы болу үшін фреймворктер қолданылады.</p>
-          <p>Python-да ойын әзірлеуге арналған ең танымал фреймворктердің бірі PyGame-нің мүмкіндіктері:</p
-           <li>Графикалық фигураларды салу</li>
-          <li>Растрлық суреттерді көрсету</li>
-          <li>Объектілерді қозғалту (анимация)</li>
-          <li>Пернетақта мен тінтуірмен байланыс жасау.</li>
-
-
-          <h2>PyGame модулін орнату</h2>
-          <img alt="" height="93" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/d98562d1-8168-46a5-bee7-0441befbec1d/" src="https://ucarecdn.com/d98562d1-8168-46a5-bee7-0441befbec1d/" width="278" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fd98562d1-8168-46a5-bee7-0441befbec1d%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22278%22%2C%22height%22%3A%2293%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p>1. Win + R пернелерін қатар басыңыз<p/>
-          <p>2. Орындау терезесінде cmd командасын енгізіңіз.<p/>
-          <p>3. Командалық жол режимінде c:\> pip install pygame командасын орындаңыз.<p/>
-          <p>4. PyGame модулін орнатудың аяқталуын күтіңіз.<p/>
-
-          <h2>Ойын терезесін анықтау</h2>
-          <p> <b>pygame.init ()</b> # Pygame модулін инициализациялау/дайындау</p>
-          <p> <b>screen = pygame.display.set_mode ((640, 480))</b> # экран өлшемін орнату</p>
-          <p> <b>Import pygame</b> # модульді қосу</p>
-           <h2>Ойыннан дұрыс шығу</h2>
-          <p> import pygame</p>
-<p> pygame.init()</p>
-<p> size = width, height = 400, 300</p>
-<p> screen = pygame.display.set_mode(size)</p>
-                              <p>Ойын терезесін дұрыс жабу үшін пайдаланушы бағдарлама терезесін жабатын оқиға
-болғанға дейін орындалатын ойынның циклын жазуды аяқтау керек.
-Сондықтан енді келесі кодтарды орындауға болады:</p>
-           <p># терезенің жабылуын күту:</p>
- <p>while pygame.event.wait().type != pygame.QUIT:</p>
- <p>pass # pass циклде ештеңені орындау қажет емес кезде қолданылады</p>
- <p># жұмысты аяқтау:</p>
- <p>pygame.quit()</p>
-          <p> Объектілердің қозғалысы табиғи болуы үшін pygame қосарлы буферлеуді қолданады.
-Пайдаланушы бір кадрға қарап тұрғанда, келесі кадр жадта салына бастайды, бұл кезде
-пайдаланушы басқа ештеңені байқамайды. Жаңа кадр салынып болғаннан кейін ол
-экраннан көрсетіледі. Бұл өте тез жүреді және ол жоғары жылдамдықтың әсерінен жай
-жыпылықтау түрінде ға көрінетіндіктен пайдаланушы сурет салу процесін байқамайды.
-Пайдаланушы үшін суреттердің/кадрдың ауысуы бір мезетте болады.
-Бұл ауысуды flip() функциясы орындайды. Сондықтан кадрды салғаннан кейін мына
-команданы орындау қажет:</p>
-          <p> pygame.display.flip()</p>
-           <h2>Draw модулі</h2>
-                    <p>PyGame библитотекасының Draw модулі графикалық примитивтерді салу және
-графикалық мәтінді ұсыну үшін қолданылады.</p>
-            <h2>Тіктөртбұрыш салу</h2>
-          <h3> pygame.draw.rect(screen, color, (x0, y0, width, height), border </h3>
-          <p>screen – surface (жазық бет)<p/>
-<p>color - түс<p/>
-<p>(x0, y0, width, height) - тіктөртбұрыштың сол жақ жоғарғы бұрышының
-координаталары, тіктөртбұрыштың ені, тіктөртбұрыштың биіктігі<p/>
-<p>border -тіктөртбұрыштың жиегінің қалыңдығы, мәні 0 болғанда боялған
-тіктөртбұрыш салынады.</p>
-          <img alt="" height="310" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/5cc3d93d-4f26-4575-96bf-f94c9a86542c/" src="https://ucarecdn.com/5cc3d93d-4f26-4575-96bf-f94c9a86542c/" width="557" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F5cc3d93d-4f26-4575-96bf-f94c9a86542c%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22757%22%2C%22height%22%3A%22410%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-          <h2>Шеңбер/дөңгелек салу</h2>
-
-<h3> pygame.draw.circle(screen, color, (x, y), R, width)</h3>
-
-<p>screen – surface (терезе/алаң)</p>
-<p>color – түс</p>
-<p>(x, y) – шеңбер центрінің координаталары</p>
-<p>R - шеңбердің радиусы</p>
-<p>width - сызықтың қалыңдығы (әдепкіде немесе мәні 0 болғанда - боялған шеңбер)</p>
-          <img alt="" height="376" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/3c530d1a-1e89-4383-8312-451537d1c3d8/" src="https://ucarecdn.com/3c530d1a-1e89-4383-8312-451537d1c3d8/" width="474" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F3c530d1a-1e89-4383-8312-451537d1c3d8%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22874%22%2C%22height%22%3A%22776%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-         <h2> Нүкте салу</h2>
-<p>Pygame-де пиксельді салудың арнайы командасы жоқ, бірақ оны <b>fill()</b> әдісімен салуға
-болады.</p>
-<p>Мысалы, код</p>
-<h3>Фигураны атауы.fill(color, (x, y, 1, 1))</h3>
-<p>Біз сурет салуға көп уақыт жұмсауымыз мүмкін, себебі draw модулінің сурет салу
-мүмкіндігі үлкен, алайда pygame модулін 2D ойынын құру аясында үйрену кезінде сурет
-салу басты мақсат емес.</p>
-<p> графикалық примитивтермен танысуға
-болады:</p>
-<p>pygame.draw.line(Surface, color, start_pos, end_pos, width)</p>
-<p>pygame.draw.ellipse(Surface, color, Rect, width)</p>
-<p>pygame.draw.polygon (Surface, color, pointlist, width)</p>
-         <p> Қосымша пайдалы ресурстар:</p>
-
-    <a href="https://www.pygame.org/docs/ref/draw.html" class="cta outline">https://www.pygame.org/docs/ref/draw.html</a>
-<p><p>
-          </div>
-      </div>
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:10px;">
+    <li>PyGame кітапханасының не үшін қолданылатынын түсіну;</li>
+    <li><code>pip install pygame</code> арқылы модульді орната білу;</li>
+    <li>Ойын терезесін құрып, оны дұрыс жабу циклін жазу;</li>
+    <li><code>pygame.draw</code> модулімен негізгі фигураларды салуды білу;</li>
+    <li>Mini-quiz арқылы білімін тексеру.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ: PYGAME НЕ ҮШІН ҚОЛДАНЫЛАДЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">PyGame деген не?</h3>
+  <p>
+    <b>PyGame</b> — Python тілінде <b>2D ойындар</b> әзірлеуге арналған
+    кітапхана (фреймворк). Ойындарды былайша сипаттауға болады:
+    <b>объектілер + графика + физика + басқару</b>.
+    Осылардың бәрін Python-да ыңғайлы басқару үшін PyGame қолданылады.
+  </p>
+
+  <p>PyGame мүмкіндіктері:</p>
+  <ul>
+    <li>графикалық фигураларды салу;</li>
+    <li>растрлық суреттерді көрсету (спрайттар);</li>
+    <li>объектілерді қозғалту (анимация);</li>
+    <li>пернетақта және тінтуірмен байланыс жасау;</li>
+    <li>дыбыс пен музыка ойнату.</li>
+  </ul>
+
+  <h3>PyGame модулін орнату</h3>
+  <p>Windows жүйесінде орнату қадамдары:</p>
+  <ol>
+    <li><b>Win + R</b> пернелерін бас;</li>
+    <li>Ашылған «Орындау» терезесіне <code>cmd</code> деп жазып, Enter бас;</li>
+    <li>Командалық жолда мына команданы орында:</li>
+  </ol>
+
+  <pre><code class="language-bash">pip install pygame</code></pre>
+
+  <p>
+    Орнату аяқталғаннан кейін Python файлында <code>import pygame</code>
+    деп модульді қосуға болады.
+  </p>
+
+  <h3>Ойын терезесін жасау</h3>
+  <p>Ең қарапайым PyGame терезесі келесі қадамдардан тұрады:</p>
+  <ul>
+    <li>модульді қосу;</li>
+    <li>инициализация (<code>pygame.init()</code>);</li>
+    <li>терезе өлшемін орнату;</li>
+    <li>негізгі цикл (ойын цикл «game loop»);</li>
+    <li>дұрыс шығу (<code>pygame.quit()</code>).</li>
+  </ul>
+
+  <pre><code class="language-python">import pygame  # 1) модульді қосу
+
+pygame.init()  # 2) pygame жүйесін дайындау
+
+size = width, height = 640, 480        # 3) терезе өлшемі
+screen = pygame.display.set_mode(size) # 4) терезені жасау
+
+pygame.display.set_caption("Менің бірінші ойыным")</code></pre>
+
+  <h3>Ойыннан дұрыс шығу (оқиға циклі)</h3>
+  <p>
+    Терезені «крестикпен» жапқанда программа да аяқталуы керек.
+    Ол үшін <b>оқиғалар циклін</b> (event loop) қолданамыз:
+  </p>
+
+  <pre><code class="language-python">import pygame
+
+pygame.init()
+size = width, height = 400, 300
+screen = pygame.display.set_mode(size)
+
+running = True
+while running:
+    # Барлық оқиғаларды қарау
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:   # терезе жабылса
+            running = False
+
+# Жұмысты аяқтау
+pygame.quit()</code></pre>
+
+  <p>
+    Кейбір оқулықтарда қысқаша форма қолданылады:
+  </p>
+
+  <pre><code class="language-python">while pygame.event.wait().type != pygame.QUIT:
+    pass   # ештеңе істемейміз, тек күтеміз
+
+pygame.quit()</code></pre>
+
+  <h3>Кадрларды жаңарту: <code>pygame.display.flip()</code></h3>
+  <p>
+    PyGame <b>қосарлы буферлеуді</b> қолданады: біз бір кадрды салған кезде
+    келесі кадр жадта дайындалады. Жаңартылған кадрды көрсету үшін:
+  </p>
+
+  <pre><code class="language-python"># ... объектілерді, фигураларды салу коды ...
+
+pygame.display.flip()  # экранды жаңарту</code></pre>
+
+  <p>
+    Осылайша пайдаланушы тек дайын кадрларды көреді, ал суретті салу процесі
+    жыпылықтамай, тегіс көрінеді.
+  </p>
+
+  <h3>Draw модулі: фигуралар салу</h3>
+  <p>
+    <code>pygame.draw</code> модулі — графикалық примитивтер салуға арналған.
+    Мысалы, тіктөртбұрыш, шеңбер, сызық, эллипс, көпбұрыш.
+  </p>
+
+  <h4>Тіктөртбұрыш салу</h4>
+  <pre><code class="language-python">pygame.draw.rect(screen, color, (x0, y0, width, height), border)</code></pre>
+
+  <ul>
+    <li><code>screen</code> — сурет салатын бет (терезе);</li>
+    <li><code>color</code> — түс (мысалы, <code>(255, 0, 0)</code> — қызыл);</li>
+    <li><code>(x0, y0, width, height)</code> — сол жақ жоғарғы бұрыштың координатасы, ені, биіктігі;</li>
+    <li><code>border</code> — жиек қалыңдығы, егер <code>0</code> болса — ішіне дейін боялады.</li>
+  </ul>
+
+  <h4>Шеңбер салу</h4>
+  <pre><code class="language-python">pygame.draw.circle(screen, color, (x, y), R, width)</code></pre>
+
+  <ul>
+    <li><code>(x, y)</code> — шеңбер центрінің координаталары;</li>
+    <li><code>R</code> — радиус;</li>
+    <li><code>width</code> — сызық қалыңдығы, <code>0</code> болса — толық боялған шеңбер.</li>
+  </ul>
+
+  <h4>Нүкте (пиксель) салу</h4>
+  <p>
+    PyGame-де жеке пиксельге арналған бөлек команда жоқ, бірақ оны
+    <code>fill()</code> әдісімен сала аламыз:
+  </p>
+
+  <pre><code class="language-python"># Бір пиксель салу мысалы:
+surface.fill(color, (x, y, 1, 1))</code></pre>
+
+  <h4>Басқа фигуралар</h4>
+  <pre><code class="language-python">pygame.draw.line(surface, color, start_pos, end_pos, width)
+pygame.draw.ellipse(surface, color, rect, width)
+pygame.draw.polygon(surface, color, pointlist, width)</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">1-мысал · Бос терезе</h3>
+  <pre><code class="language-python">import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((640, 480))
+pygame.display.set_caption("Бос PyGame терезесі")
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+pygame.quit()</code></pre>
+
+  <h3 style="margin-top:18px;">2-мысал · Түсті фон</h3>
+  <pre><code class="language-python">import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((640, 480))
+pygame.display.set_caption("Түсті фон")
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # фон түсі (R, G, B)
+    screen.fill((30, 144, 255))   # көкшіл түс
+    pygame.display.flip()
+
+pygame.quit()</code></pre>
+
+  <h3 style="margin-top:18px;">3-мысал · Тіктөртбұрыш пен шеңбер</h3>
+  <pre><code class="language-python">import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((640, 480))
+pygame.display.set_caption("Фигуралар")
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    screen.fill((245, 245, 245))  # ашық фон
+
+    # қызыл тіктөртбұрыш
+    pygame.draw.rect(screen, (255, 99, 71), (50, 50, 200, 120), 0)
+
+    # жасыл жиекті шеңбер
+    pygame.draw.circle(screen, (34, 197, 94), (400, 200), 60, 5)
+
+    pygame.display.flip()
+
+pygame.quit()</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Түсті өзгерту</h3>
+  <p>
+    2-мысалда берілген фон түсін өзіңнің сүйікті түсіңе ауыстыр. RGB
+    мәндерін тәжірибе жасап таңда.
+  </p>
+
+  <h3>Тапсырма 2 · Фигуралар галереясы</h3>
+  <p>
+    Терезеде кемінде үш түрлі фигура сал:
+    тіктөртбұрыш, шеңбер және сызық. Олардың түсін, орнын
+    өзің таңда.
+  </p>
+
+  <h3>Тапсырма 3 · Қарапайым «логотип»</h3>
+  <p>
+    PyGame арқылы өз «логотипіңді» құрастыр:
+    бірнеше шеңбер мен тіктөртбұрышты біріістіріп, ерекше сурет жаса.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (10 СҰРАҚ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тест сұрақтарына жауап бер. Соңында
+    <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) PyGame кітапханасы негізінен не үшін қолданылады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Мәтіндік құжаттармен жұмыс істеу үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) 2D ойындар мен графикалық қосымшалар жасау үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Тек деректер қорымен жұмыс істеу үшін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="d">
+        в) Браузерде сайт ашу үшін
+      </label>
     </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 2 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) PyGame модулін орнату үшін қай команда дұрыс?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>install pygame</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>python pygame</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>pip install pygame</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="d">
+        в) <code>run pygame</code>
+      </label>
+    </div>
 
+    <!-- 3 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) <code>pygame.init()</code> не істейді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) PyGame жүйесін қолдануға дайындайды (инициализация)
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) Терезені жабады
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) Терезенің өлшемін қояды
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="d">
+        в) Ойын логикасын есептейді
+      </label>
+    </div>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+    <!-- 4 -->
+    <div class="quiz-item" data-correct="d">
+      <p><b>4) Терезе жасаудың дұрыс жолы қайсы?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) <code>screen = pygame.window(640, 480)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) <code>pygame.open(640, 480)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) <code>screen = pygame.display.window((640, 480))</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="d">
+        в) <code>screen = pygame.display.set_mode((640, 480))</code>
+      </label>
+    </div>
 
-</div>
+    <!-- 5 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>5) Ойыннан дұрыс шығу үшін қандай оқиғаны тексереміз?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) <code>pygame.CLOSE</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) <code>pygame.QUIT</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) <code>pygame.EXIT</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="d">
+        в) <code>pygame.STOP</code>
+      </label>
+    </div>
 
+    <!-- 6 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>6) <code>pygame.display.flip()</code> қандай қызмет атқарады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) Ойынды паузаға қояды
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) Все оқиғаларды өшіреді
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) Экранға жаңа кадрды шығарады (экранды жаңарту)
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="d">
+        в) Терезенің тақырыбын өзгертеді
+      </label>
+    </div>
 
+    <!-- 7 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>7) Тіктөртбұрыш салудың дұрыс сигнатурасы:</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="a">
+        а) <code>pygame.draw.rect(screen, color, (x, y, w, h), width)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="b">
+        ә) <code>pygame.rect(screen, color, x, y, w, h)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="c">
+        б) <code>pygame.draw.square(color, screen)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q7" value="d">
+        в) <code>pygame.draw.box(screen, (x, y, w, h))</code>
+      </label>
+    </div>
 
+    <!-- 8 -->
+    <div class="quiz-item" data-correct="d">
+      <p><b>8) Шеңбер радиусы қай параметрмен беріледі?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="a">
+        а) <code>x</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="b">
+        ә) <code>y</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="c">
+        б) <code>width</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q8" value="d">
+        в) <code>R</code>
+      </label>
+    </div>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-          <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
+    <!-- 9 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>9) PyGame-де жеке пиксельді қалай салуға болады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="a">
+        а) <code>pygame.draw.pixel(screen, color, x, y)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="b">
+        ә) <code>screen.point(x, y)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="c">
+        б) <code>screen.fill(color, (x, y, 1, 1))</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q9" value="d">
+        в) <code>pygame.pixel(color)</code>
+      </label>
+    </div>
 
-  </body>
-</html>
+    <!-- 10 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>10) PyGame ойын циклінің міндеті:</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="a">
+        а) Оқиғаларды өңдеп, кадрларды үнемі жаңартып тұру
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="b">
+        ә) Программаны бір рет қана орындау
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="c">
+        б) Python-ды орнату
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q10" value="d">
+        в) Файылды ашып, қайта жабу
+      </label>
+    </div>
+
+  </div>
+
+  <button type="button" id="checkQuiz" class="quiz-check-btn">
+    Тексеру
+  </button>
+  <div id="quizResult" class="quiz-result"></div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. ҚОРЫТЫНДЫ / ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Қорытынды және үй жұмысы</h2>
+    <button class="btn-done" data-block="homework" data-xp="10">
+      ⬜ Орындалды (Үй жұмысы)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Қысқаша қайталау</h3>
+  <ul>
+    <li>PyGame — Python-да 2D ойын жасауға арналған кітапхана;</li>
+    <li><code>pip install pygame</code> арқылы орнатылады;</li>
+    <li><code>pygame.init()</code>, <code>set_mode()</code>, ойын циклі және
+        <code>pygame.quit()</code> — кез келген ойынның негізі;</li>
+    <li><code>pygame.draw</code> арқылы тіктөртбұрыш, шеңбер, сызық және т.б.
+        фигуралар сызуға болады.</li>
+  </ul>
+
+  <h3>Үй тапсырмасы</h3>
+  <ul>
+    <li>Компьютерге PyGame орнатып, бос терезе ашатын программа жаз;</li>
+    <li>Фон түсін өзгертіп, терезеге кемінде екі фигура сал;</li>
+    <li>Өз ойыныңның идеясын ойлап тап (3–4 сөйлеммен дәптерге жаз);</li>
+    <li>Қосымша: PyGame ресми құжатын қарап шық:
+      <a href="https://www.pygame.org/docs/ref/draw.html" target="_blank">
+        pygame.draw құжаттамасы
+      </a>.
+    </li>
+  </ul>
+</section>
+
+{% endblock %}

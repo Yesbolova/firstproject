@@ -1,219 +1,479 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Екі өлшемді массив{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <link rel="alternate" type="application/rss+xml" title="PythonRu » Лента" href="https://pythonru.com/feed">
-    <link rel="icon" type="image/png" href="https://pythonru.com/wp-content/uploads/2019/04/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://pythonru.com/wp-content/uploads/2018/11/bm-76x76.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://pythonru.com/wp-content/uploads/2018/11/bm-120x120.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://pythonru.com/wp-content/uploads/2018/11/bm-152x152.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://pythonru.com/wp-content/uploads/2018/11/bm-114x114.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://pythonru.com/wp-content/uploads/2018/11/bm-144x144.png">
-    <script type="text/javascript" src="https://pythonru.com/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
-    <link rel="amphtml" href="https://pythonru.com/osnovy/fajly-v-python-vvod-vyvod?ysclid=lfm9qe8keh52925195&amp;amp">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Екі өлшемді массив</h1>
+<p class="subtitle">
+  Бұл сабақта матрица (екі өлшемді массив) ұғымын, Python тілінде екі өлшемді
+  тізімдермен жұмыс істеуді, элементтерге индекстер арқылы жүгінуді,
+  пернетақтадан енгізуді және циклдар көмегімен өңдеуді үйренеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында сен екі өлшемді тізім құрып, оны экранға шығарып, элементтерін
+  өңдеп, мини-quiz арқылы біліміңді тексере аласың.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды
+    </button>
+  </div>
 
-
-    <title>Екі өлшемді массив</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-    <div class="copy-banner">
-      <div class="container ">
-          <h1> Екі өлшемді массив</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: екі өлшемді массивтер пайдаланып Python программалау тілінде программаларды жасау</h2>
-
-<h2> Матрица</h2>
-<p>Матрица - (неміс тілінен аударғанда "matrise", латын тілінде "matrix" - "аналық") - математикада кез-келген жиынның элементтерінен құрылған және m жол мен n бағаннан тұратын тіктөртбұрышты кесте. Матрицаны түзетін нысандар оның элементтері деп аталады. Математикада және аналитикалық геометрияда матрицаларды (екіөлшемді кесте, массив) пайдаланып көптеген мәселелерді шешуге болады. Программалауда түрлі салаларда туындаған көптеген мәселелердің шешімі матрицалардың көмегімен табылады.</p>
-
-
-
- <h2>Екі өлшемді тізім құру</h2>
-          <p>Тізімдер тізімі, мысалы, сандар тізіміне ұқсас екенін түсіну керек. Бағдарламада
-тізімдер тізімін көрсету үшін біз элементтерді төртбұрышты жақшаға үтірмен тізімдейміз:
-table = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]<p/>
-          <p>Көрнекілік үшін оны келесі түрде жазуға болады:<p/>
-          <p>table = [[1, 2, 3], <p/>
-          <p>[4, 5, 6],<p/>
-          <p>[7, 8, 9]]<p/>
-          <p>Бұл мысалда элементтер матрицасы (кесте түрінде) анық көрінеді.
-Берілген "кестедегі" элементпен байланысу үшін алдымен бірінші деңгей элементіне
-жүгіну керек.<p/>
-          <p>Мысалы, table[1] = [4, 5, 6].<p/>
-          <p>Екінші индекс кіріктірілген тізім элементтеріне жүгінуге мүмкіндік береді.<p/>
-           <p>Мысалы, table[1][2] =<p/>
-          <p>Матрица үшін бірінші деңгей индекстері қатар нөмірі, ал екінші деңгей индекстері
-баған нөмірі деп аталады. Қатар мен баған нөлден бастар индекстеледі.<p/>
-          <h2>Екі өлшемді массив элементтерін енгізу</h2>
-          <p>Егер тізім элементтері пернетақтадан енгізілсе (кестенің әр қатары жеке жолда
-ензізіледі, барлығы n қатар, енгізу жолындағы сандар бос орындармен бөлінеді), үш қатар
-тізімін енгізу үшін келесі кодты пайдалануға болады: </p>
-          <img alt="" height="100" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/4d38032e-c0f5-417d-84fb-dcba3cb52629/" src="https://ucarecdn.com/4d38032e-c0f5-417d-84fb-dcba3cb52629/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F4d38032e-c0f5-417d-84fb-dcba3cb52629%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221388%22%2C%22height%22%3A%22163%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-          <h2>Екі өлшемді тізімнің элементтерімен жұмыс. Тізімді экранға шығару</h2>
-          <p> Тізімнің элементінмен байланысу үшін сол элементтің индексін тік жақшада көрсету
-керек. Екі өлшемді кіріктірілген тізімді қарастырғанда екі индексті көрсету қажет
-(әрқайсысы жеке квадрат жақшада). Екі өлшемді массивте жол нөмірі, содан кейін баған
-нөмірі көрсетіледі (алдымен кіріктірілген тізім, содан кейін оның элемент таңдалады).</p>
-          <p>Мысалы, экранға не шығатынын анықтаңыз:</p>
-            <p>table = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</p>
-            <p>print(table[0][0], table[0][1], table[1][0])</p>
-            <p>Матрицаның барлық элементтерін өңдеу үшін (мысалы, оларды экранға шығару),
-әдетте кіріктірілген цикл (қосарлы цикл) қолданылады. Мысалы, алдыңғы мысалдағы
-тізімді келесі жолмен экранға шығаруға болады:</p>
-<img alt="" height="80" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/a8ae776b-5858-43c4-9458-333df2a4a5b9/" src="https://ucarecdn.com/a8ae776b-5858-43c4-9458-333df2a4a5b9/" width="700" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fa8ae776b-5858-43c4-9458-333df2a4a5b9%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221156%22%2C%22height%22%3A%22120%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
- <p>Бұл мысалда біз элементке оның индекстері арқылы байланыс орнаттық.<p/>
- <p>Ал енді тізім элементімен тікелей қалай байланысуға болады? Бұл өте оңай, мысалы,
-матрицаның барлық элементтерінің қосындысын есептегіміз келсе, мынадай цикл жазуға
-болады екен:<p/>
-          <img alt="" height="80" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/4edeeef2-fcc4-4d15-bbc5-09f9c4de3f3b/" src="https://ucarecdn.com/4edeeef2-fcc4-4d15-bbc5-09f9c4de3f3b/" width="700" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F4edeeef2-fcc4-4d15-bbc5-09f9c4de3f3b%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221152%22%2C%22height%22%3A%22122%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<p>Біз екі өлшемді массив (кіріктірілген тізім) элементтерін қалай өңдеуге болатынын
-қарастырдық. Мұндай массивтердің элементтерін өңдеу бір өлшемді массивті өңдеу сияқты
-орындалады.</p>
-          <h2>Мысалы:</h2>
-          <p>Екіөлшемді A [N] [N] квадраттық массиві берілген. Осы массив элементтеріне 1 мен 9 аралығындағы кездейсоқ сандарды жүкте </p>
-          <img alt="" height="200" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/36ad1e77-a853-4ef4-b8c0-2f2d8c734524/" src="https://ucarecdn.com/36ad1e77-a853-4ef4-b8c0-2f2d8c734524/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F36ad1e77-a853-4ef4-b8c0-2f2d8c734524%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221169%22%2C%22height%22%3A%22290%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-<h2>Нәтижесі:</h2>
-          <img alt="" height="250" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/21707a3b-1c27-415f-98a0-0b39dd20c500/" src="https://ucarecdn.com/21707a3b-1c27-415f-98a0-0b39dd20c500/" width="800" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F21707a3b-1c27-415f-98a0-0b39dd20c500%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221176%22%2C%22height%22%3A%22325%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-          </div>
-      </div>
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:12px;">
+    <li>Матрица және екі өлшемді массив ұғымын түсіну;</li>
+    <li>Python тілінде екі өлшемді тізім (list of lists) құру;</li>
+    <li>Элементтерге индекстер арқылы жүгінуді меңгеру;</li>
+    <li>Пернетақтадан енгізілген мәндерден матрица құру;</li>
+    <li>Кіріктірілген цикл арқылы элементтерді өңдеу.</li>
   </ul>
-</div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ · МАТРИЦА ЖӘНЕ ЕКІ ӨЛШЕМДІ ТІЗІМ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды
+    </button>
+  </div>
+
+  <h3 style="margin-top:16px;">Матрица деген не?</h3>
+  <p>
+    <b>Матрица</b> — <b>m</b> жол және <b>n</b> бағаннан тұратын тіктөртбұрышты
+    кесте. Әр ұяшықтағы мән матрицаның <b>элементі</b> деп аталады.
+  </p>
+  <p>
+    Мысалы, 3×3 өлшемді матрица:
+  </p>
+
+  <pre><code class="language-text">
+1   2   3
+4   5   6
+7   8   9
+  </code></pre>
+
+  <p>
+    Программалауда осындай кестелерді көбіне <b>екі өлшемді массив</b> немесе
+    <b>екі өлшемді тізім</b> түрінде сақтаймыз.
+  </p>
+
+  <h3>Python тілінде екі өлшемді тізім құру</h3>
+  <p>Ең қарапайым 3×3 матрицаны тізімдер тізімі арқылы былай жаза аламыз:</p>
+
+  <pre><code class="language-python">table = [
+    [1, 2, 3],   # 0-қатар
+    [4, 5, 6],   # 1-қатар
+    [7, 8, 9]    # 2-қатар
+]</code></pre>
+
+  <p>
+    Мұнда <code>table</code> — үш тізімнен тұратын үлкен тізім.
+    Әр ішкі тізім – матрицаның бір қатары.
+  </p>
+
+  <h3>Элементтерге индекстер арқылы жүгіну</h3>
+  <p>
+    Екі өлшемді тізімде бірінші индекс – <b>қатар нөмірі</b>, екіншісі –
+    <b>баған нөмірі</b>. Индекстер 0-ден басталады.
+  </p>
+
+  <pre><code class="language-python">table = [
+    [1, 2, 3],   # 0-қатар
+    [4, 5, 6],   # 1-қатар
+    [7, 8, 9]    # 2-қатар
+]
+
+print(table[0])      # [1, 2, 3]
+print(table[1])      # [4, 5, 6]
+print(table[1][2])   # 6  (1-қатар, 2-баған)</code></pre>
+
+  <p>
+    <code>table[1]</code> – бұл бүтін бір қатар, ал
+    <code>table[1][2]</code> – сол қатардың ішіндегі нақты элемент.
+  </p>
+
+  <h3>Матрицаны “әдемі” шығару</h3>
+  <p>Матрицаны кесте сияқты шығару үшін көбіне кіріктірілген цикл қолданамыз:</p>
+
+  <pre><code class="language-python">table = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in table:          # әр қатарды аламыз
+    for value in row:      # сол қатардағы әр элементті аламыз
+        print(value, end=" ")
+    print()                # жаңа жол</code></pre>
+
+  <p>Консольдағы нәтиже:</p>
+
+  <pre><code class="language-text">1 2 3
+4 5 6
+7 8 9</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. ЕКІ ӨЛШЕМДІ ТІЗІМДІ ЕНГІЗУ ЖӘНЕ ӨҢДЕУ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="input-output">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Екі өлшемді массивті енгізу және шығару</h2>
+    <button class="btn-done" data-block="io" data-xp="25">
+      ⬜ Орындалды
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Пернетақтадан матрица енгізу</h3>
+  <p>
+    Әдетте kестенің әр қатары жеке жолда енгізіледі, ал бір жолдағы сандар
+    бос орын арқылы бөлінеді. Мысалы, <b>n</b> қатардан тұратын матрица енгізу:
+  </p>
+
+  <pre><code class="language-python">n = int(input("Қатар саны: "))
+
+table = []
+for i in range(n):
+    row = list(map(int, input(f"{i+1}-қатарды енгіз: ").split()))
+    table.append(row)
+
+print("Енгізілген матрица:")
+for row in table:
+    for value in row:
+        print(value, end=" ")
+    print()</code></pre>
+
+  <p>Мысалы, енгізу:</p>
+
+  <pre><code class="language-text">Қатар саны: 3
+1 2 3
+4 5 6
+7 8 9</code></pre>
+
+  <p>Консольдағы нәтиже:</p>
+
+  <pre><code class="language-text">Енгізілген матрица:
+1 2 3
+4 5 6
+7 8 9</code></pre>
+
+  <h3>Барлық элементтердің қосындысын табу</h3>
+  <p>
+    Екі өлшемді тізімнің барлық элементтерінің қосындысын табу үшін тағы да
+    кіріктірілген цикл қолданамыз:
+  </p>
+
+  <pre><code class="language-python">table = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+total = 0
+for row in table:
+    for value in row:
+        total += value
+
+print("Элементтер қосындысы:", total)</code></pre>
+
+  <p>Нәтиже:</p>
+
+  <pre><code class="language-text">Элементтер қосындысы: 45</code></pre>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. МЫСАЛ · КВАДРАТ МАТРИЦАНЫ КЕЗДЕЙСОҚ САНМЕН ТОЛТЫРУ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Толық мысал</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Кездейсоқ сандардан квадрат матрица құру</h3>
+  <p>
+    <b>A[N][N]</b> квадрат массиві үшін 1 мен 9 арасындағы кездейсоқ сандарды
+    толтыратын программа мысалы:
+  </p>
+
+  <pre><code class="language-python">import random
+
+n = int(input("Өлшемін енгіз (N): "))
+
+A = []
+for i in range(n):
+    row = []
+    for j in range(n):
+        row.append(random.randint(1, 9))
+    A.append(row)
+
+print("Матрица A:")
+for row in A:
+    for value in row:
+        print(value, end=" ")
+    print()</code></pre>
+
+  <p>Мысалы, консольдағы нәтиже:</p>
+
+  <pre><code class="language-text">Өлшемін енгіз (N): 3
+Матрица A:
+4 1 9
+2 7 3
+5 5 8</code></pre>
+
+  <p style="margin-top:10px;color:#4b5563;">
+    Қосымша ретінде, осы матрицаның ең үлкен элементін немесе диагональ
+    элементтерінің қосындысын табуды да сұрауға болады.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды
+    </button>
+  </div>
+
+  <div class="task-card">
+    <h3>Тапсырма 1 · Қатар мен баған санын шығару</h3>
+    <p>
+      Енгізілген екі өлшемді тізім үшін қатарлар санын және әр қатардағы
+      элементтер санын экранға шығаратын программа жаз.
+    </p>
+
+    <div class="task-io">
+      <p class="task-io-title">Кіріс / Шығыс мысалы</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс (матрица)</th>
+            <th>Шығыс</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+<code>[[1, 2, 3],
+ [4, 5, 6]]</code>
+            </td>
+            <td>
+<code>Қатар саны: 2
+Әр қатардағы элементтер саны: 3</code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <h3>Тапсырма 2 · Негізгі диагональ қосындысы</h3>
+    <p>
+      Квадрат матрицаның негізгі диагоналіндегі элементтердің қосындысын
+      табатын программа жаз.
+    </p>
+
+    <div class="task-io">
+      <p class="task-io-title">Кіріс / Шығыс мысалы</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс (матрица)</th>
+            <th>Шығыс</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+<code>[[1, 2, 3],
+ [4, 5, 6],
+ [7, 8, 9]]</code>
+            </td>
+            <td><code>Диагональ қосындысы: 1 + 5 + 9 = 15</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <h3>Тапсырма 3 · Жұп элементтер санын табу</h3>
+    <p>
+      Матрицадағы барлық <b>жұп</b> элементтердің санын есептейтін программа жаз.
+    </p>
+    <div class="task-io">
+      <p class="task-io-title">Кіріс / Шығыс мысалы</p>
+      <table class="io-table">
+        <thead>
+          <tr>
+            <th>Кіріс (матрица)</th>
+            <th>Мысал шығыс</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+<code>[[1, 2, 3],
+ [4, 5, 6]]</code>
+            </td>
+            <td><code>Жұп элементтер саны: 3 (2, 4, 6)</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="20">
+      ⬜ Орындалды
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі сұрақтарға жауап бер. Соңында <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Екі өлшемді массив деген не?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) Бір ғана элементі бар тізім
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) Тізімдерден құрылған тізім (list of lists)
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) Тек мәтіндік жолдардан тұратын тізім
+      </label>
     </div>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+    <!-- 2 -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>2) Екі өлшемді тізімдегі бірінші индекс нені білдіреді?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) Қатар нөмірін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) Баған нөмірін
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) Матрицаның өлшемін
+      </label>
+    </div>
 
+    <!-- 3 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>3) Төмендегі код қандай элементті шығарады?</b></p>
+      <pre><code class="language-python">table = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+print(table[2][1])</code></pre>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>7</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>8</code> (қате жауап)
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>8</code> (2-қатар, 1-баған)
+      </label>
+    </div>
 
+    <!-- 4 -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>4) Матрица элементтерін экранға шығару үшін көбіне қандай цикл қолданылады?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) Бір ғана <code>for</code> циклі
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) Кіріктірілген <code>for</code> циклдары
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) Тек <code>while</code> циклі
+      </label>
+    </div>
 
-</div>
+    <!-- 5 -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Барлық элементтер қосындысын табу үшін не істеу керек?</b></p>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) Тек бірінші қатарды қосу
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) Тек диагональ элементтерін қосу
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) Әр қатар мен әр элементті өтіп, қосу
+      </label>
+    </div>
 
+    <button type="button" class="quiz-check-btn" id="checkQuiz">
+      Тексеру
+    </button>
+    <div class="quiz-result" id="quizResult"></div>
+  </div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 7. ҚОРЫТЫНДЫ / ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">6-бөлім · Үй тапсырмасы</h2>
+    <button class="btn-done" data-block="homework" data-xp="10">
+      ⬜ Орындалды
+    </button>
+  </div>
 
+  <ul style="margin-top:10px;">
+    <li>Екі өлшемді тізім құру, оны экранға шығару кодын өз сөзіңмен дәптерге жаз;</li>
+    <li>Квадрат матрица үшін негізгі диагональ және жанама диагональ қосындысын табатын программа құрастыр;</li>
+    <li>Матрицадағы ең үлкен және ең кіші элементті табатын жеке программа жаз;</li>
+    <li>Қалауың бойынша қосымша 3×3 матрица ойлап тауып, оны түрлі есептерде пайдаланып көр.</li>
+  </ul>
+</section>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,188 +1,505 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Сызықтық алгоритмдер{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Сызықтық алгоритмдерді программалау</h1>
+<p class="subtitle">
+  Бұл сабақта <b>сызықтық алгоритм</b> ұғымын қайталаймыз, математикалық
+  өрнектерді Python тілінде жазып үйренеміз және бірнеше мысалды практикада
+  орындаймыз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақты толық орындасаң, шамамен <b>100 XP</b> жинайсың.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-    <title>Сызықтық алгоритмдерді программалау</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1>Сызықтық алгоритмдерді программалау</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-          <h2 style="color: MediumSeaGreen;"> Оқу мақсаты: Python (пайтон) тіліндегі сызықтық алгоритмдерді жазу</h2>
-<h2> Сызықтық алгоритм </h2>
-<p>Сызықтық алгоритм – іс-әрекеттер бірінен кейін бірі тізбектей
-орындалатын алгоритм</p>
-
-          <h2> Мысалы </h2>
-          <p>Өрнектің мәнін табу керек:</p>
-          <img alt="" height="218" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/e41a1503-2534-47ce-92c0-28bf466a49ed/" src="https://ucarecdn.com/e41a1503-2534-47ce-92c0-28bf466a49ed/" width="296" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fe41a1503-2534-47ce-92c0-28bf466a49ed%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22296%22%2C%22height%22%3A%22218%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-  <h2> 1-мысал </h2>
-          <img alt="" height="205" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/44129a65-ae35-4f1f-9c48-91f5198826fa/" src="https://ucarecdn.com/44129a65-ae35-4f1f-9c48-91f5198826fa/" width="432" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F44129a65-ae35-4f1f-9c48-91f5198826fa%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22432%22%2C%22height%22%3A%22205%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-    <h2> 2-мысал </h2>
-          <img alt="" height="211" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/67d68ddc-53af-4bdf-b3dc-2d0e807f1119/" src="https://ucarecdn.com/67d68ddc-53af-4bdf-b3dc-2d0e807f1119/" width="435" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F67d68ddc-53af-4bdf-b3dc-2d0e807f1119%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22435%22%2C%22height%22%3A%22211%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-      <h2> 3-мысал </h2>
-          <img alt="" height="202" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/f1fc4a1d-eb48-4712-9284-f4da26cd378f/" src="https://ucarecdn.com/f1fc4a1d-eb48-4712-9284-f4da26cd378f/" width="478" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Ff1fc4a1d-eb48-4712-9284-f4da26cd378f%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22478%22%2C%22height%22%3A%22202%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <h2> 4-мысал </h2>
-          <img alt="" height="216" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/39b8c134-b790-43ab-9339-505999d50ef5/" src="https://ucarecdn.com/39b8c134-b790-43ab-9339-505999d50ef5/" width="429" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F39b8c134-b790-43ab-9339-505999d50ef5%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22429%22%2C%22height%22%3A%22216%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-           <h2> 5-мысал </h2>
-          <img alt="" height="186" data-cke-saved-name="image.png" name="image.png" data-cke-saved-src="https://ucarecdn.com/cb019161-6d3c-46e7-ab69-7fb96605119e/" src="https://ucarecdn.com/cb019161-6d3c-46e7-ab69-7fb96605119e/" width="413" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fcb019161-6d3c-46e7-ab69-7fb96605119e%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22413%22%2C%22height%22%3A%22186%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-
-
-      </div>
-
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:10px;">
+    <li>Сызықтық алгоритмнің анықтамасын түсіндіре алу;</li>
+    <li>Математикалық өрнектерді Python тілінде жазу;</li>
+    <li>Айнымалыға мән беріп, аралық нәтижелерді есептеу;</li>
+    <li><code class="language-python">input()</code> және <code class="language-python">print()</code> көмегімен программа құру;</li>
+    <li>Mini-Quiz арқылы өз біліміңді тексеру.</li>
   </ul>
-</div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ: СЫЗЫҚТЫҚ АЛГОРИТМ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Сызықтық алгоритм деген не?</h2>
+    <button class="btn-done" data-block="theory" data-xp="20">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
+
+  <p style="margin-top:12px;">
+    <b>Сызықтық алгоритм</b> – іс-әрекеттер (командалар) бірінен кейін бірі
+    <b>рет-ретімен</b> орындалатын алгоритм. Яғни тармақталу (<code>if</code>)
+    немесе цикл (<code>for</code>, <code>while</code>) жоқ, тек тізбекті
+    командалар тізімі.
+  </p>
+
+  <p>Мысалы, қарапайым сызықтық алгоритм:</p>
+  <ol>
+    <li>Пайдаланушыдан <code>b</code> санын енгізу;</li>
+    <li>Берілген формула бойынша мән есептеу;</li>
+    <li>Нәтижені экранға шығару.</li>
+  </ol>
+
+  <p>Python тіліндегі жалпы үлгісі:</p>
+  <pre><code class="language-python"># 1-қадам: деректерді енгізу
+b = float(input("b-ға мән бер: "))
+
+# 2-қадам: есептеу
+a = 1/9 * b**3 - 6.4 * (b + 8) + 3/4 * b
+
+# 3-қадам: нәтижені шығару
+print("Нәтиже:", a)</code></pre>
+
+  <p>
+    Командалар жоғарыдан төмен қарай біртіндеп орындалады – бұл
+    сызықтық алгоритмнің негізгі белгісі.
+  </p>
+
+  <h3 style="margin-top:18px;">Есептің формулалары</h3>
+  <p>Төменде сызықтық алгоритмдерге мысал болатын өрнектер берілген:</p>
+
+  <ol style="font-size:20px; line-height:1.6;">
+    <li>
+        \( a = \frac{1}{9} b^3 - 6.4(b + 8) + \frac{3}{4}b \)
+    </li>
+
+    <li>
+        \( d = \frac{1}{7} a^3 b - 2ab^2(a + b) \)
+    </li>
+
+    <li>
+        \( q = \frac{3a^3 - 2ab + b^2}{2a(3a - b)} \)
+    </li>
+
+    <li>
+        \( k = x^3 - 4xy(x + y^2) \)
+    </li>
+
+    <li>
+        \( h = |v + 1.7| \cdot (2v + 3) \)
+    </li>
+</ol>
+
+  <p style="margin-top:8px;">
+    Осы формулаларды Python тілінде жазып, әрқайсысы үшін жеке программа құрамыз.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР (1–5) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="25">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <!-- 1-мысал -->
+  <h3 style="margin-top:14px;">1-мысал · a шамасын есептеу</h3>
+  <p>
+    Берілген формула бойынша <code>a</code> мәнін табу үшін
+    пайдаланушыдан <code>b</code> санын енгіземіз:
+  </p>
+
+  <pre><code class="language-python">b = float(input("b-ға мән бер: "))
+
+a = 1/9 * b**3 - 6.4 * (b + 8) + 3/4 * b
+
+print("Нәтиже:", a)</code></pre>
+
+  <p><b>Консольдағы нәтиже (мысал):</b></p>
+  <pre><code class="language-python">b-ға мән бер: 3
+Нәтиже: -32.95</code></pre>
+
+  <!-- 2-мысал -->
+  <h3 style="margin-top:22px;">2-мысал · d шамасын есептеу</h3>
+  <p>
+    Пайдаланушыдан <code>a</code> және <code>b</code> мәндерін енгізіп,
+    <code>d</code> шамасын есептейміз:
+  </p>
+
+  <pre><code class="language-python">a = float(input("a-ға мән бер: "))
+b = float(input("b-ға мән бер: "))
+
+d = 1/7 * a**3 * b - 2 * a * b**2 * (a + b)
+
+print("Нәтиже:", d)</code></pre>
+
+  <p><b>Консольдағы нәтиже (мысал):</b></p>
+  <pre><code class="language-python">a-ға мән бер: 2
+b-ға мән бер: 3
+Нәтиже: -108.0</code></pre>
+
+  <!-- 3-мысал -->
+  <h3 style="margin-top:22px;">3-мысал · q шамасын есептеу</h3>
+  <p>
+    <code>a</code> және <code>b</code> мәндері бойынша бөлшек түріндегі
+    өрнектің нәтижесін табамыз:
+  </p>
+
+  <pre><code class="language-python">a = float(input("a-ға мән бер: "))
+b = float(input("b-ға мән бер: "))
+
+q = (3 * a**3 - 2 * a * b + b**2) / (2 * a * (3 * a - b))
+
+print("Нәтиже:", q)</code></pre>
+
+  <p><b>Консольдағы нәтиже (мысал):</b></p>
+  <pre><code class="language-python">a-ға мән бер: 4
+b-ға мән бер: 2
+Нәтиже: 1.2916666667</code></pre>
+
+  <!-- 4-мысал -->
+  <h3 style="margin-top:22px;">4-мысал · k шамасын есептеу</h3>
+  <p>
+    Екі айнымалысы бар өрнек:
+    <code>k = x³ − 4xy(x + y²)</code>.
+  </p>
+
+  <pre><code class="language-python">x = float(input("x-ке мән бер: "))
+y = float(input("y-ке мән бер: "))
+
+k = x**3 - 4 * x * y * (x + y**2)
+
+print("Нәтиже:", k)</code></pre>
+
+  <p><b>Консольдағы нәтиже (мысал):</b></p>
+  <pre><code class="language-python">x-ке мән бер: 2
+y-ке мән бер: 1
+Нәтиже: -10</code></pre>
+
+  <!-- 5-мысал -->
+  <h3 style="margin-top:22px;">5-мысал · h шамасын есептеу</h3>
+  <p>
+    <code>h = |v + 1.7| · (2v + 3)</code> өрнегін есептейміз.
+    Модульді есептеу үшін <code>abs()</code> функциясын қолданамыз.
+  </p>
+
+  <pre><code class="language-python">v = float(input("v-ге мән бер: "))
+
+h = abs(v + 1.7) * (2 * v + 3)
+
+print("Нәтиже:", h)</code></pre>
+
+  <p><b>Консольдағы нәтиже (мысал):</b></p>
+  <pre><code class="language-python">v-ге мән бер: -2
+Нәтиже: 0.8999999999</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <!-- Тапсырма 1 -->
+  <h3 style="margin-top:14px;">Тапсырма 1</h3>
+  <p>
+    Жоғарыдағы 1–5 мысалдың бірін таңдап, программаға әртүрлі мәндер енгізіп көр.
+    Нәтиженің қалай өзгеретінін бақыла.
+  </p>
+
+  <p><b>Кіріс/шығыс деректер кестесі</b></p>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;">
+    <thead>
+      <tr style="background:#f3f4f6;">
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Мысал</th>
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Кіріс деректер (input)</th>
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Шығыс дерек (output)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">1-мысал</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>b</code> — нақты сан</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>a</code> — формула нәтижесі</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">2-мысал</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>a</code>, <code>b</code> — нақты сандар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>d</code> — формула нәтижесі</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">3-мысал</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>a</code>, <code>b</code> — нақты сандар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>q</code> — бөлшек өрнек нәтижесі</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">4-мысал</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>x</code>, <code>y</code> — нақты сандар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>k</code> — өрнек нәтижесі</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">5-мысал</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>v</code> — нақты сан</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>h</code> — модуль бар өрнек нәтижесі</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Тапсырма 2 -->
+  <h3 style="margin-top:20px;">Тапсырма 2</h3>
+  <p>
+    Өз формулаңды ойлап тап (мысалы, үшбұрыш периметрі, тікбұрыш ауданын табу)
+    және оны сызықтық алгоритм ретінде Python тілінде жаз.
+  </p>
+
+  <p><b>Кіріс/шығыс деректерін жоспарлау</b></p>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;">
+    <thead>
+      <tr style="background:#f3f4f6;">
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Формула / есеп</th>
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Кіріс деректер (input)</th>
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Шығыс дерек (output)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Үшбұрыш периметрі</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>a</code>, <code>b</code>, <code>c</code> — қабырғалар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>P</code> — периметр</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Тікбұрыш ауданы</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>a</code>, <code>b</code> — қабырғалар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>S</code> — аудан</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Өз есебі (оқушы)</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Айнымалылар тізімі</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Нәтиже атауы</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Тапсырма 3 -->
+  <h3 style="margin-top:20px;">Тапсырма 3</h3>
+  <p>
+    Бір программа ішінде қатарынан 3 түрлі өрнек есептейтін сызықтық алгоритм құр.
+    Әр формула үшін бөлек айнымалы пайдалан.
+  </p>
+
+  <p><b>Бағдарлама құрылымын жоспарлау</b></p>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:6px;">
+    <thead>
+      <tr style="background:#f3f4f6;">
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Қадам</th>
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Кіріс деректер</th>
+        <th style="text-align:left;padding:8px;border-bottom:1px solid #e5e7eb;">Шығыс / айнымалы</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">1-өрнек</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Бастапқы айнымалылар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>res1</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">2-өрнек</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Қажет болса <code>res1</code> және басқа айнымалылар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>res2</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">3-өрнек</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;">Алдыңғы нәтижелер мен айнымалылар</td>
+        <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><code>res3</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
 
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
 
+  <p style="margin-top:10px;">
+    Төмендегі тест сұрақтарына онлайн түрде жауап бер.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>1) Сызықтық алгоритм деген не?</b></p>
+
+      <label class="quiz-option"><input type="radio" name="q1" value="a"> а) Шарттар мен циклдардан тұратын күрделі алгоритм</label>
+      <label class="quiz-option"><input type="radio" name="q1" value="b"> ә) Қадамдар рет-ретімен тізбектей орындалатын алгоритм</label>
+      <label class="quiz-option"><input type="radio" name="q1" value="c"> б) Тек бір ғана командадан тұратын алгоритм</label>
     </div>
 
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>2) Төмендегі программаның қай бөлігі сызықтық алгоритм?</b></p>
 
+      <pre><code class="language-python">b = float(input("b-ға мән бер: "))
+a = 1/9 * b**3 - 6.4 * (b + 8) + 3/4 * b
+print("Нәтиже:", a)</code></pre>
+
+      <label class="quiz-option"><input type="radio" name="q2" value="a"> а) Тек <code>print("Нәтиже:", a)</code></label>
+      <label class="quiz-option"><input type="radio" name="q2" value="b"> ә) Тек <code>b = float(input(...))</code></label>
+      <label class="quiz-option"><input type="radio" name="q2" value="c"> б) Үш жолдың барлығы бірге</label>
     </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Қай программа сызықтық алгоритмге жатады?</b></p>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а)
+        <pre><code class="language-python">x = int(input())
+y = int(input())
+s = x + y
+print(s)</code></pre>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә)
+        <pre><code class="language-python">x = int(input())
+if x > 0:
+    print("оң")</code></pre>
+      </label>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б)
+        <pre><code class="language-python">i = 1
+while i <= 5:
+    print(i)
+    i += 1</code></pre>
+      </label>
+    </div>
 
+    <!-- 4-сұрақ (ЖАҢА) -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>4) Сызықтық алгоритм қандай құрылымнан тұрады?</b></p>
+      <label class="quiz-option"><input type="radio" name="q4" value="a"> а) Кіріс → Өңдеу → Шығыс</label>
+      <label class="quiz-option"><input type="radio" name="q4" value="b"> ә) Шарт → Цикл → Блок-схема</label>
+      <label class="quiz-option"><input type="radio" name="q4" value="c"> б) Қайталау → Шарт → Функция</label>
+    </div>
 
-</div>
+    <!-- 5-сұрақ (ЖАҢА) -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>5) Қай оператор сызықтық алгоритмге жатады?</b></p>
+      <label class="quiz-option"><input type="radio" name="q5" value="a"> а) <code>if</code></label>
+      <label class="quiz-option"><input type="radio" name="q5" value="b"> ә) <code>while</code></label>
+      <label class="quiz-option"><input type="radio" name="q5" value="c"> б) <code>print()</code></label>
+    </div>
 
+    <!-- 6-сұрақ (ЖАҢА) -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>6) Төмендегі код нәтижесі қандай?</b></p>
 
+      <pre><code class="language-python">x = 3
+y = 4
+z = x*y + 2
+print(z)</code></pre>
 
+      <label class="quiz-option"><input type="radio" name="q6" value="a"> а) 10</label>
+      <label class="quiz-option"><input type="radio" name="q6" value="b"> ә) 14</label>
+      <label class="quiz-option"><input type="radio" name="q6" value="c"> б) 20</label>
+    </div>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
+  </div>
+
+  <!-- Тексеру батырмасы -->
+  <button id="checkQuiz"
+          style="margin-top:20px;padding:10px 20px;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:16px;">
+    Тексеру
+  </button>
+
+  <p id="quizResult" style="margin-top:10px;font-size:18px;font-weight:bold;"></p>
+
+</section>
+
+<script>
+document.getElementById("checkQuiz").addEventListener("click", function() {
+  let total = 0;
+  let correct = 0;
+
+  document.querySelectorAll(".quiz-item").forEach((item, index) => {
+    total++;
+    const correctAnswer = item.dataset.correct;
+    const qName = "q" + (index + 1);
+    const selected = document.querySelector(`input[name="${qName}"]:checked`);
+
+    if (selected && selected.value === correctAnswer) {
+      correct++;
+      item.style.borderLeft = "4px solid #10b981"; // жасыл
+    } else {
+      item.style.borderLeft = "4px solid #ef4444"; // қызыл
     }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+  });
+
+  document.getElementById("quizResult").textContent =
+    "Дұрыс жауаптар: " + correct + " / " + total;
+});
+</script>
+
+<!-- ========================================================= -->
+<!-- 6. ҚОРЫТЫНДЫ / РЕСУРСТАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="summary">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Қорытынды және ресурстар</h2>
+    <button class="btn-done" data-block="summary" data-xp="10">
+      ⬜ Орындалды (Қорытынды)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Есте сақта</h3>
+  <ul>
+    <li>Сызықтық алгоритм – тармақталу мен циклсыз, рет-ретімен орындалатын қадамдар;</li>
+    <li>Математикалық формуланы алдымен <b>қағазда</b>, кейін Python-да жазған ыңғайлы;</li>
+    <li><code class="language-python">input()</code> – деректер енгізу, <code class="language-python">print()</code> – нәтижені шығару;</li>
+    <li>Әр формула – жеке сызықтық алгоритмнің негізі бола алады.</li>
+  </ul>
+
+
+
+  <ul>
+    <li><a href="https://www.onlinegdb.com/" target="_blank">Онлайн компилятор</a></li>
+    <li><a href="https://www.python.org/downloads/" target="_blank">Python 3.11.2 жүктеу</a></li>
+    <li><a href="https://drive.google.com/" target="_blank">Практикалық тапсырма (Google Drive)</a></li>
+    <li><a href="bagalau" target="_blank">Бағалау критерийі</a></li>
+  </ul>
+</section>
+
+{% endblock %}

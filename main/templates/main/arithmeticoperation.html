@@ -1,206 +1,418 @@
-<!doctype html>
-<html lang="en" class=" mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
-    <meta name="keywords" content="Python, Django, framework, open-source">
-    <meta name="description" content="">
+{% extends "main/base.html" %}
 
+{% block title %}Арифметикалық амалдар{% endblock %}
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="icon" sizes="192x192" href="https://static.djangoproject.com/img/icon-touch.e4872c4da341.png">
-    <link rel="shortcut icon" href="https://static.djangoproject.com/img/favicon.6dbf28c0650e.ico">
-    <meta name="msapplication-TileColor" content="#113228">
-    <meta name="msapplication-TileImage" content="https://static.djangoproject.com/img/icon-tile.b01ac0ef9f67.png">
-    <meta name="theme-color" content="#0C4B33">
+{% block content %}
 
+<h1>Арифметикалық амалдардың жазылу ережелері</h1>
+<p class="subtitle">
+  Бұл сабақта Python тіліндегі негізгі арифметикалық операцияларды, олардың орындалу
+  тәртібін, салыстыру операторларын және <code class="language-python">math</code> модулін
+  қолдануды үйренеміз.
+</p>
 
-    <meta property="og:title" content="About the Django Software Foundation">
-    <meta property="og:description" content="The web framework for perfectionists with deadlines.">
-    <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
-    <meta property="og:image:alt" content="Django logo">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="546">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:url" content="https://www.djangoproject.com/foundation/">
-    <meta property="og:site_name" content="Django Project">
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақты толық орындасаң, шамамен <b>100 XP</b> жинайсың.
+</p>
 
-    <meta property="twitter:creator" content="djangoproject">
-    <meta property="twitter:site" content="djangoproject">
-    <meta property="twitter:card" content="summary">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-
-    <title>Арифметикалық амалдардың жазылу ережелері</title>
-
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
-    <script src="https://static.djangoproject.com/js/lib/webfontloader/webfontloader.e75218f5f090.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,400&amp;subset=latin"><script>
-    WebFont.load({
-      custom: {
-        families: ['FontAwesome', 'Fira+Mono'],
-      },
-      google: {
-        families: ['Roboto:400italic,700italic,300,700,400:latin'
-        ]
-      },
-      classes: false,
-      events: false,
-      timeout: 1000
-    });
-    </script>
-    <script src="https://static.djangoproject.com/js/lib/modernizr.3b36762e418a.js"></script>
-    <script src="https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"></script>
-
-  <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main.48270eac7c0b" src="https://static.djangoproject.com/js/main.48270eac7c0b.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mod/mobile-menu" src="https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="jquery" src="https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"></script></head>
-
-  <body id="generic" class="">
-
-
-
-
-    <div class="copy-banner">
-      <div class="container ">
-
-  <h1> Арифметикалық амалдардың жазылу ережелері</h1>
-
-      </div>
-    </div>
-    <div id="billboard"></div>
-
-    <div class="container sidebar-right">
-      <div role="main">
-           <h2 style="color: MediumSeaGreen;">  Python (пайтон) тіліндегі сызықтық алгоритмдерді жазу</h2>
-<h2> Арифметикалық операциялар</h2>
-<p> Арифметикалық операциялар  дегеніміз  –  сандармен  орындалатын есептеу операциялары.
-Python тілінде негізгі арифметикалық операцияларды: қосу,
-көбейту, бөлу, қалдықты есептеу,
-бүтін бөлікті есептеу және т.б. қолдануға мүмкіндік беріледі.
-    Python тіліндегі арифметикалық операциялардың орындалу
-тәртібі олардың математикадағы
-орындалу тәртібіне ұқсас болып
-келеді.</p>
-<img alt="" height="350" data-cke-saved-name="Banking with FinTech (1).png" name="Banking with FinTech (1).png" data-cke-saved-src="https://ucarecdn.com/f1cad99e-3505-4a02-bcbb-fab49f1b867e/-/crop/1910x979/0,97/-/preview/" src="https://ucarecdn.com/f1cad99e-3505-4a02-bcbb-fab49f1b867e/-/crop/1910x979/0,97/-/preview/" width="700" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Ff1cad99e-3505-4a02-bcbb-fab49f1b867e%2F-%2Fcrop%2F1910x979%2F0%2C97%2F-%2Fpreview%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221910%22%2C%22height%22%3A%22979%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-         <p>Python тіліндегі арифметикалық операциялардың орындалуына мысал келтірейік:</p>
-          <img alt="" height="350" data-cke-saved-name="arifmetika01.png" name="arifmetika01.png" data-cke-saved-src="https://ucarecdn.com/b6747b1f-cc80-4a2c-8003-4be3696dd485/" src="https://ucarecdn.com/b6747b1f-cc80-4a2c-8003-4be3696dd485/" width="558" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fb6747b1f-cc80-4a2c-8003-4be3696dd485%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22558%22%2C%22height%22%3A%22359%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <p>Тексеру</p>
-          <img alt="" height="172" data-cke-saved-name="arifmetika02.png" name="arifmetika02.png" data-cke-saved-src="https://ucarecdn.com/82408b14-f3a2-4c75-81d2-f6c5218639e3/" src="https://ucarecdn.com/82408b14-f3a2-4c75-81d2-f6c5218639e3/" width="500" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2F82408b14-f3a2-4c75-81d2-f6c5218639e3%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22500%22%2C%22height%22%3A%22172%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-          <h2> Python-дағы салыстыру  операторлары</h2>
-<p>Салыстыру операторлары екі мәнді/айнымалыны салыстырады және логикалық нәтижені қайтарады: True немесе False </p>
-          <img alt="" height="97" data-cke-saved-name="arifmetika03.png" name="arifmetika03.png" data-cke-saved-src="https://ucarecdn.com/b6a9363e-8f5d-46f5-8506-3044a76f5c4d/" src="https://ucarecdn.com/b6a9363e-8f5d-46f5-8506-3044a76f5c4d/" width="368" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fb6a9363e-8f5d-46f5-8506-3044a76f5c4d%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%22368%22%2C%22height%22%3A%2297%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-   <img alt="" height="350" data-cke-saved-name="Banking with FinTech (1).jpg" name="Banking with FinTech (1).jpg" data-cke-saved-src="https://ucarecdn.com/d1c1e644-cdb2-4a5c-aa47-1bd9a6bcf1da/-/crop/1667x780/132,150/-/preview/" src="https://ucarecdn.com/d1c1e644-cdb2-4a5c-aa47-1bd9a6bcf1da/-/crop/1667x780/132,150/-/preview/" width="750" data-cke-widget-data="%7B%22hasCaption%22%3Afalse%2C%22src%22%3A%22https%3A%2F%2Fucarecdn.com%2Fd1c1e644-cdb2-4a5c-aa47-1bd9a6bcf1da%2F-%2Fcrop%2F1667x780%2F132%2C150%2F-%2Fpreview%2F%22%2C%22alt%22%3A%22%22%2C%22width%22%3A%221667%22%2C%22height%22%3A%22780%22%2C%22lock%22%3Atrue%2C%22align%22%3A%22none%22%2C%22classes%22%3Anull%7D" data-cke-widget-upcasted="1" data-cke-widget-keep-attr="0" data-widget="image" class="cke_widget_element">
-    <h2>math модулі</h2>
-<p>Математикалық басқа функциялар math модуліне біріктірілген. Python-дағы модуль дегеніміз – функциялары бар файл.
-Математикалық функцияларды программадан шақыру
-үшін import командасын қолдана отырып, math модулін қосамыз.Модулдің негізгі функциялары: </p>
-          <li>pow (num, power): num – кез келген сан, power – дәрежелеу.</li>
-        <li> sqrt (num): num санның квадрат түбірін табу.</li>
-          <li>ceil (num): нақты санды ең жақын бүтін санға дейін дөңгелектеу.</li>
-          <li>floor (num): нақты санды ең кіші бүтін санға дейін дөңгелектеу.</li>
-
-      </div>
-
-
-
-
-
-<h1 class="visuallyhidden">Additional Information</h1>
-<div role="complementary">
-
-
-
-  <div class="fundraising-sidebar">
-    <h2 style="color:Gold"><b>Программалау - ол түсіну<b></h2>
-
-      <img class="python-logo" src="https://www.python.org/static/img/python-logo@2x.png" alt="python™" width="300" height="80">
-    </div>
-
-  <ul class="list-links">
-    <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-      <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3.11.2 жүктеу</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1F6p-JMBP6hYH2eQgkvD91cdgLdRKcH09?usp=sharing" class="cta outline">Практикалық тапсырма</a></li>
-      <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
+  <ul style="margin-top:10px;">
+    <li>Арифметикалық операциялардың не екенін түсіну;</li>
+    <li>Python тіліндегі негізгі арифметикалық операторларды ажырата білу;</li>
+    <li>Орындалу тәртібін (приоритетін) дұрыс қолдану;</li>
+    <li>Салыстыру операторлары мен логикалық нәтиже (True/False) түсіну;</li>
+    <li><code class="language-python">math</code> модуліндегі негізгі функциялармен танысу;</li>
+    <li>Mini-Quiz арқылы білімін тексеру.</li>
   </ul>
-</div>
+</section>
 
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ: АРИФМЕТИКАЛЫҚ ОПЕРАТОРЛАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Арифметикалық операциялар</h2>
+    <button class="btn-done" data-block="theory" data-xp="35">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
+  <h3 style="margin-top:14px;">Арифметикалық операциялар деген не?</h3>
+  <p>
+    Арифметикалық операциялар – сандармен орындалатын есептеу операциялары.
+    Python тілінде негізгі арифметикалық операциялар:
+    қосу, азайту, көбейту, бөлу, қалдықты есептеу, бүтін бөлікті есептеу және дәрежелеу.
+    Python тіліндегі арифметикалық операциялардың орындалу тәртібі
+    математикадағы орындалу тәртібіне ұқсас.
+  </p>
 
+  <h3>Python-дағы негізгі арифметикалық операторлар</h3>
+  <ul>
+    <li><code class="language-python">+</code> – қосу;</li>
+    <li><code class="language-python">-</code> – азайту;</li>
+    <li><code class="language-python">*</code> – көбейту;</li>
+    <li><code class="language-python">/</code> – бөлудің нәтижесі (нақты сан <code>float</code>);</li>
+    <li><code class="language-python">//</code> – бүтін бөлікті бөлу (төмен қарай дөңгелектейді);</li>
+    <li><code class="language-python">%</code> – қалдықты есептеу (mod);</li>
+    <li><code class="language-python">**</code> – дәрежелеу (power).</li>
+  </ul>
+
+  <h3>Мысалдар</h3>
+  <pre><code class="language-python">a = 7 + 3       # 10
+b = 7 - 3       # 4
+c = 7 * 3       # 21
+d = 7 / 3       # 2.3333333...
+e = 7 // 3      # 2  (бүтін бөлігі)
+f = 7 % 3       # 1  (қалдық)
+g = 2 ** 3      # 8  (2-нің 3-дәрежесі)
+
+print(a, b, c, d, e, f, g)</code></pre>
+
+  <h3>Орындалу тәртібі (оператор приоритеті)</h3>
+  <p>
+    Операциялар орындалу реті математикаға ұқсас:
+    алдымен дөңгелек жақша, сосын дәрежелеу, содан кейін көбейту/бөлу,
+    соңында қосу/азайту.
+  </p>
+
+  <pre><code class="language-python">n1 = 2 + 3 * 4        # 2 + 12 = 14
+n2 = (2 + 3) * 4      # 5 * 4 = 20
+
+print(n1)
+print(n2)</code></pre>
+
+  <p>
+    Жақшаны дұрыс қою – есептің дұрыс шығуына өте маңызды.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. ТЕОРИЯ: САЛЫСТЫРУ ОПЕРАТОРЛАРЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="comparison">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Салыстыру операторлары</h2>
+    <button class="btn-done" data-block="comparison" data-xp="15">
+      ⬜ Орындалды (Салыстыру)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Салыстыру операторлары екі мәнді немесе айнымалыны салыстырады және
+    логикалық нәтиже ретінде <code class="language-python">True</code> немесе
+    <code class="language-python">False</code> қайтарады.
+  </p>
+
+  <h3>Негізгі салыстыру операторлары</h3>
+  <ul>
+    <li><code class="language-python">==</code> – тең бе?</li>
+    <li><code class="language-python">!=</code> – тең емес пе?</li>
+    <li><code class="language-python">&gt;</code> – үлкен бе?</li>
+    <li><code class="language-python">&lt;</code> – кіші ме?</li>
+    <li><code class="language-python">&gt;=</code> – үлкен немесе тең бе?</li>
+    <li><code class="language-python">&lt;=</code> – кіші немесе тең бе?</li>
+  </ul>
+
+  <h3>Мысалдар</h3>
+  <pre><code class="language-python">a = 5
+b = 3
+
+print(a > b)    # True
+print(a == b)   # False
+print(a != b)   # True
+print(a >= 5)   # True
+print(a &lt; 0)    # False</code></pre>
+
+  <p>
+    Салыстырудың нәтижесі логикалық типке (<code class="language-python">bool</code>)
+    жатады және шартты операторларда (<code class="language-python">if</code>) жиі қолданылады.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ТЕОРИЯ: math МОДУЛІ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="math-module">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · math модулі</h2>
+    <button class="btn-done" data-block="math" data-xp="10">
+      ⬜ Орындалды (math модулі)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Математикалық көптеген қосымша функциялар
+    <code class="language-python">math</code> модуліне біріктірілген.
+    Python-дағы <b>модуль</b> – ішінде дайын функциялары бар файл.
+  </p>
+
+  <p>
+    Модульді қолдану үшін <code class="language-python">import</code>
+    командасымен қосамыз:
+  </p>
+
+  <pre><code class="language-python">import math</code></pre>
+
+  <h3>math модулінің негізгі функциялары</h3>
+  <ul>
+    <li><code class="language-python">math.pow(num, power)</code> –
+        <code>num</code> санын <code>power</code> дәрежесіне шығарады;</li>
+    <li><code class="language-python">math.sqrt(num)</code> –
+        <code>num</code> санының квадрат түбірін табады;</li>
+    <li><code class="language-python">math.ceil(num)</code> –
+        нақты санды ең жақын үлкен бүтін санға дейін дөңгелектейді;</li>
+    <li><code class="language-python">math.floor(num)</code> –
+        нақты санды ең жақын кіші бүтін санға дейін дөңгелектейді.</li>
+  </ul>
+
+  <h3>Мысалдар</h3>
+  <pre><code class="language-python">import math
+
+print(math.pow(2, 3))     # 8.0
+print(math.sqrt(16))      # 4.0
+print(math.ceil(3.14))    # 4
+print(math.floor(3.99))   # 3</code></pre>
+
+  <p>
+    Бұл функциялар күрделірек есептер мен формулаларды программалау кезінде
+    өте ыңғайлы.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Арифметикалық өрнектер</h3>
+  <p>
+    Төмендегі өрнектердің мәнін алдымен дәптерде қолмен есепте,
+    кейін Python-да тексер:
+  </p>
+
+  <pre><code class="language-python">a = 7 + 4 * 2
+b = (7 + 4) * 2
+c = 15 // 4
+d = 15 % 4
+e = 2 ** 5
+f = (3 + 5) * 2 - 10 / 5
+
+print(a, b, c, d, e, f)</code></pre>
+
+  <h3>Тапсырма 2 · Салыстыру</h3>
+  <p>Әр өрнектің нәтижесі True немесе False болатынын болжа, содан соң тексер:</p>
+
+  <pre><code class="language-python">print(7 &gt; 3)
+print(10 == 2 * 5)
+print(5 != 5)
+print(8 &lt;= 4 * 2)
+print(3 + 2 &gt; 3 * 2)</code></pre>
+
+  <h3>Тапсырма 3 · math модулімен жұмыс</h3>
+  <p>Төмендегі программаны IDE-де немесе онлайн компиляторда орында:</p>
+
+  <pre><code class="language-python">import math
+
+r = 5
+circle_length = 2 * math.pi * r      # шеңбер ұзындығы
+circle_area = math.pi * r ** 2       # шеңбер ауданы
+
+print("Ұзындығы:", circle_length)
+print("Ауданы:", circle_area)</code></pre>
+
+  <p>
+    Өзгеше радиус мәндерін қойып көр және нәтиженің қалай өзгеретінін бақыла.
+  </p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тестке жауап бер. Дұрыс нұсқаларды белгілеп, «Жауаптарды тексеру»
+    батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>1) Қай оператор қалдықты есептейді?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) <code class="language-python">//</code>
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) <code class="language-python">/</code>
+      </label>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) <code class="language-python">%</code>
+      </label>
     </div>
 
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>2) Қай оператор дәрежелеуді білдіреді?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code class="language-python">*</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code class="language-python">**</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code class="language-python">^</code>
+      </label>
+    </div>
 
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Қай жазба <u>бүтін бөлуді</u> көрсетеді?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code class="language-python">17 // 4</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code class="language-python">17 / 4</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code class="language-python">17 % 4</code>
+      </label>
+    </div>
 
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>4) Қай салыстыру нәтижесі True болады?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) <code class="language-python">5 == 3</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) <code class="language-python">7 &lt; 2</code>
+      </label>
 
-    <!-- SVGs -->
-    <svg xmlns="http://www.w3.org/2000/svg">
-      <symbol viewBox="0 0 24 24" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"></path></symbol>
-      <symbol viewBox="0 0 24 24" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"></path><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"></path></symbol>
-    </svg>
-    <!-- END SVGs -->
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) <code class="language-python">10 &gt;= 2 * 5</code>
+      </label>
+    </div>
 
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>5) Қай функция квадрат түбірді табады?</b></p>
 
-      <div role="contentinfo">
-  <div class="subfooter">
-    <div class="container">
-      <h1 class="visuallyhidden">Django Links</h1>
-      <div class="column-container">
-        <div class="col-learn-more">
-          <h2>Python программалау тілі</h2>
-          <ul>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) <code class="language-python">math.pow(x, 2)</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) <code class="language-python">math.sqrt(x)</code>
+      </label>
 
-</div>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) <code class="language-python">math.ceil(x)</code>
+      </label>
+    </div>
 
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>6) Қай жазба «нысанды ең жақын үлкен бүтін санға дейін дөңгелектеуді» білдіреді?</b></p>
 
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) <code class="language-python">math.ceil(3.14)</code>
+      </label>
 
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) <code class="language-python">math.floor(3.14)</code>
+      </label>
 
-    <script>
-    function extless(input) {
-        return input.replace(/(.*)\.[^.]+$/, '$1');
-    }
-    var require = {
-        shim: {
-            'jquery': [],
-            'jquery.inview': ["jquery"],
-            'jquery.payment': ["jquery"],
-            'jquery.flot': ["jquery"],
-            'jquery.unveil': ["jquery"],
-            'stripe': {
-              exports: 'Stripe'
-            }
-        },
-        paths: {
-            "jquery": extless("https://static.djangoproject.com/js/lib/jquery/dist/jquery.min.87e69028f78d.js"),
-            "jquery.inview": extless("https://static.djangoproject.com/js/lib/jquery.inview/jquery.inview.min.4edba1c65592.js"),
-            "jquery.payment": extless("https://static.djangoproject.com/js/lib/jquery.payment/lib/jquery.payment.e99c05ca79ae.js"),
-            "jquery.unveil": extless("https://static.djangoproject.com/js/lib/unveil/jquery.unveil.min.ac79eb277093.js"),
-            "jquery.flot": extless("https://static.djangoproject.com/js/lib/jquery-flot/jquery.flot.min.9964206e9d7f.js"),
-            "clipboard": extless("https://static.djangoproject.com/js/lib/clipboard/dist/clipboard.min.bd70fd596a23.js"),
-            "mod/floating-warning": extless("https://static.djangoproject.com/js/mod/floating-warning.a21b2abd2884.js"),
-            "mod/list-collapsing": extless("https://static.djangoproject.com/js/mod/list-collapsing.c1a08d3ef9e9.js"),
-            "mod/list-feature": extless("https://static.djangoproject.com/js/mod/list-feature.73529480f25b.js"),
-            "mod/mobile-menu": extless("https://static.djangoproject.com/js/mod/mobile-menu.6012f4745df8.js"),
-            "mod/version-switcher": extless("https://static.djangoproject.com/js/mod/version-switcher.c56ff7ed5481.js"),
-            "mod/search-key": extless("https://static.djangoproject.com/js/mod/search-key.1dee105cb48c.js"),
-            "mod/stripe-change-card": extless("https://static.djangoproject.com/js/mod/stripe-change-card.682c710317a8.js"),
-            "mod/switch-dark-mode": extless("https://static.djangoproject.com/js/mod/switch-dark-mode.a0e0dca32970.js"),
-            "mod/console-tabs": extless("https://static.djangoproject.com/js/mod/console-tabs.70ce882faaf3.js"),
-            "stripe-checkout": "https://checkout.stripe.com/checkout",
-            "stripe": "https://js.stripe.com/v3/?" // ? needed due to require.js
-        }
-    };
-    </script>
-    <script data-main="https://static.djangoproject.com/js/main.48270eac7c0b.js" src="https://static.djangoproject.com/js/lib/require.177879fbe7dd.js"></script>
-</body>
-</html>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) <code class="language-python">math.sqrt(3.14)</code>
+      </label>
+    </div>
+
+    <button type="button" id="checkQuiz" class="quiz-check-btn">
+      Жауаптарды тексеру
+    </button>
+    <p id="quizResult" class="quiz-result"></p>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 7. ҚОРЫТЫНДЫ ЖӘНЕ ҚОСЫМША РЕСУРСТАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="summary">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">6-бөлім · Қорытынды және қосымша материалдар</h2>
+    <button class="btn-done" data-block="homework" data-xp="10">
+      ⬜ Орындалды (Қорытынды)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Не үйрендің?</h3>
+  <ul>
+    <li>Арифметикалық операциялар мен олардың орындалу тәртібін;</li>
+    <li>Python-дағы негізгі операторларды: <code class="language-python">+, -, *, /, //, %, **</code>;</li>
+    <li>Салыстыру операторлары мен логикалық нәтижені (True/False);</li>
+    <li><code class="language-python">math</code> модуліндегі негізгі функцияларды;</li>
+    <li>Өрнектерді қолмен есептеп, Python арқылы тексеруді.</li>
+  </ul>
+
+  <h3>Қосымша ақпарат және сілтемелер</h3>
+  <ul>
+    <li><a href="https://www.onlinegdb.com/" target="_blank">Онлайн компилятор</a></li>
+    <li><a href="https://www.python.org/downloads/" target="_blank">Python 3.11.2 жүктеу</a></li>
+    <li><a href="https://drive.google.com/" target="_blank">Практикалық тапсырма (Google Drive)</a></li>
+    <li>Бағалау критерийін мұғалімнің берген материалы арқылы қара.</li>
+  </ul>
+</section>
+
+{% endblock %}

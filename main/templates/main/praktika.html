@@ -1,318 +1,232 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IDE – Мен танысу | Gamified</title>
+{% extends "main/base.html" %}
 
-    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-    <!-- Prism.js for Python highlighting -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+{% block title %}IDE – мен танысу{% endblock %}
 
+{% block content %}
 
-<style>
-.code-header {
-    background:#2c2c2e;
-    color:#d1d1d6;
-    padding:10px 14px;
-    border-radius:12px 12px 0 0;
-    font-size:14px;
-    font-weight:600;
-    font-family: "SF Pro Text", sans-serif;
-}
+<h1>IDE – мен танысу</h1>
+<p class="subtitle">
+  Бұл сабақта Python бағдарламаларын жазуға арналған орта (IDE) не екенін,
+  Python тілінің негізгі мүмкіндіктерін, алғашқы кодты және IDE-де жұмыс істеу
+  қадамдарын үйренеміз.
+</p>
 
-.code-block {
-    background:#1e1e1e;
-    padding:18px 20px;
-    border-radius:0 0 12px 12px;
-    overflow-x:auto;
-    border:1px solid #3a3a3c;
-}
+<p style="margin-top:8px;color:#4b5563;">
+  Бұл сабақ соңында сен <b>100 XP</b> жинап, деңгейді толық аяқтайсың.
+</p>
 
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="10">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-.title { font-size:42px; font-weight:800; margin-bottom:10px; }
-.subtitle { font-size:18px; opacity:.7; margin-bottom:25px; }
+  <ul style="margin-top:12px;">
+    <li>Python тілінің ерекшеліктерін және қолдану салаларын түсіну;</li>
+    <li>IDE ұғымын түсіну және мысалдар келтіру;</li>
+    <li>Python-ды орнатып, алғашқы бағдарламаны жазу;</li>
+    <li>Кодты орындау/сақтау жолдарын меңгеру;</li>
+    <li>Mini-quiz арқылы білімді тексеру.</li>
+  </ul>
+</section>
 
-.glass-card {
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(18px);
-    padding: 22px;
-    border-radius: 22px;
-    margin: 25px 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-}
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="30">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
 
-.code-header {
-    background:#2c2c2e; color:white;
-    padding:10px 14px; border-radius:12px 12px 0 0;
-}
-.code-block {
-    background:#1e1e1e; color:#f8f8f2;
-    padding:18px; border-radius:0 0 12px 12px;
-    font-family:"SF Mono",monospace;
-    overflow-x:auto;
-}
+  <!-- 2.1 Python тіліне кіріспе -->
+  <h3 style="margin-top:16px;">Python тіліне кіріспе</h3>
+  <p>
+    <b>Python</b> — оқуға жеңіл, қуатты және әмбебап бағдарламалау тілі.
+    Синтаксисі адамның табиғи тіліне ұқсайды, сондықтан бастаушыларға өте ыңғайлы.
+  </p>
 
+  <h4>Python деген не?</h4>
+  <p>
+    Python — жоғары деңгейлі, интерпретацияланатын тіл. Web, Data Science,
+    жасанды интеллект, робототехника, автоматтандыру сияқты көптеген
+    салаларда қолданылады.
+  </p>
 
-/* ---- GLOBAL ---- */
-body {
-    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    margin: 0; padding: 0; line-height: 1.6;
-}
-.container { max-width:880px; margin:auto; padding:40px 20px 80px; }
+  <h4>Неге дәл Python?</h4>
+  <ul>
+    <li>Синтаксисі жеңіл, оқуға түсінікті;</li>
+    <li>Қате хабарламалары нақты және түсінікті;</li>
+    <li>Көп түрлі салаға жол ашады;</li>
+    <li>Бастаушыларға арналған ең қолайлы тілдердің бірі.</li>
+  </ul>
 
-/* ---- TITLE ---- */
-.title { font-size:42px; font-weight:800; margin-bottom:6px; }
-.subtitle { font-size:19px; opacity:.8; margin-bottom:30px; }
+  <h4>Python қайда қолданылады?</h4>
+  <ul>
+    <li><b>Web Development</b> — Django, Flask;</li>
+    <li><b>Data Science</b> — NumPy, Pandas;</li>
+    <li><b>Machine Learning</b> — TensorFlow, PyTorch;</li>
+    <li><b>Automation</b> — скрипттер, боттар, автоматтандыру;</li>
+    <li><b>Білім беру</b> — мектепте, колледжде, университетте оқыту.</li>
+  </ul>
 
-/* ---- XP SYSTEM ---- */
-.level-box {
-    background: linear-gradient(135deg,#0071e3,#5ea0ff);
-    padding:22px; border-radius:20px; color:white;
-    margin-bottom:35px; box-shadow:0 8px 20px rgba(0,0,0,.12);
-}
-.level-box h3 { margin:0 0 8px 0; font-size:22px; font-weight:700; }
+  <h4>Алғашқы Python коды (Hello, Python!)</h4>
+  <p>Тарихта көптеген программистер бірінші рет мына кодты жазған:</p>
+  <pre><code class="language-python">print("Hello, Python!")</code></pre>
+  <p>
+    Бұл код экранға мәтін шығарады. Python синтаксисінің қарапайымдылығын көрсетеді:
+    бір ғана функция шақыру — және нәтиже дайын.
+  </p>
 
-.xp-bar {
-    width:100%; height:12px; background:rgba(255,255,255,.3);
-    border-radius:12px; overflow:hidden;
-}
-.xp-inner {
-    height:100%; width:0%; background:white;
-    transition:width .4s ease;
-}
+  <h4>Python қалай жұмыс істейді?</h4>
+  <p>
+    Python — <b>интерпретацияланатын тіл</b>. Яғни код жол-жолымен оқылып,
+    бірден орындалады. Біз файлда жазылған кодты іске қосқанда,
+    Python интерпретаторы оны оқып, дереу орындайды.
+  </p>
 
-/* ---- POPUP ---- */
-.reward-popup {
-    position:fixed; top:-200px; left:50%; transform:translateX(-50%);
-    background:white; padding:24px 30px; border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
-    text-align:center; z-index:2000; transition:top .6s ease;
-}
-.reward-popup.show { top:40px; }
+  <h4>Python үйренудің пайдасы</h4>
+  <ul>
+    <li>Ерте жастан IT саласында жұмыс табуға мүмкіндік;</li>
+    <li>Freelance жобалар арқылы қосымша табыс табу;</li>
+    <li>Data Science және AI бағыттарына жол ашады;</li>
+    <li>Олимпиада, жобалар, стартаптарда үлкен артықшылық береді.</li>
+  </ul>
 
-/* ---- CARDS ---- */
-.image-card {
-    background:#fff; border-radius:18px; padding:14px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.06); margin:20px 0;
-}
-.image-card img { width:100%; border-radius:14px; }
+  <!-- 2.2 IDE – мен танысу -->
+  <h3 style="margin-top:22px;">IDE деген не?</h3>
+  <p>
+    <b>IDE (Integrated Development Environment)</b> — код жазуға, іске қосуға,
+    қателерді табуға және жобаны басқаруға арналған кешенді орта.
+    IDE ішінде редактор, терминал, дебаггер және басқа да құралдар біріктірілген.
+  </p>
 
-/* ---- CODE ---- */
-.code-header { background:#2c2c2e; padding:10px; color:#d1d1d6; border-radius:12px 12px 0 0; font-size:14px; }
-.code-block {
-    background:#1e1e1e; padding:18px; color:#f8f8f2;
-    font-family:"SF Mono","Fira Code"; border-radius:0 0 12px 12px;
-}
+  <h3>Python-ды қайда жазамыз?</h3>
+  <ol>
+    <li><b>PyCharm</b> — кәсіби IDE, үлкен жобаларға ыңғайлы.</li>
+    <li><b>VS Code</b> — жеңіл редактор, кеңейтулер арқылы күшті IDE-ге айналады.</li>
+    <li><b>Thonny</b> — бастауыштарға арналған қарапайым IDE.</li>
+    <li><b>Онлайн IDE</b> — браузерден бірден жаза беруге болады (OnlineGDB, Replit т.б.).</li>
+  </ol>
 
-/* ---- QUIZ ---- */
-.quiz-box {
-    background:#fff; padding:22px; border-radius:18px;
-    box-shadow:0 8px 22px rgba(0,0,0,0.06); margin:25px 0;
-}
-.quiz-btn {
-    background:#34C759; color:white;
-    padding:10px 18px; border-radius:10px; border:none; cursor:pointer;
-}
+  <h3>IDE-дегі алғашқы код</h3>
+  <pre><code class="language-python">print("Salem, Python!")</code></pre>
+  <p>IDE-ні ашып, осы кодты теріп, іске қосып көр. Экранда «Salem, Python!» мәтіні шығады.</p>
 
-/* ---- STEPS ---- */
-.step {
-    background:#fff; padding:16px; border-radius:14px;
-    margin:12px 0; box-shadow:0 6px 18px rgba(0,0,0,0.05);
-}
+  <h3>Пайдаланушыдан атын сұрайтын программа</h3>
+  <p>Келесі бағдарлама қолданушыдан атын сұрап, сәлемдеседі:</p>
+  <pre><code class="language-python">name = input("Атың кім? ")
+print("Сәлем,", name)</code></pre>
+</section>
 
-/* ---- FINAL LEVEL ---- */
-.final-msg {
-    background:linear-gradient(135deg,#34C759,#2db94f);
-    padding:20px; color:white; border-radius:20px; margin-top:40px;
-    text-align:center; font-size:20px; font-weight:600;
-}
+<!-- ========================================================= -->
+<!-- 3. PYTHON ОРНАТУ + ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Практика және орнату</h2>
+    <button class="btn-done" data-block="practice" data-xp="30">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
 
-</style>
-</head>
+  <h3 style="margin-top:14px;">Python орнату (үйдегі компьютерге)</h3>
+  <p>
+    Python-ды ресми сайттан жүктеуге болады: <b>python.org</b> → <b>Downloads</b> бөлімін таңда.
+  </p>
+  <img src="https://ucarecdn.com/e96300e7-4709-4a3d-8b2d-5723054cdd70/"
+       alt="Python ресми сайтынан жүктеу"
+       style="max-width:100%;border-radius:18px;margin-top:10px;box-shadow:0 8px 24px rgba(0,0,0,0.12);">
 
-<body>
+  <ul style="margin-top:12px;">
+    <li>Жүйеңе сәйкес нұсқаны таңда (Windows, macOS, Linux);</li>
+    <li>Орнату кезінде <b>“Add Python to PATH”</b> деген жеріне құсбелгі қой;</li>
+    <li>Орнатуды аяқтаған соң, IDE-ден Python-ды ашып, код жазып көр.</li>
+  </ul>
 
-<!-- REWARD POPUP -->
-<div class="reward-popup" id="rewardPopup">
-    <h3 id="rewardTitle">Жетістік!</h3>
-    <p id="rewardText">+20 XP</p>
-    <button onclick="closeReward()" style="padding:10px 16px;background:#0071e3;color:white;border:none;border-radius:10px;cursor:pointer;">Жабу</button>
-</div>
+  <h3 style="margin-top:18px;">Тапсырма 1 · Алғашқы программа</h3>
+  <p>Python файлына төмендегі кодты жазып, іске қос:</p>
+  <pre><code class="language-python">print("Мен Python тілін оқуды бастадым")</code></pre>
 
-<div class="container">
+  <h3>Тапсырма 2 · Екі қатарлы код</h3>
+  <p>IDE-де төмендегі кодты жазып, нәтижесін көр:</p>
+  <pre><code class="language-python">print("Мен Python үйреніп жүрмін!")
+print(2 + 3)</code></pre>
 
-    <!-- TITLE -->
-    <h1 class="title">IDE – Мен танысу</h1>
-    <p class="subtitle">Бұл сабақ соңында сен 100 XP жинап, деңгейді толық аяқтайсың.</p>
+  <h3>Тапсырма 3 · Өзің туралы бағдарлама</h3>
+  <p>Өзің туралы 3 жол ақпарат шығаратын бағдарлама жаз:</p>
+  <pre><code class="language-python">print("Менің атым ...")
+print("Мен ... сыныптамын")
+print("Мен Python үйренемін")</code></pre>
 
-    <!-- XP BAR -->
-    <div class="level-box">
-        <h3>Сабақ прогресі</h3>
-        <div class="xp-bar"><div class="xp-inner" id="xpInner"></div></div>
-        <p id="xpText" style="margin-top:8px;">0 / 100 XP</p>
-    </div>
+  <p style="margin-top:10px;">
+    Кодты іске қосқанда қате шықса, жолдағы символдарды (тырнақша, жақша, бос орын)
+    мұқият тексер.
+  </p>
+</section>
 
-    <!-- SECTION 1 ------------------------------------------- -->
-    <h2>1. Python тіліне кіріспе</h2>
-    <h1 class="title">Python тіліне кіріспе</h1>
-<p class="subtitle">Python — оқуға жеңіл, қуатты және әмбебап бағдарламалау тілі.</p>
+<!-- ========================================================= -->
+<!-- 4. MINI-QUIZ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
 
-<div class="glass-card">
-    <h2>Python деген не?</h2>
-    <p>Python — адамның табиғи тіліне ұқсас синтаксисі бар жоғары деңгейлі тіл.
-       Web, Data Science, жасанды интеллект, робототехника сияқты көптеген салаларда қолданылады.</p>
-</div>
+  <p style="margin-top:12px;">
+    Төмендегі сұраққа жауап бер (ауызша, дәптерде немесе мұғалімнің платформасында):
+  </p>
 
-<div class="glass-card">
-    <h2>Неге Python?</h2>
-    <ul>
-        <li>Синтаксисі жеңіл, оқуға түсінікті</li>
-        <li>Қате хабарламалары нақты және түсінікті</li>
-        <li>Көп саланы меңгеруге мүмкіндік береді</li>
-        <li>Бастаушыларға арналған ең үздік тіл</li>
-    </ul>
-</div>
+  <p><b>Сұрақ:</b></p>
+  <pre><code class="language-python">print("Hello")</code></pre>
+  <p>Осы код орындалғанда экранда не пайда болады?</p>
 
-<div class="glass-card">
-    <h2>Python қайда қолданылады?</h2>
-    <ul>
-        <li><b>Web Development</b> — Django, Flask</li>
-        <li><b>Data Science</b> — NumPy, Pandas</li>
-        <li><b>Machine Learning</b> — TensorFlow, PyTorch</li>
-        <li><b>Automation</b> — скрипттер, боттар</li>
-        <li><b>Білім беру</b> — үйренуге өте жеңіл</li>
-    </ul>
-</div>
+  <ol>
+    <li><code>Hello</code></li>
+    <li><code>"Hello"</code></li>
+    <li><code>print("Hello")</code></li>
+  </ol>
+  <p>Дұрыс жауапты таңда да, неліктен солай екенін түсіндір.</p>
+</section>
 
-<div class="glass-card">
-    <h2>Алғашқы Python коды</h2>
-     <p>Тарихта кез келген бағдарламашы бірінші рет дәл осы кодты жазған:</p>
- <div class="code-header">Python Code</div>
-<div class="code-block">
-<pre><code class="language-python">
-print("Hello, Python!")
-</code></pre>
-</div>
+<!-- ========================================================= -->
+<!-- 5. ҚОРЫТЫНДЫ / ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Сабақты аяқтау және үй тапсырмасы</h2>
+    <button class="btn-done" data-block="homework" data-xp="15">
+      ⬜ Орындалды (Үй жұмысы)
+    </button>
+  </div>
 
-    <p>Бұл код экранға мәтін шығарады. Python синтаксисінің қарапайымдылығын көрсетеді.</p>
-</div>
+  <h3 style="margin-top:14px;">Сабақты аяқтаудың чек-листі</h3>
+  <ul>
+    <li>Python тілінің не екенін және қайда қолданылатынын түсінемін;</li>
+    <li>Компьютерге Python орната аламын;</li>
+    <li>IDE ашып, қарапайым бағдарламаны жаза аламын;</li>
+    <li><code>print()</code> және <code>input()</code> функцияларының не істейтінін білемін;</li>
+    <li>Mini-quiz сұрағына жауап бердім.</li>
+  </ul>
 
-<div class="glass-card">
-    <h2>Python қалай жұмыс істейді?</h2>
-    <p>Python — интерпретацияланатын тіл. Яғни код жол-жолымен оқылып, бірден орындалады.</p>
-</div>
+  <h3>Үй тапсырмасы</h3>
+  <ul style="margin-top:8px;">
+    <li>Үйдегі компьютерге Python және бір IDE (PyCharm, VS Code немесе Thonny) орнат;</li>
+    <li><b>«Мен және Python»</b> тақырыбында кем дегенде 5 жолдық бағдарлама жаз
+        (әр жолда өзің туралы немесе мақсаттарың туралы ақпарат болсын);</li>
+    <li>Файлды сақтап, келесі сабақта көрсет;</li>
+    <li>Қосымша: ата-анаңа немесе досыңа Python туралы қысқаша түсіндіріп бер.</li>
+  </ul>
+</section>
 
-<div class="glass-card">
-    <h2>Python үйренудің пайдасы</h2>
-    <ul>
-        <li>Ерте жұмыс табу мүмкіндігі</li>
-        <li>Freelance жобалар</li>
-        <li>Data Science және AI бағыттарына жол</li>
-        <li>Олимпиада, проект, стартаптарда үлкен артықшылық</li>
-    </ul>
-</div>
-
-    <button onclick="addXP(20,'Теория оқылды')" class="quiz-btn">Бұл бөлімді аяқтау (+20 XP)</button>
-
-    <!-- SECTION 2 ------------------------------------------- -->
-    <h2>2. Python орнату</h2>
-
-    <div class="image-card">
-        <img src="https://ucarecdn.com/e96300e7-4709-4a3d-8b2d-5723054cdd70/">
-    </div>
-
-    <button onclick="addXP(20,'Орнатуды түсіндің')" class="quiz-btn">Бұл бөлімді аяқтау (+20 XP)</button>
-
-    <!-- SECTION 3 ------------------------------------------- -->
-    <h2>3. Алғашқы программа</h2>
-
-    <div class="code-header">Python Code</div>
-    <div class="code-block"><pre>
-print("Мен Python тілін оқуды бастадым")
-    </pre></div>
-
-    <button onclick="addXP(20,'Алғашқы код жазылды')" class="quiz-btn">Кодты жаздым (+20 XP)</button>
-
-    <!-- SECTION 4: Quiz ------------------------------------- -->
-    <h2>4. Mini Quiz</h2>
-
-    <div class="quiz-box">
-        <p><b>print("Hello") → ?</b></p>
-        <input id="answer" style="padding:10px;width:100%;border-radius:10px;">
-        <button class="quiz-btn" onclick="checkAnswer()">Тексеру</button>
-        <p id="quiz-result" style="font-weight:600;margin-top:10px;"></p>
-    </div>
-
-    <!-- SECTION 5 ------------------------------------------- -->
-    <h2>5. Сабақты аяқтау</h2>
-    <div class="step"><b>1)</b> Python орнаттың</div>
-    <div class="step"><b>2)</b> IDE аштың</div>
-    <div class="step"><b>3)</b> Код жаздың</div>
-    <div class="step"><b>4)</b> Quiz өттің</div>
-    <div class="step"><b>5)</b> Сабақты аяқтауға дайынсың</div>
-
-    <button onclick="addXP(20,'Сабақты толық аяқтадың')" class="quiz-btn">Сабақты аяқтау (+20 XP)</button>
-
-    <div id="finalLevel"></div>
-
-</div>
-
-
-<script>
-/* ---- XP LOGIC ---- */
-let xp = 0;
-
-function addXP(amount, message) {
-    if (xp >= 100) return;
-
-    xp += amount;
-    if (xp > 100) xp = 100;
-
-    document.getElementById("xpInner").style.width = xp + "%";
-    document.getElementById("xpText").innerText = xp + " / 100 XP";
-
-    showReward(message + " +" + amount + " XP");
-
-    if (xp === 100) {
-        document.getElementById("finalLevel").innerHTML =
-            `<div class="final-msg">🎉 Құттықтаймын! Сен бұл сабақты 100 XP жинап толық аяқтадың!</div>`;
-    }
-}
-
-/* ---- QUIZ ---- */
-function checkAnswer() {
-    let ans = document.getElementById("answer").value.trim();
-    let result = document.getElementById("quiz-result");
-
-    if (ans === "Hello") {
-        result.style.color = "green";
-        result.innerHTML = "Дұрыс! (+20 XP)";
-        addXP(20, "Quiz дұрыс орындалды");
-    } else {
-        result.style.color = "red";
-        result.innerHTML = "Қате. Дұрыс жауап: Hello";
-    }
-}
-
-/* ---- POPUP ---- */
-function showReward(text) {
-    let popup = document.getElementById("rewardPopup");
-    document.getElementById("rewardText").innerText = text;
-
-    popup.classList.add("show");
-    setTimeout(() => popup.classList.remove("show"), 3000);
-}
-function closeReward() {
-    document.getElementById("rewardPopup").classList.remove("show");
-}
-
-</script>
-
-</body>
-</html>
+{% endblock %}

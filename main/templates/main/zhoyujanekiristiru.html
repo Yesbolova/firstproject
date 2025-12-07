@@ -1,157 +1,467 @@
-<!doctype html>
-<html lang="en" class="mdzr-js mdzr-borderradius mdzr-boxshadow mdzr-cssanimations mdzr-svg" data-theme="auto">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="ROBOTS" content="ALL">
-    <meta name="MSSmartTagsPreventParsing" content="true">
-    <meta name="Copyright" content="Django Software Foundation">
+{% extends "main/base.html" %}
 
-    <title>Элементті жою және кірістіру</title>
+{% block title %}Жою және кірістіру{% endblock %}
 
-    <link rel="stylesheet" href="https://static.djangoproject.com/css/output.1adc4207e45f.css">
+{% block content %}
 
-    <!-- Python синтаксисін әдемі көрсету (Prism.js) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<h1>Жою және кірістіру (массив элементтерімен жұмыс)</h1>
+<p class="subtitle">
+  Бұл сабақта бір өлшемді тізімдегі (массивтегі) элементтерді <b>жою</b> және
+  жаңа элементтерді тізімнің <b>басына, ортасына немесе соңына кірістіруді</b> үйренеміз.
+</p>
 
-</head>
+<p style="margin-top:8px;color:#4b5563;">
+  Сабақ соңында сен Python тізімдерімен еркін жұмыс жасап, сұрақтарға жауап берсең
+  <b>100 XP</b> жинай аласың.
+</p>
 
-<body id="generic">
+<!-- ========================================================= -->
+<!-- 1. ОҚУ МАҚСАТЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="goals">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Оқу мақсаты</h2>
+    <button class="btn-done" data-block="goals" data-xp="15">
+      ⬜ Орындалды (Мақсат)
+    </button>
+  </div>
 
-    <div class="copy-banner">
-      <div class="container ">
-          <h1>Элементті жою және кірістіру</h1>
-      </div>
+  <ul style="margin-top:10px;">
+    <li>Тізім (list) ұғымын және индекстерді қайталау;</li>
+    <li>Элементті <b>индекс бойынша жою</b> және <b>мәні бойынша жою</b> тәсілдерін түсіну;</li>
+    <li><code>append()</code>, <code>insert()</code>, <code>pop()</code>, <code>remove()</code> әдістерін қолдану;</li>
+    <li>Тізімнің ортасына және кез келген орнына жаңа элементтерді кірістіру;</li>
+    <li>Mini-quiz арқылы тақырыпты бекіту.</li>
+  </ul>
+</section>
+
+<!-- ========================================================= -->
+<!-- 2. ТЕОРИЯ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="theory">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">1-бөлім · Теория</h2>
+    <button class="btn-done" data-block="theory" data-xp="25">
+      ⬜ Орындалды (Теория)
+    </button>
+  </div>
+
+  <h3 style="margin-top:16px;">Тізім (list) және индекстер</h3>
+  <p>
+    Python тілінде бір өлшемді массивтің орнына көбіне <b>тізім (list)</b> қолданылады:
+  </p>
+
+  <pre><code class="language-python">a = [5, 9, 3, 7]</code></pre>
+
+  <ul>
+    <li><b>Элементтер</b>: 5, 9, 3, 7;</li>
+    <li><b>Индекстер</b>: <code>a[0]</code> – 5, <code>a[1]</code> – 9, <code>a[2]</code> – 3, <code>a[3]</code> – 7.</li>
+  </ul>
+
+  <h3>Элементті жою тәсілдері</h3>
+
+  <h4>1) Индекс арқылы жою: <code>del</code> және <code>pop()</code></h4>
+  <pre><code class="language-python">a = [5, 9, 3, 7]
+del a[1]        # 1-индекстегі элементті жояды (9)
+print(a)        # [5, 3, 7]</code></pre>
+
+  <pre><code class="language-python">a = [10, 20, 30, 40]
+x = a.pop(2)    # 2-индекстегі элементті жояды және мәнін қайтарады
+print(x)        # 30
+print(a)        # [10, 20, 40]</code></pre>
+
+  <ul>
+    <li><code>del a[i]</code> – тек тізімнен жояды;</li>
+    <li><code>a.pop(i)</code> – тізімнен жояды <b>және</b> жойылған мәнді қайтарады.</li>
+  </ul>
+
+  <h4>2) Мәні бойынша жою: <code>remove()</code></h4>
+  <pre><code class="language-python">a = [5, 9, 3, 9, 7]
+a.remove(9)     # тізімдегі бірінші кездескен 9-ды жояды
+print(a)        # [5, 3, 9, 7]</code></pre>
+
+  <p style="margin-top:6px;">
+    Егер мән тізімде жоқ болса, <code>remove()</code> қате береді.
+  </p>
+
+  <h3>Элементті кірістіру тәсілдері</h3>
+
+  <h4>1) Соңына қосу: <code>append()</code></h4>
+  <pre><code class="language-python">a = [2, 4, 6]
+a.append(8)
+print(a)        # [2, 4, 6, 8]</code></pre>
+
+  <h4>2) Кез келген позицияға кірістіру: <code>insert()</code></h4>
+  <pre><code class="language-python">a = [10, 20, 40]
+a.insert(2, 30)     # 2-индекске 30 мәнін кірістіреді
+print(a)            # [10, 20, 30, 40]</code></pre>
+
+  <ul>
+    <li><code>a.insert(0, x)</code> – тізім басына кірістіреді;</li>
+    <li><code>a.insert(len(a), x)</code> – тізім соңына қосу (append-ке ұқсас);</li>
+    <li><code>a.insert(k, x)</code> – k-индекске қойып, қалғандарын оңға ығыстырады.</li>
+  </ul>
+
+  <h3>Бар элементті ауыстыру</h3>
+  <p>
+    Кейде элементті жоймай-ақ, тікелей мәнін өзгерту жеткілікті:
+  </p>
+
+  <pre><code class="language-python">a = [5, 9, 3]
+a[1] = 10      # 9-дың орнына 10
+print(a)       # [5, 10, 3]</code></pre>
+
+  <p style="margin-top:6px;">
+    Яғни <b>жою</b> – элементті мүлде алып тастау, ал <b>ауыстыру</b> – орнында қалдырып, мәнін өзгерту.
+  </p>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 3. МЫСАЛДАР -->
+<!-- ========================================================= -->
+<section class="apple-section" id="examples">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">2-бөлім · Мысалдар</h2>
+    <button class="btn-done" data-block="examples" data-xp="20">
+      ⬜ Орындалды (Мысалдар)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">1-мысал · Белгілі индекстегі элементті жою</h3>
+  <p>5-элементі бар тізімнен 2-индекстегі (үшінші) элементті өшіреміз.</p>
+
+  <pre><code class="language-python">nums = [4, 7, 9, 1, 5]
+del nums[2]
+print(nums)</code></pre>
+
+  <pre><code class="language-python"># Консоль шығару:
+[4, 7, 1, 5]</code></pre>
+
+  <h3 style="margin-top:18px;">2-мысал · Барлық нөлдерді жою</h3>
+  <p>Тізімдегі барлық <code>0</code> мәндерін жоямыз.</p>
+
+  <pre><code class="language-python">a = [0, 5, 0, 3, 0, 7]
+
+while 0 in a:
+    a.remove(0)
+
+print(a)</code></pre>
+
+  <pre><code class="language-python"># Консоль шығару:
+[5, 3, 7]</code></pre>
+
+  <h3 style="margin-top:18px;">3-мысал · Ортасына элемент кірістіру</h3>
+  <p>Ортаға жаңа мән қосу:</p>
+
+  <pre><code class="language-python">a = [10, 20, 40, 50]
+
+mid_index = len(a) // 2     # ортасы
+a.insert(mid_index, 30)
+
+print(a)</code></pre>
+
+  <pre><code class="language-python"># Консоль шығару:
+[10, 20, 30, 40, 50]</code></pre>
+
+  <h3 style="margin-top:18px;">4-мысал · Емтихан балдарын өңдеу</h3>
+  <p>Соңында жаңылыс енгізілген бағаны өшіріп, орнына дұрыс мәнді қой.</p>
+
+  <pre><code class="language-python">scores = [90, 75, 88, 40]   # 40 қате енгізілген
+
+scores.pop()                # соңғы элементті жою
+scores.append(98)           # дұрыс мәнді қосу
+
+print(scores)</code></pre>
+
+  <pre><code class="language-python"># Консоль шығару:
+[90, 75, 88, 98]</code></pre>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- 4. ПРАКТИКА -->
+<!-- ========================================================= -->
+<section class="apple-section" id="practice">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">3-бөлім · Практика</h2>
+    <button class="btn-done" data-block="practice" data-xp="20">
+      ⬜ Орындалды (Практика)
+    </button>
+  </div>
+
+  <h3 style="margin-top:14px;">Тапсырма 1 · Тізімнен элемент жою</h3>
+  <p>
+    Пайдаланушыдан <b>N</b> және N бүтін сан енгізетін программа жаз.
+    Кейін пайдаланушы енгізген <b>k-индекстегі</b> элементті жой.
+  </p>
+
+  <div class="task-card">
+    <p class="task-io-title">Күтілетін кіріс/шығыс үлгісі:</p>
+    <table class="io-table">
+      <thead>
+        <tr>
+          <th>Кіріс (input)</th>
+          <th>Операция</th>
+          <th>Шығыс (output)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>n = 5, a = [3, 8, 1, 6, 4], k = 2</code></td>
+          <td><code>del a[2]</code></td>
+          <td><code>[3, 8, 6, 4]</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:18px;">Тапсырма 2 · Тізім ортасына кірістіру</h3>
+  <p>
+    Тізім берілген. Пайдаланушыдан бір сан енгізіп, оны тізімнің дәл ортасына
+    кірістіру программасын жаз.
+  </p>
+
+  <div class="task-card">
+    <p class="task-io-title">Күтілетін кіріс/шығыс үлгісі:</p>
+    <table class="io-table">
+      <thead>
+        <tr>
+          <th>Кіріс</th>
+          <th>Операция</th>
+          <th>Шығыс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>a = [1, 2, 4, 5], x = 3</code></td>
+          <td><code>a.insert(2, 3)</code></td>
+          <td><code>[1, 2, 3, 4, 5]</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin-top:18px;">Тапсырма 3 · Теріс сандарды жою</h3>
+  <p>
+    Тізімдегі барлық <b>теріс</b> сандарды жойып, тек <b>0 және оң</b> сандарды қалдыратын
+    программа жаз.
+  </p>
+
+  <div class="task-card">
+    <p class="task-io-title">Күтілетін кіріс/шығыс үлгісі:</p>
+    <table class="io-table">
+      <thead>
+        <tr>
+          <th>Кіріс</th>
+          <th>Логика</th>
+          <th>Шығыс</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>[-3, 5, 0, -1, 8]</code></td>
+          <td><code>теріс мәндерді өшіру</code></td>
+          <td><code>[5, 0, 8]</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- 5. MINI-QUIZ (ТЕСТ) -->
+<!-- ========================================================= -->
+<section class="apple-section" id="quiz">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">4-бөлім · Mini-Quiz</h2>
+    <button class="btn-done" data-block="quiz" data-xp="15">
+      ⬜ Орындалды (Quiz)
+    </button>
+  </div>
+
+  <p style="margin-top:10px;">
+    Төмендегі тест сұрақтарына жауап бер. Соңында <b>«Тексеру»</b> батырмасын бас.
+  </p>
+
+  <div class="quiz-wrapper">
+
+    <!-- 1-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>1) Қай әдіс тізімнің соңына жаңа элемент қосады?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="a">
+        а) <code>insert()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="b">
+        ә) <code>remove()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="c">
+        б) <code>append()</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q1" value="d">
+        в) <code>pop()</code>
+      </label>
     </div>
 
-    <div class="container sidebar-right">
-      <div role="main">
+    <!-- 2-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>2) Элементті индекс бойынша жою үшін қандай жазылу дұрыс?</b></p>
 
-          <h2 style="color: MediumSeaGreen;">
-              Оқу мақсаты: бір өлшемді, екі өлшемді массивтерді пайдаланып Python программалау тілінде программаларды жасау
-          </h2>
-
-          <p>
-              Python-да бірөлшемді массивке элементтерді кірістіруді және өшіруді жүзеге асыру жолдарымен танысайық.
-              Бұл әрекеттер Python тілінде өте оңай орындалады.
-          </p>
-
-          <!-- ===================== -->
-          <!--   1-МЫСАЛ — ӨШІРУ     -->
-          <!-- ===================== -->
-
-          <h2>1-мысал (Элементтерді өшіру)</h2>
-
-          <p>
-              A[N] бірөлшемді массивінде нөлге тең жалғыз элемент бар.
-              Сол элементті өшіріп, массивтің ұзындығын қысқарту керек.
-          </p>
-
-          <pre><code class="language-python">
-# 1-мысал. Нөлге тең элементті өшіру
-
-# N (0 < N < 100) элемент саны
-N = int(input("Элементтер санын енгізіңіз: "))
-
-A = []
-for i in range(N):
-    x = int(input(f"{i + 1}-элементті енгізіңіз: "))
-    A.append(x)
-
-print("Бастапқы массив:", A)
-
-# Массивтегі 0 тұрған орынды табамыз
-zero_index = A.index(0)
-
-# Сол элементті өшіреміз
-A.pop(zero_index)
-
-print("Нөлді өшіргеннен кейінгі массив:", A)
-print("Жаңа ұзындығы:", len(A))
-          </code></pre>
-
-          <h3>Нәтиже мысалы</h3>
-
-          <pre><code class="language-python">
-A = [80, 11, 25, 14, 5, 43, 5, 0, 41, 75]
-print("Бастапқы:", A)
-
-zero_index = A.index(0)
-A.pop(zero_index)
-
-print("Нәтижесі:", A)
-# Нәтиже: [80, 11, 25, 14, 5, 43, 5, 41, 75]
-          </code></pre>
-
-
-          <!-- ===================== -->
-          <!--   2-МЫСАЛ — КІРІСТІРУ -->
-          <!-- ===================== -->
-
-          <h2>2-мысал (Элементтерді кірістіру)</h2>
-
-          <p>
-              B[N] массивінің K-шы орнына жаңа X элементін кірістіру керек.
-              Python-да бұл insert() әдісімен орындалады.
-          </p>
-
-          <pre><code class="language-python">
-# 2-мысал. Элементті кірістіру
-
-# N (0 < N < 100) элемент саны
-N = int(input("Элементтер санын енгізіңіз: "))
-
-B = []
-for i in range(N):
-    x = int(input(f"{i + 1}-элементті енгізіңіз: "))
-    B.append(x)
-
-print("Бастапқы массив:", B)
-
-K = int(input("К-шы орнын енгізіңіз (1-ден басталады): "))
-X = int(input("Жаңа элемент X мәнін енгізіңіз: "))
-
-# Python индексі 0-ден басталады → сондықтан K-1
-B.insert(K - 1, X)
-
-print("Жаңа массив:", B)
-print("Массив ұзындығы:", len(B))
-          </code></pre>
-
-          <h3>Нәтиже мысалы</h3>
-
-          <pre><code class="language-python">
-B = [80, 11, 25, 14, 5, 43, 5, 41, 75]
-print("Бастапқы:", B)
-
-K = 6
-X = 55
-
-B.insert(K - 1, X)
-
-print("Нәтижесі:", B)
-# Нәтиже: [80, 11, 25, 14, 5, 55, 43, 5, 41, 75]
-          </code></pre>
-
-      </div>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="a">
+        а) <code>remove(a[i])</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="b">
+        ә) <code>del a[i]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="c">
+        б) <code>a.delete(i)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q2" value="d">
+        в) <code>a.clear(i)</code>
+      </label>
     </div>
 
-    <!-- Оң жақ панель -->
-    <div role="complementary">
-      <div class="fundraising-sidebar">
-        <h2 style="color:Gold"><b>Программалау - ол түсіну</b></h2>
-        <img src="https://www.python.org/static/img/python-logo@2x.png" width="300" height="80">
-      </div>
+    <!-- 3-сұрақ -->
+    <div class="quiz-item" data-correct="a">
+      <p><b>3) Төмендегі кодтың нәтижесі қандай?</b></p>
 
-      <ul class="list-links">
-        <li><a href="https://www.onlinegdb.com/online_python_compiler" class="cta outline">Онлайн компилятор</a></li>
-        <li><a href="https://www.python.org/downloads/" class="cta outline">Python 3 жүктеу</a></li>
-        <li><a href="/bagalau" class="cta outline">Бағалау критерийі</a></li>
-      </ul>
+      <pre><code class="language-python">a = [1, 2, 3, 4]
+a.insert(1, 9)
+print(a)</code></pre>
+
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="a">
+        а) <code>[1, 9, 2, 3, 4]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="b">
+        ә) <code>[9, 1, 2, 3, 4]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="c">
+        б) <code>[1, 2, 3, 4, 9]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q3" value="d">
+        в) <code>[1, 2, 9, 3, 4]</code>
+      </label>
     </div>
 
-</body>
-</html>
+    <!-- 4-сұрақ -->
+    <div class="quiz-item" data-correct="d">
+      <p><b>4) <code>remove(x)</code> әдісі туралы қай тұжырым дұрыс?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="a">
+        а) Индекс бойынша жояды
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="b">
+        ә) Барлық <code>x</code>-ті жояды
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="c">
+        б) Тізімді толығымен тазартады
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q4" value="d">
+        в) Тек бірінші кездескен <code>x</code> мәнін жояды
+      </label>
+    </div>
+
+    <!-- 5-сұрақ -->
+    <div class="quiz-item" data-correct="b">
+      <p><b>5) Төмендегі код орындалғанда не шығады?</b></p>
+
+      <pre><code class="language-python">a = [5, 6, 7]
+x = a.pop()
+print(x)
+print(a)</code></pre>
+
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="a">
+        а) <code>7</code> және <code>[5, 6, 7]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="b">
+        ә) <code>7</code> және <code>[5, 6]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="c">
+        б) <code>5</code> және <code>[6, 7]</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q5" value="d">
+        в) <code>Қате</code>
+      </label>
+    </div>
+
+    <!-- 6-сұрақ -->
+    <div class="quiz-item" data-correct="c">
+      <p><b>6) Қай жазылу тізім басына 0 мәнін кірістіреді?</b></p>
+
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="a">
+        а) <code>a.append(0)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="b">
+        ә) <code>a.insert(len(a), 0)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="c">
+        б) <code>a.insert(0, 0)</code>
+      </label>
+      <label class="quiz-option">
+        <input type="radio" name="q6" value="d">
+        в) <code>del a[0]</code>
+      </label>
+    </div>
+
+  </div>
+
+  <button id="checkQuiz" class="quiz-check-btn" type="button" style="margin-top:6px;">
+    Тексеру
+  </button>
+  <p id="quizResult" class="quiz-result"></p>
+</section>
+
+<!-- ========================================================= -->
+<!-- 6. ҮЙ ТАПСЫРМАСЫ -->
+<!-- ========================================================= -->
+<section class="apple-section" id="homework">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">5-бөлім · Үй тапсырмасы</h2>
+    <button class="btn-done" data-block="homework" data-xp="5">
+      ⬜ Орындалды (Үй жұмысы)
+    </button>
+  </div>
+
+  <h3 style="margin-top:12px;">Үйде орындауға</h3>
+  <ul>
+    <li>
+      <b>1-тапсырма:</b> Ұзындығы кемінде 7 элемент болатын тізім құрып,
+      оның ортасындағы 2 элементті жойып, орнына жаңа 2 элемент кірістір.
+    </li>
+    <li>
+      <b>2-тапсырма:</b> Пайдаланушы енгізген тізімнен барлық
+      <code>0</code> мәндерін жоятын программаны жаз.
+    </li>
+    <li>
+      <b>3-тапсырма:</b> Өз ойыңнан <b>мектеп журналындағы баға тізімін</b>
+      моделдейтін программа құрып, ондағы минимал бағаларды жойып,
+      орнына жаңа, түзетілген бағаларды енгіз.
+    </li>
+  </ul>
+</section>
+
+{% endblock %}
