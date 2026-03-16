@@ -1,17 +1,69 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base_auth.html" %}
 
-<div class="col-md-6 offset-md-3">
-    <h1 style="SteelBlue" class="text-center">Кіру</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter Registeration Id" name="username">
+{% block title %}Кіру · Python оқу платформасы{% endblock %}
+
+{% block content %}
+<section class="auth-wrapper">
+
+  <div class="auth-info">
+    <div class="auth-tag">Кіру</div>
+    <h1>Оқушы кабинеті</h1>
+    <p>
+      Логин және құпиясөз арқылы платформаға кіріп,
+      өз сыныбыңыздың сабақтарын жалғастырыңыз.
+    </p>
+    <ul class="auth-bullets">
+      <li>6–10 сынып Python сабақтары</li>
+      <li>Практикалық тапсырмалар және тесттер</li>
+      <li>Болашақта – прогресс пен жетістіктер панелі</li>
+    </ul>
+  </div>
+
+  <div class="auth-card">
+    <h2>Кіру</h2>
+
+    <form method="post" class="auth-form" novalidate>
+      {% csrf_token %}
+
+      <div class="auth-field">
+        <label for="id_username">Логин</label>
+        <input type="text"
+               name="username"
+               id="id_username"
+               class="auth-input"
+               value="{{ form.username.value|default_if_none:'' }}">
+        {% if form.username.errors %}
+          <div class="auth-error">{{ form.username.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <div class="auth-field">
+        <label for="id_password">Құпиясөз</label>
+        <input type="password"
+               name="password"
+               id="id_password"
+               class="auth-input">
+        {% if form.password.errors %}
+          <div class="auth-error">{{ form.password.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      {% if form.non_field_errors %}
+        <div class="auth-error">
+          {{ form.non_field_errors.0 }}
         </div>
-        <div class="form-group">
-            <input type="password" class="form-control" placeholder=" Enter Password" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary">Кіру</button>
+      {% endif %}
+
+      <button type="submit" class="auth-submit">
+        Кіру
+      </button>
+
+      <div class="auth-footer">
+        Жаңа пайдаланушысыз ба?
+        <a href="{% url 'signup' %}">Регистрация</a>
+      </div>
     </form>
-</div>
+  </div>
 
+</section>
 {% endblock %}

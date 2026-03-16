@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Аккаунт · Python оқу платформасы{% endblock %}</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f5f5f7;
+      --text:#111827;
+      --text-light:#6b7280;
+      --blue:#0071e3;
+      --border:#e5e7eb;
+    }
+
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      color:var(--text);
+    }
+
+    /* NAVBAR (как на основной платформе) */
+    .navbar{
+      background:#ffffffd8;
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+      position:sticky; top:0; z-index:50;
+    }
+    .nav-container{
+      width:94%; margin:0 auto; padding:14px 0;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .nav-title{
+      font-size:20px; font-weight:600;
+    }
+    .nav-title-link{
+      text-decoration:none; color:inherit;
+    }
+    .nav-right a{
+      padding:8px 14px; border-radius:10px;
+      border:1px solid var(--blue); color:var(--blue);
+      text-decoration:none; margin-left:8px;
+      font-size:14px; font-weight:500;
+    }
+
+    /* ОБОЛОЧКА ДЛЯ AUTH-СТРАНИЦ */
+    .auth-shell{
+      min-height:calc(100vh - 62px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px 16px;
+    }
+
+    /* КАРТОЧКА АВТОРИЗАЦИИ / РЕГИСТРАЦИИ */
+    .auth-wrapper{
+      width:100%;
+      max-width:960px;
+      display:grid;
+      grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+      gap:24px;
+      background:
+        radial-gradient(circle at top left, rgba(0,113,227,0.05), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(52,199,89,0.05), transparent 60%),
+        #ffffff;
+      border-radius:28px;
+      border:1px solid rgba(148,163,184,0.28);
+      box-shadow:0 22px 55px rgba(15,23,42,0.12);
+      padding:26px 26px 24px;
+    }
+
+    .auth-info{
+      padding-right:10px;
+      border-right:1px solid rgba(226,232,240,0.9);
+    }
+
+    .auth-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(37,99,235,0.06);
+      color:#1d4ed8;
+      font-size:11px;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      margin-bottom:10px;
+    }
+
+    .auth-info h1{
+      margin:0 0 10px;
+      font-size:26px;
+      font-weight:600;
+    }
+
+    .auth-info p{
+      margin:0 0 12px;
+      font-size:14px;
+      color:var(--text-light);
+    }
+
+    .auth-bullets{
+      margin:10px 0 0;
+      padding-left:18px;
+      font-size:13px;
+      color:var(--text-light);
+    }
+
+    .auth-card{
+      padding-left:10px;
+    }
+
+    .auth-card h2{
+      margin:0 0 14px;
+      font-size:20px;
+      font-weight:600;
+    }
+
+    .auth-form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .auth-field{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .auth-field label{
+      font-size:13px;
+      font-weight:500;
+    }
+
+    .auth-input{
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      padding:9px 11px;
+      font-size:14px;
+      font-family:inherit;
+      outline:none;
+      background:#f9fafb;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .auth-input:focus{
+      background:#ffffff;
+      border-color:#2563eb;
+      box-shadow:0 0 0 1px rgba(37,99,235,0.35);
+    }
+
+    .auth-help{
+      font-size:11px;
+      color:var(--text-light);
+    }
+
+    .auth-error{
+      font-size:12px;
+      color:#dc2626;
+    }
+
+    .auth-submit{
+      margin-top:8px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:none;
+      background:linear-gradient(135deg,#0071e3,#34c759);
+      color:#ffffff;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 14px 35px rgba(0,113,227,0.38);
+      transition:transform .16s ease, box-shadow .16s ease;
+    }
+
+    .auth-submit:hover{
+      transform:translateY(-1px);
+      box-shadow:0 18px 45px rgba(0,113,227,0.46);
+    }
+
+    .auth-footer{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--text-light);
+    }
+
+    .footer{
+      text-align:center;
+      margin:18px 0 14px;
+      font-size:12px;
+      color:#9ca3af;
+    }
+
+    @media (max-width: 900px){
+      .auth-wrapper{
+        grid-template-columns:minmax(0,1fr);
+        padding:22px 18px 20px;
+      }
+      .auth-info{
+        padding-right:0;
+        border-right:none;
+        border-bottom:1px solid rgba(226,232,240,0.9);
+        padding-bottom:14px;
+        margin-bottom:12px;
+      }
+      .auth-card{
+        padding-left:0;
+      }
+    }
+
+    @media (max-width: 640px){
+      .auth-shell{
+        padding:24px 10px;
+      }
+      .auth-wrapper{
+        border-radius:22px;
+      }
+      .auth-info h1{
+        font-size:22px;
+      }
+      .nav-container{
+        width:100%;
+        padding:10px 14px;
+      }
+      .nav-title{
+        font-size:17px;
+      }
+      .nav-right a{
+        padding:6px 10px;
+        font-size:13px;
+      }
+    }
+
+    .nav-user {
+  font-size: 14px;
+  color: #4b5563;
+  margin-right: 10px;
+}
+
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+ <div class="nav-right">
+  {% if user.is_authenticated %}
+    <span class="nav-user">
+      Сәлем, {{ user.first_name|default:user.username }}!
+    </span>
+    <a href="{% url 'logout' %}">Шығу</a>
+  {% else %}
+    <a href="{% url 'signup' %}">Регистрация</a>
+    <a href="{% url 'login' %}">Кіру</a>
+  {% endif %}
+</div>
+
+  <div class="auth-shell">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer class="footer">
+    © 2025 Python оқу платформасы
+  </footer>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

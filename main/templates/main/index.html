@@ -866,18 +866,29 @@
       </p>
 
       <div class="hero-buttons">
-        <!-- первая кнопка: перейти к первому уроку 6-сынып -->
-        <a href="/praktika" class="hero-btn primary">
-          6-сыныптан бастау
-        </a>
-        <!-- вторая кнопка: прокрутить к компилятору -->
-        <a href="operator06" class="hero-btn secondary">
-         Python бойынша жаттығулар
-        </a>
-         <a href="maksat" class="hero-btn secondary">
+  {% if user.is_authenticated %}
+    <a href="/praktika" class="hero-btn primary">
+      Оқуды жалғастыру
+    </a>
+    <a href="operator06" class="hero-btn secondary">
+      Python бойынша жаттығулар
+    </a>
+    <a href="maksat" class="hero-btn secondary">
       Оқу мақсаттары
-        </a>
-      </div>
+    </a>
+  {% else %}
+    <a href="/praktika" class="hero-btn primary">
+      6-сыныптан бастау
+    </a>
+    <a href="{% url 'signup' %}" class="hero-btn secondary">
+      Регистрация оқушы
+    </a>
+    <a href="maksat" class="hero-btn secondary">
+      Оқу мақсаттары
+    </a>
+  {% endif %}
+</div>
+
     </div>
 
   </section>

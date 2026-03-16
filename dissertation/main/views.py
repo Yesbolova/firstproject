@@ -5,20 +5,36 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+
+def signup_view(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("index")  # имя url для басты бет
+    else:
+        form = UserCreationForm()
+    return render(request, "signup.html", {"form": form})
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as auth_login
 
 
+def login_view(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            return redirect("index")   # или 'home' – твой басты бет
+    else:
+        form = AuthenticationForm()
+    return render(request, "login.html", {"form": form})
 
 
-
-class SignUp(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy("login")
-    template_name = "signup.html"
-
-    class SignUpView(generic.CreateView):
-        form_class = UserCreationForm
-        success_url = reverse_lazy('login')
-        template_name = 'signup.html'
 
 
 

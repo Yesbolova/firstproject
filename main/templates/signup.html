@@ -1,55 +1,133 @@
-{% extends "base.html" %}
-{% block title %}Зарегистрироваться{% endblock %}
-{% block content %}
-  <div class="row justify-content-center">
-    <div class="col-md-8 p-5">
-      <div class="card">
-        <div class="card-header">
-          Зарегистрироваться
-        </div>
-        <div class="card-body">
-          {# Этот блок будет показан, если в форме есть ошибки #}
-          {% if form.errors %}
-            {% for field in form %}
-              {% for error in field.errors %}
-                <div class="alert alert-danger">
-                  {{ error|escape }}
-                </div>
-              {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-              <div class="alert alert-danger">
-                {{ error|escape }}
-              </div>
-            {% endfor %}
-          {% endif %}
+{% extends "base_auth.html" %}
 
-            <form method="post" action="{% url 'signup' %}">
-              {% csrf_token %}
-              {% for field in form %}
-              <div class="form-group row my-3 p-3">
-                <label for="{{ field.id_for_label }}">
-                  {{ field.label }}
-                  {% if field.field.required %}
-                    <span class="required text-danger">*</span>
-                  {% endif %}
-                </label>
-                {{ field }}
-                {% if field.help_text %}
-                  <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
-                    {{ field.help_text|safe }}
-                  </small>
-                {% endif %}
-              </div>
-              {% endfor %}
-              <div class="col-md-6 offset-md-4">
-                <button type="login" class="btn btn-primary">
-                  Зарегистрироваться
-                </button>
-              </div>
-            </form>
-          </div> <!-- card body -->
-        </div> <!-- card -->
-      </div> <!-- col -->
-  </div> <!-- row -->
+{% block title %}Регистрация · Python оқу платформасы{% endblock %}
+
+{% block content %}
+<section class="auth-wrapper">
+
+  <div class="auth-info">
+    <div class="auth-tag">Жаңа пайдаланушы</div>
+    <h1>Оқушы кабинетін тіркеу</h1>
+    <p>
+      Бір аккаунт арқылы 6–10 сыныпқа арналған барлық Python сабақтарына,
+      практикалық тапсырмаларға және mini-quiz тесттеріне қол жеткізе аласыз.
+    </p>
+    <ul class="auth-bullets">
+      <li>Әр сыныпқа сәйкес құрылымдалған курс</li>
+      <li>XP және «Орындалды» жүйесі арқылы прогресс</li>
+      <li>Алдағы уақытта – жеке статистика және жетістіктер</li>
+    </ul>
+  </div>
+
+  <div class="auth-card">
+    <h2>Регистрация</h2>
+
+    <form method="post" class="auth-form" novalidate>
+      {% csrf_token %}
+
+      <!-- Аты -->
+      <div class="auth-field">
+        <label for="id_first_name">Аты</label>
+        <input
+          type="text"
+          name="first_name"
+          id="id_first_name"
+          class="auth-input"
+          required
+          value="{{ form.first_name.value|default_if_none:'' }}"
+        >
+        {% if form.first_name.errors %}
+          <div class="auth-error">{{ form.first_name.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Тегі -->
+      <div class="auth-field">
+        <label for="id_last_name">Тегі</label>
+        <input
+          type="text"
+          name="last_name"
+          id="id_last_name"
+          class="auth-input"
+          required
+          value="{{ form.last_name.value|default_if_none:'' }}"
+        >
+        {% if form.last_name.errors %}
+          <div class="auth-error">{{ form.last_name.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Логин -->
+      <div class="auth-field">
+        <label for="id_username">Логин (латын әріптері)</label>
+        <input
+          type="text"
+          name="username"
+          id="id_username"
+          class="auth-input"
+          required
+          value="{{ form.username.value|default_if_none:'' }}"
+        >
+        <div class="auth-help">Мысалы: aikerim_6a немесе student2025.</div>
+        {% if form.username.errors %}
+          <div class="auth-error">{{ form.username.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Email -->
+      <div class="auth-field">
+        <label for="id_email">Email (міндетті емес)</label>
+        <input
+          type="email"
+          name="email"
+          id="id_email"
+          class="auth-input"
+          value="{{ form.email.value|default_if_none:'' }}"
+        >
+        {% if form.email.errors %}
+          <div class="auth-error">{{ form.email.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Password1 -->
+      <div class="auth-field">
+        <label for="id_password1">Құпиясөз</label>
+        <input
+          type="password"
+          name="password1"
+          id="id_password1"
+          class="auth-input"
+          required
+        >
+        {% if form.password1.errors %}
+          <div class="auth-error">{{ form.password1.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Password2 -->
+      <div class="auth-field">
+        <label for="id_password2">Құпиясөзді қайталау</label>
+        <input
+          type="password"
+          name="password2"
+          id="id_password2"
+          class="auth-input"
+          required
+        >
+        {% if form.password2.errors %}
+          <div class="auth-error">{{ form.password2.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="auth-submit">
+        Аккаунт ашу
+      </button>
+
+      <div class="auth-footer">
+        Аккаунтыңыз бар ма? <a href="{% url 'login' %}">Кіру</a>
+      </div>
+    </form>
+  </div>
+
+</section>
 {% endblock %}
